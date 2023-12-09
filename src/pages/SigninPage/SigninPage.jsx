@@ -33,7 +33,7 @@ const SigninPage = () => {
         }
       );
       // console.log(res.data);
-      dispatch(signInSuccess(data));
+      dispatch(signInSuccess(res.data));
       window.localStorage.setItem("auth", JSON.stringify(res.data));
       dispatch({
         type: "LOGGED_IN_USER",
