@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { signInSuccess } from "../../redux/user/userSlice";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -32,6 +33,7 @@ const SigninPage = () => {
         }
       );
       // console.log(res.data);
+      dispatch(signInSuccess(data));
       window.localStorage.setItem("auth", JSON.stringify(res.data));
       dispatch({
         type: "LOGGED_IN_USER",
