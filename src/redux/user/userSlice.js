@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+let userState;
 if (window.localStorage.getItem("auth")) {
   userState = JSON.parse(window.localStorage.getItem("auth"));
 } else {
