@@ -1,0 +1,140 @@
+import React, { useState } from "react";
+import LogoBlack from "../../assets/lodgemeblacklogo.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { MobileNavStyle, NavbarStyles } from "./NavbarStyles";
+import { MdClose } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import MobileLogo from "../../assets/lodgemewhitelogo.png";
+
+const Navbar = () => {
+  const user = useSelector((state) => ({ ...state }));
+  //console.log(user.user);
+
+  const [toggle, setToggle] = useState(false);
+  const [select, setSelect] = useState("");
+  const navigate = useNavigate();
+
+  const { t, i18n } = useTranslation();
+
+  const selectedOption = (e) => {
+    //console.log(e.target.value);
+    const selected = i18n.changeLanguage(e.target.value);
+    setSelect(selected);
+    setToggle(false);
+  };
+
+  const logoutUser = () => {
+    window.localStorage.removeItem("auth");
+    window.location.pathname("/");
+  };
+
+  return (
+    <>
+      <NavbarStyles
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <Link to="/" className="linkStyle">
+          <img className="navlogo" src={LogoBlack} alt="brand-logo" />
+        </Link>
+        <div className="navbuttons">
+          {/* <div>
+            <Link to="/add-user-houses" className="navbutton linkStyle">
+              {t("addAccommodation")}
+            </Link>
+          </div> */}
+          <div>
+            <Link to="/register-user-in" className="navbutton linkStyle">
+              {t("register")}
+            </Link>
+          </div>
+          {user?.user?.user ? (
+            <div>
+              <Link
+                onClick={logoutUser}
+                to="/user-logout"
+                className="navbutton linkStyle"
+              >
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link to="/user-sign-in" className="navbutton linkStyle">
+                Login
+              </Link>
+            </div>
+          )}
+
+          {user?.user?.user && (
+            <div>
+              <Link to="/dashboard-user" className="navbutton linkStyle">
+                {user
+                  ? `Welcome ${user?.user?.user?.firstname} ${user?.user?.user?.lastname}`
+                  : ""}
+              </Link>
+            </div>
+          )}
+        </div>
+      </NavbarStyles>
+
+      <MobileNavStyle>
+        <Link to="/">
+          <img className="mobile_navlogo" src={MobileLogo} alt="logo" />
+        </Link>
+        <div>
+          <GiHamburgerMenu
+            className="mobile_menunav"
+            onClick={() => setToggle(!toggle)}
+          />
+        </div>
+
+        {toggle && (
+          <div className="mobile_navbox">
+            <div className="mobile_menucloseiconbox">
+              <MdClose
+                className="mobile_menucloseicon"
+                onClick={() => setToggle(false)}
+              />
+            </div>
+            <div>
+              <ul className="mobile_navmenus">
+                <Link
+                  to="/register-user-in"
+                  className="linkStyle"
+                  onClick={() => setToggle(false)}
+                >
+                  <li>{t("register")}</li>
+                </Link>
+                <Link
+                  to="/user-sign-in"
+                  className="linkStyle"
+                  onClick={() => setToggle(false)}
+                >
+                  <li>{t("login")}</li>
+                </Link>
+                <li>Menu 2</li>
+                <li>Menu 3</li>
+                {/* <li>
+                  <select value={select.name} onChange={selectedOption}>
+                    <option className="langOption" id="English" value="en">
+                      EN
+                    </option>
+                    <option className="langOption" id="French" value="fr">
+                      FR
+                    </option>
+                  </select>
+                </li> */}
+              </ul>
+            </div>
+          </div>
+        )}
+      </MobileNavStyle>
+    </>
+  );
+};
+
+export default Navbar;
