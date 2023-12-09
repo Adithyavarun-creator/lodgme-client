@@ -27,7 +27,6 @@
     "react-select-country-list": "^2.2.3",
     "react-slick": "^0.29.0",
     "redux": "^5.0.0",
-    "redux-devtools-extension": "^2.13.9",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.1",
     "swiper": "^11.0.5",
@@ -56,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }
