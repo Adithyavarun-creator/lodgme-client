@@ -46,15 +46,27 @@ const RegisterPage = () => {
     }
     try {
       setLoading(true);
-      const res = await registerUser({
-        firstname,
-        lastname,
-        email,
-        gender,
-        location,
-        contactnumber,
-        password,
-      });
+      const res = await axios.post(
+        "https://lodgme-server-api.vercel.app/api/register",
+        {
+          firstname,
+          lastname,
+          email,
+          gender,
+          location,
+          contactnumber,
+          password,
+        }
+      );
+      // const res = await registerUser({
+      //   firstname,
+      //   lastname,
+      //   email,
+      //   gender,
+      //   location,
+      //   contactnumber,
+      //   password,
+      // });
       // console.log(res.data);
       toast("You have been registered in LodgeMe community!", {
         icon: "👏",
