@@ -6,6 +6,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../../redux/user/userSlice";
+import { loginUser } from "../../baseUrl/url";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -25,14 +26,11 @@ const SigninPage = () => {
     }
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/login`,
-        {
-          email,
-          password,
-        }
-      );
-      // console.log(res.data);
+      const res = await loginUser({
+        email,
+        password,
+      });
+      console.log(res.data);
       dispatch(signInSuccess(res.data));
       window.localStorage.setItem("auth", JSON.stringify(res.data));
       dispatch({
