@@ -30,7 +30,7 @@ const SigninPage = () => {
         email,
         password,
       });
-      console.log(res.data);
+      //console.log(res.data);
       dispatch(signInSuccess(res.data));
       window.localStorage.setItem("auth", JSON.stringify(res.data));
       dispatch({
