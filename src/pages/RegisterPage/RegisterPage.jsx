@@ -46,28 +46,28 @@ const RegisterPage = () => {
     }
     try {
       setLoading(true);
-      const res = await axios.post(
-        "https://lodgme-server-api.vercel.app/api/register",
-        {
-          firstname,
-          lastname,
-          email,
-          gender,
-          location,
-          contactnumber,
-          password,
-        }
-      );
-      // const res = await registerUser({
-      //   firstname,
-      //   lastname,
-      //   email,
-      //   gender,
-      //   location,
-      //   contactnumber,
-      //   password,
-      // });
-      // console.log(res.data);
+      // const res = await axios.post(
+      //   "https://lodgme-server-api.vercel.app/api/register",
+      //   {
+      //     firstname,
+      //     lastname,
+      //     email,
+      //     gender,
+      //     location,
+      //     contactnumber,
+      //     password,
+      //   }
+      // );
+      const res = await registerUser({
+        firstname,
+        lastname,
+        email,
+        gender,
+        location,
+        contactnumber,
+        password,
+      });
+      //console.log(res.data);
       toast("You have been registered in LodgeMe community!", {
         icon: "👏",
       });
@@ -76,7 +76,7 @@ const RegisterPage = () => {
       }, 4000);
       setLoading(false);
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error?.response?.data?.message);
       //toast.error(error?.response?.data?.message);
       setLoading(false);
     }
