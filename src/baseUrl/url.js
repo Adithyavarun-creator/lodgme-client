@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const registerUser = async (user) => {
-  await axios.post(`https://lodgme-client.vercel.app/api/register`, user);
+  await axios.post(`https://lodgme-server-api.vercel.app/api/register`, user);
 };
 
 export const loginUser = async (user) => {

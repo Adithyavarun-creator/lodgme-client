@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import MobileLogo from "../../assets/lodgemewhitelogo.png";
 
 const Navbar = () => {
-  const user = useSelector((state) => ({ ...state }));
+  const { currentUser } = useSelector((state) => state.user);
   //console.log(user.user);
 
   const [toggle, setToggle] = useState(false);
@@ -51,7 +51,7 @@ const Navbar = () => {
               {t("register")}
             </Link>
           </div>
-          {user?.user?.user ? (
+          {currentUser ? (
             <div>
               <Link
                 onClick={logoutUser}
@@ -69,11 +69,11 @@ const Navbar = () => {
             </div>
           )}
 
-          {user?.user?.user && (
+          {currentUser && (
             <div>
               <Link to="/dashboard-user" className="navbutton linkStyle">
-                {user
-                  ? `Welcome ${user?.user?.user?.firstname} ${user?.user?.user?.lastname}`
+                {currentUser
+                  ? `Welcome ${currentUser?.user?.firstname} ${currentUser?.user?.lastname}`
                   : ""}
               </Link>
             </div>

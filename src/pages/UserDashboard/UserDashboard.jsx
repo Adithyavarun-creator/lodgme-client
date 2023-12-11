@@ -9,8 +9,11 @@ import { MdAddHome, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 const UserDashboard = () => {
-  const user = useSelector((state) => ({ ...state }));
+  const { currentUser } = useSelector((state) => state.user);
   //console.log(user.user);
+
+  //const { currentUser } = user;
+  console.log(currentUser);
   return (
     <>
       <HelmetProvider>
@@ -20,7 +23,7 @@ const UserDashboard = () => {
         </Helmet>
         <UserDashboardStyles>
           <div>
-            <h1>{`${user?.user?.user?.firstname} ${user?.user?.user?.lastname} Dashboard`}</h1>
+            <h1>{`${currentUser?.user?.firstname} ${currentUser?.user?.lastname} Dashboard`}</h1>
           </div>
 
           <div className="dashboardbox">

@@ -47,7 +47,7 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "https://lodgme-server-api.vercel.app/api/register",
+        `${process.env.REACT_APP_BACKEND_URL}/api/register`,
         {
           firstname,
           lastname,

@@ -37,7 +37,7 @@ const LazyResetPasswordPageComponent = React.lazy(() =>
 );
 
 function App() {
-  const user = useSelector((state) => ({ ...state }));
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <>
@@ -73,7 +73,7 @@ function App() {
             />
 
             <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-            {user?.user?.user && (
+            {currentUser && (
               <Route path="/dashboard-user" element={<UserDashboard />} />
             )}
             <Route
