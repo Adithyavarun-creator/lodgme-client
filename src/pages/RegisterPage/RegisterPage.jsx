@@ -46,28 +46,28 @@ const RegisterPage = () => {
     }
     try {
       setLoading(true);
-      const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/register`,
-        {
-          firstname,
-          lastname,
-          email,
-          gender,
-          location,
-          contactnumber,
-          password,
-        }
-      );
-      // const res = await registerUser({
-      //   firstname,
-      //   lastname,
-      //   email,
-      //   gender,
-      //   location,
-      //   contactnumber,
-      //   password,
-      // });
-      console.log(res.data);
+      // const res = await axios.post(
+      //   `${process.env.REACT_APP_BACKEND_URL}/api/register`,
+      //   {
+      //     firstname,
+      //     lastname,
+      //     email,
+      //     gender,
+      //     location,
+      //     contactnumber,
+      //     password,
+      //   }
+      // );
+      const res = await registerUser({
+        firstname,
+        lastname,
+        email,
+        gender,
+        location,
+        contactnumber,
+        password,
+      });
+      //console.log(res.data);
       toast("You have been registered in LodgeMe community!", {
         icon: "👏",
       });
