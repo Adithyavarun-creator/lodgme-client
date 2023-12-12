@@ -57,7 +57,7 @@ const RegisterPage = () => {
     if (!address) {
       toast.error("Address not filled");
     }
-    if (!gender) {
+    if (!option) {
       toast.error("Gender not filled");
     }
     if (!location) {
