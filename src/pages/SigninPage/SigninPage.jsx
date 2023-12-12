@@ -109,6 +109,11 @@ const SigninPage = () => {
                 Forgot Password ? Reset Now{" "}
               </Link>
             </div>
+            <div className="btnbox">
+              <Link to="/register-user-in" className="linkStyle forgot-pswd">
+                Sign up here to create an account
+              </Link>
+            </div>
           </div>
           <Toaster position="top-center" reverseOrder={false} />
         </SinginPageStyles>
