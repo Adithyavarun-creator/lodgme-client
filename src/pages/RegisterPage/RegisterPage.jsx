@@ -39,9 +39,9 @@ const RegisterPage = () => {
     },
   ];
 
-  const handleSelect = (event) => {
-    setOption(event.target.value);
-  };
+  // const handleSelect = (event) => {
+  //   setOption(event.target.value);
+  // };
 
   const registerForm = async (e) => {
     e.preventDefault();
@@ -186,12 +186,22 @@ const RegisterPage = () => {
                 <label className="labeltext" htmlFor="gender">
                   Gender
                 </label>
-                <select name="" id="" onChange={handleSelect} required>
+                <select
+                  value={option}
+                  onChange={(e) => setOption(e.target.value)}
+                  required
+                >
+                  <option value=""></option>
+                  <option value="Men">Men</option>
+                  <option value="Women">Women</option>
+                  <option value="Others">Others</option>
+
+                  {/* 
                   {selectOptions.map((option) => (
                     <option key={option.key} value={option.value}>
                       {option.label}
                     </option>
-                  ))}
+                  ))} */}
                 </select>
               </div>
               <div className="formlabel">
