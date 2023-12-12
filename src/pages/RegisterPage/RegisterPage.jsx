@@ -57,9 +57,12 @@ const RegisterPage = () => {
     if (!address) {
       toast.error("Address not filled");
     }
-    if (!option) {
-      toast.error("Gender not filled");
-    }
+    // if (!gender) {
+    //   toast.error("Gender option not selected");
+    // }
+    // if (!gender) {
+    //   toast.error("Gender not filled");
+    // }
     if (!location) {
       toast.error("Location not filled");
     }
@@ -180,8 +183,8 @@ const RegisterPage = () => {
                 <label className="labeltext" htmlFor="gender">
                   Gender
                 </label>
-
                 <select name="" id="" onChange={handleSelect} required>
+                  <option>Select Gender</option>
                   {selectOptions.map((option) => (
                     <option key={option.key} value={option.value}>
                       {option.label}
