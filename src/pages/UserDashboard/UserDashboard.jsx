@@ -10,10 +10,8 @@ import { useSelector } from "react-redux";
 
 const UserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
-  //console.log(user.user);
 
-  //const { currentUser } = user;
-  console.log(currentUser);
+  //console.log(currentUser);
   return (
     <>
       <HelmetProvider>
@@ -23,7 +21,7 @@ const UserDashboard = () => {
         </Helmet>
         <UserDashboardStyles>
           <div>
-            <h1>{`${currentUser?.user?.firstname} ${currentUser?.user?.lastname} Dashboard`}</h1>
+            <h1>{`${currentUser?.firstname} ${currentUser?.lastname} Dashboard`}</h1>
           </div>
 
           <div className="dashboardbox">

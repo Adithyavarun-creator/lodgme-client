@@ -159,6 +159,41 @@ export const RegisterPageStyles = styled.div`
     }
   }
 
+  select {
+    width: 100%;
+    border: 2px solid ${({ theme }) => theme.colors.primaryColor};
+    height: 50px;
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 10px;
+    outline: none;
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 15px;
+      height: 40px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+      height: 37px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 13px;
+      height: 37px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
+      height: 30px;
+    }
+
+    :focus {
+      border: 1px solid #015151 !important;
+    }
+  }
+
+  option {
+  }
+
   .btnbox {
     margin-top: 40px;
     display: flex;

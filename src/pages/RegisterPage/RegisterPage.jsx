@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { baseUrl, registerUser } from "../../baseUrl/url";
+import { baseUrl } from "../../baseUrl/url";
 import { RegisterPageStyles } from "./RegisterPageStyles";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,34 @@ const RegisterPage = () => {
   const [gender, setGender] = useState("");
   const [location, setLocation] = useState("");
   const [contactnumber, setContactnumber] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [option, setOption] = useState("");
+
+  const selectOptions = [
+    {
+      label: "Men",
+      key: 1,
+      value: "Men",
+    },
+    {
+      label: "Women",
+      key: 2,
+      value: "Women",
+    },
+    {
+      label: "Others",
+      key: 3,
+      value: "Others",
+    },
+  ];
+
+  const handleSelect = (event) => {
+    setOption(event.target.value);
+  };
 
   const registerForm = async (e) => {
     e.preventDefault();
@@ -28,6 +53,9 @@ const RegisterPage = () => {
     }
     if (!email) {
       toast.error("Email not filled");
+    }
+    if (!address) {
+      toast.error("Address not filled");
     }
     if (!gender) {
       toast.error("Gender not filled");
@@ -46,27 +74,39 @@ const RegisterPage = () => {
     }
     try {
       setLoading(true);
-      const res = await registerUser({
-        firstname,
-        lastname,
-        email,
-        gender,
-        location,
-        contactnumber,
-        password,
+      const res = await fetch(`${baseUrl}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          homeAddress: address,
+          email,
+          gender: option,
+          location,
+          contactnumber,
+          password,
+        }),
       });
-      //console.log(res.data);
+      const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        setError(null);
+        return;
+      }
+      setLoading(false);
       toast("You have been registered in LodgeMe community!", {
         icon: "👏",
       });
       setTimeout(() => {
         navigate("/user-sign-in");
-      }, 4000);
-      setLoading(false);
+      }, 3000);
     } catch (error) {
-      console.log(error?.response?.data?.message);
-      //toast.error(error?.response?.data?.message);
       setLoading(false);
+      setError(error.message);
+      console.log(error);
     }
   };
 
@@ -93,6 +133,7 @@ const RegisterPage = () => {
                   value={firstname}
                   onChange={(e) => setFirstname(e.target.value)}
                   placeholder="John"
+                  required
                 />
               </div>
               <div className="formlabel">
@@ -105,6 +146,7 @@ const RegisterPage = () => {
                   value={lastname}
                   onChange={(e) => setLastname(e.target.value)}
                   placeholder="Doe"
+                  required
                 />
               </div>
               <div className="formlabel">
@@ -118,6 +160,7 @@ const RegisterPage = () => {
                   value={contactnumber}
                   onChange={(e) => setContactnumber(e.target.value)}
                   placeholder="+33 123 2456 78"
+                  required
                 />
               </div>
               <div className="formlabel">
@@ -129,20 +172,22 @@ const RegisterPage = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="johndoe@gmail.com  "
+                  placeholder="johndoe@gmail.com"
+                  required
                 />
               </div>
               <div className="formlabel">
                 <label className="labeltext" htmlFor="gender">
                   Gender
                 </label>
-                <input
-                  name="gender"
-                  type="text"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  placeholder="Male/Female/Others"
-                />
+
+                <select name="" id="" onChange={handleSelect} required>
+                  {selectOptions.map((option) => (
+                    <option key={option.key} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="formlabel">
                 <label className="labeltext" htmlFor="location">
@@ -154,6 +199,20 @@ const RegisterPage = () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="France"
+                  required
+                />
+              </div>
+              <div className="formlabel">
+                <label className="labeltext" htmlFor="location">
+                  Address
+                </label>
+                <input
+                  name="address"
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="32/34 Rue Marbeuf, F-75374 Paris Cedex 08"
+                  required
                 />
               </div>
               <div className="formlabel">
@@ -166,6 +225,7 @@ const RegisterPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  required
                 />
               </div>
               <div className="formlabel">
@@ -178,21 +238,23 @@ const RegisterPage = () => {
                   value={confirmpassword}
                   onChange={(e) => setConfirmpassword(e.target.value)}
                   placeholder="Confirm Password"
+                  required
                 />
               </div>
             </form>
             <div className="btnbox">
               <button
-                disabled={
-                  !firstname ||
-                  !lastname ||
-                  !email ||
-                  !confirmpassword ||
-                  !password ||
-                  !location ||
-                  !gender ||
-                  !contactnumber
-                }
+                // disabled={
+                //   !firstname ||
+                //   !lastname ||
+                //   !email ||
+                //   !confirmpassword ||
+                //   !password ||
+                //   !location ||
+                //   !address ||
+                //   !gender ||
+                //   !contactnumber
+                // }
                 className="register-btn"
                 onClick={registerForm}
               >

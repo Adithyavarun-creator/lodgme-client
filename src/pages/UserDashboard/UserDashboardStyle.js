@@ -45,7 +45,14 @@ export const UserDashboardStyles = styled.div`
     padding: 20px;
     justify-content: center;
     margin-bottom: 30px;
+    transition: all 0.4s ease-in;
     /* height: 250px; */
+
+    :hover {
+      -webkit-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+      -moz-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+      box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    }
 
     @media ${devices.bigLaptopsAndDesktops} {
       grid-template-columns: 400px 400px;
@@ -104,6 +111,10 @@ export const UserDashboardStyles = styled.div`
     border-radius: 10px;
     left: -3px;
     border: 2px solid ${({ theme }) => theme.colors.primaryColor};
+
+    :hover {
+      box-shadow: none;
+    }
 
     @media ${devices.bigLaptopsAndDesktops} {
     }

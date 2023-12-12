@@ -5,16 +5,22 @@ import { MobileNavStyle, NavbarStyles } from "./NavbarStyles";
 import { MdClose } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MobileLogo from "../../assets/lodgemewhitelogo.png";
+import {
+  signOutUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
+} from "../../redux/user/userSlice";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
-  //console.log(user.user);
+  //console.log(currentUser);
 
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { t, i18n } = useTranslation();
 
@@ -25,9 +31,21 @@ const Navbar = () => {
     setToggle(false);
   };
 
-  const logoutUser = () => {
-    window.localStorage.removeItem("auth");
-    window.location.pathname("/");
+  const logoutUser = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch(`http://localhost:8000/api/signout`);
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      dispatch(signOutUserFailure(error.message));
+    }
   };
 
   return (
@@ -41,16 +59,15 @@ const Navbar = () => {
           <img className="navlogo" src={LogoBlack} alt="brand-logo" />
         </Link>
         <div className="navbuttons">
-          {/* <div>
-            <Link to="/add-user-houses" className="navbutton linkStyle">
-              {t("addAccommodation")}
-            </Link>
-          </div> */}
-          <div>
-            <Link to="/register-user-in" className="navbutton linkStyle">
-              {t("register")}
-            </Link>
-          </div>
+          {currentUser ? (
+            ""
+          ) : (
+            <div>
+              <Link to="/register-user-in" className="navbutton linkStyle">
+                {t("register")}
+              </Link>
+            </div>
+          )}
           {currentUser ? (
             <div>
               <Link
@@ -73,7 +90,7 @@ const Navbar = () => {
             <div>
               <Link to="/dashboard-user" className="navbutton linkStyle">
                 {currentUser
-                  ? `Welcome ${currentUser?.user?.firstname} ${currentUser?.user?.lastname}`
+                  ? `${currentUser?.firstname} ${currentUser?.lastname} Dashboard`
                   : ""}
               </Link>
             </div>

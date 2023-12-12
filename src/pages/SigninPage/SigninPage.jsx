@@ -5,8 +5,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { signInSuccess } from "../../redux/user/userSlice";
-import { loginUser } from "../../baseUrl/url";
+import {
+  signInFailure,
+  signInSuccess,
+  signInStart,
+} from "../../redux/user/userSlice";
+import { baseUrl, loginUser } from "../../baseUrl/url";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -26,28 +30,30 @@ const SigninPage = () => {
     }
 
     try {
-      const res = await loginUser({
-        email,
-        password,
+      dispatch(signInStart());
+      const res = await fetch(`${baseUrl}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       });
-      //console.log(res.data);
-      // dispatch(signInSuccess(res.data));
-      window.localStorage.setItem("auth", JSON.stringify(res.data));
-      // dispatch({
-      //   type: "LOGGED_IN_USER",
-      //   payload: res.data,
-      // });
-
-      toast.success(
-        "You are signed in to LodgeMe!!! We are taking you to dashboard"
-      );
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
+        return;
+      }
+      dispatch(signInSuccess(data));
+      toast.success("We are signing you in ! Welcome back");
       setTimeout(() => {
         navigate("/dashboard-user");
-      }, 4000);
+      }, 2500);
     } catch (error) {
-      console.log(error?.response?.data?.message);
-      // toast.error(error.response.data.message);
+      dispatch(signInFailure(error.message));
+      console.log(error);
     }
+
+    //console.log(data);
   };
 
   return (
