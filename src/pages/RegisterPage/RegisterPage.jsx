@@ -72,6 +72,9 @@ const RegisterPage = () => {
     if (!password) {
       toast.error("Password not filled");
     }
+    if (!confirmpassword) {
+      toast.error("Password not filled");
+    }
     if (password !== confirmpassword) {
       toast.error("Passwords do not match");
     }
