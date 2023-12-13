@@ -5,6 +5,7 @@ import { RegisterPageStyles } from "./RegisterPageStyles";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -57,9 +58,9 @@ const RegisterPage = () => {
     if (!address) {
       toast.error("Address not filled");
     }
-    // if (!option) {
-    //   toast.error("Gender option not selected");
-    // }
+    if (!option) {
+      toast.error("Gender option not selected");
+    }
     // if (!gender) {
     //   toast.error("Gender not filled");
     // }
@@ -273,7 +274,7 @@ const RegisterPage = () => {
                 className="register-btn"
                 onClick={registerForm}
               >
-                {loading ? "Registering" : "Register"}
+                {loading ? <OnlySpinner /> : "Register"}
               </button>
             </div>
           </div>
