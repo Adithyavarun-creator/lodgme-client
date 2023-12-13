@@ -10,6 +10,7 @@ import OnlySpinner from "./components/OnlySpinner/OnlySpinner";
 import EmailVerify from "./pages/EmailVerify";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import { useSelector } from "react-redux";
+import AddListingPage from "./pages/AddListing/AddListingPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -80,6 +81,7 @@ function App() {
               path="/homes&rooms/:id"
               element={<LazySingleHousePageComponent />}
             />
+            <Route path="/add-new-listing" element={<AddListingPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

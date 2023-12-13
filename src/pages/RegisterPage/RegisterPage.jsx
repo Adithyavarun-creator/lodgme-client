@@ -273,7 +273,7 @@ const RegisterPage = () => {
                 className="register-btn"
                 onClick={registerForm}
               >
-                Register
+                {loading ? "Registering" : "Register"}
               </button>
             </div>
           </div>
