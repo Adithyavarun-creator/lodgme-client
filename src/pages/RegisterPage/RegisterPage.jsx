@@ -12,8 +12,7 @@ const RegisterPage = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [location, setLocation] = useState("");
+  const [country, setCountry] = useState("");
   const [contactnumber, setContactnumber] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -61,11 +60,8 @@ const RegisterPage = () => {
     if (!option) {
       toast.error("Gender option not selected");
     }
-    // if (!gender) {
-    //   toast.error("Gender not filled");
-    // }
-    if (!location) {
-      toast.error("Location not filled");
+    if (!country) {
+      toast.error("Country not filled");
     }
     if (!contactnumber) {
       toast.error("Contact number not filled");
@@ -92,7 +88,7 @@ const RegisterPage = () => {
           homeAddress: address,
           email,
           gender: option,
-          location,
+          country,
           contactnumber,
           password,
         }),
@@ -196,30 +192,23 @@ const RegisterPage = () => {
                   <option value="Men">Men</option>
                   <option value="Women">Women</option>
                   <option value="Others">Others</option>
-
-                  {/* 
-                  {selectOptions.map((option) => (
-                    <option key={option.key} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))} */}
                 </select>
               </div>
               <div className="formlabel">
-                <label className="labeltext" htmlFor="location">
-                  Location
+                <label className="labeltext" htmlFor="country">
+                  Country
                 </label>
                 <input
-                  name="location"
+                  name="country"
                   type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
                   placeholder="France"
                   required
                 />
               </div>
               <div className="formlabel">
-                <label className="labeltext" htmlFor="location">
+                <label className="labeltext" htmlFor="address">
                   Address
                 </label>
                 <input
@@ -259,22 +248,8 @@ const RegisterPage = () => {
               </div>
             </form>
             <div className="btnbox">
-              <button
-                // disabled={
-                //   !firstname ||
-                //   !lastname ||
-                //   !email ||
-                //   !confirmpassword ||
-                //   !password ||
-                //   !location ||
-                //   !address ||
-                //   !gender ||
-                //   !contactnumber
-                // }
-                className="register-btn"
-                onClick={registerForm}
-              >
-                {loading ? <OnlySpinner /> : "Register"}
+              <button className="register-btn" onClick={registerForm}>
+                {loading ? "Registering..." : "Register"}
               </button>
             </div>
           </div>
