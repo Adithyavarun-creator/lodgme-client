@@ -21,28 +21,6 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [option, setOption] = useState("");
 
-  const selectOptions = [
-    {
-      label: "Men",
-      key: 1,
-      value: "Men",
-    },
-    {
-      label: "Women",
-      key: 2,
-      value: "Women",
-    },
-    {
-      label: "Others",
-      key: 3,
-      value: "Others",
-    },
-  ];
-
-  // const handleSelect = (event) => {
-  //   setOption(event.target.value);
-  // };
-
   const registerForm = async (e) => {
     e.preventDefault();
     if (!firstname) {

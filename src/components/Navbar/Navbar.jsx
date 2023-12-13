@@ -59,6 +59,11 @@ const Navbar = () => {
           <img className="navlogo" src={LogoBlack} alt="brand-logo" />
         </Link>
         <div className="navbuttons">
+          <div>
+            <Link to="/add-new-listing" className="navbutton linkStyle">
+              Add new Listing
+            </Link>
+          </div>
           {currentUser ? (
             ""
           ) : (
