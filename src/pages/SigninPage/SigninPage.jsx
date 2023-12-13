@@ -11,6 +11,9 @@ import {
   signInStart,
 } from "../../redux/user/userSlice";
 import { baseUrl, loginUser } from "../../baseUrl/url";
+import FacebookLogo from "../../assets/loginlogos/facebook.png";
+import AppleLogo from "../../assets/loginlogos/apple.png";
+import GoogleLogo from "../../assets/loginlogos/google.png";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -68,51 +71,97 @@ const SigninPage = () => {
             <h1>LodgeMe Customer Login/Signin Page</h1>
           </div>
           <div className="formbox">
-            <form>
-              <div className="formlabel">
-                <label className="labeltext" htmlFor="email">
-                  Email address
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="johndoe@gmail.com"
-                />
+            <div>
+              <form>
+                <div className="formlabel">
+                  <label className="labeltext" htmlFor="email">
+                    Email address
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="johndoe@gmail.com"
+                  />
+                </div>
+
+                <div className="formlabel">
+                  <label className="labeltext" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                  />
+                </div>
+                <div className="btnbox">
+                  <button
+                    className="register-btn"
+                    type="submit"
+                    onClick={loginForm}
+                  >
+                    Log In
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div className="btnbox">
+              <div>
+                <Link to="/forgot-password" className="linkStyle forgot-pswd">
+                  Forgot Password ? Reset Now
+                </Link>
+              </div>
+              <div>
+                <Link to="/register-user-in" className="linkStyle forgot-pswd">
+                  Sign up here to create an account
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <hr className="hrline" />
+            </div>
+
+            <div className="loginformbox">
+              <div>
+                <span className="socialsignin">
+                  Sign in with social accounts
+                </span>
               </div>
 
-              <div className="formlabel">
-                <label className="labeltext" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                />
+              <div className="btnsociallinks">
+                <div>
+                  <img
+                    src={GoogleLogo}
+                    className="socialiconimg"
+                    alt=""
+                    title="Sign with Google Account"
+                  />
+                </div>
+
+                <div>
+                  <img
+                    src={FacebookLogo}
+                    className="socialiconimg"
+                    alt=""
+                    title="Sign with Google Account"
+                  />
+                </div>
+
+                <div>
+                  <img
+                    src={AppleLogo}
+                    className="socialiconimg"
+                    alt=""
+                    title="Sign with Apple Account"
+                  />
+                </div>
               </div>
-            </form>
-            <div className="btnbox">
-              <button
-                className="register-btn"
-                type="submit"
-                onClick={loginForm}
-              >
-                Log In
-              </button>
-            </div>
-            <div className="btnbox">
-              <Link to="/forgot-password" className="linkStyle forgot-pswd">
-                Forgot Password ? Reset Now{" "}
-              </Link>
-            </div>
-            <div className="btnbox">
-              <Link to="/register-user-in" className="linkStyle forgot-pswd">
-                Sign up here to create an account
-              </Link>
             </div>
           </div>
           <Toaster position="top-center" reverseOrder={false} />

@@ -9,7 +9,7 @@ import countryList from "react-select-country-list";
 import axios from "axios";
 import { baseUrl } from "../../baseUrl/url";
 import { useSelector } from "react-redux";
-import { HomepageSelectStyles } from "../../components/SelectStyles/Select";
+import { AddListingSelectStyles } from "../../components/SelectStyles/Select";
 import Button from "../../components/Button/Button";
 
 const AddListingPage = () => {
@@ -98,7 +98,7 @@ const AddListingPage = () => {
             <input
               name="title"
               type="text"
-              placeholder="Studio/Flat/Apartment"
+              placeholder="Studio/Flat/Apartment in city center"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -113,7 +113,7 @@ const AddListingPage = () => {
             <input
               name="subtitle"
               type="text"
-              placeholder="Nearby bus,trams,hotspot of city,airport"
+              placeholder=" Beaches,Parks,Museums"
               value={subtitle}
               onChange={(e) => setSubtitle(e.target.value)}
             />
@@ -196,12 +196,11 @@ const AddListingPage = () => {
               onChange={(e) => setLocatedCountry(e.target.value)}
             /> */}
             <Select
-              className="select"
               placeholder="Select Location"
               options={options}
               value={value}
               onChange={changeHandler}
-              styles={HomepageSelectStyles}
+              styles={AddListingSelectStyles}
               name="location"
             />
             <span>
@@ -214,10 +213,7 @@ const AddListingPage = () => {
             <label htmlFor="description">Description of your house*</label>
             <textarea
               name="description"
-              id=""
-              cols="30"
-              rows="10"
-              placeholder=""
+              placeholder="This is a house with all your needed amenities and furnishments. We provide you breakfat and dinner with unlimited servings.We even provide you American and Chinese cuisines"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

@@ -17,7 +17,9 @@ export const AddListingStyles = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.4px;
-    width: 400px;
+    /* width: 450px; */
+    width: 450px;
+
   }
   label {
     color: red;
@@ -25,8 +27,34 @@ export const AddListingStyles = styled.div`
 
   input {
     height: 40px;
+    width: 450px;
+    padding: 10px;
+    border-radius: 5px;
+    offset: none;
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+
+    :focus {
+      border: none;
+      offset: none;
+    }
+
+    :invalid {
+      color: red;
+    }
+  }
+
+  textarea {
+    height: 200px;
     width: 400px;
     padding: 10px;
+    border-radius: 5px;
+    offset: none;
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+
+    :focus {
+      border: none;
+      offset: none;
+    }
   }
 
   span {
