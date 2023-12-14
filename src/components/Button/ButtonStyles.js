@@ -28,7 +28,7 @@ export const ButtonStyles = styled.button`
   }
 
   @media ${devices.smallMobiles} {
-    padding: 4px 6px;
-    font-size: 6px;
+    padding: 8px 10px;
+    font-size: 10px;
   }
 `;

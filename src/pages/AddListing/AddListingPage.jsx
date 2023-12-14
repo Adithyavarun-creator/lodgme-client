@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { AddListingStyles } from "./AddListingStyles";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -11,6 +11,15 @@ import { baseUrl } from "../../baseUrl/url";
 import { useSelector } from "react-redux";
 import { AddListingSelectStyles } from "../../components/SelectStyles/Select";
 import Button from "../../components/Button/Button";
+import { MdDelete } from "react-icons/md";
+
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../../firebase/firebase";
 
 const AddListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -26,7 +35,6 @@ const AddListingPage = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);
   const [housePrice, setHouseprice] = useState(0);
   const [user, setUser] = useState("");
   const [amentitiesinc, setAmenitiesinc] = useState([]);
@@ -34,6 +42,16 @@ const AddListingPage = () => {
   //country
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
+  //images
+  const [formData, setFormData] = useState({
+    imageUrls: [],
+  });
+  const [files, setFiles] = useState([]);
+  const [imageUploadError, setImageUploadError] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [percent, setPercent] = useState("");
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -43,50 +61,142 @@ const AddListingPage = () => {
     setCoordiantes(ll);
   };
 
-  //console.log(address);
-
   const changeHandler = (value) => {
     setValue(value);
   };
 
-  //console.log(value.label);
+  //uploadfiles
+  const handleImageSubmit = () => {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+      setUploading(true);
+      setImageUploadError(false);
+      const promises = [];
+
+      for (let i = 0; i < files.length; i++) {
+        promises.push(storeImage(files[i]));
+      }
+      Promise.all(promises)
+        .then((urls) => {
+          setFormData({
+            ...formData,
+            imageUrls: formData.imageUrls.concat(urls),
+          });
+          setImageUploadError(false);
+          setUploading(false);
+        })
+        .catch((err) => {
+          setImageUploadError("Image upload failed (2 mb max per image)");
+          setUploading(false);
+        });
+    } else {
+      setImageUploadError("You can only upload 6 images per listing");
+      setUploading(false);
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+    });
+  };
+
+  const storeImage = async (file) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, `/houseListingImages/${fileName}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setPercent(progress);
+          //console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
 
   const onAddListing = async () => {
-    if (
-      !title ||
-      !subtitle ||
-      !coordinates ||
-      !address ||
-      !description ||
-      !beds ||
-      !baths ||
-      !livingRoom ||
-      !amentitiesinc ||
-      !amentitiesnotinc ||
-      !user ||
-      !housePrice ||
-      !value
-    ) {
-      alert("missing input field");
+    if (!title) {
+      alert("Enter title");
     }
 
-    const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
-      title,
-      subtitle,
-      mapLocation: coordinates,
-      houseAddress: address,
-      description,
-      beds,
-      baths,
-      livingRoom,
-      amenitiesIncluded: amentitiesinc,
-      amenitiesNotIncluded: amentitiesnotinc,
-      publishedUser: user,
-      pricePerNight: housePrice,
-      locatedCountry: value.label,
-    });
-    console.log(res.data);
-    alert("house details saved");
+    if (!subtitle) {
+      alert("Enter Facilites");
+    }
+
+    if (!coordinates) {
+      alert("Enter and select Address");
+    }
+
+    if (!address) {
+      alert("Enter and select Address");
+    }
+    if (!description) {
+      alert("Enter Description");
+    }
+    if (!beds) {
+      alert("Enter no of beds");
+    }
+    if (!baths) {
+      alert("Enter no of baths");
+    }
+    if (!livingRoom) {
+      alert("Enter no of livingRoom");
+    }
+    if (!amentitiesinc) {
+      alert("Enter amenitites included");
+    }
+    if (!amentitiesnotinc) {
+      alert("Enter amenitites not included");
+    }
+
+    if (!user) {
+      alert("Enter user name");
+    }
+    if (!housePrice) {
+      alert("Enter price of stay per day");
+    }
+    if (!value) {
+      alert("Enter country name");
+    }
+    if (!files) {
+      alert("Images not selected");
+    }
+
+    try {
+      const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
+        title,
+        subtitle,
+        mapLocation: coordinates,
+        houseAddress: address,
+        description,
+        houseImages: formData.imageUrls,
+        beds,
+        baths,
+        livingRoom,
+        amenitiesIncluded: amentitiesinc,
+        amenitiesNotIncluded: amentitiesnotinc,
+        publishedUser: user,
+        pricePerNight: housePrice,
+        locatedCountry: value.label,
+      });
+      console.log(res.data);
+      alert("house details saved");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -188,13 +298,6 @@ const AddListingPage = () => {
           </div>
           <div className="forminputs">
             <label htmlFor="country">Country Located*</label>
-            {/* <input
-              name="country"
-              type="text"
-              placeholder="France/Latvia/Estonia"
-              value={locatedCountry}
-              onChange={(e) => setLocatedCountry(e.target.value)}
-            /> */}
             <Select
               placeholder="Select Location"
               options={options}
@@ -213,7 +316,7 @@ const AddListingPage = () => {
             <label htmlFor="description">Description of your house*</label>
             <textarea
               name="description"
-              placeholder="This is a house with all your needed amenities and furnishments. We provide you breakfat and dinner with unlimited servings.We even provide you American and Chinese cuisines"
+              placeholder="This is a house with all your needed amenities and furnishments. We provide you breakfast and dinner with unlimited servings.We even provide you American and Chinese cuisines"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -228,7 +331,7 @@ const AddListingPage = () => {
 
           <div className="forminputs">
             <label htmlFor="amenitiesinc">
-              Add amenities that you offer while staying *
+              Add amenities that you offer while staying*
             </label>
             <input
               name="amenitiesinc"
@@ -245,7 +348,7 @@ const AddListingPage = () => {
           </div>
           <div className="forminputs">
             <label htmlFor="amenitiesnotinc">
-              Add amenities that you do not offer while staying *
+              Add amenities that you do not offer while staying*
             </label>
             <input
               name="amenitiesnotinc"
@@ -277,7 +380,7 @@ const AddListingPage = () => {
 
           <div className="forminputs">
             <label htmlFor="">
-              Enter your address so that we will mark in map for public view *
+              Enter your address so that we will mark in map for public view*
             </label>
             <PlacesAutocomplete
               value={address}
@@ -331,8 +434,66 @@ const AddListingPage = () => {
             </span>
           </div>
         </div>
+        <div className="uploadImagebox">
+          <div className="uploadImage">
+            <label>Upload House Images*</label>
+
+            <input
+              className="imginput"
+              type="file"
+              multiple
+              onChange={(e) => setFiles(e.target.files)}
+              accept="image/*"
+            />
+
+            <span>
+              **The maximum count of images has to be <strong>5</strong> and
+              above**
+            </span>
+          </div>
+
+          <div className="">
+            <button
+              className="uploadbtn"
+              onClick={handleImageSubmit}
+              disabled={uploading}
+            >
+              Submit to preview images that you have selected
+            </button>
+          </div>
+        </div>
+
+        {percent ? (
+          <div>
+            <span className="progress">
+              Uploaded all your images {percent}%
+            </span>
+          </div>
+        ) : (
+          <div>
+            <span className="progress">{percent}</span>
+          </div>
+        )}
+
+        <div className="imagemap">
+          {formData.imageUrls.length > 0 &&
+            formData.imageUrls.map((url, index) => (
+              <div className="imageboxurl" key={index}>
+                <div>
+                  <img src={url} className="imageUrls" alt="" />
+                </div>
+                <div className="deleteimg">
+                  <MdDelete
+                    className="deleteicon"
+                    onClick={() => handleRemoveImage(index)}
+                  />
+                </div>
+              </div>
+            ))}
+        </div>
+
         <div>
-          <Button onClick={onAddListing} title="Publish House to public view" />
+          <Button onClick={onAddListing} title="Publish House Listing" />
         </div>
       </AddListingStyles>
     </>
@@ -340,62 +501,3 @@ const AddListingPage = () => {
 };
 
 export default AddListingPage;
-
-/**
- {
-    title: {
-      type: String,
-      text: true,
-    },
-    subtitle: {
-      type: String,
-      text: true,
-    },
-    located: {
-      type: String,
-      text: true,
-    },
-    amenitiesIncluded: {
-      type: Array,
-      text: true,
-    },
-    amenitiesNotIncluded: {
-      type: Array,
-      text: true,
-    },
-    houseImages: {
-      type: Array,
-      default: [],
-    },
-    beds: {
-      type: Number,
-      default: 1,
-    },
-    baths: {
-      type: Number,
-      default: 1,
-    },
-    pricePerNight: {
-      type: Number,
-    },
-    description: {
-      type: String,
-      trim: true,
-    },
-    publishedUser: {
-      type: String,
-    },
-    mapLocation: [
-      {
-        lat: {
-          type: Number,
-          default: 56.9581514,
-        },
-        lng: {
-          type: Number,
-          default: 24.1399615,
-        },
-      },
-    ],
-  },
- */
