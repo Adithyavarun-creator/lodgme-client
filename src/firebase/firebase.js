@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_FIREBASE_API_KEY,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "chatgpt-yt-5feac.firebaseapp.com",
   projectId: "chatgpt-yt-5feac",
   storageBucket: "chatgpt-yt-5feac.appspot.com",
@@ -11,3 +12,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
+const provider = new GoogleAuthProvider();
+
+// whenever a user interacts with the provider, we force them to select an account
+provider.setCustomParameters({
+  prompt: "select_account ",
+});
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);

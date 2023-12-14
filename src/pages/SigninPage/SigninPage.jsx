@@ -14,6 +14,7 @@ import { baseUrl, loginUser } from "../../baseUrl/url";
 import FacebookLogo from "../../assets/loginlogos/facebook.png";
 import AppleLogo from "../../assets/loginlogos/apple.png";
 import GoogleLogo from "../../assets/loginlogos/google.png";
+import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -136,12 +137,7 @@ const SigninPage = () => {
 
               <div className="btnsociallinks">
                 <div>
-                  <img
-                    src={GoogleLogo}
-                    className="socialiconimg"
-                    alt=""
-                    title="Sign with Google Account"
-                  />
+                  <GoogleLogin />
                 </div>
 
                 <div>
@@ -149,16 +145,7 @@ const SigninPage = () => {
                     src={FacebookLogo}
                     className="socialiconimg"
                     alt=""
-                    title="Sign with Google Account"
-                  />
-                </div>
-
-                <div>
-                  <img
-                    src={AppleLogo}
-                    className="socialiconimg"
-                    alt=""
-                    title="Sign with Apple Account"
+                    title="Sign with Facebook Account"
                   />
                 </div>
               </div>

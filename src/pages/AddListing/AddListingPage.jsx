@@ -180,6 +180,7 @@ const AddListingPage = () => {
     }
 
     try {
+      setLoading(true);
       const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
         title,
         subtitle,
@@ -196,9 +197,12 @@ const AddListingPage = () => {
         pricePerNight: housePrice,
         locatedCountry: value.label,
       });
+      setLoading(false);
+
       //console.log(res.data);
       alert("house details saved");
     } catch (error) {
+      setLoading(false);
       console.log(error.message);
     }
   };
@@ -502,7 +506,10 @@ const AddListingPage = () => {
           </div>
 
           <div>
-            <Button onClick={onAddListing} title="Publish House Listing" />
+            <Button
+              onClick={onAddListing}
+              title={loading ? "Publishing...." : "Publish House Listing"}
+            />
           </div>
         </AddListingStyles>
       </HelmetProvider>
