@@ -1,10 +1,10 @@
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app, signInWithGooglePopup } from "../../firebase/firebase";
 import { useDispatch } from "react-redux";
 import { signInFailure, signInSuccess } from "../../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../baseUrl/url";
 import GoogleLogo from "../../assets/loginlogos/google.png";
+import toast, { Toaster } from "react-hot-toast";
 
 const GoogleLogin = () => {
   const dispatch = useDispatch();
@@ -30,13 +30,16 @@ const GoogleLogin = () => {
           photo: response.user.photoURL,
         }),
       });
-    
+
       const data = await res.json();
       //console.log(data);
       dispatch(signInSuccess(data));
+      toast("You are logging in to LodgeMe community shortly!", {
+        icon: "👏",
+      });
       setTimeout(() => {
         navigate("/dashboard-user");
-      }, 2500);
+      }, 1200);
     } catch (error) {
       console.log(error);
       dispatch(signInFailure(error));
@@ -52,6 +55,7 @@ const GoogleLogin = () => {
         alt=""
         title="Sign with Google Account"
       />
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };
