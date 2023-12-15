@@ -13,6 +13,7 @@ import {
   signOutUserSuccess,
 } from "../../redux/user/userSlice";
 import { FiLogOut } from "react-icons/fi";
+import { baseUrl } from "../../baseUrl/url";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -35,7 +36,7 @@ const Navbar = () => {
   const logoutUser = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`http://localhost:8000/api/signout`);
+      const res = await fetch(`${baseUrl}/api/signout`);
       const data = await res.json();
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));

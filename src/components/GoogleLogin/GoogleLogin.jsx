@@ -37,9 +37,7 @@ const GoogleLogin = () => {
       toast("You are logging in to LodgeMe community shortly!", {
         icon: "👏",
       });
-      setTimeout(() => {
-        navigate("/dashboard-user");
-      }, 1200);
+      navigate("/dashboard-user");
     } catch (error) {
       console.log(error);
       dispatch(signInFailure(error));

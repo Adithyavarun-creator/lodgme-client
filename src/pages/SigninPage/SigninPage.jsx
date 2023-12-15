@@ -15,6 +15,7 @@ import FacebookLogo from "../../assets/loginlogos/facebook.png";
 import AppleLogo from "../../assets/loginlogos/apple.png";
 import GoogleLogo from "../../assets/loginlogos/google.png";
 import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
+import FacebookSignin from "../../components/FacebookSignin/FacebookSignin";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -140,14 +141,9 @@ const SigninPage = () => {
                   <GoogleLogin />
                 </div>
 
-                <div>
-                  <img
-                    src={FacebookLogo}
-                    className="socialiconimg"
-                    alt=""
-                    title="Sign with Facebook Account"
-                  />
-                </div>
+                {/* <div>
+                  <FacebookSignin />
+                </div> */}
               </div>
             </div>
           </div>
