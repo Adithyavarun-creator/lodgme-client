@@ -4,7 +4,6 @@ import { signInFailure, signInSuccess } from "../../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import FacebookLogo from "../../assets/loginlogos/facebook.png";
 import toast, { Toaster } from "react-hot-toast";
-import FacebookLogin from "react-facebook-login";
 import { baseUrl } from "../../baseUrl/url";
 import { FacebookProvider, LoginButton } from "react-facebook";
 import axios from "axios";
