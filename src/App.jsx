@@ -10,7 +10,6 @@ import OnlySpinner from "./components/OnlySpinner/OnlySpinner";
 import EmailVerify from "./pages/EmailVerify";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import { useSelector } from "react-redux";
-import AddListingPage from "./pages/AddListing/AddListingPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 const LazyHomepageComponent = React.lazy(() =>
@@ -36,6 +35,10 @@ const LazyForgotPasswordPageComponent = React.lazy(() =>
 );
 const LazyResetPasswordPageComponent = React.lazy(() =>
   import("./pages/ResetPassword/ResetPassword")
+);
+
+const LazyAddListingPageComponent = React.lazy(() =>
+  import("./pages/AddListing/AddListingPage")
 );
 
 function App() {
@@ -80,7 +83,7 @@ function App() {
               path="/homes&rooms/:id"
               element={<LazySingleHousePageComponent />}
             />
-            <Route path="/add-new-listing" element={<AddListingPage />} />
+            <Route path="/add-new-listing" element={<LazyAddListingPageComponent />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
             </Route>

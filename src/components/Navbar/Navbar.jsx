@@ -12,6 +12,7 @@ import {
   signOutUserStart,
   signOutUserSuccess,
 } from "../../redux/user/userSlice";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -55,12 +56,16 @@ const Navbar = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        <Link to="/" className="linkStyle">
+        <Link to="/" className="linkStyle" title="LodgeMe">
           <img className="navlogo" src={LogoBlack} alt="brand-logo" />
         </Link>
         <div className="navbuttons">
           <div>
-            <Link to="/add-new-listing" className="navbutton linkStyle">
+            <Link
+              to="/add-new-listing"
+              className="navbutton linkStyle"
+              title="Add a new house listing at LodgeMe"
+            >
               Add new Listing
             </Link>
           </div>
@@ -68,35 +73,47 @@ const Navbar = () => {
             ""
           ) : (
             <div>
-              <Link to="/register-user-in" className="navbutton linkStyle">
-                {t("register")}
-              </Link>
-            </div>
-          )}
-          {currentUser ? (
-            <div>
               <Link
-                onClick={logoutUser}
-                to="/user-logout"
+                to="/register-user-in"
                 className="navbutton linkStyle"
+                title="Register as user in LodgeMe"
               >
-                Logout
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <Link to="/user-sign-in" className="navbutton linkStyle">
-                Login
+                {t("register")}
               </Link>
             </div>
           )}
 
           {currentUser && (
             <div>
-              <Link to="/dashboard-user" className="navbutton linkStyle">
-                {currentUser
-                  ? `${currentUser?.firstname} ${currentUser?.lastname} Dashboard`
-                  : ""}
+              <Link
+                to="/dashboard-user"
+                className="navbutton linkStyle"
+                title="Click to manage your LodgeMe account"
+              >
+                {currentUser ? `${currentUser?.username} Dashboard` : ""}
+              </Link>
+            </div>
+          )}
+
+          {currentUser ? (
+            <div>
+              <Link
+                onClick={logoutUser}
+                to="/user-logout"
+                className="navbutton linkStyle"
+                title="Logout from LodgeMe"
+              >
+                Logout &nbsp; <FiLogOut />
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link
+                to="/user-sign-in"
+                className="navbutton linkStyle"
+                title="Login to LodgeMe"
+              >
+                Login
               </Link>
             </div>
           )}

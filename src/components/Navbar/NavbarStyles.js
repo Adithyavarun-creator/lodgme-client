@@ -90,6 +90,7 @@ export const NavbarStyles = styled(motion.div)`
     cursor: pointer;
     transition: all.5s ease-in;
     text-transform: capitalize;
+    display: flex;
 
     @media ${devices.bigLaptopsAndDesktops} {
       font-size: 14px;

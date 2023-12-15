@@ -9,6 +9,7 @@ import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +24,9 @@ const RegisterPage = () => {
 
   const registerForm = async (e) => {
     e.preventDefault();
+    if (!username) {
+      toast.error("Username not filled");
+    }
     if (!firstname) {
       toast.error("Firstname not filled");
     }
@@ -61,6 +65,7 @@ const RegisterPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          username,
           firstname,
           lastname,
           homeAddress: address,
@@ -104,6 +109,19 @@ const RegisterPage = () => {
           </div>
           <div className="formbox">
             <form>
+            <div className="formlabel">
+                <label className="labeltext" htmlFor="username">
+                  Username
+                </label>
+                <input
+                  id="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="John78"
+                  required
+                />
+              </div>
               <div className="formlabel">
                 <label className="labeltext" htmlFor="firstname">
                   Firstname

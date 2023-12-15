@@ -7,6 +7,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
 import { MdAddHome, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const UserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -21,7 +22,7 @@ const UserDashboard = () => {
         </Helmet>
         <UserDashboardStyles>
           <div>
-            <h1>{`${currentUser?.firstname} ${currentUser?.lastname} Dashboard`}</h1>
+            <h1>{currentUser?.username} Dashboard</h1>
           </div>
 
           <div className="dashboardbox">
@@ -89,22 +90,23 @@ const UserDashboard = () => {
                 <span>Click here and post your houses or book your houses</span>
               </div>
             </div>
-            <div className="dashboardbox-1">
+            <Link to="/add-new-listing" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
               <div className="flexbox">
                 <div className="">
-                  <h2 className="dashboard-maintitle">Add new Houses</h2>
+                  <h2 className="dashboard-maintitle">Add new House Listing</h2>
                 </div>
                 <div className="dashboard-mainlink">
                   <MdAddHome className="dashboard-icon" />
                 </div>
               </div>
               <div>
-                <span>Click here and add your houses to stay</span>
+              <span>Post your house listing to public</span>
+
               </div>
-            </div>
+            </Link>
             <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -120,7 +122,7 @@ const UserDashboard = () => {
                 </div>
               </div>
               <div>
-                <span>Any queries ? we can fix and guide you</span>
+                <span>Any queries ? We can guide you</span>
               </div>
             </div>
           </div>
