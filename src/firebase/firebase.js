@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: "AIzaSyAe5nuRyJ85plgPz4tGLVgR91Ou0fCdLX0",
   authDomain: "chatgpt-yt-5feac.firebaseapp.com",
   projectId: "chatgpt-yt-5feac",
   storageBucket: "chatgpt-yt-5feac.appspot.com",
