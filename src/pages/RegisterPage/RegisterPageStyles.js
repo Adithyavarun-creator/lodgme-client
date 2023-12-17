@@ -159,6 +159,20 @@ export const RegisterPageStyles = styled.div`
     }
   }
 
+  .emailverifybox {
+    display: flex;
+    justify-content: center;
+  }
+
+  .emailverifytext {
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    font-size: 18px;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
   select {
     width: 100%;
     border: 2px solid ${({ theme }) => theme.colors.primaryColor};

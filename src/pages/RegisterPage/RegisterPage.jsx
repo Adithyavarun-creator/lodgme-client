@@ -21,6 +21,7 @@ const RegisterPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [option, setOption] = useState("");
+  const [emailverify, setEmailverify] = useState("");
 
   const registerForm = async (e) => {
     e.preventDefault();
@@ -83,12 +84,16 @@ const RegisterPage = () => {
         return;
       }
       setLoading(false);
-      toast("You have been registered in LodgeMe community!", {
-        icon: "👏",
-      });
-      setTimeout(() => {
-        navigate("/user-sign-in");
-      }, 3000);
+      setEmailverify(true);
+      toast(
+        "We have sent a verification link to your email address, please click on link to verify your account and you will be registered in LodgeMe community!",
+        {
+          icon: "👏",
+        }
+      );
+      // setTimeout(() => {
+      //   navigate("/user-sign-in");
+      // }, 3000);
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -109,7 +114,7 @@ const RegisterPage = () => {
           </div>
           <div className="formbox">
             <form>
-            <div className="formlabel">
+              <div className="formlabel">
                 <label className="labeltext" htmlFor="username">
                   Username
                 </label>
@@ -248,6 +253,14 @@ const RegisterPage = () => {
                 {loading ? "Registering..." : "Register"}
               </button>
             </div>
+            {emailverify && (
+              <div className="emailverifybox">
+                <span className="emailverifytext">
+                  We have sent a verification link to your email address ,
+                  please click on link to verify your account
+                </span>
+              </div>
+            )}
           </div>
           <Toaster position="top-center" reverseOrder={false} />
         </RegisterPageStyles>

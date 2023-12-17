@@ -77,13 +77,16 @@ function App() {
               element={<LazyResetPasswordPageComponent />}
             />
 
-            <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+            <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
 
             <Route
               path="/homes&rooms/:id"
               element={<LazySingleHousePageComponent />}
             />
-            <Route path="/add-new-listing" element={<LazyAddListingPageComponent />} />
+            <Route
+              path="/add-new-listing"
+              element={<LazyAddListingPageComponent />}
+            />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
             </Route>
