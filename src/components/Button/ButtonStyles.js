@@ -3,7 +3,7 @@ import { devices } from "../../theme/breakpoints";
 
 export const ButtonStyles = styled.button`
   cursor: pointer;
-  padding: 16px 18px;
+  padding: 16px 22px;
   border-radius: 10px;
   border: 1px solid #fff;
   offset: none;
@@ -14,12 +14,12 @@ export const ButtonStyles = styled.button`
   font-weight: bolder;
 
   @media ${devices.bigLaptopsAndDesktops} {
-    padding: 12px 10px;
+    padding: 12px 20px;
     font-size: 16px;
   }
 
   @media ${devices.tabletsAndIpads} {
-    padding: 8px 8px;
+    padding: 10px 18px;
     font-size: 12px;
   }
   @media ${devices.smallTabs} {
@@ -28,7 +28,7 @@ export const ButtonStyles = styled.button`
   }
 
   @media ${devices.smallMobiles} {
-    padding: 8px 10px;
+    padding: 8px 16px;
     font-size: 10px;
   }
 `;

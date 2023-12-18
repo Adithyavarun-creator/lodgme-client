@@ -7,7 +7,7 @@ import ScrollToTop from "./components/ScrollTop/ScrollToTop";
 import Spinner from "./components/Spinner/Spinner";
 import Animate from "./Animate";
 import OnlySpinner from "./components/OnlySpinner/OnlySpinner";
-import EmailVerify from "./pages/EmailVerify";
+import EmailVerify from "./components/EmailVerify/EmailVerify";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import { useSelector } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -39,6 +39,10 @@ const LazyResetPasswordPageComponent = React.lazy(() =>
 
 const LazyAddListingPageComponent = React.lazy(() =>
   import("./pages/AddListing/AddListingPage")
+);
+
+const LazyNotFoundPageComponent = React.lazy(() =>
+  import("./pages/NotFoundPage/NotFound")
 );
 
 function App() {
@@ -76,6 +80,7 @@ function App() {
               path="/reset-password/:id/:token"
               element={<LazyResetPasswordPageComponent />}
             />
+            <Route path="*" element={<LazyNotFoundPageComponent />} />
 
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
 

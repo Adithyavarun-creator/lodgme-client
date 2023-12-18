@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { baseUrl } from "../baseUrl/url";
+import { baseUrl } from "../../baseUrl/url";
+import { MdVerified, MdError } from "react-icons/md";
+import { EmailVerifyStyles } from "./EmailVerifyStyles";
+import Button from "../Button/Button";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(false);
@@ -10,16 +13,19 @@ const EmailVerify = () => {
 
   console.log(params);
 
+  const onLogin = () => {
+    navigate("/user-sign-in");
+  };
+
   useEffect(() => {
     const verifyEmail = async () => {
       try {
         const url = `${baseUrl}/api/${params.id}/verify/${params.token}`;
         const { data } = await axios.get(url);
-        //console.log(data);
         setValidUrl(true);
         setTimeout(() => {
           navigate("/user-sign-in");
-        }, 2400);
+        }, 2600);
       } catch (error) {
         console.log(error);
         setValidUrl(false);
@@ -31,22 +37,27 @@ const EmailVerify = () => {
 
   return (
     <>
-      <div>
+      <EmailVerifyStyles>
         {validUrl ? (
           <>
-            <img
-              src="https://media.istockphoto.com/id/1313547780/vector/profile-verification-check-marks-icons-vector-illustration.jpg?s=612x612&w=0&k=20&c=XDWxGC05gd-sTn_cBvlI2aG1onqOdiVdPb0IeFO-Q2M="
-              alt=""
-              style={{ height: "100px", width: "100px" }}
-            />
-            <h2>
-              You are verified, redirecting to LodgeMe login page in a moment
+            <MdVerified className="verify-icon" />
+            <h2 className="verified-text">
+              You are verified as a vaid user, redirecting to LodgeMe login page
+              in a moment
             </h2>
           </>
         ) : (
-          <h2>404 Page</h2>
+          <>
+            <MdError className="verify-icon" />
+            <h2 className="verified-text">
+              We have an issue in verifying your account, we will solve it ,
+              meanwhile you can login with your registered credentials and
+              browse
+            </h2>
+          </>
         )}
-      </div>
+        <Button title="Login" onClick={onLogin} />
+      </EmailVerifyStyles>
     </>
   );
 };
