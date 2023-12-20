@@ -41,6 +41,10 @@ const LazyAddListingPageComponent = React.lazy(() =>
   import("./pages/AddListing/AddListingPage")
 );
 
+const LazySearchPageComponent = React.lazy(() =>
+  import("./pages/SearchPage/SearchPage")
+);
+
 const LazyNotFoundPageComponent = React.lazy(() =>
   import("./pages/NotFoundPage/NotFound")
 );
@@ -92,6 +96,7 @@ function App() {
               path="/add-new-listing"
               element={<LazyAddListingPageComponent />}
             />
+            <Route path="/search" element={<LazySearchPageComponent />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
             </Route>

@@ -13,7 +13,7 @@ const NotFound = () => {
 
   return (
     <NotFoundStyles>
-      <div>
+      <div className="flex">
         <h2>Page you are looking does not exist</h2>
       </div>
       <div>
