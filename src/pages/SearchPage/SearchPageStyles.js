@@ -353,12 +353,10 @@ export const SearchPageStyles = styled.div`
     }
     @media ${devices.smallTabs} {
       padding: 5px;
-
     }
 
     @media ${devices.smallMobiles} {
       padding: 4px;
-
     }
   }
 
