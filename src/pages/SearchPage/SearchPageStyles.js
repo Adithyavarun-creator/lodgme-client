@@ -335,6 +335,193 @@ export const SearchPageStyles = styled.div`
     }
   }
 
+  .searchpricebox {
+    /* padding: 4px; */
+    border-radius: 10px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 6px;
+    width: max-content;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+      padding: 5px;
+
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 4px;
+
+    }
+  }
+
+  .searchpricetag {
+    position: absolute;
+    top: 48px;
+    left: 10px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+      top: 28px;
+      left: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      top: 20px;
+      left: 10px;
+    }
+  }
+
+  .searchpricetagicon {
+    color: #ff8c00;
+    height: 22px;
+    width: 22px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 18px;
+      width: 18px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 15px;
+      width: 15px;
+    }
+    @media ${devices.smallTabs} {
+      height: 10px;
+      width: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 7px;
+      width: 7px;
+    }
+  }
+
+  .searchpriceicon {
+    height: 20px;
+    width: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 15px;
+      width: 15px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 15px;
+      width: 15px;
+    }
+    @media ${devices.smallTabs} {
+      height: 10px;
+      width: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  .searchhouseamount {
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 16px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+
+  .searchresultview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .searchresultviewbtn {
+    padding: 10px 16px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    font-size: 18px;
+    font-weight: bolder;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    offset: none;
+    cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      padding: 10px 16px;
+      font-size: 16px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 5px 8px;
+      font-size: 7px;
+    }
+  }
+  .searchresultviewbtnicon {
+    height: 15px;
+    width: 15px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 12px;
+      width: 12px;
+    }
+    @media ${devices.smallTabs} {
+      height: 10px;
+      width: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 7px;
+      width: 7px;
+    }
+  }
+
   .searchresultsection {
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -366,6 +553,7 @@ export const SearchPageStyles = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 15px;
+    /* padding: 4px; */
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 10px;
@@ -375,57 +563,65 @@ export const SearchPageStyles = styled.div`
       gap: 8px;
     }
     @media ${devices.smallTabs} {
-      gap: 7px;
+      gap: 5px;
+      padding: 2px;
     }
 
     @media ${devices.smallMobiles} {
       gap: 5px;
+      padding: 2px;
     }
   }
 
   .bedbathamenities {
     display: flex;
     flex-direction: row;
-    gap: 2px;
-    align-items: center;
-    padding: 5px;
-    background-color: ${({ theme }) => theme.colors.primaryColor};
-    color: #fff;
+    gap: 5px;
+    color: #333;
     border-radius: 10px;
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+    padding: 5px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
+      gap: 2px;
+      padding: 5px;
     }
     @media ${devices.smallTabs} {
-      padding: 4px;
+      gap: 2px;
+      padding: 1.5px;
+      border-radius: 5px;
     }
 
     @media ${devices.smallMobiles} {
-      padding: 2px;
+      gap: 2px;
+      padding: 2.5px;
+      border-radius: 5px;
     }
   }
 
   .bedsbathicon {
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
+    color: ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
-      height: 20px;
-      width: 20px;
-    }
-    @media ${devices.smallTabs} {
       height: 10px;
       width: 10px;
     }
+    @media ${devices.smallTabs} {
+      height: 7px;
+      width: 7px;
+    }
 
     @media ${devices.smallMobiles} {
-      height: 8px;
-      width: 8px;
+      height: 7px;
+      width: 7px;
     }
   }
 
@@ -441,7 +637,7 @@ export const SearchPageStyles = styled.div`
       font-size: 14px;
     }
     @media ${devices.smallTabs} {
-      font-size: 10px;
+      font-size: 8px;
     }
 
     @media ${devices.smallMobiles} {
@@ -450,8 +646,9 @@ export const SearchPageStyles = styled.div`
   }
 
   .bedsbathtext {
-    color: #fff;
+    color: #333;
     font-weight: bolder;
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
@@ -462,7 +659,7 @@ export const SearchPageStyles = styled.div`
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 6px;
+      font-size: 8px;
     }
   }
 
@@ -470,6 +667,7 @@ export const SearchPageStyles = styled.div`
     font-size: 14px;
     color: darkgrey;
     font-weight: bolder;
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
