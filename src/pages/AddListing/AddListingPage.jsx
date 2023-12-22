@@ -239,8 +239,8 @@ const AddListingPage = () => {
         publishedUser: user,
         pricePerNight: housePrice,
         locatedCountry: value.label,
-        availableFrom: format(range[0].startDate, "MM/dd/yyyy"),
-        availableTill: format(range[0].endDate, "MM/dd/yyyy"),
+        availableFrom: format(range[0].startDate, "dd/MM/yyyy"),
+        availableTill: format(range[0].endDate, "dd/MM/yyyy"),
       });
       setLoading(false);
 
@@ -302,9 +302,9 @@ const AddListingPage = () => {
                 Select Available dates for your house*
               </label>
               <input
-                value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
+                value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
                   range[0].endDate,
-                  "MM/dd/yyyy"
+                  "dd/MM/yyyy"
                 )}`}
                 readOnly
                 onClick={() => setOpen((open) => !open)}

@@ -72,7 +72,7 @@ export const HomepageStyles = styled(motion.div)`
     }
 
     @media ${devices.tabletsAndIpads} {
-      height: 500px;
+      height: 300px;
     }
 
     @media ${devices.smallTabs} {
@@ -124,12 +124,12 @@ export const HomepageStyles = styled(motion.div)`
     display: flex;
     flex-direction: row;
     border: 2px solid ${({ theme }) => theme.colors.primaryColor};
-    height: 125px;
+    height: 105px;
     background-color: white;
     z-index: 20;
     width: 70%;
     margin: 0 auto;
-    border-radius: 15px;
+    border-radius: 50px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -143,14 +143,13 @@ export const HomepageStyles = styled(motion.div)`
     @media ${devices.bigLaptopsAndDesktops} {
       width: 90%;
       gap: 20px;
+      margin-top: 20px;
     }
 
     @media ${devices.tabletsAndIpads} {
       width: 98%;
-      /* margin-top: 420px; */
       padding: 5px;
       gap: 10px;
-      /* justify-content: space-evenly; */
     }
 
     @media ${devices.smallTabs} {
@@ -159,7 +158,7 @@ export const HomepageStyles = styled(motion.div)`
       flex-direction: column;
       gap: 7px;
       padding: 3px;
-      width: 60%;
+      width: 50%;
     }
 
     @media ${devices.smallMobiles} {
@@ -167,9 +166,8 @@ export const HomepageStyles = styled(motion.div)`
       display: flex;
       flex-direction: column;
       gap: 5px;
-      /* margin-top: 130px; */
       padding: 0;
-      width: 75%;
+      width: 85%;
     }
   }
 
@@ -312,7 +310,6 @@ export const HomepageStyles = styled(motion.div)`
       height: 40px;
       font-size: 16px;
       font-weight: 400;
-
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -320,21 +317,18 @@ export const HomepageStyles = styled(motion.div)`
       /* font-size: ${({ theme }) => theme.tabletAndIpadScreens.inputFont}; */
       font-size: 12px;
       font-weight: 400;
-
     }
 
     @media ${devices.smallTabs} {
       height: 30px;
       font-size: 9px;
       font-weight: 400;
-
     }
 
     @media ${devices.smallMobiles} {
       height: 30px;
       font-size: 12px;
       font-weight: 400;
-
     }
   }
 

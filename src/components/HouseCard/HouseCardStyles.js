@@ -16,6 +16,7 @@ export const HouseCardStyles = styled.div`
 
   @media ${devices.smallTabs} {
     margin-top: 30px;
+
   }
 
   @media ${devices.smallMobiles} {

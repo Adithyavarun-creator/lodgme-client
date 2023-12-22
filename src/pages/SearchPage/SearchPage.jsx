@@ -7,6 +7,8 @@ import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
 import { PiArmchairFill } from "react-icons/pi";
 import { MdVerified } from "react-icons/md";
 import queryString from "query-string";
+import axios from "axios";
+import { baseUrl, searchListings } from "../../baseUrl/url";
 
 const SearchPage = () => {
   const [country, setCountry] = useState("");
@@ -15,12 +17,28 @@ const SearchPage = () => {
   const [toDate, setTodate] = useState("");
   const [fetchedResults, setFetchedResults] = useState([]);
 
+  const searchListings = async (locatedCountry) => {
+    const res = await axios.post(`${baseUrl}/api/search-listings`, {
+      locatedCountry,
+    });
+    console.log(res.data);
+    setFetchedResults(res.data);
+  };
+
   useEffect(() => {
-    const { location, fromdate, todate, persons } = queryString.parse(
-      window.location.search
-    );
-    console.log({location, fromdate, todate, persons});
-  }, [window.location.search]);
+    // const { location, fromdate, todate, persons } = queryString.parse(
+
+    const { locatedCountry } = queryString.parse(window.location.search);
+    //console.log(locatedCountry);
+
+    // searchListings({ locatedCountry }).then((res) => {
+    //   console.log("results", res);
+    // });
+    setCountry(locatedCountry)
+    searchListings(locatedCountry);
+
+    // console.log({location, fromdate, todate, persons});
+  }, []);
 
   return (
     <SearchPageStyles>
@@ -29,7 +47,10 @@ const SearchPage = () => {
       </div>
       <div className="search-resultsbox">
         <div>
-          <h2>5 results for your search </h2>
+          <h2>
+            {fetchedResults.length > 0 && fetchedResults.length} results for
+            your search {country}
+          </h2>
         </div>
 
         <div className="searchresultbox">

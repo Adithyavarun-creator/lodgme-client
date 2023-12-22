@@ -15,6 +15,7 @@ import format from "date-fns/format";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { differenceInDays } from "date-fns";
+import { DatePicker, Space } from "antd";
 
 import { IoSearchSharp } from "react-icons/io5";
 import { useRef } from "react";
@@ -28,10 +29,12 @@ import { apartmentDatas } from "../../datas/apartmentDatas";
 import { HomepageSelectStyles } from "../../components/SelectStyles/Select";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const Homepage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { RangePicker } = DatePicker;
 
   const settings = {
     dots: true,
@@ -53,6 +56,7 @@ const Homepage = () => {
   ]);
 
   const [diffInDays, setDiffInDays] = useState(0);
+  const [dates, setDates] = useState("");
 
   const [open, setOpen] = useState(false);
 
@@ -127,20 +131,24 @@ const Homepage = () => {
     if (!noPersons) {
       toast.error("Person count not selected");
     }
-    navigate(
-      `/search-results?location=${value.label}&fromdate=${format(
-        range[0].startDate,
-        "yyyy/MM/dd"
-      )}&todate=${format(range[0].endDate, "yyyy/MM/dd")}&persons=${
-        noPersons.value
-      }`
-    );
+    // navigate(
+    //   `/search-results?location=${value.label}&fromdate=${format(
+    //     range[0].startDate,
+    //     "dd/MM/yyyy"
+    //   )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}&persons=${
+    //     noPersons.value
+    //   }`
+    // );
+    navigate(`/search-results?locatedCountry=${value.label}`);
   };
+
+  //console.log(value);
 
   // console.log(`${format(range[0].startDate, "yyyy/MM/dd")}`, "fromdate");
   // console.log(`${format(range[0].endDate, "yyyy/MM/dd")}`, "enddate");
+  //console.log(noPersons.value);
 
-  // console.log(diffInDays);
+  //console.log(dates);
 
   return (
     <HomepageStyles
@@ -188,7 +196,7 @@ const Homepage = () => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("bookingdate")}</span>
               <span>
@@ -196,18 +204,18 @@ const Homepage = () => {
               </span>
             </div>
             <input
-              value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
+              value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
                 range[0].endDate,
-                "MM/dd/yyyy"
+                "dd/MM/yyyy"
               )}`}
               readOnly
               className="date_inputfield"
               onClick={() => setOpen((open) => !open)}
             />
-          </div>
+          </div> */}
 
-          <div className="datebox_range" ref={refOne}>
-            {open && (
+          {/* <div className="datebox_range" ref={refOne}> */}
+          {/* {open && (
               <DateRangePicker
                 className="date_range"
                 onChange={(item) => {
@@ -222,10 +230,16 @@ const Homepage = () => {
                 rangeColors={["#015151", "#015151", "#fed14c"]}
                 minDate={new Date()}
               />
-            )}
-          </div>
+            )} */}
+          {/* <RangePicker
+              onChange={(value, dateString) => setDates(dateString)}
+              disabledDate={(current) =>
+                current && current.valueOf() < moment().subtract(1, "days")
+              }
+            />
+          </div> */}
 
-          <div>
+          {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("persons")}</span>
               <span>
@@ -242,7 +256,7 @@ const Homepage = () => {
               styles={HomepageSelectStyles}
               name="person"
             />
-          </div>
+          </div> */}
           <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("submit")}</span>
@@ -258,7 +272,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="mt-100"></div>
+      {/* <div className="mt-100"></div> */}
 
       <div>
         <HouseCard title="Top Rated Apartments" houseCards={apartmentDatas} />
