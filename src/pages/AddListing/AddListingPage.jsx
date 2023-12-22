@@ -239,6 +239,8 @@ const AddListingPage = () => {
         publishedUser: user,
         pricePerNight: housePrice,
         locatedCountry: value.label,
+        availableFrom: format(range[0].startDate, "MM/dd/yyyy"),
+        availableTill: format(range[0].endDate, "MM/dd/yyyy"),
       });
       setLoading(false);
 
@@ -249,6 +251,8 @@ const AddListingPage = () => {
       console.log(error.message);
     }
   };
+
+  // console.log(format(range[0].startDate, "MM/dd/yyyy"));
 
   return (
     <>
