@@ -26,9 +26,12 @@ import { useTranslation } from "react-i18next";
 import { houseCards } from "../../datas/houseCards";
 import { apartmentDatas } from "../../datas/apartmentDatas";
 import { HomepageSelectStyles } from "../../components/SelectStyles/Select";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -57,7 +60,7 @@ const Homepage = () => {
   const options = useMemo(() => countryList().getData(), []);
 
   //for number
-  const [noPersons, setnoPersons] = useState(1);
+  const [noPersons, setnoPersons] = useState(0);
 
   // get the target element to toggle
   const refOne = useRef(null);
@@ -105,8 +108,8 @@ const Homepage = () => {
   };
 
   const handleSelect = (ranges) => {
-    console.log(ranges.selection.startDate);
-    console.log(ranges.selection.endDate);
+    //console.log(ranges.selection.startDate);
+    //console.log(ranges.selection.endDate);
     const diff = differenceInDays(
       ranges.selection.endDate,
       ranges.selection.startDate
@@ -114,10 +117,30 @@ const Homepage = () => {
     setDiffInDays(diff);
   };
 
+  const handleSearchSubmit = () => {
+    if (!range) {
+      toast.error("Date not selected");
+    }
+    if (!value) {
+      toast.error("Location not selected");
+    }
+    if (!noPersons) {
+      toast.error("Person count not selected");
+    }
+    navigate(
+      `/search-results?location=${value.label}&fromdate=${format(
+        range[0].startDate,
+        "yyyy/MM/dd"
+      )}&todate=${format(range[0].endDate, "yyyy/MM/dd")}&persons=${
+        noPersons.value
+      }`
+    );
+  };
 
-  
+  // console.log(`${format(range[0].startDate, "yyyy/MM/dd")}`, "fromdate");
+  // console.log(`${format(range[0].endDate, "yyyy/MM/dd")}`, "enddate");
 
-  //console.log(diffInDays);
+  // console.log(diffInDays);
 
   return (
     <HomepageStyles
@@ -187,7 +210,10 @@ const Homepage = () => {
             {open && (
               <DateRangePicker
                 className="date_range"
-                onChange={(item) => setRange([item.selection])}
+                onChange={(item) => {
+                  setRange([item.selection]);
+                  handleSelect(item);
+                }}
                 editableDateInputs={true}
                 moveRangeOnFirstSelection={false}
                 ranges={range}
@@ -195,7 +221,6 @@ const Homepage = () => {
                 direction="horizontal"
                 rangeColors={["#015151", "#015151", "#fed14c"]}
                 minDate={new Date()}
-                // onChange={handleSelect}
               />
             )}
           </div>
@@ -225,7 +250,7 @@ const Homepage = () => {
                 <FaSearchLocation className="search_box_icon" />
               </span>
             </div>
-            <button className="homepage_searchbtn">
+            <button className="homepage_searchbtn" onClick={handleSearchSubmit}>
               <IoSearchSharp className="" />
               {t("search")}
             </button>
@@ -242,6 +267,7 @@ const Homepage = () => {
       <div>
         <HouseCard title="Top Rated Houses" houseCards={houseCards} />
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </HomepageStyles>
   );
 };

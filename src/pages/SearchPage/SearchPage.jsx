@@ -1,49 +1,26 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { SearchPageStyles } from "./SearchPageStyles";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import {
-  FaLocationDot,
-  FaBath,
-  FaBed,
-  FaUserCheck,
-  FaTag,
-} from "react-icons/fa6";
-import { IoBedSharp, IoBed, IoPricetags } from "react-icons/io5";
+import { FaLocationDot, FaBath } from "react-icons/fa6";
+import { IoBedSharp, IoPricetags } from "react-icons/io5";
 import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
-import { FaStar } from "react-icons/fa";
 import { PiArmchairFill } from "react-icons/pi";
 import { MdVerified } from "react-icons/md";
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Button from "../../components/Button/Button";
+import queryString from "query-string";
 
 const SearchPage = () => {
-  const sampleImages = [
-    {
-      id: 1,
-      src: "https://images.unsplash.com/photo-1701730282717-f6478c8f2186?q=80&w=3862&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1702470170564-22dd352f5b88?q=80&w=3864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      id: 3,
-      src: "https://plus.unsplash.com/premium_photo-1685053085344-c6171e7ddafa?q=80&w=3928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+  const [country, setCountry] = useState("");
+  const [persons, setPersons] = useState("");
+  const [fromDate, setFromdate] = useState("");
+  const [toDate, setTodate] = useState("");
+  const [fetchedResults, setFetchedResults] = useState([]);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    speed: 3000,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-  };
+  useEffect(() => {
+    const { location, fromdate, todate, persons } = queryString.parse(
+      window.location.search
+    );
+    console.log({location, fromdate, todate, persons});
+  }, [window.location.search]);
 
   return (
     <SearchPageStyles>

@@ -96,7 +96,7 @@ function App() {
               path="/add-new-listing"
               element={<LazyAddListingPageComponent />}
             />
-            <Route path="/search" element={<LazySearchPageComponent />} />
+            <Route path="/search-results" element={<LazySearchPageComponent />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
             </Route>

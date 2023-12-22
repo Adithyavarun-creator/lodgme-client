@@ -28,6 +28,7 @@ export const AddListingStyles = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 50px;
     position: relative;
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
@@ -91,6 +92,7 @@ export const AddListingStyles = styled.div`
     border-radius: 5px;
     offset: none;
     border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+    outline: none;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -128,20 +130,19 @@ export const AddListingStyles = styled.div`
       offset: none;
     }
 
-   ::placeholder{
-    @media ${devices.bigLaptopsAndDesktops} {
-    }
+    ::placeholder {
+      @media ${devices.bigLaptopsAndDesktops} {
+      }
 
-    @media ${devices.tabletsAndIpads} {
-    }
-    @media ${devices.smallTabs} {
-      
-    }
+      @media ${devices.tabletsAndIpads} {
+      }
+      @media ${devices.smallTabs} {
+      }
 
-    @media ${devices.smallMobiles} {
-      font-size: 8px;
+      @media ${devices.smallMobiles} {
+        font-size: 8px;
+      }
     }
-   }
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -384,6 +385,33 @@ export const AddListingStyles = styled.div`
     }
 
     @media ${devices.smallMobiles} {
+    }
+  }
+
+  .datepicker {
+    position: absolute;
+    top: 210px;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 130;
+    background-color: #fff;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      top: 350px;
+      overflow-x: scroll;
+    }
+    @media ${devices.smallTabs} {
+      top: 280px;
+      overflow-x: scroll;
+    }
+
+    @media ${devices.smallMobiles} {
+      top: 270px;
+      overflow-x: scroll;
     }
   }
 `;

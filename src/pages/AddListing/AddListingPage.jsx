@@ -1,5 +1,12 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { AddListingStyles } from "./AddListingStyles";
+
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { addDays } from "date-fns";
+import format from "date-fns/format";
+import { FaCalendarMinus } from "react-icons/fa";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -40,6 +47,19 @@ const AddListingPage = () => {
   const [user, setUser] = useState("");
   const [amentitiesinc, setAmenitiesinc] = useState([]);
   const [amentitiesnotinc, setNotamenitiesinc] = useState([]);
+  const [fromDate, setFromdate] = useState("");
+  const [toDate, setTodate] = useState("");
+
+  //dates
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: "selection",
+    },
+  ]);
+  const [open, setOpen] = useState(false);
+
   //country
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
@@ -53,6 +73,8 @@ const AddListingPage = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [percent, setPercent] = useState("");
+  // get the target element to toggle
+  const refOne = useRef(null);
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -101,6 +123,27 @@ const AddListingPage = () => {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refOne.current && !refOne.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+
+  // hide dropdown on ESC press
+  const hideOnEscape = (e) => {
+    // console.log(e.key)
+    if (e.key === "Escape") {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // event listeners
+    document.addEventListener("keydown", hideOnEscape, true);
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -215,7 +258,7 @@ const AddListingPage = () => {
           <title>Add Listing | LodgeMe</title>
         </Helmet>
         <AddListingStyles>
-          <div className="formbox">
+          <div className="formbox" ref={refOne}>
             <div className="forminputs">
               <label htmlFor="title">Title of your house*</label>
               <input
@@ -249,6 +292,40 @@ const AddListingPage = () => {
                 **
               </span>
             </div>
+
+            <div className="forminputs">
+              <label htmlFor="dates">
+                Select Available dates for your house*
+              </label>
+              <input
+                value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
+                  range[0].endDate,
+                  "MM/dd/yyyy"
+                )}`}
+                readOnly
+                onClick={() => setOpen((open) => !open)}
+              />
+            </div>
+
+            {open && (
+              <div className="datepicker">
+                <DateRangePicker
+                  // className="date_range"
+                  onChange={(item) => {
+                    setRange([item.selection]);
+                    handleSelect(item);
+                  }}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={2}
+                  direction="horizontal"
+                  rangeColors={["#015151", "#015151", "#fed14c"]}
+                  minDate={new Date()}
+                />
+              </div>
+            )}
+
             <div className="forminputs">
               <label htmlFor="price">Price per night*</label>
               <input
@@ -475,7 +552,6 @@ const AddListingPage = () => {
               </button>
             </div>
           </div>
-
           {percent ? (
             <div>
               <span className="progress">
@@ -487,7 +563,6 @@ const AddListingPage = () => {
               <span className="progress">{percent}</span>
             </div>
           )}
-
           <div className="imagemap">
             {formData.imageUrls.length > 0 &&
               formData.imageUrls.map((url, index) => (
@@ -504,7 +579,6 @@ const AddListingPage = () => {
                 </div>
               ))}
           </div>
-
           <div>
             <Button
               onClick={onAddListing}
