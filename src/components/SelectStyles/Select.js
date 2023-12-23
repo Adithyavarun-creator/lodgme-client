@@ -84,7 +84,7 @@ export const AddListingSelectStyles = {
   },
   option: (defaultStyles, state) => ({
     ...defaultStyles,
-    color: state.isSelected ? "#015151" : "#fff",
+     color: state.isSelected ? "#015151" : "#fff",
     backgroundColor: state.isSelected ? "#fff" : "#015151",
   }),
 

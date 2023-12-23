@@ -41,7 +41,8 @@ const AddListingPage = () => {
   const [baths, setBaths] = useState(0);
   const [livingRoom, setLivingRoom] = useState(0);
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
+  const [facilities, setFacilities] = useState("");
+  const [houseType, setHouseType] = useState("");
   const [description, setDescription] = useState("");
   const [housePrice, setHouseprice] = useState(0);
   const [user, setUser] = useState("");
@@ -49,6 +50,7 @@ const AddListingPage = () => {
   const [amentitiesnotinc, setNotamenitiesinc] = useState([]);
   const [fromDate, setFromdate] = useState("");
   const [toDate, setTodate] = useState("");
+  const [noOfpersons, setnoOfpersons] = useState(0);
 
   //dates
   const [range, setRange] = useState([
@@ -179,7 +181,10 @@ const AddListingPage = () => {
       alert("Enter title");
     }
 
-    if (!subtitle) {
+    if (!houseType) {
+      alert("Enter type of your house");
+    }
+    if (!facilities) {
       alert("Enter Facilites");
     }
 
@@ -226,14 +231,16 @@ const AddListingPage = () => {
       setLoading(true);
       const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
         title,
-        subtitle,
         mapLocation: coordinates,
         houseAddress: address,
         description,
+        type: houseType,
         houseImages: formData.imageUrls,
         beds,
+        facilities: facilities,
         baths,
         livingRoom,
+        noOfpersons,
         amenitiesIncluded: amentitiesinc,
         amenitiesNotIncluded: amentitiesnotinc,
         publishedUser: user,
@@ -268,7 +275,7 @@ const AddListingPage = () => {
               <input
                 name="title"
                 type="text"
-                placeholder="Studio/Flat/Apartment in city center"
+                placeholder="Apartment in city center"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -278,14 +285,30 @@ const AddListingPage = () => {
                 <strong>Superb studio apartment in city center</strong>**
               </span>
             </div>
+
             <div className="forminputs">
-              <label htmlFor="subtitle">Enter the facilities*</label>
+              <label htmlFor="title">Type of your house*</label>
               <input
-                name="subtitle"
+                name="title"
+                type="text"
+                placeholder="Studio/Flat/Apartment"
+                value={houseType}
+                onChange={(e) => setHouseType(e.target.value)}
+              />
+              <span>
+                **The title has to be specific so that people get to know about
+                your house like&nbsp;
+                <strong>Studio/Flat/Apartment</strong>**
+              </span>
+            </div>
+            <div className="forminputs">
+              <label htmlFor="facilities">Enter the facilities*</label>
+              <input
+                name="facilities"
                 type="text"
                 placeholder=" Beaches,Parks,Museums"
-                value={subtitle}
-                onChange={(e) => setSubtitle(e.target.value)}
+                value={facilities}
+                onChange={(e) => setFacilities(e.target.value)}
               />
               <span>
                 **The facilities has to be specific so that people get to know
@@ -357,6 +380,21 @@ const AddListingPage = () => {
               <span>
                 **The number of beds available in the house&nbsp;
                 <strong>1 or 2 beds</strong>
+                **
+              </span>
+            </div>
+            <div className="forminputs">
+              <label htmlFor="beds">Guest allowed to visit*</label>
+              <input
+                name="noOfpersons"
+                type="number"
+                placeholder="Number of guests to visit"
+                value={noOfpersons}
+                onChange={(e) => setnoOfpersons(e.target.value)}
+              />
+              <span>
+                **We can allow only 2-3 guest to visit you&nbsp;
+                <strong>2-3</strong>
                 **
               </span>
             </div>
@@ -559,7 +597,7 @@ const AddListingPage = () => {
           {percent ? (
             <div>
               <span className="progress">
-                Uploaded all your images {percent}%
+                Uploaded all your images {`${percent}%`}
               </span>
             </div>
           ) : (
