@@ -50,7 +50,7 @@ const Homepage = () => {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: new Date(),
       key: "selection",
     },
   ]);
@@ -121,6 +121,8 @@ const Homepage = () => {
     setDiffInDays(diff);
   };
 
+  //console.log(diffInDays);
+
   const handleSearchSubmit = () => {
     if (!range) {
       toast.error("Date not selected");
@@ -139,7 +141,16 @@ const Homepage = () => {
     //     noPersons.value
     //   }`
     // );
-    navigate(`/search-results?locatedCountry=${value.label}`);
+    navigate(
+      `/search-results?locatedCountry=${
+        value.label
+      }&stayDays=${diffInDays}&fromdate=${format(
+        range[0].startDate,
+        "dd/MM/yyyy"
+      )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}&persons=${
+        noPersons.value
+      }`
+    );
   };
 
   //console.log(value);
@@ -196,7 +207,7 @@ const Homepage = () => {
             />
           </div>
 
-          {/* <div>
+          <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("bookingdate")}</span>
               <span>
@@ -212,10 +223,10 @@ const Homepage = () => {
               className="date_inputfield"
               onClick={() => setOpen((open) => !open)}
             />
-          </div> */}
+          </div>
 
-          {/* <div className="datebox_range" ref={refOne}> */}
-          {/* {open && (
+          <div className="datebox_range" ref={refOne}>
+            {open && (
               <DateRangePicker
                 className="date_range"
                 onChange={(item) => {
@@ -230,16 +241,16 @@ const Homepage = () => {
                 rangeColors={["#015151", "#015151", "#fed14c"]}
                 minDate={new Date()}
               />
-            )} */}
-          {/* <RangePicker
+            )}
+            {/* <RangePicker
               onChange={(value, dateString) => setDates(dateString)}
               disabledDate={(current) =>
                 current && current.valueOf() < moment().subtract(1, "days")
               }
-            />
-          </div> */}
+            />*/}
+          </div>
 
-          {/* <div>
+          <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("persons")}</span>
               <span>
@@ -256,7 +267,7 @@ const Homepage = () => {
               styles={HomepageSelectStyles}
               name="person"
             />
-          </div> */}
+          </div>
           <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("submit")}</span>

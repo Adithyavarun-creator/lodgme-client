@@ -17,7 +17,7 @@ export const HomepageSelectStyles = {
     // padding: "10px",
     border: "none",
     boxShadow: "none",
-    color: "#ffffff",
+    color: "#fff",
     fontSize: "18px",
     height: "40px",
     textAlign: "center",

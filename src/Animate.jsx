@@ -16,8 +16,8 @@ const Animate = () => {
   const [diffInDays, setDiffInDays] = useState(0);
 
   const handleSelect = (ranges) => {
-    console.log(ranges.selection.startDate);
-    console.log(ranges.selection.endDate);
+    //console.log(ranges.selection.startDate);
+    //console.log(ranges.selection.endDate);
     const diff = differenceInDays(
       ranges.selection.endDate,
       ranges.selection.startDate
