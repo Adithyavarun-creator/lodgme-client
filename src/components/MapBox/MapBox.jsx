@@ -14,12 +14,14 @@ const containerStyle = {
   border: "2px solid #015151",
 };
 
-const center = {
-  lat: 56.96,
-  lng: 24.13,
-};
+const MapBox = ({ lat, lng }) => {
+  //console.log(lat, lng);
 
-const MapBox = () => {
+  const center = {
+    lat: Number(lat),
+    lng: Number(lng),
+  };
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_MAPS_API,

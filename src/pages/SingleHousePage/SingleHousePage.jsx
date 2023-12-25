@@ -53,6 +53,8 @@ import { BiSolidBlanket } from "react-icons/bi";
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import { apartmentDatas } from "../../datas/apartmentDatas";
 import SingleHouseImages from "../../components/SingleHousePage/SingleHouseImages";
+import { baseUrl } from "../../baseUrl/url";
+import axios from "axios";
 
 const SingleHousePage = () => {
   const { id } = useParams();
@@ -66,6 +68,9 @@ const SingleHousePage = () => {
   const [showImages, setShowImages] = useState(false);
 
   const [diffInDays, setDiffInDays] = useState(0);
+  const [houseData, setHousedata] = useState({});
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
 
   const [range, setRange] = useState([
     {
@@ -74,6 +79,18 @@ const SingleHousePage = () => {
       key: "selection",
     },
   ]);
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      const res = await axios.get(`${baseUrl}/api/get/${id}`);
+
+      setHousedata(res.data);
+      setLat(res.data.mapLocation[0].lat);
+      setLng(res.data.mapLocation[0].lng);
+    };
+
+    fetchListing();
+  }, [id]);
 
   //date
   // const date1 = new Date(2020, 5, 1); // the later date
@@ -206,6 +223,10 @@ const SingleHousePage = () => {
     singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
   };
 
+  console.log(lat, lng);
+
+  // console.log(houseData.mapLocation[0].lat);
+
   if (!id) {
     return <Spinner />;
   }
@@ -216,9 +237,7 @@ const SingleHousePage = () => {
         <Helmet>
           <meta />
           <title>
-            {data?.caption
-              ? data?.caption
-              : "Paris-Montparnasse: superb 34 m2 studio"}
+            {houseData?.title ? houseData?.title : "A beautiful house"}
           </title>
         </Helmet>
         <SingleHousePageStyles>
@@ -228,9 +247,7 @@ const SingleHousePage = () => {
           <div className="singlepagetitlebox">
             <div className="">
               <h2 className="singlepagetitletext flex">
-                {data?.caption
-                  ? data?.caption
-                  : "Paris-Montparnasse: superb 34 m2 studio"}{" "}
+                {houseData?.title ? houseData?.title : "A beautiful house"}
                 <MdLocationPin
                   className="rating"
                   style={{ color: "#EA4335" }}
@@ -283,20 +300,25 @@ const SingleHousePage = () => {
           <div className="singlepagehouserooms">
             <div className="singlepagehouseroomdetail">
               <PiArmchairFill />
-              <span>1 Living room</span>
+              <span>
+                {houseData.livingRoom ? houseData.livingRoom : "No"} Living room
+              </span>
             </div>
             <div className="singlepagehouseroomdetail">
               <IoBedSharp />
-              <span>2 Beds</span>
+              <span>{houseData.beds ? houseData.beds : "No"} Beds</span>
             </div>
             <div className="singlepagehouseroomdetail">
               <FaBath />
-              <span>2 Baths</span>
+              <span>{houseData.baths ? houseData.baths : "No"} Baths</span>
             </div>
             <div className="singlepagehouseroomdetail">
               <FaUsers />
 
-              <span> 2 Visitors Allowed</span>
+              <span>
+                {houseData.noOfpersons ? houseData.noOfpersons : "No"} Visitors
+                Allowed
+              </span>
             </div>
             <div className="singlepagehouseroomdetail">
               <FaUsersSlash />
@@ -433,8 +455,9 @@ const SingleHousePage = () => {
 
           {/* Map Location Pin  */}
           <div className="singlepagemapbox" ref={mapRef}>
-            <Mapbox />
+            <Mapbox lat={lat} lng={lng} />
           </div>
+
           {/* review box */}
           <div className="reviewandbookbox">
             <div className="singlepagereviewbox" ref={reviewRef}>
@@ -549,7 +572,13 @@ const SingleHousePage = () => {
             </div>
             <div className="reservation-card" ref={dateRef}>
               <div>
-                <h1 className="singlepagereviewheading">0504 par unit</h1>
+                <h1 className="singlepagereviewheading">
+                  EUR
+                  {houseData.pricePerNight
+                    ? houseData.pricePerNight
+                    : "On talks"}
+                  &nbsp;per day
+                </h1>
               </div>
               <div className="">
                 <div className="date-calendar-box">
@@ -580,10 +609,10 @@ const SingleHousePage = () => {
               <div className="reservation-box">
                 <div className="reservation-details">
                   <div>
-                    <span>4504 x 7 nuits</span>
+                    <span>{houseData.pricePerNight} x 7 nuits</span>
                   </div>
                   <div>
-                    <span>31526</span>
+                    <span>{houseData.pricePerNight * 7}</span>
                   </div>
                 </div>
                 <div className="reservation-details">

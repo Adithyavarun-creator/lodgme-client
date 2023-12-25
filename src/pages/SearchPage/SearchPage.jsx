@@ -10,6 +10,7 @@ import queryString from "query-string";
 import axios from "axios";
 import { baseUrl, searchListings } from "../../baseUrl/url";
 import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   const [country, setCountry] = useState("");
@@ -148,12 +149,15 @@ const SearchPage = () => {
                   </span>
                 </div>
 
-                <div className="searchresultview">
+                <Link
+                  to={`/homes&rooms/${res._id}`}
+                  className="linkStyle searchresultview"
+                >
                   <button className="searchresultviewbtn">
                     View Property
                     <MdOutlineHomeWork className="searchresultviewbtnicon" />
                   </button>
-                </div>
+                </Link>
               </div>
 
               <div className="searchresultimgsection">
