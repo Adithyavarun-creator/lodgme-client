@@ -4,6 +4,9 @@ const initialState = {
   currentUser: null,
   error: null,
   loading: false,
+  bookingAmount: 0,
+  selectedHouse: [],
+  stayingDays: 0,
 };
 
 const userSlice = createSlice({
@@ -58,6 +61,15 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    setBookingAmount: (state, action) => {
+      state.bookingAmount = action.payload;
+    },
+    setSelectedHouse: (state, action) => {
+      state.selectedHouse = action.payload;
+    },
+    setStayingDays: (state, action) => {
+      state.stayingDays = action.payload;
+    },
   },
 });
 
@@ -74,5 +86,8 @@ export const {
   signOutUserFailure,
   signOutUserStart,
   signOutUserSuccess,
+  setBookingAmount,
+  setSelectedHouse,
+  setStayingDays,
 } = userSlice.actions;
 export default userSlice.reducer;

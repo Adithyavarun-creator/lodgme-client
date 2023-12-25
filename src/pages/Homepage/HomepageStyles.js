@@ -306,6 +306,7 @@ export const HomepageStyles = styled(motion.div)`
     justify-content: center;
     cursor: pointer;
 
+
     @media ${devices.bigLaptopsAndDesktops} {
       height: 40px;
       font-size: 16px;

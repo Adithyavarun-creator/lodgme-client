@@ -168,4 +168,14 @@ body {
   
 }
 }
+
+
+@keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px ${({ theme }) => theme.colors.primaryColor};
+    }
+    100% {
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }
+  }
 `;

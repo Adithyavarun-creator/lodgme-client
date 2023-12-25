@@ -1,0 +1,232 @@
+import React, { useEffect, useState } from "react";
+import { BookingPreviewStyles } from "./BookingPreviewStyles";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import queryString from "query-string";
+import moment from "moment";
+import format from "date-fns/format";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import {
+  MdOutlineDone,
+  MdOutlineClose,
+  MdOutlineMapsHomeWork,
+  MdChair,
+  MdEuroSymbol,
+} from "react-icons/md";
+import { FaUsers, FaBath } from "react-icons/fa6";
+import { IoReceipt, IoBedSharp } from "react-icons/io5";
+import Button from "../../components/Button/Button";
+
+const BookingPreviewPage = () => {
+  const { house } = useParams();
+  const { bookingAmount, selectedHouse, stayingDays } = useSelector(
+    (state) => state.user
+  );
+  const [startDate, setStartdate] = useState("");
+  const [endDate, setEnddate] = useState("");
+
+  useEffect(() => {
+    const { title, stayDays, fromdate, todate } = queryString.parse(
+      window.location.search
+    );
+    setStartdate(fromdate);
+    setEnddate(todate);
+
+    //console.log({ title, stayDays, fromdate, todate });
+    //moment().format('LL');
+  }, []);
+
+  console.log(selectedHouse);
+
+  return (
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <meta />
+          <title>Preview Booking | Lodgeme</title>
+        </Helmet>
+        <BookingPreviewStyles>
+          <div className="bookingbox-1">
+            <div>
+              <h1 className="flex">
+                Short snap to review your booking informations&nbsp;
+                <IoReceipt className="doneIcon" />
+              </h1>
+            </div>
+            <div>
+              <h2 className="bookingstayname flex">
+                For your stay at&nbsp;
+                <Link
+                  className="linkStyle bookingstay"
+                  to={`/homes&rooms/${selectedHouse._id}`}
+                >
+                  {selectedHouse.title}&nbsp;
+                </Link>
+                &nbsp;
+                <MdOutlineMapsHomeWork className="doneIcon" />
+              </h2>
+            </div>
+            <div>
+              <h3 className="flex">
+                Number of people staying are 5 &nbsp;
+                <FaUsers className="doneIcon" />
+              </h3>
+            </div>
+            <div>
+              <h3 className="flex">
+                <IoBedSharp className="doneIcon" />2 beds &nbsp;{" "}
+                <FaBath className="doneIcon" />2 baths &nbsp;{" "}
+                <MdChair className="doneIcon" />1 living room
+              </h3>
+            </div>
+            <div className="bookingcheckdates">
+              <div className="bookingcheckdatescenter">
+                <span className="checktitle">Check in date </span>
+                <span className="checkdate">
+                  {moment(startDate).format("MMMM Do YYYY")}
+                </span>
+              </div>
+              <div className="bookingcheckdatescenter">
+                <span className="checktitle">Check out date </span>
+                <span className="checkdate">
+                  {moment(endDate).format("MMMM Do YYYY")}
+                </span>
+              </div>
+              <div className="bookingcheckdatescenter">
+                <span className="checktitle">Number of days staying </span>
+                <span className="checkdate">{stayingDays}</span>
+              </div>
+            </div>
+            <div className="bookingamenititesbox">
+              <div className="bookingamenitieslist">
+                <div>
+                  <h2 className="bookingamenitiestitle">
+                    Amenities not included in your stay
+                  </h2>
+                </div>
+                <div className="flex">
+                  <MdOutlineClose className="doneIcon" />
+                  <span>Tour</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineClose className="doneIcon" />
+                  <span>Room Service</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineClose className="doneIcon" />
+                  <span>Breakfast</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineClose className="doneIcon" />
+                  <span>Meals</span>
+                </div>
+              </div>
+              <div className="bookingamenitieslist">
+                <div>
+                  <h2 className="bookingamenitiestitle">
+                    Amenities included in your stay
+                  </h2>
+                </div>
+                <div className="flex">
+                  <MdOutlineDone className="doneIcon" />
+                  <span>Tour</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineDone className="doneIcon" />
+                  <span>Room Service</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineDone className="doneIcon" />
+                  <span>Breakfast</span>
+                </div>
+                <div className="flex">
+                  <MdOutlineDone className="doneIcon" />
+                  <span>Meals</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <h2>Cancellation Policies</h2>
+              </div>
+              <ul>
+                <li>You are allowed to check in at anytime</li>
+                <li>You are allowed to check out at anytime</li>
+                <li>
+                  And damages in the house will be costed with its EUR charges
+                </li>
+                <li>
+                  Can also connect with Lodgeme support to canel your booking
+                </li>
+                <li>
+                  We cannot cancel your booking, so you need to speak with
+                  Lodgeme team and they will get back to us about your
+                  cancellation
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="bookingbox-2">
+            <div>
+              <h2 className="bookingpriceheading">Booking Price details</h2>
+            </div>
+            <div>
+              <div className="bookingpricecontent">
+                <div className="bookingpricebox">
+                  <div>
+                    <span className="flex">
+                      {selectedHouse.pricePerNight}&nbsp;{" "}
+                      <MdEuroSymbol className="" /> x{stayingDays}
+                      &nbsp;{stayingDays < 2 ? "night" : "nights"}
+                    </span>
+                  </div>
+                  <div>
+                    <span>
+                      <MdEuroSymbol />
+                      &nbsp;{selectedHouse.pricePerNight * stayingDays}
+                    </span>
+                  </div>
+                </div>
+                <div className="bookingpricebox">
+                  <div>
+                    <span>Frais de manage</span>
+                  </div>
+                  <div>
+                    <span className="flex">
+                      <MdEuroSymbol />
+                      &nbsp;100
+                    </span>
+                  </div>
+                </div>
+                <div className="bookingpricebox bookingpricetotal">
+                  <div>
+                    <span>Total hors taxes</span>
+                  </div>
+                  <div>
+                    <span className="flex">
+                      <MdEuroSymbol />
+                      &nbsp;{selectedHouse.pricePerNight * stayingDays + 100}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="bookingboxbtn">
+                <Button title="Cancel" />
+                <Button title="Proceed" />
+              </div>
+            </div>
+          </div>
+        </BookingPreviewStyles>
+      </HelmetProvider>
+    </>
+  );
+};
+
+export default BookingPreviewPage;
+
+/**
+ http://localhost:3000/booking-preview?title=Beautiful%20Flat%20at%20center%20of%20Latvia&stayDays=1&fromdate=Mon%20Dec%2025%202023%2022:27:29%20GMT+0530%20(India%20Standard%20Time)&todate=Tue%20Dec%2026%202023%2022:27:29%20GMT+0530%20(India%20Standard%20Time)
+ */

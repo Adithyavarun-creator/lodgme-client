@@ -11,6 +11,7 @@ import EmailVerify from "./components/EmailVerify/EmailVerify";
 import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import { useSelector } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import BookingPreviewPage from "./pages/BookingPreviewPage/BookingPreviewPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -49,9 +50,11 @@ const LazyNotFoundPageComponent = React.lazy(() =>
   import("./pages/NotFoundPage/NotFound")
 );
 
-function App() {
-  const { currentUser } = useSelector((state) => state.user);
+const LazyBookingPreviewPageComponent = React.lazy(() =>
+  import("./pages/BookingPreviewPage/BookingPreviewPage")
+);
 
+function App() {
   return (
     <>
       <Suspense fallback={<Spinner />}>
@@ -93,10 +96,17 @@ function App() {
               element={<LazySingleHousePageComponent />}
             />
             <Route
+              path="/booking-preview"
+              element={<LazyBookingPreviewPageComponent />}
+            />
+            <Route
               path="/add-new-listing"
               element={<LazyAddListingPageComponent />}
             />
-            <Route path="/search-results" element={<LazySearchPageComponent />} />
+            <Route
+              path="/search-results"
+              element={<LazySearchPageComponent />}
+            />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
             </Route>

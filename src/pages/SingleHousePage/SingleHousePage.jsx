@@ -43,10 +43,17 @@ import { apartmentDatas } from "../../datas/apartmentDatas";
 import SingleHouseImages from "../../components/SingleHousePage/SingleHouseImages";
 import { baseUrl } from "../../baseUrl/url";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  setBookingAmount,
+  setSelectedHouse,
+  setStayingDays,
+} from "../../redux/user/userSlice";
 
 const SingleHousePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   //datas
   const [data, setData] = useState(null);
 
@@ -84,6 +91,7 @@ const SingleHousePage = () => {
       const res = await axios.get(`${baseUrl}/api/get/${id}`);
 
       setHousedata(res.data);
+      dispatch(setSelectedHouse(res.data));
       setLat(res.data.mapLocation[0].lat);
       setLng(res.data.mapLocation[0].lng);
     };
@@ -218,7 +226,16 @@ const SingleHousePage = () => {
 
   const lodgmeCharge = 100;
 
-  console.log(diffInDays);
+  const bookingAmount = houseData.pricePerNight * diffInDays + lodgmeCharge;
+  dispatch(setBookingAmount(bookingAmount));
+  dispatch(setStayingDays(diffInDays));
+
+  const bookingPreviewbtn = () => {
+    // navigate(`/booking-preview/${houseData.title}/checkout-preview`);
+    navigate(
+      `/booking-preview?title=${houseData?.title}&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${range[0].endDate}`
+    );
+  };
 
   // console.log(houseData.mapLocation[0].lat);
 
@@ -646,7 +663,7 @@ const SingleHousePage = () => {
                 </div>
 
                 <div className="date-calendar-box ">
-                  <Button title="Book Now" />
+                  <Button title="Book Now" onClick={bookingPreviewbtn} />
                 </div>
               </div>
             </div>
