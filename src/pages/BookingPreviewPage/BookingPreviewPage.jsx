@@ -177,7 +177,7 @@ const BookingPreviewPage = () => {
                   <div>
                     <span className="flex">
                       {selectedHouse.pricePerNight}&nbsp;{" "}
-                      <MdEuroSymbol className="" /> x{stayingDays}
+                      <MdEuroSymbol className="" /> x&nbsp;{stayingDays}
                       &nbsp;{stayingDays < 2 ? "night" : "nights"}
                     </span>
                   </div>
