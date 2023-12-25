@@ -25,21 +25,9 @@ import {
   PiBowlFoodBold,
 } from "react-icons/pi";
 import { SiKeepassxc } from "react-icons/si";
-import {
-  MdFavoriteBorder,
-  MdApartment,
-  MdCleaningServices,
-  MdBalcony,
-  MdLocationPin,
-  MdClose,
-} from "react-icons/md";
-import { TiLocation } from "react-icons/ti";
-import { GiModernCity, GiWashingMachine } from "react-icons/gi";
-import { IoLocateSharp, IoBedSharp } from "react-icons/io5";
-import { BsFillHouseFill } from "react-icons/bs";
+import { MdFavoriteBorder, MdBalcony, MdLocationPin } from "react-icons/md";
+import { IoBedSharp } from "react-icons/io5";
 import { PiArmchairFill } from "react-icons/pi";
-import { RiTempHotFill } from "react-icons/ri";
-import { TbHanger } from "react-icons/tb";
 import Mapbox from "../../components/MapBox/MapBox";
 import { DateRangePicker, DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
@@ -67,18 +55,29 @@ const SingleHousePage = () => {
   const [value, setValue] = useState("");
   const [showImages, setShowImages] = useState(false);
 
-  const [diffInDays, setDiffInDays] = useState(0);
+  const [diffInDays, setDiffInDays] = useState(1);
   const [houseData, setHousedata] = useState({});
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
+  const [noOfdays, setNoofdays] = useState(1);
 
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: addDays(new Date(), 1),
       key: "selection",
     },
   ]);
+
+  const handleSelect = (ranges) => {
+    //console.log(ranges.selection.startDate);
+    //console.log(ranges.selection.endDate);
+    const diff = differenceInDays(
+      ranges.selection.endDate,
+      ranges.selection.startDate
+    );
+    setDiffInDays(diff);
+  };
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -91,12 +90,6 @@ const SingleHousePage = () => {
 
     fetchListing();
   }, [id]);
-
-  //date
-  // const date1 = new Date(2020, 5, 1); // the later date
-  // const date2 = new Date(2020, 2, 1); // the earlier date
-  // const result = differenceInDays(range.startDate, range.endDate);
-  //console.log(result);
 
   const dateRef = useRef();
   const reviewRef = useRef();
@@ -223,7 +216,9 @@ const SingleHousePage = () => {
     singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
   };
 
-  console.log(lat, lng);
+  const lodgmeCharge = 100;
+
+  console.log(diffInDays);
 
   // console.log(houseData.mapLocation[0].lat);
 
@@ -583,7 +578,10 @@ const SingleHousePage = () => {
               <div className="">
                 <div className="date-calendar-box">
                   <DateRange
-                    onChange={(item) => setRange([item.selection])}
+                    onChange={(item) => {
+                      setRange([item.selection]);
+                      handleSelect(item);
+                    }}
                     showSelectionPreview={true}
                     moveRangeOnFirstSelection={false}
                     months={1}
@@ -609,10 +607,12 @@ const SingleHousePage = () => {
               <div className="reservation-box">
                 <div className="reservation-details">
                   <div>
-                    <span>{houseData.pricePerNight} x 7 nuits</span>
+                    <span>
+                      {houseData.pricePerNight} x {diffInDays} nuits
+                    </span>
                   </div>
                   <div>
-                    <span>{houseData.pricePerNight * 7}</span>
+                    <span>{houseData.pricePerNight * diffInDays}</span>
                   </div>
                 </div>
                 <div className="reservation-details">
@@ -620,7 +620,7 @@ const SingleHousePage = () => {
                     <span>Frais de manage</span>
                   </div>
                   <div>
-                    <span>1984</span>
+                    <span>{lodgmeCharge}</span>
                   </div>
                 </div>
 
@@ -634,7 +634,9 @@ const SingleHousePage = () => {
                   </div>
                   <div>
                     <span>
-                      <strong>33510</strong>
+                      <strong>
+                        {houseData.pricePerNight * diffInDays + lodgmeCharge}
+                      </strong>
                     </span>
                   </div>
                 </div>
