@@ -23,7 +23,7 @@ export const ButtonStyles = styled.button`
     font-size: 12px;
   }
   @media ${devices.smallTabs} {
-    padding: 6px;
+    padding: 8px 14px;
     font-size: 10px;
   }
 

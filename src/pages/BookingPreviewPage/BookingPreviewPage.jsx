@@ -16,6 +16,7 @@ import {
 import { FaUsers, FaBath } from "react-icons/fa6";
 import { IoReceipt, IoBedSharp } from "react-icons/io5";
 import Button from "../../components/Button/Button";
+import BookingPaymentCard from "../../components/BookingPaymentCard/BookingPaymentCard";
 
 const BookingPreviewPage = () => {
   const { house } = useParams();
@@ -31,12 +32,9 @@ const BookingPreviewPage = () => {
     );
     setStartdate(fromdate);
     setEnddate(todate);
-
-    //console.log({ title, stayDays, fromdate, todate });
-    //moment().format('LL');
   }, []);
 
-  console.log(selectedHouse);
+  //console.log(selectedHouse);
 
   return (
     <>
@@ -48,28 +46,27 @@ const BookingPreviewPage = () => {
         <BookingPreviewStyles>
           <div className="bookingbox-1">
             <div>
-              <h1 className="flex">
-                Short snap to review your booking informations&nbsp;
+              <h1 className="bookingbox1heading">
                 <IoReceipt className="doneIcon" />
+                &nbsp; Short snap to review your booking informations
               </h1>
             </div>
-            <div>
-              <h2 className="bookingstayname flex">
-                For your stay at&nbsp;
+            <div className="flex">
+              <h2 className="bookingstayname">
+                <MdOutlineMapsHomeWork className="doneIcon" />
+                &nbsp;For your stay at&nbsp;
                 <Link
                   className="linkStyle bookingstay"
                   to={`/homes&rooms/${selectedHouse._id}`}
                 >
                   {selectedHouse.title}&nbsp;
                 </Link>
-                &nbsp;
-                <MdOutlineMapsHomeWork className="doneIcon" />
               </h2>
             </div>
-            <div>
-              <h3 className="flex">
-                Number of people staying are 5 &nbsp;
+            <div className="flex">
+              <h3>
                 <FaUsers className="doneIcon" />
+                &nbsp; Number of people staying are 5
               </h3>
             </div>
             <div>
@@ -148,7 +145,7 @@ const BookingPreviewPage = () => {
 
             <div>
               <div>
-                <h2>Cancellation Policies</h2>
+                <h2 className="bookingbox1heading">Cancellation Policies</h2>
               </div>
               <ul>
                 <li>You are allowed to check in at anytime</li>
@@ -167,7 +164,7 @@ const BookingPreviewPage = () => {
               </ul>
             </div>
           </div>
-          <div className="bookingbox-2">
+          {/* <div className="bookingbox-2">
             <div>
               <h2 className="bookingpriceheading">Booking Price details</h2>
             </div>
@@ -182,7 +179,7 @@ const BookingPreviewPage = () => {
                     </span>
                   </div>
                   <div>
-                    <span>
+                    <span className="flex">
                       <MdEuroSymbol />
                       &nbsp;{selectedHouse.pricePerNight * stayingDays}
                     </span>
@@ -218,6 +215,9 @@ const BookingPreviewPage = () => {
                 <Button title="Proceed" />
               </div>
             </div>
+          </div> */}
+          <div>
+            <BookingPaymentCard />
           </div>
         </BookingPreviewStyles>
       </HelmetProvider>
