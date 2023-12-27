@@ -214,10 +214,7 @@ const AddListingPage = () => {
       alert("Enter amenitites not included");
     }
 
-    if (!user) {
-      alert("Enter user name");
-    }
-    if (!housePrice) {
+   if (!housePrice) {
       alert("Enter price of stay per day");
     }
     if (!value) {
@@ -243,11 +240,12 @@ const AddListingPage = () => {
         noOfpersons,
         amenitiesIncluded: amentitiesinc,
         amenitiesNotIncluded: amentitiesnotinc,
-        publishedUser: user,
+        //publishedUser: user,
+        postedBy: currentUser,
         pricePerNight: housePrice,
         locatedCountry: value.label,
-        availableFrom: format(range[0].startDate, "dd/MM/yyyy"),
-        availableTill: format(range[0].endDate, "dd/MM/yyyy"),
+        availableFrom: range[0].startDate,
+        availableTill: range[0].endDate,
       });
       setLoading(false);
 
@@ -259,7 +257,7 @@ const AddListingPage = () => {
     }
   };
 
-  // console.log(format(range[0].startDate, "MM/dd/yyyy"));
+  //console.log(range[0].startDate);
 
   return (
     <>
@@ -495,7 +493,7 @@ const AddListingPage = () => {
                 **
               </span>
             </div>
-            <div className="forminputs">
+            {/* <div className="forminputs">
               <label htmlFor="username">Enter your name*</label>
               <input
                 name="username"
@@ -508,7 +506,7 @@ const AddListingPage = () => {
                 <strong>John Doe</strong>
                 **
               </span>
-            </div>
+            </div> */}
 
             <div className="forminputs">
               <label htmlFor="">

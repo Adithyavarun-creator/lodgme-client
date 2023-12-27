@@ -4,7 +4,8 @@ import { OnlySpinnerStyles } from "./OnlySpinnerStyles";
 const OnlySpinner = () => {
   return (
     <OnlySpinnerStyles>
-      <div className="loader"></div>
+      <div className="loader">
+      </div>
     </OnlySpinnerStyles>
   );
 };

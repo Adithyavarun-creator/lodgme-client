@@ -36,23 +36,21 @@ const SigninPage = () => {
 
     try {
       dispatch(signInStart());
-      const res = await fetch(`${baseUrl}/api/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      axios.defaults.withCredentials = true;
+
+      const { data } = await axios.post(`${baseUrl}/api/login`, {
+        email,
+        password,
       });
-      const data = await res.json();
+      console.log(data);
+      //console.log(res.data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
         return;
       }
       dispatch(signInSuccess(data));
       toast.success("We are signing you in ! Welcome back");
-      setTimeout(() => {
-        navigate("/dashboard-user");
-      }, 2500);
+      navigate("/dashboard-user");
     } catch (error) {
       dispatch(signInFailure(error.message));
       console.log(error);

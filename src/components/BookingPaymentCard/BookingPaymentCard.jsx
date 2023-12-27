@@ -16,6 +16,27 @@ const BookingPaymentCard = () => {
     setStartdate(fromdate);
     setEnddate(todate);
   }, []);
+
+  const cardPayment = () => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/x-www-form-urlencoded",
+        authorization:
+          "Basic {base64({4d473fb6-b781-4841-bd34-9e97c3026ff3}:{8533850f-f6dd-44a8-9e77-c38524e2535a})}",
+      },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        scope: "AIS",
+      }),
+    };
+
+    fetch("https://api-sandbox.fintecture.com/oauth/accesstoken", options)
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
   return (
     <BookingPaymentCardStyles>
       <div>
@@ -73,3 +94,6 @@ const BookingPaymentCard = () => {
 };
 
 export default BookingPaymentCard;
+
+//app id= 4d473fb6-b781-4841-bd34-9e97c3026ff3
+//app secret = 8533850f-f6dd-44a8-9e77-c38524e2535a

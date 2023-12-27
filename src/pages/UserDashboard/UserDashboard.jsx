@@ -74,7 +74,7 @@ const UserDashboard = () => {
                 <span>Your previous and upcoming bookings</span>
               </div>
             </div>
-            <div className="dashboardbox-1">
+            <Link to="/user-listings" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -89,7 +89,7 @@ const UserDashboard = () => {
               <div>
                 <span>Click here and post your houses or book your houses</span>
               </div>
-            </div>
+            </Link>
             <Link to="/add-new-listing" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -103,8 +103,7 @@ const UserDashboard = () => {
                 </div>
               </div>
               <div>
-              <span>Post your house listing to public</span>
-
+                <span>Post your house listing to public</span>
               </div>
             </Link>
             <div className="dashboardbox-1">

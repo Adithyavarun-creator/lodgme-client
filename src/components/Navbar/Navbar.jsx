@@ -14,6 +14,7 @@ import {
 } from "../../redux/user/userSlice";
 import { FiLogOut } from "react-icons/fi";
 import { baseUrl } from "../../baseUrl/url";
+import axios from "axios";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -33,11 +34,14 @@ const Navbar = () => {
     setToggle(false);
   };
 
+  axios.defaults.withCredentials = true;
+
   const logoutUser = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`${baseUrl}/api/signout`);
-      const data = await res.json();
+      // const res = await fetch(`${baseUrl}/api/signout`);
+      // const data = await res.json();
+      const { data } = await axios.get(`${baseUrl}/api/signout`);
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
         return;
@@ -61,7 +65,7 @@ const Navbar = () => {
           <img className="navlogo" src={LogoBlack} alt="brand-logo" />
         </Link>
         <div className="navbuttons">
-          <div>
+          {/* <div>
             <Link
               to="/add-new-listing"
               className="navbutton linkStyle"
@@ -69,7 +73,7 @@ const Navbar = () => {
             >
               Add new Listing
             </Link>
-          </div>
+          </div> */}
           {currentUser ? (
             ""
           ) : (

@@ -62,13 +62,13 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     setBookingAmount: (state, action) => {
-      state.bookingAmount = action.payload;
+      state.bookingAmount = "action.payload";
     },
     setSelectedHouse: (state, action) => {
-      state.selectedHouse = action.payload;
+      state.selectedHouse = "action.payload";
     },
     setStayingDays: (state, action) => {
-      state.stayingDays = action.payload;
+      state.stayingDays = "action.payload";
     },
   },
 });

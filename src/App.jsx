@@ -12,6 +12,7 @@ import UserDashboard from "./pages/UserDashboard/UserDashboard";
 import { useSelector } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import BookingPreviewPage from "./pages/BookingPreviewPage/BookingPreviewPage";
+import UserListingPage from "./pages/UserListingPage/UserListingPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -87,7 +88,6 @@ function App() {
               path="/reset-password/:id/:token"
               element={<LazyResetPasswordPageComponent />}
             />
-            <Route path="*" element={<LazyNotFoundPageComponent />} />
 
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
 
@@ -99,17 +99,21 @@ function App() {
               path="/booking-preview"
               element={<LazyBookingPreviewPageComponent />}
             />
-            <Route
-              path="/add-new-listing"
-              element={<LazyAddListingPageComponent />}
-            />
+
             <Route
               path="/search-results"
               element={<LazySearchPageComponent />}
             />
+
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
+              <Route path="/user-listings" element={<UserListingPage />} />
+              <Route
+                path="/add-new-listing"
+                element={<LazyAddListingPageComponent />}
+              />
             </Route>
+            {/* <Route path="*" element={<LazyNotFoundPageComponent />} /> */}
           </Routes>
           <Footer />
         </BrowserRouter>
