@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLocationDot, FaBath, FaReddit } from "react-icons/fa6";
+import { FaLocationDot, FaBath } from "react-icons/fa6";
 import { IoBedSharp, IoPricetags } from "react-icons/io5";
 import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
 import { PiArmchairFill } from "react-icons/pi";
@@ -34,7 +34,7 @@ const SearchPageCard = ({ res }) => {
             />
           </div>
 
-          {currentUser && (
+          {currentUser ? (
             <div className="editdelicons">
               <div className="searchuserdelete">
                 <MdDelete
@@ -47,6 +47,8 @@ const SearchPageCard = ({ res }) => {
                 <FiEdit title="Edit your Listing" className="searchediticon" />
               </div>
             </div>
+          ) : (
+            ""
           )}
 
           <div className="searchuserverified">

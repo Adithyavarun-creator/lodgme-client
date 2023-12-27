@@ -5,6 +5,7 @@ import axios from "axios";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { UserListingPageStyles } from "./UserListingPageStyles";
+import Spinner from "../../components/Spinner/Spinner";
 
 const UserListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -17,12 +18,13 @@ const UserListingPage = () => {
       const { data } = await axios.get(
         `${baseUrl}/api/listings/${currentUser._id}`
       );
-      console.log(data);
       setHouses(data);
     };
 
     getListing();
   }, [currentUser._id]);
+
+  console.log(houses);
 
   return (
     <>
@@ -35,9 +37,13 @@ const UserListingPage = () => {
           <div>
             <h2>My Listings Posted to public view</h2>
           </div>
-          {houses.map((house) => (
-            <SearchPageCard res={house} key={house._id} />
-          ))}
+          {houses.length ? (
+            <Spinner />
+          ) : (
+            houses.map((house) => (
+              <SearchPageCard res={house} key={house._id} />
+            ))
+          )}
         </UserListingPageStyles>
       </HelmetProvider>
     </>
