@@ -37,7 +37,6 @@ const SigninPage = () => {
     try {
       dispatch(signInStart());
       axios.defaults.withCredentials = true;
-
       const { data } = await axios.post(`${baseUrl}/api/login`, {
         email,
         password,
