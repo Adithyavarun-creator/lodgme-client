@@ -46,6 +46,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import {
   setBookingAmount,
+  setNumberofPersons,
   setSelectedHouse,
   setStayingDays,
 } from "../../redux/user/userSlice";
@@ -229,11 +230,14 @@ const SingleHousePage = () => {
   const bookingAmount = houseData.pricePerNight * diffInDays + lodgmeCharge;
   dispatch(setBookingAmount(bookingAmount));
   dispatch(setStayingDays(diffInDays));
+  dispatch(setNumberofPersons(noPersons));
+  console.log(noPersons.value);
 
   const bookingPreviewbtn = () => {
     // navigate(`/booking-preview/${houseData.title}/checkout-preview`);
+
     navigate(
-      `/booking-preview?title=${houseData?.title}&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${range[0].endDate}`
+      `/booking-preview?title=${houseData?.title}&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${range[0].endDate}&persons=${noPersons.value}`
     );
   };
 

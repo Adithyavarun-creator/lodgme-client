@@ -41,12 +41,12 @@ const Navbar = () => {
       // // const data = await res.json();
       axios.defaults.withCredentials = true;
       const { data } = await axios.get(`${baseUrl}/api/signout`);
-      localStorage.removeItem("token");
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
         return;
       }
       dispatch(signOutUserSuccess(data));
+      localStorage.removeItem("token");
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -24,13 +24,17 @@ const BookingPaymentCard = () => {
         accept: "application/json",
         "content-type": "application/x-www-form-urlencoded",
         authorization:
-          "Basic {base64({4d473fb6-b781-4841-bd34-9e97c3026ff3}:{8533850f-f6dd-44a8-9e77-c38524e2535a})}",
+          "Basic {base64({b5ed9f7b-3b02-4075-86fd-065fcca84fa0}:{a2c0f9d3-2e43-4e77-bfbb-f0631e94ffc8})}",
       },
       body: new URLSearchParams({
         grant_type: "authorization_code",
         scope: "AIS",
+        code: "1234",
       }),
     };
+
+    //APP ID : b5ed9f7b-3b02-4075-86fd-065fcca84fa0
+    //APP SECRET : a2c0f9d3-2e43-4e77-bfbb-f0631e94ffc8
 
     fetch("https://api-sandbox.fintecture.com/oauth/accesstoken", options)
       .then((response) => response.json())
@@ -83,12 +87,13 @@ const BookingPaymentCard = () => {
           </div>
         </div>
       </div>
-      <div>
+
+      {/* <div>
         <div className="bookingboxbtn">
           <Button title="Cancel" />
           <Button title="Proceed" />
         </div>
-      </div>
+      </div> */}
     </BookingPaymentCardStyles>
   );
 };

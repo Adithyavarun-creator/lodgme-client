@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BookingPreviewStyles } from "./BookingPreviewStyles";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import queryString from "query-string";
 import moment from "moment";
 import format from "date-fns/format";
@@ -25,16 +25,26 @@ const BookingPreviewPage = () => {
   );
   const [startDate, setStartdate] = useState("");
   const [endDate, setEnddate] = useState("");
+  const [nopersons, setNopersons] = useState(0);
 
   useEffect(() => {
-    const { title, stayDays, fromdate, todate } = queryString.parse(
+    const { title, stayDays, fromdate, todate, persons } = queryString.parse(
       window.location.search
     );
     setStartdate(fromdate);
     setEnddate(todate);
+    setNopersons(persons);
   }, []);
 
+  const navigate = useNavigate();
+
   //console.log(selectedHouse);
+
+  const gotoFormFillingPage = () => {
+    navigate(
+      `/billing-details?title=${selectedHouse.title}&stayDays=${startDate}&fromdate=${startDate}&todate=${endDate}&persons=${nopersons}`
+    );
+  };
 
   return (
     <>
@@ -66,7 +76,7 @@ const BookingPreviewPage = () => {
             <div className="flex">
               <h3>
                 <FaUsers className="doneIcon" />
-                &nbsp; Number of people staying are 5
+                &nbsp; Number of people staying are {nopersons}
               </h3>
             </div>
             <div>
@@ -216,8 +226,12 @@ const BookingPreviewPage = () => {
               </div>
             </div>
           </div> */}
-          <div>
+          <div className="billingbox-2">
             <BookingPaymentCard />
+            <Button
+              title="Proceed for billing 	&#10230;"
+              onClick={gotoFormFillingPage}
+            />
           </div>
         </BookingPreviewStyles>
       </HelmetProvider>

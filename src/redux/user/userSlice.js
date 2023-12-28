@@ -7,6 +7,7 @@ const initialState = {
   bookingAmount: 0,
   selectedHouse: [],
   stayingDays: 0,
+  persons: 0,
   token: null,
 };
 
@@ -66,13 +67,16 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     setBookingAmount: (state, action) => {
-      state.bookingAmount = "action.payload";
+      state.bookingAmount = action.payload;
     },
     setSelectedHouse: (state, action) => {
-      state.selectedHouse = "action.payload";
+      state.selectedHouse = action.payload;
     },
     setStayingDays: (state, action) => {
-      state.stayingDays = "action.payload";
+      state.stayingDays = action.payload;
+    },
+    setNumberofPersons: (state, action) => {
+      state.persons = action.payload;
     },
   },
 });
@@ -87,6 +91,7 @@ export const {
   deleteUserFailure,
   deleteUserStart,
   signInToken,
+  setNumberofPersons,
   deleteUserSuccess,
   signOutUserFailure,
   signOutUserStart,

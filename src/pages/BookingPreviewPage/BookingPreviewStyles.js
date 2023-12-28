@@ -165,7 +165,6 @@ export const BookingPreviewStyles = styled.div`
     @media ${devices.smallMobiles} {
       padding: 4px;
       border-radius: 10px;
-
     }
   }
 
@@ -519,5 +518,11 @@ export const BookingPreviewStyles = styled.div`
     @media ${devices.smallMobiles} {
       /* gap: 20px; */
     }
+  }
+
+  .billingbox-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
 `;

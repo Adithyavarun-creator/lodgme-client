@@ -13,6 +13,9 @@ import { useSelector } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import BookingPreviewPage from "./pages/BookingPreviewPage/BookingPreviewPage";
 import UserListingPage from "./pages/UserListingPage/UserListingPage";
+import BillingPage from "./pages/BillingPage/BillingPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import Success from "./components/Success/Success";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -104,6 +107,11 @@ function App() {
               path="/search-results"
               element={<LazySearchPageComponent />}
             />
+
+            <Route path="/billing-details" element={<BillingPage />} />
+            <Route path="/success" element={<Success />} />
+
+            <Route path="/checkout-options" element={<CheckoutPage />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
