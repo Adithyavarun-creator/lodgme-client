@@ -10,17 +10,41 @@ const UserListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [houses, setHouses] = useState([]);
 
-  useEffect(() => {
-    const getListing = async () => {
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.get(
-        `${baseUrl}/api/listings/${currentUser._id}`
-      );
-      setHouses(data);
-    };
+  console.log(currentUser._id);
 
-    getListing();
-  }, [currentUser._id]);
+  // useEffect(() => {
+  //   const getListing = async () => {
+  //     axios.defaults.withCredentials = true;
+  //     const { data } = await axios.get(
+  //       `${baseUrl}/api/listings/${currentUser._id}`
+  //     );
+  //     setHouses(data);
+  //   };
+
+  //   getListing();
+  // }, [currentUser._id]);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    //console.log(token);
+    setToken(token);
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(`${baseUrl}/api/listings/${currentUser._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // <----------- HERE
+        },
+      });
+      const data = await result.json();
+      console.log(data);
+      setHouses(data)
+      // setActivities(data);
+    };
+    fetchData();
+  }, [token]);
 
   console.log(houses);
 

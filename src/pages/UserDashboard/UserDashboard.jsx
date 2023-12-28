@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const UserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
 
-  //console.log(currentUser);
+  //console.log(currentUser.user._id);
   return (
     <>
       <HelmetProvider>

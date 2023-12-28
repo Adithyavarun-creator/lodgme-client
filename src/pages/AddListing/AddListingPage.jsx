@@ -175,6 +175,13 @@ const AddListingPage = () => {
       );
     });
   };
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    //console.log(token);
+    setToken(token);
+  }, [token]);
 
   const onAddListing = async () => {
     if (!title) {
@@ -214,7 +221,7 @@ const AddListingPage = () => {
       alert("Enter amenitites not included");
     }
 
-   if (!housePrice) {
+    if (!housePrice) {
       alert("Enter price of stay per day");
     }
     if (!value) {
@@ -226,26 +233,54 @@ const AddListingPage = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
-        title,
-        mapLocation: coordinates,
-        houseAddress: address,
-        description,
-        type: houseType,
-        houseImages: formData.imageUrls,
-        beds,
-        facilities: facilities,
-        baths,
-        livingRoom,
-        noOfpersons,
-        amenitiesIncluded: amentitiesinc,
-        amenitiesNotIncluded: amentitiesnotinc,
-        //publishedUser: user,
-        postedBy: currentUser,
-        pricePerNight: housePrice,
-        locatedCountry: value.label,
-        availableFrom: range[0].startDate,
-        availableTill: range[0].endDate,
+      // const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
+      //   title,
+      //   mapLocation: coordinates,
+      //   houseAddress: address,
+      //   description,
+      //   type: houseType,
+      //   houseImages: formData.imageUrls,
+      //   beds,
+      //   facilities: facilities,
+      //   baths,
+      //   livingRoom,
+      //   noOfpersons,
+      //   amenitiesIncluded: amentitiesinc,
+      //   amenitiesNotIncluded: amentitiesnotinc,
+      //   //publishedUser: user,
+      //   postedBy: currentUser,
+      //   pricePerNight: housePrice,
+      //   locatedCountry: value.label,
+      //   availableFrom: range[0].startDate,
+      //   availableTill: range[0].endDate,
+      // });
+      await fetch(`${baseUrl}/api/create-new-listing`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // <---------- HERE
+        },
+        body: JSON.stringify({
+          title,
+          mapLocation: coordinates,
+          houseAddress: address,
+          description,
+          type: houseType,
+          houseImages: formData.imageUrls,
+          beds,
+          facilities: facilities,
+          baths,
+          livingRoom,
+          noOfpersons,
+          amenitiesIncluded: amentitiesinc,
+          amenitiesNotIncluded: amentitiesnotinc,
+          //publishedUser: user,
+          postedBy: currentUser,
+          pricePerNight: housePrice,
+          locatedCountry: value.label,
+          availableFrom: range[0].startDate,
+          availableTill: range[0].endDate,
+        }),
       });
       setLoading(false);
 

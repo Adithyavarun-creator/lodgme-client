@@ -16,6 +16,7 @@ import AppleLogo from "../../assets/loginlogos/apple.png";
 import GoogleLogo from "../../assets/loginlogos/google.png";
 import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 import FacebookSignin from "../../components/FacebookSignin/FacebookSignin";
+import Cookies from "js-cookie";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -35,19 +36,37 @@ const SigninPage = () => {
     }
 
     try {
+      // dispatch(signInStart());
+      // axios.defaults.withCredentials = true;
+      // const { data } = await axios.post(`${baseUrl}/api/login`, {
+      //   email,
+      //   password,
+      // });
+      // console.log(data.user);
+      // Cookies.set("access_token", JSON.stringify(data.token));
+      // if (data.success === false) {
+      //   dispatch(signInFailure(data.message));
+      //   return;
+      // }
+      // dispatch(signInSuccess(data.user));
+      // toast.success("We are signing you in ! Welcome back");
+      // navigate("/dashboard-user");
       dispatch(signInStart());
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.post(`${baseUrl}/api/login`, {
-        email,
-        password,
+      const response = await fetch(`${baseUrl}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       });
-      console.log(data);
-      //console.log(res.data);
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
-        return;
-      }
-      dispatch(signInSuccess(data));
+
+      const data = await response.json();
+      dispatch(signInSuccess(data.user));
+      console.log(data.user);
+      localStorage.setItem("token", JSON.stringify(data.token));
       toast.success("We are signing you in ! Welcome back");
       navigate("/dashboard-user");
     } catch (error) {

@@ -94,7 +94,7 @@ const Navbar = () => {
                 className="navbutton linkStyle"
                 title="Click to manage your LodgeMe account"
               >
-                {currentUser ? `${currentUser?.username} Dashboard` : ""}
+                {currentUser ? `${currentUser.username} Dashboard` : ""}
               </Link>
             </div>
           )}
