@@ -67,7 +67,7 @@ const SigninPage = () => {
       const data = await response.json();
       dispatch(signInSuccess(data.user));
       dispatch(signInToken(data.token));
-      console.log(data.user);
+      //console.log(data.user);
       localStorage.setItem("token", JSON.stringify(data.token));
       toast.success("We are signing you in ! Welcome back");
       navigate("/dashboard-user");

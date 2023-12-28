@@ -27,9 +27,10 @@ const UserListingPage = () => {
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
-    //console.log(token);
     setToken(token);
-  }, [token]);
+  }, []);
+
+  //console.log(token);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,11 +40,11 @@ const UserListingPage = () => {
         },
       });
       const data = await result.json();
-      console.log(data);
+      //console.log(data);
       setHouses(data);
     };
     fetchData();
-  }, [token]);
+  }, [currentUser, token]);
 
   console.log(houses);
 
