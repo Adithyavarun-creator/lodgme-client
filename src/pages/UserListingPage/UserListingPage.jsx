@@ -35,13 +35,12 @@ const UserListingPage = () => {
     const fetchData = async () => {
       const result = await fetch(`${baseUrl}/api/listings/${currentUser._id}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // <----------- HERE
+          Authorization: `Bearer ${token}`,
         },
       });
       const data = await result.json();
       console.log(data);
-      setHouses(data)
-      // setActivities(data);
+      setHouses(data);
     };
     fetchData();
   }, [token]);

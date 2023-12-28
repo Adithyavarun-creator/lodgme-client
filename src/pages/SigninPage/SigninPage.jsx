@@ -9,6 +9,7 @@ import {
   signInFailure,
   signInSuccess,
   signInStart,
+  signInToken,
 } from "../../redux/user/userSlice";
 import { baseUrl, loginUser } from "../../baseUrl/url";
 import FacebookLogo from "../../assets/loginlogos/facebook.png";
@@ -65,6 +66,7 @@ const SigninPage = () => {
 
       const data = await response.json();
       dispatch(signInSuccess(data.user));
+      dispatch(signInToken(data.token));
       console.log(data.user);
       localStorage.setItem("token", JSON.stringify(data.token));
       toast.success("We are signing you in ! Welcome back");

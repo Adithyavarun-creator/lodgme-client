@@ -7,6 +7,7 @@ const initialState = {
   bookingAmount: 0,
   selectedHouse: [],
   stayingDays: 0,
+  token: null,
 };
 
 const userSlice = createSlice({
@@ -20,6 +21,9 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
       state.loading = false;
       state.error = null;
+    },
+    signInToken: (state, action) => {
+      state.token = action.payload;
     },
     signInFailure: (state, action) => {
       state.loading = false;
@@ -82,6 +86,7 @@ export const {
   updateUserStart,
   deleteUserFailure,
   deleteUserStart,
+  signInToken,
   deleteUserSuccess,
   signOutUserFailure,
   signOutUserStart,

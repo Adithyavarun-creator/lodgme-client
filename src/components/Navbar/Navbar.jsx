@@ -37,10 +37,11 @@ const Navbar = () => {
   const logoutUser = async () => {
     try {
       dispatch(signOutUserStart());
-      // const res = await fetch(`${baseUrl}/api/signout`);
-      // const data = await res.json();
+      // // const res = await fetch(`${baseUrl}/api/signout`);
+      // // const data = await res.json();
       axios.defaults.withCredentials = true;
       const { data } = await axios.get(`${baseUrl}/api/signout`);
+      localStorage.removeItem("token");
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
         return;
