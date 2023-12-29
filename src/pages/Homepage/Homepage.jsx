@@ -30,11 +30,30 @@ import { HomepageSelectStyles } from "../../components/SelectStyles/Select";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { baseUrl } from "../../baseUrl/url";
 
 const Homepage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { RangePicker } = DatePicker;
+  const [houses, setHouses] = useState([]);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/listings`);
+        const data = await res.json();
+        //console.log(data);
+        setHouses(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  // console.log(houses.map((h)=>h.houseImages));
 
   const settings = {
     dots: true,
@@ -283,9 +302,9 @@ const Homepage = () => {
 
       {/* <div className="mt-100"></div> */}
 
-      <div>
+      {/* <div>
         <HouseCard title="Top Rated Apartments" houseCards={apartmentDatas} />
-      </div>
+      </div> */}
 
       <div>
         <HouseCard title="Top Rated Houses" houseCards={houseCards} />

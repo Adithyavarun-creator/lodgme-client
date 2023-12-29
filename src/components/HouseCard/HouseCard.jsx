@@ -52,7 +52,7 @@ const HouseCard = ({ houseCards, title }) => {
                 )}
               </Slider>
 
-              <div className="toprated_favorite">
+              {/* <div className="toprated_favorite">
                 <span className="">
                   {card.favorite && (
                     <FaHeart className="toprated_favoriteicon" />
@@ -61,7 +61,7 @@ const HouseCard = ({ houseCards, title }) => {
                     <IoHeartDislikeOutline className="toprated_favoriteicon" />
                   )}
                 </span>
-              </div>
+              </div> */}
 
               {card.userImg && (
                 <div className="toprated_favoriteuser">
