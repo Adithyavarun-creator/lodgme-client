@@ -5,16 +5,16 @@ import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
 import { PiArmchairFill } from "react-icons/pi";
 import { MdVerified, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { SearchPageCardStyles } from "./SearchPageCardStyles";
+import { EditCardStyles } from "./EditCardStyles.js";
 import { useSelector } from "react-redux";
 import { FiEdit } from "react-icons/fi";
 
-const SearchPageCard = ({ res }) => {
+const EditCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
     <>
-      <SearchPageCardStyles>
+      <EditCardStyles>
         <div className="searchresultsection">
           <div>
             <h2>{res.title} </h2>
@@ -34,7 +34,7 @@ const SearchPageCard = ({ res }) => {
             />
           </div>
 
-          {/* {currentUser ? (
+          {currentUser ? (
             <div className="editdelicons">
               <div className="searchuserdelete">
                 <MdDelete
@@ -49,7 +49,7 @@ const SearchPageCard = ({ res }) => {
             </div>
           ) : (
             ""
-          )} */}
+          )}
 
           <div className="searchuserverified">
             <MdVerified
@@ -122,9 +122,9 @@ const SearchPageCard = ({ res }) => {
             />
           </div>
         </div>
-      </SearchPageCardStyles>
+      </EditCardStyles>
     </>
   );
 };
 
-export default SearchPageCard;
+export default EditCard;

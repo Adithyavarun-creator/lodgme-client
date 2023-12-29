@@ -58,7 +58,7 @@ const SearchPage = () => {
         <div>
           <h2>
             {fetchedResults.length > 0 ? fetchedResults.length : 0} results
-            found for your search {country}country
+            found for your search {country} country
           </h2>
         </div>
 

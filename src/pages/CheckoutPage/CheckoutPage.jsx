@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CheckoutPageStyles } from "./CheckoutPageStyles";
 import BookingPaymentCard from "../../components/BookingPaymentCard/BookingPaymentCard";
-import { FaCcVisa, FaCcMastercard } from "react-icons/fa";
-import { loadStripe } from "@stripe/stripe-js";
+import { FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { baseUrl } from "../../baseUrl/url";
 import axios from "axios";
+import queryString from "query-string";
 
 const CheckoutPage = () => {
-  const { bookingAmount, selectedHouse, stayingDays, token, currentUser } =
+  const { bookingAmount, selectedHouse, stayingDays, currentUser, token } =
     useSelector((state) => state.user);
+  const [startDate, setStartdate] = useState("");
+  const [endDate, setEnddate] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [nopersons, setNopersons] = useState(0);
+
+  useEffect(() => {
+    const {
+      fromdate,
+      todate,
+      persons,
+      bookname,
+      bookemail,
+      bookAddress,
+      bookNumber,
+    } = queryString.parse(window.location.search);
+    setName(bookname);
+    setEmail(bookemail);
+    setAddress(bookAddress);
+    setNumber(bookNumber);
+
+    setStartdate(fromdate);
+    setEnddate(todate);
+    setNopersons(persons);
+  }, []);
 
   //publish=pk_test_51OCJt5SJsmJ4s67G7rbSy3PGzXYaAlCb2D31sTTALDoNVXGoThAQYIdflpHxWKhaVY6Ach1X8d5OnBxll6r4jNYo00orevZ6se
-
 
   const checkOutwithStripe = () => {
     axios
@@ -21,42 +47,56 @@ const CheckoutPage = () => {
         selectedHouse,
       })
       .then((res) => {
+        //save
+        saveOrder();
         if (res.data.url) {
           window.location.href = res.data.url;
         }
       })
       .catch((err) => console.log(err.message));
-    // const stripe = await loadStripe(
-    //   "pk_test_51OCJt5SJsmJ4s67G7rbSy3PGzXYaAlCb2D31sTTALDoNVXGoThAQYIdflpHxWKhaVY6Ach1X8d5OnBxll6r4jNYo00orevZ6se"
-    // );
-    // const body = {
-    //   booking: selectedHouse,
-    //   amount: bookingAmount,
-    // };
-
-    // const response = await fetch(`${baseUrl}/api/create-checkout-session`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   mode: "cors",
-    //   body: JSON.stringify({ body }),
-    // });
-    // const session = await response.json();
-    // console.log(session);
-    // const result = stripe.redirectToCheckout({
-    //   sessionId: session.id,
-    // });
-    // if (result.error) {
-    //   console.log(result.error);
-    // }
   };
+
+  console.log(selectedHouse);
+
+  const saveOrder = async () => {
+    const response = await fetch(`${baseUrl}/api/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // <---------- HERE
+      },
+      body: JSON.stringify({
+        billingName: name,
+        billingEmail: email,
+        billingPhonenumber: number,
+        billingAddress: address,
+        totalPrice: bookingAmount,
+        nopersons: nopersons,
+        startDate,
+        endDate,
+        country: selectedHouse.country,
+        beds: selectedHouse.beds,
+        baths: selectedHouse.baths,
+        livingRoom: selectedHouse.livingRoom,
+        stayingDays,
+        listingBooked: selectedHouse.title,
+        houseDetails: selectedHouse,
+        bookedBy: currentUser,
+        paymentMode: "Stripe",
+      }),
+    });
+    //console.log(response);
+  };
+
+  const checkOutwithPayPal = async () => {};
 
   return (
     <CheckoutPageStyles>
       <div className="checkoutbox">
         <div>
-          <h1>Checkout with any of the payment options</h1>
+          <h1 className="checkoutheading">
+            Checkout with below payment options
+          </h1>
         </div>
         <div className="checkoutoptions">
           <button className="flex checkoutbtn" onClick={checkOutwithStripe}>
@@ -65,6 +105,10 @@ const CheckoutPage = () => {
             &nbsp;
             <FaCcMastercard />
           </button>
+          <button className="flex checkoutbtn" onClick={checkOutwithPayPal}>
+            PayPal &nbsp; <FaPaypal />
+          </button>
+
           <button className="flex checkoutbtn">Future Payments</button>
         </div>
       </div>

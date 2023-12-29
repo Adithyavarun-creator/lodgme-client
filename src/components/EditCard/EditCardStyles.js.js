@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { devices } from "../../theme/breakpoints";
 
-export const SearchPageCardStyles = styled.div`
+export const EditCardStyles = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

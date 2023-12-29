@@ -107,6 +107,7 @@ export const BookingPaymentCardStyles = styled.div`
 
     @media ${devices.tabletsAndIpads} {
       padding: 6px;
+      font-size: 16px;
     }
     @media ${devices.smallTabs} {
       padding: 5px 8px;

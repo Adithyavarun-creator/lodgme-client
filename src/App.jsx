@@ -16,6 +16,7 @@ import UserListingPage from "./pages/UserListingPage/UserListingPage";
 import BillingPage from "./pages/BillingPage/BillingPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Success from "./components/Success/Success";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -108,11 +109,6 @@ function App() {
               element={<LazySearchPageComponent />}
             />
 
-            <Route path="/billing-details" element={<BillingPage />} />
-            <Route path="/success" element={<Success />} />
-
-            <Route path="/checkout-options" element={<CheckoutPage />} />
-
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
               <Route path="/user-listings" element={<UserListingPage />} />
@@ -120,6 +116,11 @@ function App() {
                 path="/add-new-listing"
                 element={<LazyAddListingPageComponent />}
               />
+              <Route path="/billing-details" element={<BillingPage />} />
+              <Route path="/success" element={<Success />} />
+
+              <Route path="/checkout-options" element={<CheckoutPage />} />
+              <Route path="/order-details" element={<OrdersPage />} />
             </Route>
             {/* <Route path="*" element={<LazyNotFoundPageComponent />} /> */}
           </Routes>

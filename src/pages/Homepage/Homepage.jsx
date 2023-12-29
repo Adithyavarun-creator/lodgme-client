@@ -130,9 +130,9 @@ const Homepage = () => {
     if (!value) {
       toast.error("Location not selected");
     }
-    if (!noPersons) {
-      toast.error("Person count not selected");
-    }
+    // if (!noPersons) {
+    //   toast.error("Person count not selected");
+    // }
     // navigate(
     //   `/search-results?location=${value.label}&fromdate=${format(
     //     range[0].startDate,
@@ -147,9 +147,7 @@ const Homepage = () => {
       }&stayDays=${diffInDays}&fromdate=${format(
         range[0].startDate,
         "dd/MM/yyyy"
-      )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}&persons=${
-        noPersons.value
-      }`
+      )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}`
     );
   };
 
@@ -250,7 +248,7 @@ const Homepage = () => {
             />*/}
           </div>
 
-          <div>
+          {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("persons")}</span>
               <span>
@@ -267,7 +265,7 @@ const Homepage = () => {
               styles={HomepageSelectStyles}
               name="person"
             />
-          </div>
+          </div> */}
           <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("submit")}</span>

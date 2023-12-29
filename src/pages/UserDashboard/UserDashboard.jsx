@@ -8,6 +8,7 @@ import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
 import { MdAddHome, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { TbHomeSearch } from "react-icons/tb";
 
 const UserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -26,6 +27,24 @@ const UserDashboard = () => {
           </div>
 
           <div className="dashboardbox">
+            <Link to="/" className="linkStyle dashboardbox-1">
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">
+                    Search to stay and book
+                  </h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <TbHomeSearch className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Browse houses and book it</span>
+              </div>
+            </Link>
             <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -58,7 +77,7 @@ const UserDashboard = () => {
                 <span>Click here and edit your personal details</span>
               </div>
             </div>
-            <div className="dashboardbox-1">
+            <Link to="/order-details" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -73,7 +92,7 @@ const UserDashboard = () => {
               <div>
                 <span>Your previous and upcoming bookings</span>
               </div>
-            </div>
+            </Link>
             <Link to="/user-listings" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />

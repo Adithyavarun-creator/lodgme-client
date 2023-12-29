@@ -237,8 +237,11 @@ export const BookingPreviewStyles = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 30px;
+
 
     @media ${devices.bigLaptopsAndDesktops} {
+      gap: 30px;
     }
 
     @media ${devices.tabletsAndIpads} {

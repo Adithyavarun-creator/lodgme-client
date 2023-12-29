@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../baseUrl/url";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { UserListingPageStyles } from "./UserListingPageStyles";
+import EditCard from "../../components/EditCard/EditCard";
 
 const UserListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -46,7 +45,7 @@ const UserListingPage = () => {
     fetchData();
   }, [currentUser, token]);
 
-  console.log(houses);
+  // console.log(houses);
 
   return (
     <>
@@ -60,9 +59,7 @@ const UserListingPage = () => {
             <h2>My Listings Posted to public view</h2>
           </div>
           {houses.length &&
-            houses.map((house) => (
-              <SearchPageCard res={house} key={house._id} />
-            ))}
+            houses.map((house) => <EditCard res={house} key={house._id} />)}
         </UserListingPageStyles>
       </HelmetProvider>
     </>
