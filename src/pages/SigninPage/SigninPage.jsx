@@ -22,6 +22,7 @@ import Cookies from "js-cookie";
 const SigninPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -70,9 +71,12 @@ const SigninPage = () => {
       //console.log(data.user);
       localStorage.setItem("token", JSON.stringify(data.token));
       toast.success("We are signing you in ! Welcome back");
-      navigate("/dashboard-user");
+      setTimeout(() => {
+        navigate("/dashboard-user");
+      }, 2000);
     } catch (error) {
       dispatch(signInFailure(error.message));
+      setError("Invalid credentials, please try again !");
       console.log(error);
     }
 
@@ -130,6 +134,11 @@ const SigninPage = () => {
               </form>
             </div>
 
+            {error && (
+              <span style={{ color: "red", fontWeight: "bolder" }}>
+                {error}
+              </span>
+            )}
             <div className="btnbox">
               <div>
                 <Link to="/forgot-password" className="linkStyle forgot-pswd">

@@ -45,6 +45,7 @@ const Navbar = () => {
         dispatch(signOutUserFailure(data.message));
         return;
       }
+      //console.log(data);
       dispatch(signOutUserSuccess(data));
       localStorage.removeItem("token");
       navigate("/");

@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { SuccessStyles } from "./SuccessStyle";
-import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import SuccessImage from "../../assets/success.jpg";
 
 const Success = () => {
   const { bookingAmount, selectedHouse, stayingDays } = useSelector(
@@ -10,6 +10,10 @@ const Success = () => {
   );
 
   const navigate = useNavigate();
+
+  setTimeout(() => {
+    navigate("/order-details");
+  }, 3000);
 
   const goHome = () => {
     navigate("/");
@@ -22,14 +26,16 @@ const Success = () => {
   return (
     <SuccessStyles>
       <div>
-        <h1>Your payment is success</h1>
+        <h1>Your transaction is success !!!</h1>
       </div>
       <div>
-        <img src="" alt="" />
+        <h3>We received your payment</h3>
       </div>
       <div>
-        <Button title="Back to Home" onClick={goHome} />
-        <Button title="Go to Orders Page" onClick={goOrders}/>
+        <h3>Hold on ! We are taking you to Orders Page</h3>
+      </div>
+      <div>
+        <img src={SuccessImage} className="successimg" alt="" />
       </div>
     </SuccessStyles>
   );

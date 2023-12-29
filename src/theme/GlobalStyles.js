@@ -58,6 +58,7 @@ body {
 .linkStyle{
   text-decoration: none;
   color: #333333;
+  cursor: pointer;
 }
 
 .flex-center{

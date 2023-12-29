@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { devices } from "../../theme/breakpoints";
 
-export const SuccessStyles = styled.div`
+export const ErrorStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
