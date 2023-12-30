@@ -16,7 +16,6 @@ export const HouseCardStyles = styled.div`
 
   @media ${devices.smallTabs} {
     margin-top: 30px;
-
   }
 
   @media ${devices.smallMobiles} {
@@ -29,10 +28,12 @@ export const HouseCardStyles = styled.div`
     column-gap: 30px;
     row-gap: 50px;
     margin-top: 40px;
+    margin-bottom: 40px;
 
     @media ${devices.bigLaptopsAndDesktops} {
       grid-template-columns: 240px 240px 240px;
       row-gap: 40px;
+
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -64,6 +65,7 @@ export const HouseCardStyles = styled.div`
     z-index: 1;
     overflow: hidden;
     transition: all 0.6s;
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
   }
 
   .slick-dots {
@@ -78,12 +80,10 @@ export const HouseCardStyles = styled.div`
     }
     @media ${devices.smallTabs} {
       top: 155px;
-
     }
 
     @media ${devices.smallMobiles} {
       top: 145px;
-
     }
   }
 
@@ -280,16 +280,17 @@ export const HouseCardStyles = styled.div`
     padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 15px;
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
     @media ${devices.tabletsAndIpads} {
       padding: 12px;
-      gap: 6px;
+      gap: 10px;
     }
 
     @media ${devices.smallTabs} {
-      gap: 5px;
+      gap: 8px;
     }
 
     @media ${devices.smallMobiles} {

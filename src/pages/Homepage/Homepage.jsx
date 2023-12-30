@@ -53,7 +53,7 @@ const Homepage = () => {
     fetchListings();
   }, []);
 
-  // console.log(houses.map((h)=>h.houseImages));
+  //console.log(houses);
 
   const settings = {
     dots: true,
@@ -307,7 +307,7 @@ const Homepage = () => {
       </div> */}
 
       <div>
-        <HouseCard title="Top Rated Houses" houseCards={houseCards} />
+        <HouseCard title="Top Rated Houses" houseCards={houses} />
       </div>
       <Toaster position="top-center" reverseOrder={false} />
     </HomepageStyles>
