@@ -18,6 +18,8 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Success from "./components/Success/Success";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import Error from "./components/Error/Error";
+import SearchFiltersPage from "./pages/SearchFiltersPage/SearchFiltersPage";
+import OTPPage from "./pages/OTPPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -60,6 +62,10 @@ const LazyBookingPreviewPageComponent = React.lazy(() =>
   import("./pages/BookingPreviewPage/BookingPreviewPage")
 );
 
+const LazyEditProfilePageComponent = React.lazy(() =>
+  import("./pages/EditProfile/EditProfile")
+);
+
 function App() {
   return (
     <>
@@ -93,9 +99,7 @@ function App() {
               path="/reset-password/:id/:token"
               element={<LazyResetPasswordPageComponent />}
             />
-
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
-
             <Route
               path="/homes&rooms/:id"
               element={<LazySingleHousePageComponent />}
@@ -104,23 +108,35 @@ function App() {
               path="/booking-preview"
               element={<LazyBookingPreviewPageComponent />}
             />
-
             <Route
               path="/search-results"
               element={<LazySearchPageComponent />}
             />
-
+            <Route
+              path="/search-filter-results"
+              element={<SearchFiltersPage />}
+            />
+            {/* <Route
+              path="/add-new-listing"
+              element={<LazyAddListingPageComponent />}
+            /> */}
+            <Route path="/otp-page" element={<OTPPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
               <Route path="/user-listings" element={<UserListingPage />} />
               <Route
+                path="/edit-user-profile"
+                element={<LazyEditProfilePageComponent />}
+              />
+
+              {/* <Route
                 path="/add-new-listing"
                 element={<LazyAddListingPageComponent />}
-              />
+              /> */}
               <Route path="/billing-details" element={<BillingPage />} />
-
               <Route path="/checkout-options" element={<CheckoutPage />} />
               <Route path="/order-details" element={<OrdersPage />} />
+              {/* <Route path="/otp-page" element={<OTPPage />} /> */}
               <Route path="/success" element={<Success />} />
               <Route path="/error" element={<Error />} />
             </Route>

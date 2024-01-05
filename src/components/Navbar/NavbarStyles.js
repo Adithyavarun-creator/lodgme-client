@@ -208,6 +208,30 @@ export const NavbarStyles = styled(motion.div)`
       display: none;
     }
   }
+
+  .navbar-profileimage {
+    border-radius: 50%;
+    border: 2px solid ${({ theme }) => theme.colors.primaryColor};
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      width: 35px;
+      height: 35px;
+    }
+
+    @media ${devices.smallTabs} {
+      display: none;
+    }
+
+    @media ${devices.smallMobiles} {
+      display: none;
+    }
+  }
 `;
 
 export const MobileNavStyle = styled.div`

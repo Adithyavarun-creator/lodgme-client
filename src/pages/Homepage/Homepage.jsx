@@ -15,8 +15,6 @@ import format from "date-fns/format";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { differenceInDays } from "date-fns";
-import { DatePicker, Space } from "antd";
-
 import { IoSearchSharp } from "react-icons/io5";
 import { useRef } from "react";
 import { RiMapPin2Fill } from "react-icons/ri";
@@ -31,6 +29,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { baseUrl } from "../../baseUrl/url";
+import { DatePicker } from "antd";
 
 const Homepage = () => {
   const { t } = useTranslation();
@@ -76,6 +75,7 @@ const Homepage = () => {
 
   const [diffInDays, setDiffInDays] = useState(0);
   const [dates, setDates] = useState("");
+  const [date, setDate] = useState();
 
   const [open, setOpen] = useState(false);
 
@@ -131,7 +131,7 @@ const Homepage = () => {
   };
 
   const handleSelect = (ranges) => {
-    //console.log(ranges.selection.startDate);
+    console.log(ranges.selection.startDate);
     //console.log(ranges.selection.endDate);
     const diff = differenceInDays(
       ranges.selection.endDate,
@@ -149,34 +149,26 @@ const Homepage = () => {
     if (!value) {
       toast.error("Location not selected");
     }
-    // if (!noPersons) {
-    //   toast.error("Person count not selected");
-    // }
     // navigate(
-    //   `/search-results?location=${value.label}&fromdate=${format(
+    //   `/search-results?locatedCountry=${
+    //     value.label ? value.label : "France"
+    //   }&stayDays=${diffInDays}&fromdate=${format(
     //     range[0].startDate,
     //     "dd/MM/yyyy"
-    //   )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}&persons=${
-    //     noPersons.value
-    //   }`
+    //   )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}`
+    // );
+    //*************** */
+    //  navigate(
+    //   `/search-results?locatedCountry=${
+    //     value.label ? value.label : "France"
+    //   }&date=${date}`
     // );
     navigate(
-      `/search-results?locatedCountry=${
-        value.label
-      }&stayDays=${diffInDays}&fromdate=${format(
-        range[0].startDate,
-        "dd/MM/yyyy"
-      )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}`
+      `/search-results?locatedCountry=${value.label ? value.label : "France"}`
     );
   };
 
-  //console.log(value);
-
-  // console.log(`${format(range[0].startDate, "yyyy/MM/dd")}`, "fromdate");
-  // console.log(`${format(range[0].endDate, "yyyy/MM/dd")}`, "enddate");
-  //console.log(noPersons.value);
-
-  //console.log(dates);
+  console.log(date);
 
   return (
     <HomepageStyles
@@ -198,7 +190,7 @@ const Homepage = () => {
         </Slider>
       </div>
 
-      <div>
+      <div className="homepage_header_content">
         <div className="homepage_header_text">
           <h1>WEBSITE UNDER PROGRESS, COMING SOON !!!</h1>
           <h1>Un toit ou vous retrouver tous ensemble</h1>
@@ -224,7 +216,7 @@ const Homepage = () => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("bookingdate")}</span>
               <span>
@@ -240,32 +232,9 @@ const Homepage = () => {
               className="date_inputfield"
               onClick={() => setOpen((open) => !open)}
             />
-          </div>
+          </div> */}
 
-          <div className="datebox_range" ref={refOne}>
-            {open && (
-              <DateRangePicker
-                className="date_range"
-                onChange={(item) => {
-                  setRange([item.selection]);
-                  handleSelect(item);
-                }}
-                editableDateInputs={true}
-                moveRangeOnFirstSelection={false}
-                ranges={range}
-                months={2}
-                direction="horizontal"
-                rangeColors={["#015151", "#015151", "#fed14c"]}
-                minDate={new Date()}
-              />
-            )}
-            {/* <RangePicker
-              onChange={(value, dateString) => setDates(dateString)}
-              disabledDate={(current) =>
-                current && current.valueOf() < moment().subtract(1, "days")
-              }
-            />*/}
-          </div>
+    
 
           {/* <div>
             <div className="search_labelbox">
@@ -316,4 +285,44 @@ const Homepage = () => {
 
 export default Homepage;
 
-//    background-color: ${({ theme }) => theme.colors.numbering};
+
+
+/**
+       <div className="datebox_range" ref={refOne}>
+            {open && (
+              // <DateRangePicker
+              //   className="date_range"
+              //   onChange={(item) => {
+              //     setRange([item.selection]);
+              //     handleSelect(item);
+              //   }}
+              //   editableDateInputs={true}
+              //   moveRangeOnFirstSelection={false}
+              //   ranges={range}
+              //   months={2}
+              //   direction="horizontal"
+              //   rangeColors={["#015151", "#015151", "#fed14c"]}
+              //   minDate={new Date()}
+              // />
+              // <RangePicker
+              //   onChange={(value, dateString) => setDate(dateString)}
+              //   disabledDate={(current) =>
+              //     current && current.valueOf() < moment().subtract(1, "days")
+              //   }
+              // />
+            )}
+            {/* <RangePicker
+              onChange={(value, dateString) => setDates(dateString)}
+              disabledDate={(current) =>
+                current && current.valueOf() < moment().subtract(1, "days")
+              }
+            />
+            </div>
+
+            <RangePicker
+              onChange={(value, dateString) => setDate(dateString)}
+              disabledDate={(current) =>
+                current && current.valueOf() < moment().subtract(1, "days")
+              }
+            />
+ */

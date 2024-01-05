@@ -7,23 +7,57 @@ import { FaUserEdit } from "react-icons/fa";
 import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
 import { MdAddHome, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
+import { baseUrl } from "../../baseUrl/url";
 
 const UserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   //console.log(currentUser.user._id);
+
+  const mobileOtp = () => {
+    // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify({ formData, homeAddress: address }),
+    // });
+    // const data = await res.json();
+    // console.log(data);
+    navigate("/otp-page");
+  };
+
   return (
     <>
       <HelmetProvider>
         <Helmet>
           <meta />
-          <title>Dashboard | LodgeMe</title>
+          <title>Dashboard | Lodgeme</title>
         </Helmet>
         <UserDashboardStyles>
           <div>
             <h1>{currentUser?.username} Dashboard</h1>
+          </div>
+
+          <div>
+            <h1>
+              {currentUser?.verified
+                ? "Email verified by Lodgeme"
+                : "Email not verified"}
+            </h1>
+          </div>
+
+          <div>
+            <h1>
+              {currentUser?.mobileVerified ? (
+                "Mobile number verified by Lodgeme"
+              ) : (
+                <button onClick={mobileOtp}>Verify Phone number</button>
+              )}{" "}
+            </h1>
           </div>
 
           <div className="dashboardbox">
@@ -61,7 +95,7 @@ const UserDashboard = () => {
                 <span>Upload your passport and verify</span>
               </div>
             </div>
-            <div className="dashboardbox-1">
+            <Link to="/edit-user-profile" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -76,7 +110,7 @@ const UserDashboard = () => {
               <div>
                 <span>Click here and edit your personal details</span>
               </div>
-            </div>
+            </Link>
             <Link to="/order-details" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />

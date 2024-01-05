@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../Button/Button";
 
 const SingleHouseImages = ({ data, setShowImages, showImages }) => {
-  //console.log(data[0].imgSrc);
+  // console.log(data?.map((d) => d));
 
   return (
     <div>
@@ -11,7 +11,7 @@ const SingleHouseImages = ({ data, setShowImages, showImages }) => {
           <img
             src={
               data
-                ? data[0].imgSrc
+                ? data[0]
                 : "https://www.ssn.no/build/images/temp/placeholder-house.5fe09041.png"
             }
             alt=""
@@ -24,7 +24,7 @@ const SingleHouseImages = ({ data, setShowImages, showImages }) => {
             <img
               src={
                 data
-                  ? data[1]?.imgSrc
+                  ? data[1]
                   : "https://www.ssn.no/build/images/temp/placeholder-house.5fe09041.png"
               }
               alt=""
@@ -35,7 +35,7 @@ const SingleHouseImages = ({ data, setShowImages, showImages }) => {
             <img
               src={
                 data
-                  ? data[2]?.imgSrc
+                  ? data[2]
                   : "https://www.ssn.no/build/images/temp/placeholder-house.5fe09041.png"
               }
               alt=""
@@ -46,7 +46,7 @@ const SingleHouseImages = ({ data, setShowImages, showImages }) => {
             <img
               src={
                 data
-                  ? data[3]?.imgSrc
+                  ? data[3]
                   : "https://www.ssn.no/build/images/temp/placeholder-house.5fe09041.png"
               }
               alt=""
@@ -57,7 +57,7 @@ const SingleHouseImages = ({ data, setShowImages, showImages }) => {
             <img
               src={
                 data
-                  ? data[4]?.imgSrc
+                  ? data[4]
                   : "https://www.ssn.no/build/images/temp/placeholder-house.5fe09041.png"
               }
               alt=""

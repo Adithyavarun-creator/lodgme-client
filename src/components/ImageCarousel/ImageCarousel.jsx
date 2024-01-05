@@ -11,8 +11,6 @@ const ImageCarousel = ({ showImages, setShowImages, images }) => {
     slidesToScroll: 1,
   };
 
-  console.log(images);
-
   return (
     <ImageCarouselStyles>
       <div className="closecarousel">
@@ -23,9 +21,9 @@ const ImageCarousel = ({ showImages, setShowImages, images }) => {
       </div>
 
       {images &&
-        images?.map((image) => (
-          <div key={image.id} className="imgbox">
-            <img className="img" src={image?.imgSrc} />
+        images?.map((image, i) => (
+          <div key={i} className="imgbox">
+            <img className="img" src={image} />
           </div>
         ))}
     </ImageCarouselStyles>

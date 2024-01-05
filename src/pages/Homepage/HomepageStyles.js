@@ -120,6 +120,23 @@ export const HomepageStyles = styled(motion.div)`
     }
   }
 
+  .homepage_header_content {
+    margin-top: 0;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      margin-top: 50px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 50px;
+    }
+  }
+
   .homepage_search_container {
     display: flex;
     flex-direction: row;
@@ -127,7 +144,7 @@ export const HomepageStyles = styled(motion.div)`
     height: 105px;
     background-color: white;
     z-index: 20;
-    width: 70%;
+    width: 40%;
     margin: 0 auto;
     border-radius: 50px;
     align-items: center;
@@ -141,19 +158,19 @@ export const HomepageStyles = styled(motion.div)`
     margin-top: 0;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      width: 90%;
+      width: 65%;
       gap: 20px;
       margin-top: 20px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      width: 98%;
+      width: 75%;
       padding: 5px;
       gap: 10px;
     }
 
     @media ${devices.smallTabs} {
-      height: 330px;
+      height: 250px;
       display: flex;
       flex-direction: column;
       gap: 7px;
@@ -162,12 +179,12 @@ export const HomepageStyles = styled(motion.div)`
     }
 
     @media ${devices.smallMobiles} {
-      height: 300px;
+      height: 250px;
       display: flex;
       flex-direction: column;
       gap: 5px;
       padding: 0;
-      width: 85%;
+      width: 75%;
     }
   }
 
@@ -305,7 +322,6 @@ export const HomepageStyles = styled(motion.div)`
     gap: 5px;
     justify-content: center;
     cursor: pointer;
-
 
     @media ${devices.bigLaptopsAndDesktops} {
       height: 40px;

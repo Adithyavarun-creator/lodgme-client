@@ -15,7 +15,11 @@ import {
   FaElevator,
   FaToiletPortable,
   FaArrowLeftLong,
+  FaCalendarCheck,
 } from "react-icons/fa6";
+import { BsEmojiHeartEyesFill } from "react-icons/bs";
+import { IoMdCloseCircle } from "react-icons/io";
+
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Spinner from "../../components/Spinner/Spinner";
 import Button from "../../components/Button/Button";
@@ -25,7 +29,12 @@ import {
   PiBowlFoodBold,
 } from "react-icons/pi";
 import { SiKeepassxc } from "react-icons/si";
-import { MdFavoriteBorder, MdBalcony, MdLocationPin } from "react-icons/md";
+import {
+  MdFavoriteBorder,
+  MdBalcony,
+  MdLocationPin,
+  MdEuroSymbol,
+} from "react-icons/md";
 import { IoBedSharp } from "react-icons/io5";
 import { PiArmchairFill } from "react-icons/pi";
 import Mapbox from "../../components/MapBox/MapBox";
@@ -50,6 +59,8 @@ import {
   setSelectedHouse,
   setStayingDays,
 } from "../../redux/user/userSlice";
+import moment from "moment";
+import toast, { Toaster } from "react-hot-toast";
 
 const SingleHousePage = () => {
   const { id } = useParams();
@@ -90,15 +101,24 @@ const SingleHousePage = () => {
   useEffect(() => {
     const fetchListing = async () => {
       const res = await axios.get(`${baseUrl}/api/get/${id}`);
-
-      setHousedata(res.data);
-      dispatch(setSelectedHouse(res.data));
-      setLat(res.data.mapLocation[0].lat);
-      setLng(res.data.mapLocation[0].lng);
+      setHousedata(res.data.listing);
+      dispatch(setSelectedHouse(res.data.listing));
+      const latitude = res.data.listing.mapLocation[0].lat;
+      setLat(latitude);
+      const longitude = res.data.listing.mapLocation[0].lng;
+      setLng(longitude);
     };
 
     fetchListing();
   }, [id]);
+
+  // console.log(availableFroms);
+
+  //console.log(houseData);
+  //console.log(range[0]?.startDate);
+  // console.log(range[0]?.endDate);
+
+  //console.log(lat, lng);
 
   const dateRef = useRef();
   const reviewRef = useRef();
@@ -231,17 +251,27 @@ const SingleHousePage = () => {
   dispatch(setBookingAmount(bookingAmount));
   dispatch(setStayingDays(diffInDays));
   dispatch(setNumberofPersons(noPersons));
-  console.log(noPersons.value);
+  //console.log(noPersons.value);
 
   const bookingPreviewbtn = () => {
-    // navigate(`/booking-preview/${houseData.title}/checkout-preview`);
+    if (moment(range[0].endDate).format() > houseData.availableTill) {
+      toast.error(
+        "You need to change the dates for this house, please look a bit above for the available dates"
+      );
+      return;
+    }
 
     navigate(
-      `/booking-preview?title=${houseData?.title}&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${range[0].endDate}&persons=${noPersons.value}`
+      `/booking-preview?title=${
+        houseData?.title
+      }&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${
+        range[0].endDate
+      }&persons=${noPersons.value ? noPersons.value : 1}`
     );
   };
 
-  // console.log(houseData.mapLocation[0].lat);
+  // console.log(moment(range[0].endDate).format(), "enddate");
+  // console.log(houseData.availableTill, "housedata");
 
   if (!id) {
     return <Spinner />;
@@ -258,7 +288,7 @@ const SingleHousePage = () => {
         </Helmet>
         <SingleHousePageStyles>
           <div className="">
-            <Button title="Back to Home" onClick={goBack} />
+            <Button title="Back to Search List" onClick={goBack} />
           </div>
           <div className="singlepagetitlebox">
             <div className="">
@@ -276,16 +306,17 @@ const SingleHousePage = () => {
                 <span className="ratingnumber">4.3</span>
               </div>
             </div>
+
             <div className="singlepagebookbox">
               <div>
                 <Button title="Book Now" onClick={onClick} />
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <span className="amenitieslisttext">
                   <MdFavoriteBorder className="share-icon" />
                 </span>
                 <span className="sharetext">Save</span>
-              </div>
+              </div> */}
               <div className="flex">
                 <span className="amenitieslisttext">
                   <PiShareFatFill className="share-icon" />
@@ -294,20 +325,29 @@ const SingleHousePage = () => {
               </div>
             </div>
           </div>
+          <div>
+            <span onClick={onClick} className="flex singlepagecalendardates">
+              <FaCalendarCheck />
+              &nbsp; Available from{" "}
+              {moment(houseData?.availableFrom).format(
+                "MMMM Do YYYY"
+              )} until {moment(houseData?.availableTill).format("MMMM Do YYYY")}
+            </span>
+          </div>
           {/* singlehouseimages */}
           <SingleHouseImages
-            data={data?.images}
+            data={houseData.houseImages}
             setShowImages={setShowImages}
             showImages={showImages}
           />
 
           {/* Image Carousel */}
-          {showImages && (
+          {showImages && houseData?.houseImages && (
             <div className="singlepagecarouselbox">
               <ImageCarousel
                 setShowImages={setShowImages}
                 showImages={showImages}
-                images={data?.images}
+                images={houseData?.houseImages}
               />
             </div>
           )}
@@ -317,22 +357,23 @@ const SingleHousePage = () => {
             <div className="singlepagehouseroomdetail">
               <PiArmchairFill />
               <span>
-                {houseData.livingRoom ? houseData.livingRoom : "No"} Living room
+                {houseData?.livingRoom ? houseData.livingRoom : "No"} Living
+                room
               </span>
             </div>
             <div className="singlepagehouseroomdetail">
               <IoBedSharp />
-              <span>{houseData.beds ? houseData.beds : "No"} Beds</span>
+              <span>{houseData?.beds ? houseData?.beds : "No"} Beds</span>
             </div>
             <div className="singlepagehouseroomdetail">
               <FaBath />
-              <span>{houseData.baths ? houseData.baths : "No"} Baths</span>
+              <span>{houseData?.baths ? houseData?.baths : "No"} Baths</span>
             </div>
             <div className="singlepagehouseroomdetail">
               <FaUsers />
 
               <span>
-                {houseData.noOfpersons ? houseData.noOfpersons : "No"} Visitors
+                {houseData.noOfpersons ? houseData?.noOfpersons : "No"} Visitors
                 Allowed
               </span>
             </div>
@@ -363,7 +404,7 @@ const SingleHousePage = () => {
 
           <div>
             <h1 className="amenities-listheading">
-              TITRE DE L’ANNONCE – STUDIO/APPARTEMENT/VILLA/MAISON
+              TITRE DE L’ANNONCE – {houseData?.type}
             </h1>
           </div>
 
@@ -402,77 +443,32 @@ const SingleHousePage = () => {
                     Composition du logement
                   </h1>
                 </div>
-                <div className="amenities-singlebox">
-                  <PiBowlFoodBold className="amenities-icon" />
-                  <span className="amenitieslisttext">Cuisine américaine</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <MdBalcony className="amenities-icon" />
-                  <span className="amenitieslisttext">Terrasse</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <FaKitchenSet className="amenities-icon" />
-                  <span className="amenitieslisttext">1 salle d'eau</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <FaToilet className="amenities-icon" />
-
-                  <span className="amenitieslisttext">1 wc</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <IoBedSharp className="amenities-icon" />
-                  <span className="amenitieslisttext">1 lit(s) double</span>
-                </div>
+                {houseData?.amenitiesIncluded?.map((amenity, i) => (
+                  <div className="amenities-singlebox" key={i}>
+                    <BsEmojiHeartEyesFill className="amenities-icon" />
+                    <span className="amenitieslisttext">{amenity}</span>
+                  </div>
+                ))}
               </div>
 
               <div className="amenities-list">
                 <div>
                   <h1 className="amenities-listheading">Prestations</h1>
                 </div>
-                <div className="amenities-singlebox">
-                  <FaTreeCity className="amenities-icon" />
-                  <span className="amenitieslisttext">Wifi</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <FaWifi className="amenities-icon" />
-                  <span className="amenitieslisttext">Télévision</span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <MdOutlineSmokeFree className="amenities-icon" />
-                  <span className="amenitieslisttext">
-                    De préférence non fumeur
-                  </span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <FaKitchenSet className="amenities-icon" />
-                  <span className="amenitieslisttext">
-                    Appareils de cuisson
-                  </span>
-                </div>
-
-                <div className="amenities-singlebox">
-                  <BiSolidBlanket className="amenities-icon" />
-                  <span className="amenitieslisttext">Linge fourni</span>
-                </div>
-                <div className="amenities-singlebox">
-                  <SiKeepassxc className="amenities-icon" />
-                  <span className="amenitieslisttext">Ménage possible</span>
-                </div>
+                {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
+                  <div className="amenities-singlebox" key={i}>
+                    <IoMdCloseCircle className="amenities-icon" />
+                    <span className="amenitieslisttext">{amenity}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Map Location Pin  */}
-          <div className="singlepagemapbox" ref={mapRef}>
+          {/* <div className="singlepagemapbox" ref={mapRef}>
             <Mapbox lat={lat} lng={lng} />
-          </div>
+          </div> */}
 
           {/* review box */}
           <div className="reviewandbookbox">
@@ -507,12 +503,7 @@ const SingleHousePage = () => {
                   </div>
                   <div>
                     <article className="singlepagearticlecontent">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cumque omnis ex cupiditate animi neque. Rem, consequatur
-                      accusantium quis soluta voluptates excepturi perferendis
-                      eaque laboriosam temporibus? Qui officiis suscipit
-                      assumenda molestias facilis sit consequatur aspernatur
-                      nostrum.
+                      {houseData?.description}
                     </article>
                   </div>
                 </div>
@@ -587,14 +578,21 @@ const SingleHousePage = () => {
               </div>
             </div>
             <div className="reservation-card" ref={dateRef}>
-              <div>
-                <h1 className="singlepagereviewheading">
-                  EUR
+              <div className="reservationcardcontent">
+                <h1 className="singlepagereviewheading flex">
+                  <MdEuroSymbol className="amenities-icon" />
                   {houseData.pricePerNight
                     ? houseData.pricePerNight
                     : "On talks"}
                   &nbsp;per day
                 </h1>
+                <span className="reservation-available">
+                  <FaCalendarCheck />
+                  &nbsp; Available only from{" "}
+                  {moment(houseData?.availableFrom).format("MMMM Do YYYY")}{" "}
+                  until{" "}
+                  {moment(houseData?.availableTill).format("MMMM Do YYYY")}
+                </span>
               </div>
               <div className="">
                 <div className="date-calendar-box">
@@ -739,6 +737,7 @@ const SingleHousePage = () => {
               </div>
             </div>
           </div>
+          <Toaster position="top-center" reverseOrder={false} />
         </SingleHousePageStyles>
       </HelmetProvider>
     </>

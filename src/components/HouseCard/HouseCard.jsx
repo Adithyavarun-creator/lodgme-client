@@ -12,7 +12,7 @@ import moment from "moment";
 
 const HouseCard = ({ houseCards, title }) => {
   const { t } = useTranslation();
-  console.log(houseCards);
+  //console.log(houseCards);
 
   const settings = {
     dots: true,

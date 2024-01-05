@@ -2,6 +2,9 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { AddListingStyles } from "./AddListingStyles";
 
 import { DateRangePicker } from "react-date-range";
+import { DatePicker } from "antd";
+import { differenceInDays } from "date-fns";
+
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { addDays } from "date-fns";
@@ -31,6 +34,8 @@ import { app } from "../../firebase/firebase";
 
 const AddListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const { RangePicker } = DatePicker;
+
   const [address, setAddress] = useState("");
   const [coordinates, setCoordiantes] = useState({
     lat: null,
@@ -233,27 +238,6 @@ const AddListingPage = () => {
 
     try {
       setLoading(true);
-      // const res = await axios.post(`${baseUrl}/api/create-new-listing`, {
-      //   title,
-      //   mapLocation: coordinates,
-      //   houseAddress: address,
-      //   description,
-      //   type: houseType,
-      //   houseImages: formData.imageUrls,
-      //   beds,
-      //   facilities: facilities,
-      //   baths,
-      //   livingRoom,
-      //   noOfpersons,
-      //   amenitiesIncluded: amentitiesinc,
-      //   amenitiesNotIncluded: amentitiesnotinc,
-      //   //publishedUser: user,
-      //   postedBy: currentUser,
-      //   pricePerNight: housePrice,
-      //   locatedCountry: value.label,
-      //   availableFrom: range[0].startDate,
-      //   availableTill: range[0].endDate,
-      // });
       await fetch(`${baseUrl}/api/create-new-listing`, {
         method: "POST",
         headers: {
@@ -274,7 +258,6 @@ const AddListingPage = () => {
           noOfpersons,
           amenitiesIncluded: amentitiesinc,
           amenitiesNotIncluded: amentitiesnotinc,
-          //publishedUser: user,
           postedBy: currentUser,
           pricePerNight: housePrice,
           locatedCountry: value.label,
@@ -352,7 +335,6 @@ const AddListingPage = () => {
                 **
               </span>
             </div>
-
             <div className="forminputs">
               <label htmlFor="dates">
                 Select Available dates for your house*
@@ -370,7 +352,6 @@ const AddListingPage = () => {
             {open && (
               <div className="datepicker">
                 <DateRangePicker
-                  // className="date_range"
                   onChange={(item) => {
                     setRange([item.selection]);
                     handleSelect(item);

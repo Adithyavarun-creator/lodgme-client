@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLocationDot, FaBath } from "react-icons/fa6";
+import { FaLocationDot, FaBath, FaCalendarCheck } from "react-icons/fa6";
 import { IoBedSharp, IoPricetags } from "react-icons/io5";
 import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
 import { PiArmchairFill } from "react-icons/pi";
@@ -8,20 +8,36 @@ import { Link } from "react-router-dom";
 import { SearchPageCardStyles } from "./SearchPageCardStyles";
 import { useSelector } from "react-redux";
 import { FiEdit } from "react-icons/fi";
+import moment from "moment";
+import { FaStar } from "react-icons/fa";
 
 const SearchPageCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
+
+  // console.log(res);
 
   return (
     <>
       <SearchPageCardStyles>
         <div className="searchresultsection">
-          <div>
-            <h2>{res.title} </h2>
+          <div className="flex">
+            <h2>{res.title} </h2>&nbsp;&nbsp;
+            <span className="searchratingbox flex">
+              <FaStar className="searchpriceicon" />
+              4.3
+            </span>
           </div>
           <div className="searchpricebox">
             <MdEuroSymbol className="searchpriceicon" />
             <span className="searchhouseamount">{res.pricePerNight}/night</span>
+          </div>
+          <div className="searchpricebox">
+            <FaCalendarCheck className="searchpriceicon" />
+            &nbsp;
+            <span className="searchhouseamount">
+              {moment(res.availableFrom).format("LL")} until{" "}
+              {moment(res.availableTill).format("LL")}
+            </span>
           </div>
           <div className="searchpricetag">
             <IoPricetags className="searchpricetagicon" />

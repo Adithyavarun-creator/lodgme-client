@@ -1,57 +1,105 @@
 import styled from "styled-components";
 import { devices } from "../../theme/breakpoints";
 
-export const SearchPageCardStyles = styled.div`
+export const SearchFiltersPageStyles = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 60px;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
+  gap: 60px;
+  padding-left: 60px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 60px;
 
   @media ${devices.bigLaptopsAndDesktops} {
+    gap: 40px;
   }
 
   @media ${devices.tabletsAndIpads} {
-    margin-top: 50px;
+    gap: 30px;
+
+    flex-direction: column;
   }
   @media ${devices.smallTabs} {
-    margin-top: 60px;
+    gap: 25px;
+    flex-direction: column;
   }
 
   @media ${devices.smallMobiles} {
+    gap: 25px;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .search-box {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    height: fit-content;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .search-resultsbox {
+    display: flex;
+    flex: 3;
+    padding: 10px;
+    flex-direction: column;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 5px;
+    }
+  }
+
+  .searchresultbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 60px;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      margin-top: 50px;
+    }
+    @media ${devices.smallTabs} {
+      margin-top: 60px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 60px;
+    }
   }
 
   h2 {
     font-size: 22px;
     font-weight: bolder;
-    @media ${devices.bigLaptopsAndDesktops} {
-    }
-
-    @media ${devices.tabletsAndIpads} {
-      font-size: 18px;
-    }
-    @media ${devices.smallTabs} {
-      font-size: 14px;
-    }
-
-    @media ${devices.smallMobiles} {
-      font-size: 12px;
-    }
-  }
-
-  .searchratingbox {
-    font-size: 18px;
-    color: #fff;
-    background-color: ${({ theme }) => theme.colors.primaryColor};
-    padding: 4px;
-    font-weight: bolder;
-    border-radius: 10px;
-
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
@@ -557,38 +605,22 @@ export const SearchPageCardStyles = styled.div`
     }
   }
 
-  .editdelicons {
-    position: absolute;
-    top: -30px;
-    right: 0;
+  .searchboxstyles {
     display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .searchuseredit {
-    /* position: absolute;
-    top: -20px;
-    right: 0; */
-    padding: 7px;
+    flex: 1;
+    gap: 10px;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.primaryColor};
-    border-radius: 5px;
-    border: none;
+    height: fit-content;
   }
 
-  .searchediticon {
-    height: 30px;
-    width: 30px;
-    color: #fff;
-  }
-
-  .searchuserdelete {
-    padding: 7px;
-    background-color: ${({ theme }) => theme.colors.primaryColor};
-    border-radius: 5px;
-    border: none;
+  .searchcontentbox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -599,14 +631,226 @@ export const SearchPageCardStyles = styled.div`
     }
 
     @media ${devices.smallMobiles} {
-      padding: 3px;
     }
   }
 
-  .searchdeleteicon {
+  .daterangeposition {
+    position: absolute;
+    top: -20px;
+    left: 280px;
+    z-index: 30;
+    -webkit-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    -moz-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    background-color: #fff;
+  }
+
+  .closedateicon {
     height: 30px;
     width: 30px;
+    padding: 5px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
     color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .labelcenter {
+    text-align: center !important;
+  }
+
+  .datewidth {
+    width: 100% !important;
+  }
+
+  label {
+    font-size: 15px;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center !important;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+
+  span {
+    /* color: #fff; */
+    font-size: 14px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
+  }
+
+  .bedbathinputbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+  }
+
+  .searchdatebox {
+    position: absolute;
+    left: 350px;
+    z-index: 20;
+  }
+
+  .datepicker {
+    color: black;
+  }
+
+  .bedbathlabel {
+    text-align: center;
+  }
+
+  .bedbathinput {
+    height: 40px;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    offset: none;
+    border: 1px solid #fff;
+    cursor: pointer;
+    text-align: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 30px;
+      font-size: 14px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 30px;
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      height: 20px;
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 20px;
+      font-size: 8px;
+    }
+  }
+
+  .bedbathinput:focus {
+    outline: none;
+  }
+
+  .bedbathinput::placeholder {
+    font-size: 15px;
+    text-align: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+
+  .bedbathselect {
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    offset: none;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  option {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    offset: none;
+    border: 1px solid #fff;
+    cursor: pointer;
+    text-align: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 30px;
+      font-size: 14px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 30px;
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      height: 20px;
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 20px;
+      font-size: 8px;
+    }
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input::placeholder {
+    font-size: 15px;
+    text-align: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+
+  .inputcheckbox {
+    height: 20px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -614,11 +858,147 @@ export const SearchPageCardStyles = styled.div`
     @media ${devices.tabletsAndIpads} {
     }
     @media ${devices.smallTabs} {
+      height: 15px;
     }
 
     @media ${devices.smallMobiles} {
       height: 10px;
-      width: 10px;
     }
+  }
+
+  .searchlocationbox {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .inputcheckboxsection {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-between;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .searchinputcheckbox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .searchinputcheck {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .searchfilterbtnbox {
+    display: flex;
+    justify-content: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .searchfilterbtn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    outline: none;
+    offset: none;
+    cursor: pointer;
+    border: 1px solid #fff;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      padding: 10px 20px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      padding: 8px 12px;
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 6px 10px;
+      font-size: 8px;
+    }
+  }
+
+  .inputcheckboxsection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-checkbox-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+  }
+
+  input[type="checkbox"] {
+    accent-color: ${({ theme }) => theme.colors.primaryColor};
+    width: 20px;
+    height: 20px;
+  }
+
+  .span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+
+  select {
+    font-size: 16px;
+    border: none;
+    offset: none;
+    text-align: center;
+    border-radius: 10px;
+    height: 30px;
+    padding: 4px;
+    outline-style: none;
+    box-shadow: none;
+    border-color: transparent;
+    overflow: hidden;
+
+  }
+
+  option {
+    font-size: 16px;
   }
 `;

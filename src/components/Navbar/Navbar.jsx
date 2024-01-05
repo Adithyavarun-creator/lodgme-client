@@ -91,6 +91,16 @@ const Navbar = () => {
 
           {currentUser && (
             <div>
+              <img
+                src={currentUser.profilePic ? currentUser.profilePic : ""}
+                alt="user-pic"
+                className="navbar-profileimage"
+              />
+            </div>
+          )}
+
+          {currentUser && (
+            <div>
               <Link
                 to="/dashboard-user"
                 className="navbutton linkStyle"

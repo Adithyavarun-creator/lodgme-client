@@ -91,9 +91,6 @@ const RegisterPage = () => {
           icon: "👏",
         }
       );
-      // setTimeout(() => {
-      //   navigate("/user-sign-in");
-      // }, 3000);
     } catch (error) {
       setLoading(false);
       setError(error.message);

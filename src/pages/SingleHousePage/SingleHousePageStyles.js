@@ -364,10 +364,10 @@ export const SingleHousePageStyles = styled.section`
   }
 
   .singlepagetitletext {
-    font-size: 18px;
+    font-size: 22px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      font-size: 18px;
+      font-size: 20px;
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -609,6 +609,32 @@ export const SingleHousePageStyles = styled.section`
     }
     @media ${devices.smallMobiles} {
       font-size: 7px;
+    }
+  }
+
+  .singlepagecalendardates {
+    padding: 6px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    font-size: 20px;
+    width: max-content;
+    border-radius: 5px;
+    border: none;
+    font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+    @media ${devices.tabletsAndIpads} {
+      padding: 4px;
+      font-size: 16px;
+    }
+    @media ${devices.smallTabs} {
+      padding: 3px;
+      font-size: 12px;
+    }
+    @media ${devices.smallMobiles} {
+      padding: 3px;
+      font-size: 9px;
     }
   }
 
@@ -1028,6 +1054,45 @@ export const SingleHousePageStyles = styled.section`
     }
   }
 
+  .reservationcardcontent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 13px;
+    align-items: center;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .reservation-available {
+    font-size: 14px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    padding: 5px;
+    font-weight: bolder;
+    width: max-content;
+    border-radius: 10px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
   .reservation-card-title {
     text-align: center;
     font-size: 16px;
@@ -1172,6 +1237,9 @@ export const SingleHousePageStyles = styled.section`
     text-align: center;
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media ${devices.bigLaptopsAndDesktops} {
       font-size: 18px;
