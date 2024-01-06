@@ -168,7 +168,7 @@ const Homepage = () => {
     );
   };
 
-  console.log(date);
+  // console.log(date);
 
   return (
     <HomepageStyles
@@ -234,8 +234,6 @@ const Homepage = () => {
             />
           </div> */}
 
-    
-
           {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("persons")}</span>
@@ -284,8 +282,6 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-
 
 /**
        <div className="datebox_range" ref={refOne}>

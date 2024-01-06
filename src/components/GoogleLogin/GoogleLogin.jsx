@@ -17,6 +17,7 @@ const GoogleLogin = () => {
       //   const result = await signInWithPopup(auth, provider);
       const response = await signInWithGooglePopup();
       console.log(response.user);
+      dispatch(signInSuccess(response.user));
 
       //console.log(result);
       const res = await fetch(`${baseUrl}/api/googlesignin`, {
@@ -37,7 +38,7 @@ const GoogleLogin = () => {
       toast("You are logging in to LodgeMe community shortly!", {
         icon: "👏",
       });
-      navigate("/dashboard-user");
+      navigate("/dashboard-google-user");
     } catch (error) {
       console.log(error);
       dispatch(signInFailure(error));

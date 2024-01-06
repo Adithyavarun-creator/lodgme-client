@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../baseUrl/url";
-import { RegisterPageStyles } from "./RegisterPageStyles";
+import { RegisterUserStyles } from "./RegisterUserStyles";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -9,7 +9,7 @@ import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-const RegisterPage = () => {
+const RegisterUser = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -93,6 +93,7 @@ const RegisterPage = () => {
           icon: "👏",
         }
       );
+      // localStorage.removeItem("token");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -107,7 +108,7 @@ const RegisterPage = () => {
           <meta />
           <title>Register | LodgeMe</title>
         </Helmet>
-        <RegisterPageStyles>
+        <RegisterUserStyles>
           <div>
             <h1>LodgeMe Customer Registration Page</h1>
           </div>
@@ -156,6 +157,11 @@ const RegisterPage = () => {
                 <label className="labeltext" htmlFor="contactnumber">
                   Contact Number
                 </label>
+                <PhoneInput
+                  placeholder="Enter phone number"
+                  value={contactnumber}
+                  onChange={setContactnumber}
+                />
                 {/* <input
                   name="contactnumber"
                   type="tel"
@@ -165,11 +171,6 @@ const RegisterPage = () => {
                   placeholder="+33 123 2456 78"
                   required
                 /> */}
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  value={contactnumber}
-                  onChange={setContactnumber}
-                />
               </div>
               <div className="formlabel">
                 <label className="labeltext" htmlFor="email">
@@ -267,10 +268,10 @@ const RegisterPage = () => {
             )}
           </div>
           <Toaster position="top-center" reverseOrder={false} />
-        </RegisterPageStyles>
+        </RegisterUserStyles>
       </HelmetProvider>
     </>
   );
 };
 
-export default RegisterPage;
+export default RegisterUser;

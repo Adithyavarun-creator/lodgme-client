@@ -12,6 +12,8 @@ import { FiEdit } from "react-icons/fi";
 const EditCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
+  // console.log(res);
+
   return (
     <>
       <EditCardStyles>
@@ -43,9 +45,12 @@ const EditCard = ({ res }) => {
                 />
               </div>
 
-              <div className="searchuseredit">
+              <Link
+                to={`/edit-listing/${res._id}`}
+                className="linkStyle searchuseredit"
+              >
                 <FiEdit title="Edit your Listing" className="searchediticon" />
-              </div>
+              </Link>
             </div>
           ) : (
             ""

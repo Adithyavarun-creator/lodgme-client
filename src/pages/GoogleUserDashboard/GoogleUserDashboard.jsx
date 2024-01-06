@@ -11,11 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
 import { baseUrl } from "../../baseUrl/url";
 
-const UserDashboard = () => {
+const GoogleUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  //console.log(currentUser);
+  console.log(currentUser);
 
   const mobileOtp = () => {
     // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
@@ -39,24 +39,14 @@ const UserDashboard = () => {
         </Helmet>
         <UserDashboardStyles>
           <div>
-            <h1>{currentUser?.username} Dashboard</h1>
+            <h1>{currentUser?.user?.username} Dashboard</h1>
           </div>
 
           <div>
             <h1>
-              {currentUser?.verified
-                ? "Email verified by Lodgeme"
-                : "Email not verified"}
-            </h1>
-          </div>
-
-          <div>
-            <h1>
-              {currentUser?.mobileVerified ? (
-                "Mobile number verified by Lodgeme"
-              ) : (
-                <button onClick={mobileOtp}>Verify Phone number</button>
-              )}{" "}
+              {currentUser?.provider === "google"
+                ? "If you have planned to add a listing please register as a user and proceed further"
+                : ""}{" "}
             </h1>
           </div>
 
@@ -79,7 +69,7 @@ const UserDashboard = () => {
                 <span>Browse houses and book it</span>
               </div>
             </Link>
-            <div className="dashboardbox-1">
+            {/* <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -94,40 +84,54 @@ const UserDashboard = () => {
               <div>
                 <span>Upload your passport and verify</span>
               </div>
-            </div>
-            <Link to="/edit-user-profile" className="linkStyle dashboardbox-1">
-              <div className="dashboard-logobox">
-                <img src={Logo} className="dashboard-logo" alt="" />
-              </div>
-              <div className="flexbox">
-                <div className="">
-                  <h2 className="dashboard-maintitle">Edit your Profile</h2>
+            </div> */}
+            {currentUser?.provider === "google" ? (
+              ""
+            ) : (
+              <Link
+                to="/edit-user-profile"
+                className="linkStyle dashboardbox-1"
+              >
+                <div className="dashboard-logobox">
+                  <img src={Logo} className="dashboard-logo" alt="" />
                 </div>
-                <div className="dashboard-mainlink">
-                  <FaUserEdit className="dashboard-icon" />
+                <div className="flexbox">
+                  <div className="">
+                    <h2 className="dashboard-maintitle">Edit your Profile</h2>
+                  </div>
+                  <div className="dashboard-mainlink">
+                    <FaUserEdit className="dashboard-icon" />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <span>Click here and edit your personal details</span>
-              </div>
-            </Link>
-            <Link to="/order-details" className="linkStyle dashboardbox-1">
-              <div className="dashboard-logobox">
-                <img src={Logo} className="dashboard-logo" alt="" />
-              </div>
-              <div className="flexbox">
-                <div className="">
-                  <h2 className="dashboard-maintitle">Bookings</h2>
+                <div>
+                  <span>Click here and edit your personal details</span>
                 </div>
-                <div className="dashboard-mainlink">
-                  <BsCalendar2HeartFill className="dashboard-icon" />
+              </Link>
+            )}
+            {currentUser?.provider === "google" ? (
+              <Link
+                to="/register-social-user"
+                className="linkStyle dashboardbox-1"
+              >
+                <div className="dashboard-logobox">
+                  <img src={Logo} className="dashboard-logo" alt="" />
                 </div>
-              </div>
-              <div>
-                <span>Your previous and upcoming bookings</span>
-              </div>
-            </Link>
-            <Link to="/user-listings" className="linkStyle dashboardbox-1">
+                <div className="flexbox">
+                  <div className="">
+                    <h2 className="dashboard-maintitle">Register as a user</h2>
+                  </div>
+                  <div className="dashboard-mainlink">
+                    <BsCalendar2HeartFill className="dashboard-icon" />
+                  </div>
+                </div>
+                <div>
+                  <span>Regsiter as a user so that we can verify you</span>
+                </div>
+              </Link>
+            ) : (
+              ""
+            )}
+            {/* <Link to="/user-listings" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -142,8 +146,8 @@ const UserDashboard = () => {
               <div>
                 <span>Click here and post your houses or book your houses</span>
               </div>
-            </Link>
-            <Link to="/add-new-listing" className="linkStyle dashboardbox-1">
+            </Link> */}
+            {/* <Link to="/add-new-listing" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
               </div>
@@ -158,7 +162,7 @@ const UserDashboard = () => {
               <div>
                 <span>Post your house listing to public</span>
               </div>
-            </Link>
+            </Link> */}
             <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -184,4 +188,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default GoogleUserDashboard;

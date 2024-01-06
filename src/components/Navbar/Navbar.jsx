@@ -55,6 +55,8 @@ const Navbar = () => {
     }
   };
 
+  // console.log(currentUser?.user?.username);
+
   return (
     <>
       <NavbarStyles
@@ -92,7 +94,13 @@ const Navbar = () => {
           {currentUser && (
             <div>
               <img
-                src={currentUser.profilePic ? currentUser.profilePic : ""}
+                src={
+                  currentUser.profilePic
+                    ? currentUser.profilePic
+                    : "" || currentUser?.provider === "google"
+                    ? currentUser?.user?.avatar
+                    : ""
+                }
                 alt="user-pic"
                 className="navbar-profileimage"
               />
@@ -102,11 +110,20 @@ const Navbar = () => {
           {currentUser && (
             <div>
               <Link
-                to="/dashboard-user"
+                to={
+                  (currentUser.username && `${`/dashboard-user`}`) ||
+                  (currentUser?.provider === "google" &&
+                    `${"/dashboard-google-user"}`)
+                }
                 className="navbutton linkStyle"
                 title="Click to manage your LodgeMe account"
               >
-                {currentUser ? `${currentUser.username} Dashboard` : ""}
+                {currentUser.username
+                  ? currentUser.username
+                  : "" || currentUser?.provider === "google"
+                  ? currentUser?.user?.username
+                  : ""}{" "}
+                Dashboard
               </Link>
             </div>
           )}

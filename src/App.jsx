@@ -20,6 +20,9 @@ import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import Error from "./components/Error/Error";
 import SearchFiltersPage from "./pages/SearchFiltersPage/SearchFiltersPage";
 import OTPPage from "./pages/OTPPage";
+import GoogleUserDashboard from "./pages/GoogleUserDashboard/GoogleUserDashboard";
+import RegisterUser from "./pages/RegisterUser/RegisterUser";
+import EditListingPage from "./pages/EditListing/EditListingPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -128,6 +131,14 @@ function App() {
                 path="/edit-user-profile"
                 element={<LazyEditProfilePageComponent />}
               />
+              <Route
+                path="/dashboard-google-user"
+                element={<GoogleUserDashboard />}
+              />
+
+              <Route path="/register-social-user" element={<RegisterUser />} />
+
+              <Route path="/edit-listing/:id" element={<EditListingPage />} />
 
               {/* <Route
                 path="/add-new-listing"
