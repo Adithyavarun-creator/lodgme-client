@@ -48,7 +48,9 @@ const CheckoutPage = () => {
       })
       .then((res) => {
         //save
-        saveOrder();
+
+        currentUser.provider === "google" ? saveGoogleOrder() : saveOrder();
+
         if (res.data.url) {
           window.location.href = res.data.url;
         }
@@ -56,7 +58,7 @@ const CheckoutPage = () => {
       .catch((err) => console.log(err.message));
   };
 
-  console.log(selectedHouse);
+  //console.log(selectedHouse);
 
   const saveOrder = async () => {
     const response = await fetch(`${baseUrl}/api/create-order`, {
@@ -88,6 +90,36 @@ const CheckoutPage = () => {
     //console.log(response);
   };
 
+  const saveGoogleOrder = async () => {
+    const response = await fetch(`${baseUrl}/api/create-google-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // <---------- HERE
+      },
+      body: JSON.stringify({
+        billingName: name,
+        billingEmail: email,
+        billingPhonenumber: number,
+        billingAddress: address,
+        totalPrice: bookingAmount,
+        nopersons: nopersons,
+        startDate,
+        endDate,
+        country: selectedHouse.country,
+        beds: selectedHouse.beds,
+        baths: selectedHouse.baths,
+        livingRoom: selectedHouse.livingRoom,
+        stayingDays,
+        listingBooked: selectedHouse.title,
+        houseDetails: selectedHouse,
+        bookedBy: currentUser.user,
+        paymentMode: "Stripe",
+      }),
+    });
+    //console.log(response);
+  };
+
   const checkOutwithPayPal = async () => {};
 
   return (
@@ -105,9 +137,9 @@ const CheckoutPage = () => {
             &nbsp;
             <FaCcMastercard />
           </button>
-          <button className="flex checkoutbtn" onClick={checkOutwithPayPal}>
+          {/* <button className="flex checkoutbtn" onClick={checkOutwithPayPal}>
             PayPal &nbsp; <FaPaypal />
-          </button>
+          </button> */}
 
           <button className="flex checkoutbtn">Future Payments</button>
         </div>

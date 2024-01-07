@@ -54,7 +54,9 @@ const OrdersPage = () => {
                 <div className="ordercard" key={order._id}>
                   <div className="ordercard-1">
                     <div className="ordernumber">
-                      <h2 className="ordercardid">OrderId {order._id}</h2>
+                      <h2 className="ordercardid">
+                        OrderId {`LODGEME${order._id}`}
+                      </h2>
                     </div>
                     <Link
                       title="View House"

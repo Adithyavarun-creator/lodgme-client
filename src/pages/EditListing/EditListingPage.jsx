@@ -32,6 +32,7 @@ import {
 } from "firebase/storage";
 import { app } from "../../firebase/firebase";
 import { useParams } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const EditListingPage = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -243,11 +244,13 @@ const EditListingPage = () => {
           // availableTill: range[0].endDate,
         }),
       });
+      toast.success("Inputs are updated!!!");
       // alert("house details saved");
       console.log(res?.data);
     } catch (error) {
       setLoading(false);
       console.log(error.message);
+      toast.error("Inputs are updated!!!");
     }
   };
   // const data = await res.json();
@@ -634,6 +637,7 @@ const EditListingPage = () => {
           <div>
             <Button onClick={onUpdateListing} title="Update" />
           </div>
+          <Toaster position="top-center" reverseOrder={false} />
         </EditListingStyles>
       </HelmetProvider>
     </>

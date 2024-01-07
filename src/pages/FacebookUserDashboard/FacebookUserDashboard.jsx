@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { UserDashboardStyles } from "./UserDashboardStyle";
+import { FacebookUserDashboardStyles } from "./FacebookUserDashboardStyles";
 import Logo from "../../assets/lodgemeblacklogo.png";
 import { HiIdentification } from "react-icons/hi2";
 import { FaUserEdit } from "react-icons/fa";
@@ -11,11 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
 import { baseUrl } from "../../baseUrl/url";
 
-const GoogleUserDashboard = () => {
+const FacebookUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  console.log(currentUser.user);
+  console.log(currentUser);
 
   const mobileOtp = () => {
     // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
@@ -35,16 +35,16 @@ const GoogleUserDashboard = () => {
       <HelmetProvider>
         <Helmet>
           <meta />
-          <title>Dashboard | Lodgeme</title>
+          <title>Facebook Dashboard | Lodgeme</title>
         </Helmet>
-        <UserDashboardStyles>
+        <FacebookUserDashboardStyles>
           <div>
-            <h1>{currentUser?.user?.username} Dashboard</h1>
+            <h1>{currentUser?.username} Dashboard</h1>
           </div>
 
           <div>
             <h1>
-              {currentUser?.provider === "google"
+              {currentUser?.provider === "facebook"
                 ? "If you have planned to add a listing please register as a user and proceed further"
                 : ""}{" "}
             </h1>
@@ -85,7 +85,7 @@ const GoogleUserDashboard = () => {
                 <span>Upload your passport and verify</span>
               </div>
             </div> */}
-            {currentUser?.provider === "google" ? (
+            {currentUser?.provider === "facebook" ? (
               ""
             ) : (
               <Link
@@ -182,10 +182,10 @@ const GoogleUserDashboard = () => {
               </div>
             </div>
           </div>
-        </UserDashboardStyles>
+        </FacebookUserDashboardStyles>
       </HelmetProvider>
     </>
   );
 };
 
-export default GoogleUserDashboard;
+export default FacebookUserDashboard;

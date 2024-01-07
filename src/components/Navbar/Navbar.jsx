@@ -99,6 +99,8 @@ const Navbar = () => {
                     ? currentUser.profilePic
                     : "" || currentUser?.provider === "google"
                     ? currentUser?.user?.avatar
+                    : "" || currentUser?.provider === "facebook"
+                    ? "https://i.stack.imgur.com/l60Hf.png"
                     : ""
                 }
                 alt="user-pic"

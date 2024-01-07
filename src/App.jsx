@@ -23,6 +23,7 @@ import OTPPage from "./pages/OTPPage";
 import GoogleUserDashboard from "./pages/GoogleUserDashboard/GoogleUserDashboard";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
 import EditListingPage from "./pages/EditListing/EditListingPage";
+import FacebookUserDashboard from "./pages/FacebookUserDashboard/FacebookUserDashboard";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -134,6 +135,11 @@ function App() {
               <Route
                 path="/dashboard-google-user"
                 element={<GoogleUserDashboard />}
+              />
+
+              <Route
+                path="/dashboard-facebook-user"
+                element={<FacebookUserDashboard />}
               />
 
               <Route path="/register-social-user" element={<RegisterUser />} />

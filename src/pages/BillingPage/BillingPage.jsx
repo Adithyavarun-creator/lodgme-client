@@ -22,9 +22,8 @@ const BillingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { stayDays, fromdate, todate, persons } = queryString.parse(
-      window.location.search
-    );
+    const { stayDays, fromdate, todate, persons, currentUser } =
+      queryString.parse(window.location.search);
     setStartdate(fromdate);
     setEnddate(todate);
     setNopersons(persons);

@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import SuccessImage from "../../assets/success.jpg";
 
 const Success = () => {
-  const { bookingAmount, selectedHouse, stayingDays } = useSelector(
-    (state) => state.user
-  );
+  const { bookingAmount, selectedHouse, stayingDays, currentUser } =
+    useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -24,20 +23,28 @@ const Success = () => {
   };
 
   return (
-    <SuccessStyles>
-      <div>
-        <h1>Your transaction is success !!!</h1>
-      </div>
-      <div>
-        <h3>We received your payment</h3>
-      </div>
-      <div>
-        <h3>Hold on ! We are taking you to Orders Page</h3>
-      </div>
-      <div>
-        <img src={SuccessImage} className="successimg" alt="" />
-      </div>
-    </SuccessStyles>
+    <>
+      <SuccessStyles>
+        {currentUser ? (
+          <>
+            <div>
+              <h1>Your transaction is success !!!</h1>
+            </div>
+            <div>
+              <h3>We received your payment</h3>
+            </div>
+            <div>
+              <h3>Hold on ! We are taking you to Orders Page</h3>
+            </div>
+            <div>
+              <img src={SuccessImage} className="successimg" alt="" />
+            </div>
+          </>
+        ) : (
+          "Login"
+        )}
+      </SuccessStyles>
+    </>
   );
 };
 

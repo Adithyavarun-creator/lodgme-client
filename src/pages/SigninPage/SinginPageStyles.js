@@ -230,6 +230,7 @@ export const SinginPageStyles = styled.div`
     height: 30px;
     width: 100%;
     cursor: pointer;
+    border: none;
 
     @media ${devices.bigLaptopsAndDesktops} {
       height: 30px;

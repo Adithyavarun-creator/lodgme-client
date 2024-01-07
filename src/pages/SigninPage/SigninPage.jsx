@@ -168,9 +168,9 @@ const SigninPage = () => {
                   <GoogleLogin />
                 </div>
 
-                {/* <div>
+                <div>
                   <FacebookSignin />
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
