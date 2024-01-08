@@ -13,22 +13,8 @@ import { baseUrl } from "../../baseUrl/url";
 
 const FacebookUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
   console.log(currentUser);
-
-  const mobileOtp = () => {
-    // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify({ formData, homeAddress: address }),
-    // });
-    // const data = await res.json();
-    // console.log(data);
-    navigate("/otp-page");
-  };
 
   return (
     <>
@@ -51,6 +37,25 @@ const FacebookUserDashboard = () => {
           </div>
 
           <div className="dashboardbox">
+            <Link
+              to="/register-social-user"
+              className="linkStyle dashboardbox-1"
+            >
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Register as a user</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <BsCalendar2HeartFill className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Register as a user so that we can verify you</span>
+              </div>
+            </Link>
             <Link to="/" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -67,6 +72,27 @@ const FacebookUserDashboard = () => {
               </div>
               <div>
                 <span>Browse houses and book it</span>
+              </div>
+            </Link>
+            <Link
+              to={`${
+                currentUser.provider === "facebook" && "/facebook-orders-page"
+              }`}
+              className="linkStyle dashboardbox-1"
+            >
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Bookings</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <BsCalendar2HeartFill className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Your previous and upcoming bookings</span>
               </div>
             </Link>
             {/* <div className="dashboardbox-1">

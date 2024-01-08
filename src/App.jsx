@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { GlobalStyles } from "./theme/GlobalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
@@ -24,6 +24,8 @@ import GoogleUserDashboard from "./pages/GoogleUserDashboard/GoogleUserDashboard
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
 import EditListingPage from "./pages/EditListing/EditListingPage";
 import FacebookUserDashboard from "./pages/FacebookUserDashboard/FacebookUserDashboard";
+import FacebookOrdersPage from "./pages/OrdersPage/FacebookOrdersPage";
+import GoogleOrdersPage from "./pages/OrdersPage/GoogleOrdersPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -71,6 +73,8 @@ const LazyEditProfilePageComponent = React.lazy(() =>
 );
 
 function App() {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <>
       <Suspense fallback={<Spinner />}>
@@ -141,6 +145,15 @@ function App() {
                 path="/dashboard-facebook-user"
                 element={<FacebookUserDashboard />}
               />
+              <Route
+                path="/facebook-orders-page"
+                element={<FacebookOrdersPage />}
+              />
+              <Route
+                path="/google-orders-page"
+                element={<GoogleOrdersPage />}
+              />
+              <Route path="/order-details" element={<OrdersPage />} />
 
               <Route path="/register-social-user" element={<RegisterUser />} />
 
@@ -152,7 +165,6 @@ function App() {
               /> */}
               <Route path="/billing-details" element={<BillingPage />} />
               <Route path="/checkout-options" element={<CheckoutPage />} />
-              <Route path="/order-details" element={<OrdersPage />} />
               {/* <Route path="/otp-page" element={<OTPPage />} /> */}
               <Route path="/success" element={<Success />} />
               <Route path="/error" element={<Error />} />

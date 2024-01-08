@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { SuccessStyles } from "./SuccessStyle";
 import { useNavigate } from "react-router-dom";
 import SuccessImage from "../../assets/success.jpg";
+import Button from "../Button/Button";
 
 const Success = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser } =
@@ -10,16 +11,26 @@ const Success = () => {
 
   const navigate = useNavigate();
 
-  setTimeout(() => {
-    navigate("/order-details");
-  }, 3000);
+  console.log(currentUser);
+
+  // setTimeout(() => {
+  //   navigate("/order-details");
+  // }, 3000);
 
   const goHome = () => {
     navigate("/");
   };
 
   const goOrders = () => {
-    navigate("/order-details");
+    if (currentUser?.user?.provider === "google") {
+      navigate("/google-orders-page");
+    }
+    if (currentUser?.provider === "facebook") {
+      navigate("/facebook-orders-page");
+    }
+    if (currentUser?.provider === "lodgeme") {
+      navigate("/order-details");
+    }
   };
 
   return (
@@ -34,7 +45,7 @@ const Success = () => {
               <h3>We received your payment</h3>
             </div>
             <div>
-              <h3>Hold on ! We are taking you to Orders Page</h3>
+              <Button title="Go to Orders" onClick={goOrders} />
             </div>
             <div>
               <img src={SuccessImage} className="successimg" alt="" />

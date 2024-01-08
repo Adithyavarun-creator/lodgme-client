@@ -13,28 +13,30 @@ import { RiBillFill } from "react-icons/ri";
 import moment from "moment";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const OrdersPage = () => {
+const FacebookOrdersPage = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser, token } =
     useSelector((state) => state.user);
 
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`${baseUrl}/api/order/${currentUser._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const fetchFacebookOrderData = async () => {
+      const result = await fetch(
+        `${baseUrl}/api/facebook-orders/${currentUser._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await result.json();
-      //console.log(data);
       setOrders(data);
     };
-
-    fetchData();
+    // currentUser?.provider === "facebook" && fetchFacebookUserData();
+    fetchFacebookOrderData();
   }, [currentUser, token]);
 
-  // console.log(currentUser.provider);
+  console.log(orders);
 
   return (
     <>
@@ -150,4 +152,4 @@ const OrdersPage = () => {
   );
 };
 
-export default OrdersPage;
+export default FacebookOrdersPage;

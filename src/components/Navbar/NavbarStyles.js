@@ -211,16 +211,17 @@ export const NavbarStyles = styled(motion.div)`
 
   .navbar-profileimage {
     border-radius: 50%;
-    border: 2px solid ${({ theme }) => theme.colors.primaryColor};
-    width: 45px;
+    /* border: 2px solid ${({ theme }) => theme.colors.primaryColor}; */
+    width: 100%;
     height: 45px;
     cursor: pointer;
+    object-fit: fill;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
-      width: 35px;
+      width: 100%;
       height: 35px;
     }
 

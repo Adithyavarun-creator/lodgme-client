@@ -55,7 +55,7 @@ const Navbar = () => {
     }
   };
 
-  // console.log(currentUser?.user?.username);
+  // console.log(currentUser);
 
   return (
     <>
@@ -100,7 +100,7 @@ const Navbar = () => {
                     : "" || currentUser?.provider === "google"
                     ? currentUser?.user?.avatar
                     : "" || currentUser?.provider === "facebook"
-                    ? "https://i.stack.imgur.com/l60Hf.png"
+                    ? "https://images.hindustantimes.com/tech/img/2023/09/21/1600x900/fb_1695273515215_1695273522698.jpg"
                     : ""
                 }
                 alt="user-pic"
@@ -113,9 +113,12 @@ const Navbar = () => {
             <div>
               <Link
                 to={
-                  (currentUser.username && `${`/dashboard-user`}`) ||
+                  (currentUser?.provider === "lodgeme" &&
+                    `${`/dashboard-user`}`) ||
                   (currentUser?.provider === "google" &&
-                    `${"/dashboard-google-user"}`)
+                    `${"/dashboard-google-user"}`) ||
+                  (currentUser?.provider === "facebook" &&
+                    `${"/dashboard-facebook-user"}`)
                 }
                 className="navbutton linkStyle"
                 title="Click to manage your LodgeMe account"

@@ -8,8 +8,15 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { useDispatch } from "react-redux";
+import {
+  signOutUserFailure,
+  signOutUserStart,
+} from "../../redux/user/userSlice";
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -93,10 +100,32 @@ const RegisterPage = () => {
           icon: "👏",
         }
       );
+      logoutUser();
     } catch (error) {
       setLoading(false);
       setError(error.message);
       console.log(error);
+    }
+  };
+
+  const logoutUser = async () => {
+    try {
+      dispatch(signOutUserStart());
+      // // const res = await fetch(`${baseUrl}/api/signout`);
+      // // const data = await res.json();
+      axios.defaults.withCredentials = true;
+      const { data } = await axios.get(`${baseUrl}/api/signout`);
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      //console.log(data);
+      dispatch(signOutUserFailure(data));
+      localStorage.removeItem("token");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      dispatch(signOutUserFailure(error.message));
     }
   };
 

@@ -13,28 +13,31 @@ import { RiBillFill } from "react-icons/ri";
 import moment from "moment";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-const OrdersPage = () => {
+const GoogleOrdersPage = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser, token } =
     useSelector((state) => state.user);
 
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`${baseUrl}/api/order/${currentUser._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const fetchGoogleUserData = async () => {
+      const result = await fetch(
+        `${baseUrl}/api/google-orders/${currentUser.user._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await result.json();
-      //console.log(data);
       setOrders(data);
     };
-
-    fetchData();
+    // currentUser.user.provider === "google" && fetchGoogleUserData();
+    fetchGoogleUserData();
   }, [currentUser, token]);
 
-  // console.log(currentUser.provider);
+
+  //console.log(orders);
 
   return (
     <>
@@ -150,4 +153,4 @@ const OrdersPage = () => {
   );
 };
 
-export default OrdersPage;
+export default GoogleOrdersPage;

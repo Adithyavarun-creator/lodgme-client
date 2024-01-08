@@ -15,21 +15,6 @@ const GoogleUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  console.log(currentUser.user);
-
-  const mobileOtp = () => {
-    // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify({ formData, homeAddress: address }),
-    // });
-    // const data = await res.json();
-    // console.log(data);
-    navigate("/otp-page");
-  };
-
   return (
     <>
       <HelmetProvider>
@@ -44,13 +29,54 @@ const GoogleUserDashboard = () => {
 
           <div>
             <h1>
-              {currentUser?.provider === "google"
+              {currentUser?.user?.provider === "google"
                 ? "If you have planned to add a listing please register as a user and proceed further"
                 : ""}{" "}
             </h1>
           </div>
 
           <div className="dashboardbox">
+            <Link
+              to="/register-social-user"
+              className="linkStyle dashboardbox-1"
+            >
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Register as a user</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <BsCalendar2HeartFill className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Register as a user so that we can verify you</span>
+              </div>
+            </Link>
+
+            <Link
+              to={`${
+                currentUser.provider === "google" && "/google-orders-page"
+              }`}
+              className="linkStyle dashboardbox-1"
+            >
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Bookings</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <BsCalendar2HeartFill className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Your previous and upcoming bookings</span>
+              </div>
+            </Link>
             <Link to="/" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -69,6 +95,7 @@ const GoogleUserDashboard = () => {
                 <span>Browse houses and book it</span>
               </div>
             </Link>
+
             {/* <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -85,7 +112,7 @@ const GoogleUserDashboard = () => {
                 <span>Upload your passport and verify</span>
               </div>
             </div> */}
-            {currentUser?.provider === "google" ? (
+            {/* {currentUser?.provider === "google" ? (
               ""
             ) : (
               <Link
@@ -107,30 +134,8 @@ const GoogleUserDashboard = () => {
                   <span>Click here and edit your personal details</span>
                 </div>
               </Link>
-            )}
-            {currentUser?.provider === "google" ? (
-              <Link
-                to="/register-social-user"
-                className="linkStyle dashboardbox-1"
-              >
-                <div className="dashboard-logobox">
-                  <img src={Logo} className="dashboard-logo" alt="" />
-                </div>
-                <div className="flexbox">
-                  <div className="">
-                    <h2 className="dashboard-maintitle">Register as a user</h2>
-                  </div>
-                  <div className="dashboard-mainlink">
-                    <BsCalendar2HeartFill className="dashboard-icon" />
-                  </div>
-                </div>
-                <div>
-                  <span>Regsiter as a user so that we can verify you</span>
-                </div>
-              </Link>
-            ) : (
-              ""
-            )}
+            )} */}
+
             {/* <Link to="/user-listings" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />

@@ -18,6 +18,8 @@ const CheckoutPage = () => {
   const [address, setAddress] = useState("");
   const [nopersons, setNopersons] = useState(0);
 
+  // console.log(currentUser);
+
   useEffect(() => {
     const {
       fromdate,
@@ -38,8 +40,6 @@ const CheckoutPage = () => {
     setNopersons(persons);
   }, []);
 
-  //publish=pk_test_51OCJt5SJsmJ4s67G7rbSy3PGzXYaAlCb2D31sTTALDoNVXGoThAQYIdflpHxWKhaVY6Ach1X8d5OnBxll6r4jNYo00orevZ6se
-
   const checkOutwithStripe = () => {
     axios
       .post(`${baseUrl}/api/create-checkout-session`, {
@@ -48,9 +48,21 @@ const CheckoutPage = () => {
       })
       .then((res) => {
         //save
+        if (currentUser.provider === "facebook") {
+          saveFacebookOrder();
+        }
+        if (currentUser.provider === "google") {
+          saveGoogleOrder();
+        } else {
+          saveOrder();
+        }
 
-        currentUser.provider === "google" ? saveGoogleOrder() : saveOrder();
-
+        // currentUser.provider === "google"
+        //   ? saveGoogleOrder()
+        //   : currentUser.provider === "facebook"
+        //   ? saveFacebookOrder()
+        //   : currentUser.provider === "lodgeme" && saveOrder();
+        // currentUser.provider === "facebook" ? saveFacebookOrder() : saveOrder();
         if (res.data.url) {
           window.location.href = res.data.url;
         }
@@ -114,6 +126,36 @@ const CheckoutPage = () => {
         listingBooked: selectedHouse.title,
         houseDetails: selectedHouse,
         bookedBy: currentUser.user,
+        paymentMode: "Stripe",
+      }),
+    });
+    //console.log(response);
+  };
+
+  const saveFacebookOrder = async () => {
+    const response = await fetch(`${baseUrl}/api/create-facebook-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // <---------- HERE
+      },
+      body: JSON.stringify({
+        billingName: name,
+        billingEmail: email,
+        billingPhonenumber: number,
+        billingAddress: address,
+        totalPrice: bookingAmount,
+        nopersons: nopersons,
+        startDate,
+        endDate,
+        country: selectedHouse.country,
+        beds: selectedHouse.beds,
+        baths: selectedHouse.baths,
+        livingRoom: selectedHouse.livingRoom,
+        stayingDays,
+        listingBooked: selectedHouse.title,
+        houseDetails: selectedHouse,
+        bookedBy: currentUser._id,
         paymentMode: "Stripe",
       }),
     });
