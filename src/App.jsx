@@ -26,6 +26,7 @@ import EditListingPage from "./pages/EditListing/EditListingPage";
 import FacebookUserDashboard from "./pages/FacebookUserDashboard/FacebookUserDashboard";
 import FacebookOrdersPage from "./pages/OrdersPage/FacebookOrdersPage";
 import GoogleOrdersPage from "./pages/OrdersPage/GoogleOrdersPage";
+import AddReview from "./components/AddReview/AddReview";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")

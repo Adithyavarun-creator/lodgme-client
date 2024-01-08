@@ -52,7 +52,7 @@ import { apartmentDatas } from "../../datas/apartmentDatas";
 import SingleHouseImages from "../../components/SingleHousePage/SingleHouseImages";
 import { baseUrl } from "../../baseUrl/url";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setBookingAmount,
   setNumberofPersons,
@@ -61,6 +61,8 @@ import {
 } from "../../redux/user/userSlice";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
+import AddReview from "../../components/AddReview/AddReview";
+import ShowAllReview from "../../components/ShowAllReview/ShowAllReview";
 
 const SingleHousePage = () => {
   const { id } = useParams();
@@ -68,6 +70,7 @@ const SingleHousePage = () => {
   const dispatch = useDispatch();
   //datas
   const [data, setData] = useState(null);
+  const { token } = useSelector((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const [noPersons, setnoPersons] = useState(1);
@@ -79,6 +82,9 @@ const SingleHousePage = () => {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [noOfdays, setNoofdays] = useState(1);
+  const [showAllReview, setShowAllReview] = useState(false);
+  const [addReview, setAddReview] = useState(false);
+  const [postedBy, setPostedBy] = useState({});
 
   const [range, setRange] = useState([
     {
@@ -101,24 +107,17 @@ const SingleHousePage = () => {
   useEffect(() => {
     const fetchListing = async () => {
       const res = await axios.get(`${baseUrl}/api/get/${id}`);
+      // console.log(res.data);
       setHousedata(res.data.listing);
+      setPostedBy(res.data.user);
       dispatch(setSelectedHouse(res.data.listing));
       const latitude = res.data.listing.mapLocation[0].lat;
       setLat(latitude);
       const longitude = res.data.listing.mapLocation[0].lng;
       setLng(longitude);
     };
-
     fetchListing();
   }, [id]);
-
-  // console.log(availableFroms);
-
-  //console.log(houseData);
-  //console.log(range[0]?.startDate);
-  // console.log(range[0]?.endDate);
-
-  //console.log(lat, lng);
 
   const dateRef = useRef();
   const reviewRef = useRef();
@@ -271,7 +270,9 @@ const SingleHousePage = () => {
   };
 
   // console.log(moment(range[0].endDate).format(), "enddate");
-  // console.log(houseData.availableTill, "housedata");
+  // console.log(houseData);
+
+  //console.log(postedBy);
 
   if (!id) {
     return <Spinner />;
@@ -387,11 +388,7 @@ const SingleHousePage = () => {
           <div className="">
             <div className="singlepagehousepublishbox">
               <div>
-                <img
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8fDA%3D"
-                  alt=""
-                  className="userimage"
-                />
+                <img src={postedBy.profilePic} alt="" className="userimage" />
               </div>
               <div>
                 <span className="singlepagehousepublishsubname">
@@ -479,102 +476,72 @@ const SingleHousePage = () => {
                 </h1>
               </div>
               <div className="reviewpersonsbox">
-                <div className="reviewpersondetailbox">
-                  <div className="reviewuserbox">
-                    <div>
-                      <img
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        className="reviewpersonimg"
-                      />
-                    </div>
+                {houseData?.reviews?.length ? (
+                  houseData?.reviews?.map((review) => (
+                    <div className="reviewpersondetailbox" key={review._id}>
+                      <div className="reviewuserbox">
+                        <div>
+                          <img
+                            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+                            alt=""
+                            className="reviewpersonimg"
+                          />
+                        </div>
 
-                    <div className="reviewwww">
-                      <h2 className="reviewusername">John Doe</h2>
-                      <span className="reviewusercountry">USA</span>
+                        <div className="reviewwww">
+                          <h2 className="reviewusername">
+                            {review?.reviewerFirstname}&nbsp;
+                            {review?.reviewerLastname}
+                          </h2>
+                          <span className="reviewusercountry">
+                            {review?.reviewerCountry}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="reviewuserating">
+                        <FaStar className="reviewuserstar" />
+                        <span className="reviewuserpostdate">
+                          {review?.rating}
+                        </span>{" "}
+                      </div>
+                      <div>
+                        <span className="reviewuserpostdated">
+                          Posted on {moment(review.reviewedAt).format("LL")}
+                        </span>
+                      </div>
+                      <div>
+                        <article className="singlepagearticlecontent">
+                          {review?.reviewDescription}
+                        </article>
+                      </div>
                     </div>
-                  </div>
-                  <div className="reviewuserating">
-                    <FaStar className="reviewuserstar" />
-                    <span className="reviewuserpostdate">4.2</span>
-                    <span className="reviewuserpostdated">
-                      Posted on October 4
-                    </span>
-                  </div>
-                  <div>
-                    <article className="singlepagearticlecontent">
-                      {houseData?.description}
-                    </article>
-                  </div>
+                  ))
+                ) : (
+                  <span>No reviews added</span>
+                )}
+
+                <div>
+                  <span
+                    className="seeallreviews"
+                    onClick={() => setShowAllReview(true)}
+                  >
+                    See All Reviews
+                  </span>
                 </div>
 
-                <div className="reviewpersondetailbox">
-                  <div className="reviewuserbox">
-                    <div>
-                      <img
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        className="reviewpersonimg"
-                      />
-                    </div>
-
-                    <div className="reviewwww">
-                      <h2 className="reviewusername">John Doe</h2>
-                      <span className="reviewusercountry">USA</span>
-                    </div>
-                  </div>
-                  <div className="reviewuserating">
-                    <FaStar className="reviewuserstar" />
-                    <span className="reviewuserpostdate">4.2</span>
-                    <span className="reviewuserpostdated">
-                      Posted on October 4
-                    </span>
-                  </div>
-                  <div>
-                    <article className="singlepagearticlecontent">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cumque omnis ex cupiditate animi neque. Rem, consequatur
-                      accusantium quis soluta voluptates excepturi perferendis
-                      eaque laboriosam temporibus? Qui officiis suscipit
-                      assumenda molestias facilis sit consequatur aspernatur
-                      nostrum.
-                    </article>
-                  </div>
+                <div>
+                  <Button
+                    title="Add Review"
+                    onClick={() => setAddReview(true)}
+                  />
                 </div>
-
-                <div className="reviewpersondetailbox">
-                  <div className="reviewuserbox">
-                    <div>
-                      <img
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        className="reviewpersonimg"
-                      />
-                    </div>
-
-                    <div className="reviewwww">
-                      <h2 className="reviewusername">John Doe</h2>
-                      <span className="reviewusercountry">USA</span>
-                    </div>
-                  </div>
-                  <div className="reviewuserating">
-                    <FaStar className="reviewuserstar" />
-                    <span className="reviewuserpostdate">4.2</span>
-                    <span className="reviewuserpostdated">
-                      Posted on October 4
-                    </span>
-                  </div>
-                  <div>
-                    <article className="singlepagearticlecontent">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cumque omnis ex cupiditate animi neque. Rem, consequatur
-                      accusantium quis soluta voluptates excepturi perferendis
-                      eaque laboriosam temporibus? Qui officiis suscipit
-                      assumenda molestias facilis sit consequatur aspernatur
-                      nostrum.
-                    </article>
-                  </div>
-                </div>
+                {addReview && (
+                  <AddReview
+                    setAddReview={setAddReview}
+                    addReview={addReview}
+                    houseId={houseData._id}
+                  />
+                )}
               </div>
             </div>
             <div className="reservation-card" ref={dateRef}>
@@ -671,6 +638,8 @@ const SingleHousePage = () => {
             </div>
           </div>
 
+          {showAllReview && <ShowAllReview />}
+
           <div>
             <div className="reviewownerdetail">
               <div className="reviewownerdetailgrid-1">
@@ -678,22 +647,31 @@ const SingleHousePage = () => {
                   <div>
                     <img
                       className="hostimage"
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                      src={
+                        postedBy.profilePic
+                          ? postedBy.profilePic
+                          : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                      }
                       alt=""
                     />
                   </div>
                   <div className="hostdetails">
-                    <h2 className="hostdetailname">Serviced by John Doe</h2>
+                    <h2 className="hostdetailname">
+                      Serviced by {postedBy.firstname}&nbsp;{postedBy.lastname}
+                    </h2>
                     <span className="hostdetailsubname">
-                      Joined on Feb 2023
+                      Joined on{" "}
+                      {moment(postedBy.createdAt).format("MMMM Do YYYY")}
                     </span>
                   </div>
-                  <div className="verifybox">
-                    <span>
-                      <RiVerifiedBadgeFill />
-                    </span>
-                    <span>Verified</span>
-                  </div>
+                  {postedBy.verified && (
+                    <div className="verifybox">
+                      <span>
+                        <RiVerifiedBadgeFill />
+                      </span>
+                      <span>Verified</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -715,13 +693,11 @@ const SingleHousePage = () => {
               <div className="reviewownerlist">
                 <div>
                   <span className="reviewowneradds">
-                    Registration number: 0*********0
+                    Country: {postedBy.country}
                   </span>
                 </div>
                 <div>
-                  <span className="reviewowneradds">
-                    Languages: English, Français, Italiano, Español
-                  </span>
+                  <span className="reviewowneradds">Languages: English</span>
                 </div>
                 <div>
                   <span className="reviewowneradds">Response rate: 100%</span>
@@ -731,9 +707,9 @@ const SingleHousePage = () => {
                     Response time: within a few hours
                   </span>
                 </div>
-                <div>
+                {/* <div>
                   <Button title="Contact Service" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

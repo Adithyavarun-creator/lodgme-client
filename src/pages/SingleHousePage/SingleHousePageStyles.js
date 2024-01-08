@@ -1000,13 +1000,14 @@ export const SingleHousePageStyles = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     justify-content: center;
+    position: relative;
 
     @media ${devices.bigLaptopsAndDesktops} {
       grid-template-columns: 1fr 1fr;
     }
 
     @media ${devices.tabletsAndIpads} {
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr;
       gap: 20px;
     }
     @media ${devices.smallTabs} {
@@ -1020,15 +1021,36 @@ export const SingleHousePageStyles = styled.section`
     }
   }
 
+  .seeallreviews {
+    font-size: 16px;
+    text-decoration: underline;
+    font-weight: bolder;
+    cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
+  }
+
   .reservation-card {
     display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: center;
     border-radius: 20px;
-    -webkit-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    /* -webkit-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
     -moz-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
-    box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
+    box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1); */
     padding: 15px;
     cursor: pointer;
 
@@ -1286,6 +1308,7 @@ export const SingleHousePageStyles = styled.section`
     grid-template-columns: 1fr;
     gap: 20px;
     align-items: center;
+    position: relative;
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 20px;
@@ -1352,10 +1375,11 @@ export const SingleHousePageStyles = styled.section`
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 2px solid ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -1414,7 +1438,7 @@ export const SingleHousePageStyles = styled.section`
   .reviewuserstar {
     height: 20px;
     width: 20px;
-    color: ${({ theme }) => theme.colors.ratingColor};
+    color: ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
       height: 20px;
@@ -1442,6 +1466,12 @@ export const SingleHousePageStyles = styled.section`
     gap: 3px;
     align-items: center;
     font-weight: bold;
+    padding: 5px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    background-color: #fff;
+    width: max-content;
+    border-radius: 10px;
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 3px;
@@ -1457,10 +1487,10 @@ export const SingleHousePageStyles = styled.section`
     }
   }
   .reviewuserpostdate {
-    font-size: 14px;
+    font-size: 16px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      font-size: 12px;
+      font-size: 15px;
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -1477,7 +1507,8 @@ export const SingleHousePageStyles = styled.section`
 
   .reviewuserpostdated {
     font-size: 14px;
-    color: grey;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    font-weight: bolder;
 
     @media ${devices.bigLaptopsAndDesktops} {
       font-size: 12px;
