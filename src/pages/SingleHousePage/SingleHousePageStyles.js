@@ -10,6 +10,7 @@ export const SingleHousePageStyles = styled.section`
   padding-right: 120px;
   padding-top: 50px;
   padding-bottom: 0;
+
   /* position: relative; */
 
   @media ${devices.bigLaptopsAndDesktops} {

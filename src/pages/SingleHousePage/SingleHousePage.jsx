@@ -85,6 +85,7 @@ const SingleHousePage = () => {
   const [showAllReview, setShowAllReview] = useState(false);
   const [addReview, setAddReview] = useState(false);
   const [postedBy, setPostedBy] = useState({});
+  const [avg, setAvg] = useState(0);
 
   const [range, setRange] = useState([
     {
@@ -115,6 +116,8 @@ const SingleHousePage = () => {
       setLat(latitude);
       const longitude = res.data.listing.mapLocation[0].lng;
       setLng(longitude);
+      const avgrating = res.data?.listing?.reviews?.map((r) => r.rating);
+      setAvg(avgrating);
     };
     fetchListing();
   }, [id]);
@@ -270,7 +273,7 @@ const SingleHousePage = () => {
   };
 
   // console.log(moment(range[0].endDate).format(), "enddate");
-  // console.log(houseData);
+  //console.log(houseData);
 
   //console.log(postedBy);
 
@@ -288,9 +291,6 @@ const SingleHousePage = () => {
           </title>
         </Helmet>
         <SingleHousePageStyles>
-          <div className="">
-            <Button title="Back to Search List" onClick={goBack} />
-          </div>
           <div className="singlepagetitlebox">
             <div className="">
               <h2 className="singlepagetitletext flex">
@@ -477,7 +477,7 @@ const SingleHousePage = () => {
               </div>
               <div className="reviewpersonsbox">
                 {houseData?.reviews?.length ? (
-                  houseData?.reviews?.map((review) => (
+                  houseData?.reviews?.slice(0, 3).map((review) => (
                     <div className="reviewpersondetailbox" key={review._id}>
                       <div className="reviewuserbox">
                         <div>
@@ -498,15 +498,15 @@ const SingleHousePage = () => {
                           </span>
                         </div>
                       </div>
+                      <div>
+                        <span className="reviewuserpostdated">
+                          Posted on {moment(review.reviewedAt).format("LL")}
+                        </span>
+                      </div>
                       <div className="reviewuserating">
                         <FaStar className="reviewuserstar" />
                         <span className="reviewuserpostdate">
                           {review?.rating}
-                        </span>{" "}
-                      </div>
-                      <div>
-                        <span className="reviewuserpostdated">
-                          Posted on {moment(review.reviewedAt).format("LL")}
                         </span>
                       </div>
                       <div>
@@ -520,14 +520,16 @@ const SingleHousePage = () => {
                   <span>No reviews added</span>
                 )}
 
-                <div>
-                  <span
-                    className="seeallreviews"
-                    onClick={() => setShowAllReview(true)}
-                  >
-                    See All Reviews
-                  </span>
-                </div>
+                {houseData?.reviews?.length && (
+                  <div>
+                    <span
+                      className="seeallreviews"
+                      onClick={() => setShowAllReview(true)}
+                    >
+                      See All Reviews
+                    </span>
+                  </div>
+                )}
 
                 <div>
                   <Button
@@ -636,9 +638,17 @@ const SingleHousePage = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          {showAllReview && <ShowAllReview />}
+            {showAllReview && (
+              <div>
+                <ShowAllReview
+                  houseData={houseData}
+                  avg={avg}
+                  setShowAllReview={setShowAllReview}
+                />
+              </div>
+            )}
+          </div>
 
           <div>
             <div className="reviewownerdetail">
