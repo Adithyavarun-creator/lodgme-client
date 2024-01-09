@@ -1877,16 +1877,23 @@ export const SingleHousePageStyles = styled.section`
     }
   }
 
-  .singlepagemapbox {
+  .totalbookingamount {
+    font-weight: bolder;
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
     }
     @media ${devices.smallTabs} {
+      font-size: 12px;
     }
 
     @media ${devices.smallMobiles} {
+      font-size: 9px;
     }
   }
 `;

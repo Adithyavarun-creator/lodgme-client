@@ -10,7 +10,7 @@ export const AddReviewStyles = styled.div`
   width: 100%;
   background-color: #fff;
   position: absolute;
-  top: 0;
+  top: 170px;
   padding: 10px;
   border-radius: 10px;
   box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
@@ -26,10 +26,12 @@ export const AddReviewStyles = styled.div`
   }
   @media ${devices.smallTabs} {
     height: 330px;
+    top: 0;
   }
 
   @media ${devices.smallMobiles} {
     height: 320px;
+    top: 0;
   }
 
   .reviewclosebox {

@@ -22,15 +22,18 @@ export const ShowAllReviewStyles = styled.div`
   }
 
   @media ${devices.tabletsAndIpads} {
+    top: 100px;
     height: 80vh;
     padding: 30px;
   }
   @media ${devices.smallTabs} {
+    top: 20px;
     height: 50vh;
     padding: 15px;
   }
 
   @media ${devices.smallMobiles} {
+    top: 20px;
     height: 40vh;
     padding: 10px;
   }

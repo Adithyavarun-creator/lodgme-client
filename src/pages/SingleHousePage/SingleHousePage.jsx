@@ -517,10 +517,10 @@ const SingleHousePage = () => {
                     </div>
                   ))
                 ) : (
-                  <span>No reviews added</span>
+                  <span className="totalbookingamount">No reviews added</span>
                 )}
 
-                {houseData?.reviews?.length && (
+                {houseData?.reviews?.length ? (
                   <div>
                     <span
                       className="seeallreviews"
@@ -529,6 +529,8 @@ const SingleHousePage = () => {
                       See All Reviews
                     </span>
                   </div>
+                ) : (
+                  ""
                 )}
 
                 <div>
@@ -618,11 +620,12 @@ const SingleHousePage = () => {
 
                 <div className="reservation-details">
                   <div>
-                    <span>Total hors taxes</span>
+                    <span className="totalbookingamount">Total hors taxes</span>
                   </div>
                   <div>
-                    <span>
-                      <strong>
+                    <span className="totalbookingamount">
+                      <strong className="flex">
+                        <MdEuroSymbol className="amenities-icon" />
                         {houseData.pricePerNight * diffInDays + lodgmeCharge}
                       </strong>
                     </span>
