@@ -240,4 +240,29 @@ export const UserDashboardStyles = styled.div`
     @media ${devices.smallMobiles} {
     }
   }
+
+  .verifyLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .verifylinkfont {
+    font-size: 20px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 20px;
+    }
+    @media ${devices.tabletsAndIpads} {
+      font-size: 17px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 12px;
+    }
+  }
 `;

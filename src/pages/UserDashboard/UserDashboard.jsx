@@ -10,9 +10,11 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
 import { baseUrl } from "../../baseUrl/url";
+import { MdVerified } from "react-icons/md";
+import { FaWindowClose } from "react-icons/fa";
 
 const UserDashboard = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   //console.log(currentUser);
@@ -27,7 +29,7 @@ const UserDashboard = () => {
     // });
     // const data = await res.json();
     // console.log(data);
-    navigate("/otp-page");
+    navigate("/lodgeme-otp-verification-page");
   };
 
   return (
@@ -42,31 +44,43 @@ const UserDashboard = () => {
             <h1>{currentUser?.username} Dashboard</h1>
           </div>
 
-          <div>
-            <h1>
-              {currentUser?.verified
-                ? "Email verified by Lodgeme"
-                : "Email not verified"}
-            </h1>
-          </div>
-
-          <div>
-            <h1>
-              {currentUser?.mobileVerified
-                ? "Mobile verified by Lodgeme"
-                : "Mobile not verified"}
-            </h1>
-          </div>
-
-          {/* <div>
-            <h1>
-              {currentUser?.mobileVerified ? (
-                "Mobile number verified by Lodgeme"
+          <div className="verifyLinks">
+            <h1 className="verifylinkfont">
+              {currentUser?.emailVerified ? (
+                <span className="flex verifylinkfont">
+                  <MdVerified />
+                  Email verified by Lodgeme
+                </span>
               ) : (
-                <button onClick={mobileOtp}>Verify Phone number</button>
-              )}{" "}
+                <Link
+                  to={`/email-verify`}
+                  className="flex linkStyle verifylinkfont"
+                >
+                  <FaWindowClose />
+                  &nbsp;Email not verified
+                </Link>
+              )}
             </h1>
-          </div> */}
+          </div>
+
+          <div className="verifyLinks">
+            <h1 className="verifylinkfont">
+              {currentUser?.mobileVerified ? (
+                <span className="flex verifylinkfont">
+                  <MdVerified />
+                  Mobile number verified by Lodgeme
+                </span>
+              ) : (
+                <Link
+                  to="/lodgeme-otp-verification-page"
+                  className="flex linkStyle verifylinkfont"
+                >
+                  <FaWindowClose />
+                  &nbsp;Mobile number not verified
+                </Link>
+              )}
+            </h1>
+          </div>
 
           <div className="dashboardbox">
             <Link to="/" className="linkStyle dashboardbox-1">

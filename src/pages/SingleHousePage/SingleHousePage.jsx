@@ -458,11 +458,10 @@ const SingleHousePage = () => {
                 </div>
                 {houseData?.amenitiesIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>
-                    {/* <BsEmojiHeartEyesFill className="amenities-icon" /> */}
                     <span className="amenitieslisttext">
                       {amenity.split(",").map((a, i) => (
-                        <ul key={i} className="amenitiiesul">
-                          <li className="flex">
+                        <ul key={i} className="amenitiesul">
+                          <li className="flex amenitieslisttext">
                             <IoCheckmarkDoneCircleSharp className="amenitylisticon" />
                             &nbsp;{a}
                           </li>
@@ -479,10 +478,9 @@ const SingleHousePage = () => {
                 </div>
                 {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>
-                    {/* <IoMdCloseCircle className="amenities-icon" /> */}
                     {amenity.split(",").map((a, i) => (
-                      <ul key={i} className="amenitiiesul">
-                        <li className="flex">
+                      <ul key={i} className="amenitiesul">
+                        <li className="flex amenitieslisttext">
                           <MdCancel className="amenitylisticon" />
                           &nbsp;{a}
                         </li>

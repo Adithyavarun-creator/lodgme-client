@@ -19,7 +19,7 @@ import Success from "./components/Success/Success";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import Error from "./components/Error/Error";
 import SearchFiltersPage from "./pages/SearchFiltersPage/SearchFiltersPage";
-import OTPPage from "./pages/OTPPage";
+import OTPPage from "./pages/OTPPage/OTPPage";
 import GoogleUserDashboard from "./pages/GoogleUserDashboard/GoogleUserDashboard";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
 import EditListingPage from "./pages/EditListing/EditListingPage";
@@ -28,6 +28,7 @@ import FacebookOrdersPage from "./pages/OrdersPage/FacebookOrdersPage";
 import GoogleOrdersPage from "./pages/OrdersPage/GoogleOrdersPage";
 import AddReview from "./components/AddReview/AddReview";
 import SupportPage from "./pages/SupportPage/SupportPage";
+import EmailDashboardVerfiy from "./components/EmailVerify/EmailDashboardVerfiy";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -127,11 +128,11 @@ function App() {
               element={<SearchFiltersPage />}
             />
             <Route path="/lodgeme-support-q&a" element={<SupportPage />} />
-            {/* <Route
-              path="/add-new-listing"
-              element={<LazyAddListingPageComponent />}
-            /> */}
-            <Route path="/otp-page" element={<OTPPage />} />
+
+            <Route
+              path="/lodgeme-otp-verification-page"
+              element={<OTPPage />}
+            />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
               <Route path="/user-listings" element={<UserListingPage />} />
@@ -161,6 +162,13 @@ function App() {
               <Route path="/register-social-user" element={<RegisterUser />} />
 
               <Route path="/edit-listing/:id" element={<EditListingPage />} />
+
+              <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
+
+              <Route
+                path="/email-verify"
+                element={<EmailDashboardVerfiy />}
+              />
 
               <Route
                 path="/add-new-listing"

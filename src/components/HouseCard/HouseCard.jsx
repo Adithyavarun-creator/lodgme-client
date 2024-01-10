@@ -122,7 +122,7 @@ const HouseCard = ({ houseCards, title }) => {
         className="toprated_house_cardbox"
       >
         {houseCards && houseCards.length ? (
-          houseCards?.map((card) => (
+          houseCards?.reverse().map((card) => (
             <Link
               to={`/homes&rooms/${card._id}`}
               className="toprated_house_card linkStyle"

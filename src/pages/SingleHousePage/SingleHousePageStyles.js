@@ -934,7 +934,7 @@ export const SingleHousePageStyles = styled.section`
     padding: 10px;
   }
 
-  .amenitiiesul {
+  .amenitiesul {
     margin-left: 10px;
     color: ${({ theme }) => theme.colors.primaryColor};
     font-weight: bolder;
@@ -1447,13 +1447,13 @@ export const SingleHousePageStyles = styled.section`
   }
 
   .reviewuserstar {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     color: ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
-      height: 20px;
-      width: 20px;
+      height: 15px;
+      width: 15px;
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -1477,12 +1477,12 @@ export const SingleHousePageStyles = styled.section`
     gap: 3px;
     align-items: center;
     font-weight: bold;
-    padding: 5px;
+    padding: 3px;
     color: ${({ theme }) => theme.colors.primaryColor};
     background-color: #fff;
     width: max-content;
     border-radius: 10px;
-    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+    /* border: 1px solid ${({ theme }) => theme.colors.primaryColor}; */
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 3px;
