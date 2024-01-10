@@ -47,7 +47,7 @@ const FacebookOrdersPage = () => {
         </Helmet>
         <OrdersPageStyles>
           <div>
-            <h1 className="ordertitle">Your Orders</h1>
+            <h1 className="ordertitle">Your Bookings</h1>
           </div>
           {orders.length >= 1 ? (
             orders

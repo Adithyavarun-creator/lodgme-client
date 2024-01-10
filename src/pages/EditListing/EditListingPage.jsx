@@ -33,32 +33,32 @@ import {
 import { app } from "../../firebase/firebase";
 import { useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import moment from "moment";
 
 const EditListingPage = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  const { RangePicker } = DatePicker;
+  const { currentUser, token } = useSelector((state) => state.user);
 
-  const [address, setAddress] = useState("");
-  const [coordinates, setCoordiantes] = useState({
-    lat: null,
-    lng: null,
-  });
-  const [token, setToken] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [coordinates, setCoordiantes] = useState({
+  //   lat: null,
+  //   lng: null,
+  // });
+  // // const [token, setToken] = useState("");
 
-  const [beds, setBeds] = useState(0);
-  const [baths, setBaths] = useState(0);
-  const [livingRoom, setLivingRoom] = useState(0);
-  const [title, setTitle] = useState("");
-  const [facilities, setFacilities] = useState("");
-  const [houseType, setHouseType] = useState("");
-  const [description, setDescription] = useState("");
-  const [housePrice, setHouseprice] = useState(0);
-  const [user, setUser] = useState("");
-  const [amentitiesinc, setAmenitiesinc] = useState([]);
-  const [amentitiesnotinc, setNotamenitiesinc] = useState([]);
-  const [fromDate, setFromdate] = useState("");
-  const [toDate, setTodate] = useState("");
-  const [noOfpersons, setnoOfpersons] = useState(0);
+  // const [beds, setBeds] = useState(0);
+  // const [baths, setBaths] = useState(0);
+  // const [livingRoom, setLivingRoom] = useState(0);
+  // const [title, setTitle] = useState("");
+  // const [facilities, setFacilities] = useState("");
+  // const [houseType, setHouseType] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [housePrice, setHouseprice] = useState(0);
+  // const [user, setUser] = useState("");
+  // const [amentitiesinc, setAmenitiesinc] = useState([]);
+  // const [amentitiesnotinc, setNotamenitiesinc] = useState([]);
+  // const [fromDate, setFromdate] = useState("");
+  // const [toDate, setTodate] = useState("");
+  // const [noOfpersons, setnoOfpersons] = useState(0);
 
   //dates
   const [range, setRange] = useState([
@@ -69,13 +69,30 @@ const EditListingPage = () => {
     },
   ]);
   const [open, setOpen] = useState(false);
+  const [address, setAddress] = useState("");
 
   //country
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   //images
-  const [formData, setFormData] = useState({
-    imageUrls: [],
+  const [fetchData, setFetchData] = useState({
+    houseImages: [],
+    title: "",
+    availableFrom: "",
+    availableTill: "",
+    description: "",
+    houseAddress: "",
+    houseType: "",
+    facilities: "",
+    amenitiesIncluded: [],
+    amenitiesNotIncluded: [],
+    beds: 0,
+    baths: 0,
+    livingRoom: 0,
+    noOfpersons: 0,
+    pricePerNight: 0,
+    locatedCountry: "",
+    mapLocation: [],
   });
   const [files, setFiles] = useState([]);
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -91,15 +108,14 @@ const EditListingPage = () => {
 
   useEffect(() => {
     const fetchListing = async () => {
-      // const listingId = params.listingId;
       const res = await fetch(`${baseUrl}/api/get/${id}`);
       const data = await res.json();
-      // console.log(data);
+      //console.log(data.listing);
       if (data.success === false) {
         console.log(data.message);
         return;
       }
-      // setFormData(data);
+      setFetchData(data.listing);
     };
 
     fetchListing();
@@ -108,49 +124,13 @@ const EditListingPage = () => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
-    //console.log(ll);
-    setAddress(value);
-    setCoordiantes(ll);
+    // console.log(ll);
+    // setAddress(value);
+    // setCoordiantes(ll);
   };
 
   const changeHandler = (value) => {
     setValue(value);
-  };
-
-  // //uploadfiles
-  const handleImageSubmit = () => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
-      setUploading(true);
-      setImageUploadError(false);
-      const promises = [];
-
-      for (let i = 0; i < files.length; i++) {
-        promises.push(storeImage(files[i]));
-      }
-      Promise.all(promises)
-        .then((urls) => {
-          setFormData({
-            ...formData,
-            imageUrls: formData.imageUrls.concat(urls),
-          });
-          setImageUploadError(false);
-          setUploading(false);
-        })
-        .catch((err) => {
-          setImageUploadError("Image upload failed (2 mb max per image)");
-          setUploading(false);
-        });
-    } else {
-      setImageUploadError("You can only upload 6 images per listing");
-      setUploading(false);
-    }
-  };
-
-  const handleRemoveImage = (index) => {
-    setFormData({
-      ...formData,
-      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
-    });
   };
 
   // // Hide dropdown on outside click
@@ -172,22 +152,53 @@ const EditListingPage = () => {
     document.addEventListener("click", hideOnClickOutside, true);
   }, []);
 
+  const handleChange = (e) => {
+    setFetchData({
+      ...fetchData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleImageSubmit = (e) => {
+    if (files.length > 0 && files.length + fetchData.houseImages.length < 7) {
+      setUploading(true);
+      setImageUploadError(false);
+      const promises = [];
+
+      for (let i = 0; i < files.length; i++) {
+        promises.push(storeImage(files[i]));
+      }
+      Promise.all(promises)
+        .then((urls) => {
+          setFetchData({
+            ...fetchData,
+            houseImages: fetchData.houseImages.concat(urls),
+          });
+          setImageUploadError(false);
+          setUploading(false);
+        })
+        .catch((err) => {
+          setImageUploadError("Image upload failed (2 mb max per image)");
+          setUploading(false);
+        });
+    } else {
+      setImageUploadError("You can only upload 6 images per listing");
+      setUploading(false);
+    }
+  };
+
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
-      const storageRef = ref(
-        storage,
-        `/houseListingImages/${user}/${fileName}`
-      );
+      const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setPercent(progress);
-          //console.log(`Upload is ${progress}% done`);
+          console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error);
@@ -200,22 +211,19 @@ const EditListingPage = () => {
       );
     });
   };
-  // const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    setToken(token);
-  }, [token]);
+  const handleRemoveImage = (index) => {
+    setFetchData({
+      ...fetchData,
+      houseImages: fetchData?.houseImages?.filter((_, i) => i !== index),
+    });
+  };
 
-  // console.log(currentUser._id);
-
-  // const subject = currentUser._id;
-  // // const text2 = subject.slice(14, subject.length - 2);
-  // console.log(subject);
+  // console.log(currentUser);
 
   const onUpdateListing = async () => {
     try {
-      // setLoading(true);
+      setLoading(true);
       const res = await fetch(`${baseUrl}/api/listing-update/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -223,69 +231,39 @@ const EditListingPage = () => {
         },
         method: "POST",
         body: JSON.stringify({
+          // ...fetchData,
+          locatedCountry: value.label,
+          description: fetchData.description,
           postedBy: currentUser._id,
-          title,
-          // mapLocation: coordinates,
-          // houseAddress: address,
-          // description,
-          // type: houseType,
-          // houseImages: formData.imageUrls,
-          // beds,
-          // facilities: facilities,
-          // baths,
-          // livingRoom,
-          // noOfpersons,
-          // amenitiesIncluded: amentitiesinc,
-          // amenitiesNotIncluded: amentitiesnotinc,
-          // postedBy: currentUser,
-          // pricePerNight: housePrice,
-          // locatedCountry: value.label,
-          // availableFrom: range[0].startDate,
-          // availableTill: range[0].endDate,
+          title: fetchData.title,
+          type: fetchData.houseType,
+          mapLocation: fetchData.coordinates,
+          houseAddress: fetchData.address,
+          description: fetchData.description,
+          houseImages: fetchData.houseImages,
+          beds: fetchData.beds,
+          facilities: fetchData.facilities,
+          baths: fetchData.baths,
+          livingRoom: fetchData.livingRoom,
+          noOfpersons: fetchData.noOfpersons,
+          amenitiesIncluded: fetchData.amenitiesIncluded,
+          amenitiesNotIncluded: fetchData.amenitiesNotIncluded,
+          pricePerNight: fetchData.pricePerNight,
+          locatedCountry: value.label,
+          availableFrom: range[0].startDate,
+          availableTill: range[0].endDate,
         }),
       });
+      const data = await res.json();
+      setLoading(false);
       toast.success("Inputs are updated!!!");
-      // alert("house details saved");
-      console.log(res?.data);
+      //console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error.message);
       toast.error("Inputs are updated!!!");
     }
   };
-  // const data = await res.json();
-  //     await fetch(`${baseUrl}/api/create-new-listing`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`, // <---------- HERE
-  //       },
-  //       body: JSON.stringify({
-  //         title,
-  //         mapLocation: coordinates,
-  //         houseAddress: address,
-  //         description,
-  //         type: houseType,
-  //         houseImages: formData.imageUrls,
-  //         beds,
-  //         facilities: facilities,
-  //         baths,
-  //         livingRoom,
-  //         noOfpersons,
-  //         amenitiesIncluded: amentitiesinc,
-  //         amenitiesNotIncluded: amentitiesnotinc,
-  //         postedBy: currentUser,
-  //         pricePerNight: housePrice,
-  //         locatedCountry: value.label,
-  //         availableFrom: range[0].startDate,
-  //         availableTill: range[0].endDate,
-  //       }),
-  //     });
-  //     setLoading(false);
-
-  //     //console.log(res.data);
-
-  //console.log(range[0].startDate);
 
   return (
     <>
@@ -294,9 +272,6 @@ const EditListingPage = () => {
           <meta />
           <title>Edit Listing | Lodgeme</title>
         </Helmet>
-        <div>
-          <h1>Editing</h1>
-        </div>
         <EditListingStyles>
           <div className="formbox" ref={refOne}>
             <div className="forminputs">
@@ -305,8 +280,8 @@ const EditListingPage = () => {
                 name="title"
                 type="text"
                 placeholder="Apartment in city center"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={fetchData?.title}
+                onChange={handleChange}
               />
               <span>
                 **The title has to be specific so that people get to know about
@@ -314,15 +289,14 @@ const EditListingPage = () => {
                 <strong>Superb studio apartment in city center</strong>**
               </span>
             </div>
-
             <div className="forminputs">
               <label htmlFor="title">Type of your house*</label>
               <input
                 name="title"
                 type="text"
                 placeholder="Studio/Flat/Apartment"
-                value={houseType}
-                onChange={(e) => setHouseType(e.target.value)}
+                value={fetchData?.type}
+                onChange={handleChange}
               />
               <span>
                 **The title has to be specific so that people get to know about
@@ -336,8 +310,8 @@ const EditListingPage = () => {
                 name="facilities"
                 type="text"
                 placeholder=" Beaches,Parks,Museums"
-                value={facilities}
-                onChange={(e) => setFacilities(e.target.value)}
+                value={fetchData?.facilities}
+                onChange={handleChange}
               />
               <span>
                 **The facilities has to be specific so that people get to know
@@ -352,16 +326,28 @@ const EditListingPage = () => {
               <label htmlFor="dates">
                 Select Available dates for your house*
               </label>
-              <input
-                value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
-                  range[0].endDate,
-                  "dd/MM/yyyy"
+              <label style={{ fontWeight: "bolder", color: "#015151" }}>
+                The selected dates by you were from{" "}
+                {`${moment(fetchData.availableFrom).format(
+                  "MMMM Do YYYY"
+                )} to ${moment(fetchData.availableTill).format(
+                  "MMMM Do YYYY"
                 )}`}
+              </label>
+              <input
+                value={`${moment(range[0].startDate).format(
+                  "MMMM Do YYYY"
+                )} to ${moment(range[0].endDate).format("MMMM Do YYYY")}`}
+                // onChange={handleChange}
                 readOnly
                 onClick={() => setOpen((open) => !open)}
               />
+              <span>
+                **Make sure to add start date and end date for your house&nbsp;
+                <strong>January 1th 2024 to January 7th 2024</strong>
+                **
+              </span>
             </div>
-
             {open && (
               <div className="datepicker">
                 <DateRangePicker
@@ -379,15 +365,14 @@ const EditListingPage = () => {
                 />
               </div>
             )}
-
             <div className="forminputs">
               <label htmlFor="price">Price per night*</label>
               <input
                 name="price"
                 type="number"
                 placeholder="Price per night in EUR"
-                value={housePrice}
-                onChange={(e) => setHouseprice(e.target.value)}
+                value={fetchData?.pricePerNight}
+                onChange={handleChange}
               />
               <span>
                 **The price is you post for staying in the house per day&nbsp;
@@ -401,8 +386,8 @@ const EditListingPage = () => {
                 name="beds"
                 type="number"
                 placeholder="beds"
-                value={beds}
-                onChange={(e) => setBeds(e.target.value)}
+                value={fetchData?.beds}
+                onChange={handleChange}
               />
               <span>
                 **The number of beds available in the house&nbsp;
@@ -416,8 +401,8 @@ const EditListingPage = () => {
                 name="noOfpersons"
                 type="number"
                 placeholder="Number of guests to visit"
-                value={noOfpersons}
-                onChange={(e) => setnoOfpersons(e.target.value)}
+                value={fetchData?.noOfpersons}
+                onChange={handleChange}
               />
               <span>
                 **We can allow only 2-3 guest to visit you&nbsp;
@@ -431,8 +416,8 @@ const EditListingPage = () => {
                 name="baths"
                 type="number"
                 placeholder="baths"
-                value={baths}
-                onChange={(e) => setBaths(e.target.value)}
+                value={fetchData?.baths}
+                onChange={handleChange}
               />
               <span>
                 **The number of baths available in the house&nbsp;
@@ -446,8 +431,8 @@ const EditListingPage = () => {
                 name="livingroom"
                 type="number"
                 placeholder="baths"
-                value={livingRoom}
-                onChange={(e) => setLivingRoom(e.target.value)}
+                value={fetchData?.livingRoom}
+                onChange={handleChange}
               />
               <span>
                 **The number of living rooms available in the house&nbsp;
@@ -457,6 +442,9 @@ const EditListingPage = () => {
             </div>
             <div className="forminputs">
               <label htmlFor="country">Country Located*</label>
+              <label style={{ fontWeight: "bolder", color: "#015151" }}>
+                The selected country by you was {fetchData.locatedCountry}
+              </label>
               <Select
                 placeholder="Select Location"
                 options={options}
@@ -476,8 +464,8 @@ const EditListingPage = () => {
               <textarea
                 name="description"
                 placeholder="This is a house with all your needed amenities and furnishments. We provide you breakfast and dinner with unlimited servings.We even provide you American and Chinese cuisines"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={fetchData?.description}
+                onChange={handleChange}
               />
               <span>
                 **A short description about the features present in house&nbsp;
@@ -487,16 +475,15 @@ const EditListingPage = () => {
                 **
               </span>
             </div>
-
             <div className="forminputs">
-              <label htmlFor="amenitiesinc">
+              <label htmlFor="amenitiesIncluded">
                 Add amenities that you offer while staying*
               </label>
               <input
-                name="amenitiesinc"
+                name="amenitiesIncluded"
                 placeholder="Amenities Included"
-                value={amentitiesinc}
-                onChange={(e) => setAmenitiesinc(e.target.value)}
+                value={fetchData.amenitiesIncluded}
+                onChange={handleChange}
               />
               <span>
                 **The amenities that you can afford when people stay in the
@@ -505,15 +492,13 @@ const EditListingPage = () => {
                 **
               </span>
             </div>
-            <div className="forminputs">
-              <label htmlFor="amenitiesnotinc">
+            {/* <div className="forminputs">
+              <label htmlFor="amenitiesNotIncluded">
                 Add amenities that you do not offer while staying*
               </label>
               <input
-                name="amenitiesnotinc"
+                name="amenitiesNotIncluded"
                 placeholder="Amenities Not Included"
-                value={amentitiesnotinc}
-                onChange={(e) => setNotamenitiesinc(e.target.value)}
               />
               <span>
                 **The amenities that you cannot afford when people stay in the
@@ -521,14 +506,15 @@ const EditListingPage = () => {
                 <strong>Food,Servicing,Tour arrangements</strong>
                 **
               </span>
-            </div>
-
+            </div> */}
             <div className="forminputs">
               <label htmlFor="">
                 Enter your address so that we will mark in map for public view*
               </label>
               <PlacesAutocomplete
-                value={address}
+                value={fetchData?.houseAddress}
+                // onChange={handleChange}
+                // value={address}
                 onChange={setAddress}
                 onSelect={handleSelect}
               >
@@ -552,7 +538,6 @@ const EditListingPage = () => {
                         const className = suggestion.active
                           ? "suggestion-item--active"
                           : "suggestion-item";
-                        // inline style for demonstration purpose
                         const style = suggestion.active
                           ? { backgroundColor: "#fafafa", cursor: "pointer" }
                           : { backgroundColor: "#ffffff", cursor: "pointer" };
@@ -619,8 +604,8 @@ const EditListingPage = () => {
             </div>
           )}
           <div className="imagemap">
-            {formData.imageUrls.length > 0 &&
-              formData.imageUrls.map((url, index) => (
+            {fetchData?.houseImages?.length >= 1 &&
+              fetchData?.houseImages?.map((url, index) => (
                 <div className="imageboxurl" key={index}>
                   <div>
                     <img src={url} className="imageUrls" alt="" />

@@ -934,6 +934,16 @@ export const SingleHousePageStyles = styled.section`
     padding: 10px;
   }
 
+  .amenitiiesul {
+    margin-left: 10px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    font-weight: bolder;
+  }
+
+  .amenitylisticon {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+
   .amenitieslisttext {
     font-size: 18px;
 

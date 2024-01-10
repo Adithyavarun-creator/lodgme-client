@@ -4,6 +4,7 @@ import { AddListingStyles } from "./AddListingStyles";
 import { DateRangePicker } from "react-date-range";
 import { DatePicker } from "antd";
 import { differenceInDays } from "date-fns";
+import toast, { Toaster } from "react-hot-toast";
 
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -31,9 +32,10 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../../firebase/firebase";
+import moment from "moment";
 
 const AddListingPage = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, token } = useSelector((state) => state.user);
   const { RangePicker } = DatePicker;
 
   const [address, setAddress] = useState("");
@@ -97,7 +99,11 @@ const AddListingPage = () => {
 
   //uploadfiles
   const handleImageSubmit = () => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+    if (files.length < 5) {
+      toast.error("Max file has to be 5 and more");
+      return;
+    }
+    if (files.length > 0 && files.length + formData.imageUrls.length) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -180,60 +186,75 @@ const AddListingPage = () => {
       );
     });
   };
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    //console.log(token);
-    setToken(token);
-  }, [token]);
 
   const onAddListing = async () => {
     if (!title) {
-      alert("Enter title");
+      toast.error("Enter title");
+      return;
     }
 
     if (!houseType) {
-      alert("Enter type of your house");
+      toast.error("Enter type of your house");
+      return;
     }
     if (!facilities) {
-      alert("Enter Facilites");
+      toast.error("Enter Facilites");
+      return;
     }
 
     if (!coordinates) {
-      alert("Enter and select Address");
+      toast.error("Enter and select Address");
+      return;
     }
 
     if (!address) {
-      alert("Enter and select Address");
+      toast.error("Enter and select Address");
+      return;
     }
     if (!description) {
-      alert("Enter Description");
+      toast.error("Enter Description");
+      return;
     }
     if (!beds) {
-      alert("Enter no of beds");
+      toast.error("Enter no of beds");
+      return;
     }
     if (!baths) {
-      alert("Enter no of baths");
+      toast.error("Enter no of baths");
+      return;
     }
     if (!livingRoom) {
-      alert("Enter no of livingRoom");
+      toast.error("Enter no of livingRoom");
+      return;
     }
     if (!amentitiesinc) {
-      alert("Enter amenitites included");
+      toast.error("Enter amenitites included");
+      return;
     }
     if (!amentitiesnotinc) {
-      alert("Enter amenitites not included");
+      toast.error("Enter amenitites not included");
+      return;
     }
 
     if (!housePrice) {
-      alert("Enter price of stay per day");
+      toast.error("Enter price of stay per day");
+      return;
     }
     if (!value) {
-      alert("Enter country name");
+      toast.error("Enter country name");
+      return;
     }
-    if (!files) {
-      alert("Images not selected");
+    if (!range[0].startDate) {
+      toast.error("Enter start date");
+      return;
+    }
+    if (!range[0].endDate) {
+      toast.error("Enter start date");
+      return;
+    }
+    if (!files && files.length < 5) {
+      toast.error("Images not selected and maximm images should be 5");
+      return;
     }
 
     try {
@@ -266,12 +287,10 @@ const AddListingPage = () => {
         }),
       });
       setLoading(false);
-
-      //console.log(res.data);
-      alert("house details saved");
+      toast.success("House Listing Published");
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -340,10 +359,9 @@ const AddListingPage = () => {
                 Select Available dates for your house*
               </label>
               <input
-                value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
-                  range[0].endDate,
-                  "dd/MM/yyyy"
-                )}`}
+                value={`${moment(range[0].startDate).format(
+                  "MMMM Do YYYY"
+                )} to ${moment(range[0].endDate).format("MMMM Do YYYY")}`}
                 readOnly
                 onClick={() => setOpen((open) => !open)}
               />
@@ -641,6 +659,7 @@ const AddListingPage = () => {
               title={loading ? "Publishing...." : "Publish House Listing"}
             />
           </div>
+          <Toaster position="top-center" reverseOrder={false} />
         </AddListingStyles>
       </HelmetProvider>
     </>

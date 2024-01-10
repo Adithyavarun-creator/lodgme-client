@@ -9,7 +9,7 @@ import { baseUrl } from "../baseUrl/url";
 import { useSelector } from "react-redux";
 
 const OTPPage = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, token } = useSelector((state) => state.user);
 
   const [value, setValue] = useState();
   const [otp, setOtp] = useState("");
@@ -25,18 +25,19 @@ const OTPPage = () => {
       console.log(error);
     }
   };
-  //   console.log(value);
+  //console.log(currentUser);
 
   const verifyOtp = async () => {
     try {
       const data = await user.confirm(otp);
       setResults(data.user);
       const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
-        method: "PUT",
-        body: JSON.stringify(currentUser.mobileVerified),
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify({ mobileVerified: currentUser?.mobileVerified }),
       });
       const response = await res.json();
       console.log(response);

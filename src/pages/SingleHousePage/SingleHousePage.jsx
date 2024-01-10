@@ -9,6 +9,7 @@ import {
   FaStar,
   FaToilet,
 } from "react-icons/fa";
+import { RWebShare } from "react-web-share";
 import {
   FaKitchenSet,
   FaTreeCity,
@@ -35,7 +36,7 @@ import {
   MdLocationPin,
   MdEuroSymbol,
 } from "react-icons/md";
-import { IoBedSharp } from "react-icons/io5";
+import { IoBedSharp, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { PiArmchairFill } from "react-icons/pi";
 import Mapbox from "../../components/MapBox/MapBox";
 import { DateRangePicker, DateRange } from "react-date-range";
@@ -45,12 +46,12 @@ import { addDays, differenceInDays } from "date-fns";
 import format from "date-fns/format";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Select from "react-select";
-import { MdOutlineSmokeFree } from "react-icons/md";
+import { MdCancel } from "react-icons/md";
 import { BiSolidBlanket } from "react-icons/bi";
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import { apartmentDatas } from "../../datas/apartmentDatas";
 import SingleHouseImages from "../../components/SingleHousePage/SingleHouseImages";
-import { baseUrl } from "../../baseUrl/url";
+import { baseUrl, clientUrl } from "../../baseUrl/url";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -255,6 +256,22 @@ const SingleHousePage = () => {
   dispatch(setNumberofPersons(noPersons));
   //console.log(noPersons.value);
 
+  // const url = `https://server-api-q17g.onrender.com/homes&rooms/${houseData._id}`;
+  const shareDetails = {
+    url: `${clientUrl}/homes&rooms/${houseData._id}`,
+    title: houseData.title,
+    text: "Listing from Lodgeme",
+  };
+
+  const shareFunction = async () => {
+    try {
+      await navigator.share(shareDetails);
+      toast.success("Link copied to clipboard !");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const bookingPreviewbtn = () => {
     if (moment(range[0].endDate).format() > houseData.availableTill) {
       toast.error(
@@ -272,10 +289,7 @@ const SingleHousePage = () => {
     );
   };
 
-  // console.log(moment(range[0].endDate).format(), "enddate");
-  //console.log(houseData);
-
-  //console.log(postedBy);
+  // console.log(houseData.amenitiesIncluded.map((a) => a.split(",")));
 
   if (!id) {
     return <Spinner />;
@@ -322,7 +336,9 @@ const SingleHousePage = () => {
                 <span className="amenitieslisttext">
                   <PiShareFatFill className="share-icon" />
                 </span>
-                <span className="sharetext">Share</span>
+                <span className="sharetext" onClick={shareFunction}>
+                  Share
+                </span>
               </div>
             </div>
           </div>
@@ -442,8 +458,17 @@ const SingleHousePage = () => {
                 </div>
                 {houseData?.amenitiesIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>
-                    <BsEmojiHeartEyesFill className="amenities-icon" />
-                    <span className="amenitieslisttext">{amenity}</span>
+                    {/* <BsEmojiHeartEyesFill className="amenities-icon" /> */}
+                    <span className="amenitieslisttext">
+                      {amenity.split(",").map((a, i) => (
+                        <ul key={i} className="amenitiiesul">
+                          <li className="flex">
+                            <IoCheckmarkDoneCircleSharp className="amenitylisticon" />
+                            &nbsp;{a}
+                          </li>
+                        </ul>
+                      ))}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -454,8 +479,15 @@ const SingleHousePage = () => {
                 </div>
                 {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>
-                    <IoMdCloseCircle className="amenities-icon" />
-                    <span className="amenitieslisttext">{amenity}</span>
+                    {/* <IoMdCloseCircle className="amenities-icon" /> */}
+                    {amenity.split(",").map((a, i) => (
+                      <ul key={i} className="amenitiiesul">
+                        <li className="flex">
+                          <MdCancel className="amenitylisticon" />
+                          &nbsp;{a}
+                        </li>
+                      </ul>
+                    ))}
                   </div>
                 ))}
               </div>
@@ -463,9 +495,9 @@ const SingleHousePage = () => {
           </div>
 
           {/* Map Location Pin  */}
-          {/* <div className="singlepagemapbox" ref={mapRef}>
+          <div className="singlepagemapbox" ref={mapRef}>
             <Mapbox lat={lat} lng={lng} />
-          </div> */}
+          </div>
 
           {/* review box */}
           <div className="reviewandbookbox">
@@ -477,45 +509,48 @@ const SingleHousePage = () => {
               </div>
               <div className="reviewpersonsbox">
                 {houseData?.reviews?.length ? (
-                  houseData?.reviews?.slice(0, 3).map((review) => (
-                    <div className="reviewpersondetailbox" key={review._id}>
-                      <div className="reviewuserbox">
-                        <div>
-                          <img
-                            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-                            alt=""
-                            className="reviewpersonimg"
-                          />
-                        </div>
+                  houseData?.reviews
+                    ?.slice(0, 3)
+                    .reverse()
+                    .map((review) => (
+                      <div className="reviewpersondetailbox" key={review._id}>
+                        <div className="reviewuserbox">
+                          <div>
+                            <img
+                              src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+                              alt=""
+                              className="reviewpersonimg"
+                            />
+                          </div>
 
-                        <div className="reviewwww">
-                          <h2 className="reviewusername">
-                            {review?.reviewerFirstname}&nbsp;
-                            {review?.reviewerLastname}
-                          </h2>
-                          <span className="reviewusercountry">
-                            {review?.reviewerCountry}
+                          <div className="reviewwww">
+                            <h2 className="reviewusername">
+                              {review?.reviewerFirstname}&nbsp;
+                              {review?.reviewerLastname}
+                            </h2>
+                            <span className="reviewusercountry">
+                              {review?.reviewerCountry}
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="reviewuserpostdated">
+                            Posted on {moment(review.reviewedAt).format("LL")}
                           </span>
                         </div>
+                        <div className="reviewuserating">
+                          <FaStar className="reviewuserstar" />
+                          <span className="reviewuserpostdate">
+                            {review?.rating}
+                          </span>
+                        </div>
+                        <div>
+                          <article className="singlepagearticlecontent">
+                            {review?.reviewDescription}
+                          </article>
+                        </div>
                       </div>
-                      <div>
-                        <span className="reviewuserpostdated">
-                          Posted on {moment(review.reviewedAt).format("LL")}
-                        </span>
-                      </div>
-                      <div className="reviewuserating">
-                        <FaStar className="reviewuserstar" />
-                        <span className="reviewuserpostdate">
-                          {review?.rating}
-                        </span>
-                      </div>
-                      <div>
-                        <article className="singlepagearticlecontent">
-                          {review?.reviewDescription}
-                        </article>
-                      </div>
-                    </div>
-                  ))
+                    ))
                 ) : (
                   <span className="totalbookingamount">No reviews added</span>
                 )}

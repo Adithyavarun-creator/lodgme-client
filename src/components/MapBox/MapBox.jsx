@@ -5,6 +5,8 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import { useLoadScript } from '@react-google-maps/api';
+
 import LogoMarker from "../../assets/lodgemeblacklogo.png";
 
 const containerStyle = {

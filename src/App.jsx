@@ -27,6 +27,7 @@ import FacebookUserDashboard from "./pages/FacebookUserDashboard/FacebookUserDas
 import FacebookOrdersPage from "./pages/OrdersPage/FacebookOrdersPage";
 import GoogleOrdersPage from "./pages/OrdersPage/GoogleOrdersPage";
 import AddReview from "./components/AddReview/AddReview";
+import SupportPage from "./pages/SupportPage/SupportPage";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -125,6 +126,7 @@ function App() {
               path="/search-filter-results"
               element={<SearchFiltersPage />}
             />
+            <Route path="/lodgeme-support-q&a" element={<SupportPage />} />
             {/* <Route
               path="/add-new-listing"
               element={<LazyAddListingPageComponent />}
@@ -160,10 +162,10 @@ function App() {
 
               <Route path="/edit-listing/:id" element={<EditListingPage />} />
 
-              {/* <Route
+              <Route
                 path="/add-new-listing"
                 element={<LazyAddListingPageComponent />}
-              /> */}
+              />
               <Route path="/billing-details" element={<BillingPage />} />
               <Route path="/checkout-options" element={<CheckoutPage />} />
               {/* <Route path="/otp-page" element={<OTPPage />} /> */}

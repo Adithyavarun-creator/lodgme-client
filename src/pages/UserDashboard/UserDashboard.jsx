@@ -52,13 +52,21 @@ const UserDashboard = () => {
 
           <div>
             <h1>
+              {currentUser?.mobileVerified
+                ? "Mobile verified by Lodgeme"
+                : "Mobile not verified"}
+            </h1>
+          </div>
+
+          {/* <div>
+            <h1>
               {currentUser?.mobileVerified ? (
                 "Mobile number verified by Lodgeme"
               ) : (
                 <button onClick={mobileOtp}>Verify Phone number</button>
               )}{" "}
             </h1>
-          </div>
+          </div> */}
 
           <div className="dashboardbox">
             <Link to="/" className="linkStyle dashboardbox-1">

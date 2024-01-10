@@ -11,7 +11,7 @@ const EmailVerify = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  console.log(params);
+  // console.log(params);
 
   const onLogin = () => {
     navigate("/user-sign-in");

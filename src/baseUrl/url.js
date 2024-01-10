@@ -4,7 +4,11 @@
 import axios from "axios";
 
 export const baseUrl = "https://server-api-q17g.onrender.com";
+export const clientUrl = "https://lodgme-client.vercel.app";
 
 export const searchListings = async (query) => {
   await axios.post(`${baseUrl}/api/search-listings`, query);
 };
+
+//dashboard email ceo@lodgeme.com (MAIL°
+//dashboard password Mot de passe : 0659043811Cm@
