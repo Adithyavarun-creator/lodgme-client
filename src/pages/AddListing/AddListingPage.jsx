@@ -33,6 +33,7 @@ import {
 } from "firebase/storage";
 import { app } from "../../firebase/firebase";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const AddListingPage = () => {
   const { currentUser, token } = useSelector((state) => state.user);
@@ -84,6 +85,7 @@ const AddListingPage = () => {
   const [percent, setPercent] = useState("");
   // get the target element to toggle
   const refOne = useRef(null);
+  const navigate = useNavigate();
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -259,7 +261,7 @@ const AddListingPage = () => {
 
     try {
       setLoading(true);
-      await fetch(`${baseUrl}/api/create-new-listing`, {
+      const response = await fetch(`${baseUrl}/api/create-new-listing`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -286,8 +288,14 @@ const AddListingPage = () => {
           availableTill: range[0].endDate,
         }),
       });
+      const data = await response.json();
       setLoading(false);
-      toast.success("House Listing Published");
+      toast.success(
+        "House Listing Published, Taking you to your published house shortly"
+      );
+      setTimeout(() => {
+        navigate(`/homes&rooms/${data._id}`);
+      }, 4000);
     } catch (error) {
       setLoading(false);
       toast.error(error.message);

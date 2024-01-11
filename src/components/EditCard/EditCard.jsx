@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaLocationDot, FaBath } from "react-icons/fa6";
 import { IoBedSharp, IoPricetags } from "react-icons/io5";
 import { MdEuroSymbol, MdOutlineHomeWork } from "react-icons/md";
@@ -12,7 +12,7 @@ import { FiEdit } from "react-icons/fi";
 const EditCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
-  // console.log(res);
+  //console.log(res);
 
   return (
     <>
@@ -31,19 +31,26 @@ const EditCard = ({ res }) => {
           <div className="searchresultuserbox">
             <img
               className="searchresultuser"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={
+                currentUser.profilePic
+                  ? currentUser.profilePic
+                  : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
               alt=""
             />
           </div>
 
           {currentUser ? (
             <div className="editdelicons">
-              <div className="searchuserdelete">
+              <Link
+                to={`/delete-listing/${res._id}`}
+                className="searchuserdelete"
+              >
                 <MdDelete
                   title="Delete your Listing"
                   className="searchdeleteicon"
                 />
-              </div>
+              </Link>
 
               <Link
                 to={`/edit-listing/${res._id}`}
@@ -56,12 +63,14 @@ const EditCard = ({ res }) => {
             ""
           )}
 
-          <div className="searchuserverified">
-            <MdVerified
-              className="searchuserverifiedicon"
-              title="User verified by Lodgeme"
-            />
-          </div>
+          {currentUser.mobileVerified && (
+            <div className="searchuserverified">
+              <MdVerified
+                className="searchuserverifiedicon"
+                title="User verified by Lodgeme"
+              />
+            </div>
+          )}
           <div>
             <h3>{res.facilities} nearby </h3>
           </div>
@@ -122,7 +131,11 @@ const EditCard = ({ res }) => {
           <div>
             <img
               className="searchresultimg"
-              src="https://images.unsplash.com/photo-1683009427513-28e163402d16?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={
+                res.houseImages
+                  ? res.houseImages[0]
+                  : "https://images.unsplash.com/photo-1683009427513-28e163402d16?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
               alt=""
             />
           </div>

@@ -8,6 +8,8 @@ import moment from "moment";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../baseUrl/url";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const BillingPage = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser, token } =
@@ -107,12 +109,20 @@ const BillingPage = () => {
                   />
                 </div>
                 <div className="billingform">
-                  <label htmlFor="">Mobile number</label>
-                  <input
+                  <label className="phonelabel" htmlFor="">
+                    Mobile number
+                  </label>
+                  {/* <input
                     type="number"
                     placeholder="+929938383838"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
+                  /> */}
+                  <PhoneInput
+                    className=""
+                    placeholder="Enter phone number"
+                    value={number}
+                    onChange={setNumber}
                   />
                 </div>
                 <div className="billingform">

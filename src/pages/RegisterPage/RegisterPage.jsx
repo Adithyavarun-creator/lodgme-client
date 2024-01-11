@@ -100,32 +100,13 @@ const RegisterPage = () => {
           icon: "👏",
         }
       );
-      logoutUser();
+      setTimeout(() => {
+        navigate("/user-sign-in");
+      }, 4000);
     } catch (error) {
       setLoading(false);
       setError(error.message);
       console.log(error);
-    }
-  };
-
-  const logoutUser = async () => {
-    try {
-      dispatch(signOutUserStart());
-      // // const res = await fetch(`${baseUrl}/api/signout`);
-      // // const data = await res.json();
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.get(`${baseUrl}/api/signout`);
-      if (data.success === false) {
-        dispatch(signOutUserFailure(data.message));
-        return;
-      }
-      //console.log(data);
-      dispatch(signOutUserFailure(data));
-      localStorage.removeItem("token");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      dispatch(signOutUserFailure(error.message));
     }
   };
 
@@ -134,7 +115,7 @@ const RegisterPage = () => {
       <HelmetProvider>
         <Helmet>
           <meta />
-          <title>Register | LodgeMe</title>
+          <title>Register | Lodgeme</title>
         </Helmet>
         <RegisterPageStyles>
           <div>

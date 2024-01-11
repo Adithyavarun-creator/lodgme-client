@@ -38,28 +38,6 @@ import moment from "moment";
 const EditListingPage = () => {
   const { currentUser, token } = useSelector((state) => state.user);
 
-  // const [address, setAddress] = useState("");
-  // const [coordinates, setCoordiantes] = useState({
-  //   lat: null,
-  //   lng: null,
-  // });
-  // // const [token, setToken] = useState("");
-
-  // const [beds, setBeds] = useState(0);
-  // const [baths, setBaths] = useState(0);
-  // const [livingRoom, setLivingRoom] = useState(0);
-  // const [title, setTitle] = useState("");
-  // const [facilities, setFacilities] = useState("");
-  // const [houseType, setHouseType] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [housePrice, setHouseprice] = useState(0);
-  // const [user, setUser] = useState("");
-  // const [amentitiesinc, setAmenitiesinc] = useState([]);
-  // const [amentitiesnotinc, setNotamenitiesinc] = useState([]);
-  // const [fromDate, setFromdate] = useState("");
-  // const [toDate, setTodate] = useState("");
-  // const [noOfpersons, setnoOfpersons] = useState(0);
-
   //dates
   const [range, setRange] = useState([
     {

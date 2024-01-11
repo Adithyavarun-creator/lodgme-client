@@ -144,9 +144,9 @@ export const HomepageStyles = styled(motion.div)`
     height: 105px;
     background-color: white;
     z-index: 20;
-    width: 40%;
+    width: 30%;
     margin: 0 auto;
-    border-radius: 50px;
+    border-radius: 30px;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -158,33 +158,35 @@ export const HomepageStyles = styled(motion.div)`
     margin-top: 0;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      width: 65%;
+      width: 45%;
       gap: 20px;
       margin-top: 20px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      width: 75%;
+      width: 60%;
       padding: 5px;
       gap: 10px;
     }
 
     @media ${devices.smallTabs} {
-      height: 250px;
+      margin-top: 30px;
+      height: 170px;
       display: flex;
       flex-direction: column;
       gap: 7px;
       padding: 3px;
-      width: 50%;
+      width: 40%;
     }
 
     @media ${devices.smallMobiles} {
-      height: 250px;
+      margin-top: 40px;
+      height: 160px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      padding: 0;
-      width: 75%;
+      gap: 7px;
+      padding: 3px;
+      width: 70%;
     }
   }
 

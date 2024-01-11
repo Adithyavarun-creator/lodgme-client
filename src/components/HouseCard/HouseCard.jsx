@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import Button from "../Button/Button";
 import moment from "moment";
+import { MdOutlineEuro } from "react-icons/md";
 
 const HouseCard = ({ houseCards, title }) => {
   const { t } = useTranslation();
-  //console.log(houseCards);
 
   const settings = {
     dots: true,
@@ -26,96 +26,6 @@ const HouseCard = ({ houseCards, title }) => {
 
   return (
     <HouseCardStyles>
-      {/* <div
-        animate={{ x: 100 }}
-        transition={{ delay: 1 }}
-        className="toprated_house_cardbox"
-      >
-        {houseCards && houseCards.length ? (
-          houseCards?.map((card) => (
-            <Link
-              to={`/homes&rooms/${card.id}`}
-              className="toprated_house_card linkStyle"
-              key={card.id}
-            >
-              <Slider {...settings}>
-                {card.images ? (
-                  card.images.map((image) => (
-                    <div className="" key={image.id}>
-                      <img
-                        src={image.imgSrc}
-                        alt=""
-                        className="toprated_house_cardimg"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <Spinner />
-                )}
-              </Slider>
-
-              {card.userImg && (
-                <div className="toprated_favoriteuser">
-                  <span className="">
-                    <img src={card.userImg} alt="" className="toprated_user" />
-                  </span>
-                </div>
-              )}
-
-              <div className="toprated_house_cardsubs">
-                <div className="housetitlebox">
-                  {card.caption && (
-                    <div>
-                      <h3 className="toprated_house_cardmaintext">
-                        {card.caption}
-                      </h3>
-                    </div>
-                  )}
-                  <div>
-                    {card.ratingCount && (
-                      <div className="flex">
-                        <FaStar className="toprated_staricon" />
-                        &nbsp;{" "}
-                        <span className="toprated_ratingcount">
-                          {card.ratingCount}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {card.location && (
-                  <div className="toprated_locationbox">
-                    <span>
-                      <RiMapPin2Fill className="toprated_locationicon" />
-                    </span>
-                    <span> {card.location}</span>
-                  </div>
-                )}
-
-                {card.subLocation && (
-                  <div className="toprated_locationbox">
-                    <span>{card.subLocation} </span>
-                  </div>
-                )}
-
-                {card.priceperNight && (
-                  <div className="flex">
-                    <strong className="toprated_pricebox">
-                      ${card.priceperNight}/night
-                    </strong>
-                  </div>
-                )}
-                <div className="toprated_reviewbox"></div>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <Spinner />
-        )}
-      </div>
-      <div className="flex-center mt-10 mb-20">
-        <Button title="Search More" />
-      </div> */}
       <div
         animate={{ x: 100 }}
         transition={{ delay: 1 }}
@@ -181,12 +91,12 @@ const HouseCard = ({ houseCards, title }) => {
                     </div>
                   </div>
                 </div>
-                {card.country && (
+                {card.locatedCountry && (
                   <div className="toprated_locationbox">
                     <span>
                       <RiMapPin2Fill className="toprated_locationicon" />
                     </span>
-                    <span>{card.country}</span>
+                    <span>{card.locatedCountry}</span>
                   </div>
                 )}
 
@@ -194,26 +104,25 @@ const HouseCard = ({ houseCards, title }) => {
                   <div className="toprated_locationbox">
                     <span
                       className="toprated_pricebox"
-                      style={{ fontWeight: "bolder" }}
+                      style={{ color: "#015151", fontWeight: "bolder" }}
                     >
-                      {card.type}{" "}
+                      {card.type}
                     </span>
                   </div>
                 )}
 
                 <div className="toprated_locationbox">
                   <span style={{ fontWeight: "bolder" }}>
-                    From&nbsp;
-                    {moment(card.availableFrom).format(
-                      "MMMM Do YYYY"
-                    )} until {moment(card.availableTill).format("MMMM Do YYYY")}{" "}
+                    {moment(card.availableFrom).format("L")} until{" "}
+                    {moment(card.availableTill).format("L")}{" "}
                   </span>
                 </div>
 
                 {card.pricePerNight && (
                   <div className="flex">
-                    <strong className="toprated_pricebox">
-                      ${card.pricePerNight}/night
+                    <strong className="flex toprated_priceboxi">
+                      <MdOutlineEuro />
+                      {card.pricePerNight}/night
                     </strong>
                   </div>
                 )}
@@ -222,12 +131,18 @@ const HouseCard = ({ houseCards, title }) => {
             </Link>
           ))
         ) : (
-          <Spinner />
+          <div className="notfoundhousebox">
+            <h2 className="notfoundhouse">No houses published</h2>
+          </div>
         )}
       </div>
-      <div className="flex-center mt-10 mb-20">
-        <Button title="Search More" />
-      </div>
+      {houseCards.length ? (
+        <div className="flex-center mt-10 mb-20">
+          <Button title="Search More" />
+        </div>
+      ) : (
+        ""
+      )}
     </HouseCardStyles>
   );
 };

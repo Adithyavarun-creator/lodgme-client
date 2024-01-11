@@ -6,10 +6,8 @@ import { UserListingPageStyles } from "./UserListingPageStyles";
 import EditCard from "../../components/EditCard/EditCard";
 
 const UserListingPage = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, token } = useSelector((state) => state.user);
   const [houses, setHouses] = useState([]);
-
-  console.log(currentUser._id);
 
   // useEffect(() => {
   //   const getListing = async () => {
@@ -22,12 +20,12 @@ const UserListingPage = () => {
 
   //   getListing();
   // }, [currentUser._id]);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    setToken(token);
-  }, []);
+  // useEffect(() => {
+  //   const token = JSON.parse(localStorage.getItem("token"));
+  //   setToken(token);
+  // }, []);
 
   //console.log(token);
 
@@ -44,8 +42,6 @@ const UserListingPage = () => {
     };
     fetchData();
   }, [currentUser, token]);
-
-  // console.log(houses);
 
   return (
     <>

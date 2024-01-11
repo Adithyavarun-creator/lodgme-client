@@ -29,6 +29,9 @@ import GoogleOrdersPage from "./pages/OrdersPage/GoogleOrdersPage";
 import AddReview from "./components/AddReview/AddReview";
 import SupportPage from "./pages/SupportPage/SupportPage";
 import EmailDashboardVerfiy from "./components/EmailVerify/EmailDashboardVerfiy";
+import DeletePopup from "./components/DeletePopup/DeletePopup";
+import DeleteListing from "./pages/DeleteFolder/DeleteListing";
+import DeleteUserPage from "./pages/DeleteFolder/DeleteUser";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -163,12 +166,13 @@ function App() {
 
               <Route path="/edit-listing/:id" element={<EditListingPage />} />
 
+              <Route path="/delete-listing/:id" element={<DeleteListing />} />
+
+              <Route path="/delete-profile/" element={<DeleteUserPage />} />
+
               <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
 
-              <Route
-                path="/email-verify"
-                element={<EmailDashboardVerfiy />}
-              />
+              <Route path="/email-verify" element={<EmailDashboardVerfiy />} />
 
               <Route
                 path="/add-new-listing"

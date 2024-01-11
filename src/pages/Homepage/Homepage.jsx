@@ -59,8 +59,8 @@ const Homepage = () => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    speed: 10000,
+    // autoplay: true,
+    // speed: 10000,
     cssEase: "linear",
     responsive: [],
   };

@@ -12,6 +12,9 @@ export const ButtonStyles = styled.button`
   font-size: 18px;
   text-transform: capitalize;
   font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media ${devices.bigLaptopsAndDesktops} {
     padding: 12px 20px;

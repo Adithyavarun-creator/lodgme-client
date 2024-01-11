@@ -5,6 +5,7 @@ export const HomepageSelectStyles = {
       color: "#fff",
     };
   },
+
   option: (defaultStyles, state) => ({
     ...defaultStyles,
     color: "#fff",
@@ -64,9 +65,9 @@ export const HomepageSelectStyles = {
       ...HomepageSelectStyles[
         "@media (min-width: 280px) and (max-width: 480px) "
       ],
-      fontSize: "12px",
+      fontSize: "10px",
       backgroundColor: "#015151",
-      height: "25px",
+      height: "15px",
       borderRadius: "10px",
       textAlign: "center",
       width: "180px",

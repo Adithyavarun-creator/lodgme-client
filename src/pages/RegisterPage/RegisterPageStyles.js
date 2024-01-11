@@ -187,7 +187,7 @@ export const RegisterPageStyles = styled.div`
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 14px;
+      font-size: 12px;
       height: 37px;
     }
     @media ${devices.smallTabs} {

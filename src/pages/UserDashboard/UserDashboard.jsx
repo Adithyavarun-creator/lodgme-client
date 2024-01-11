@@ -5,7 +5,7 @@ import Logo from "../../assets/lodgemeblacklogo.png";
 import { HiIdentification } from "react-icons/hi2";
 import { FaUserEdit } from "react-icons/fa";
 import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
-import { MdAddHome, MdSupportAgent } from "react-icons/md";
+import { MdAddHome, MdSupportAgent, MdAutoDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
@@ -117,22 +117,7 @@ const UserDashboard = () => {
                 <span>Upload your passport and verify</span>
               </div>
             </div>
-            <Link to="/edit-user-profile" className="linkStyle dashboardbox-1">
-              <div className="dashboard-logobox">
-                <img src={Logo} className="dashboard-logo" alt="" />
-              </div>
-              <div className="flexbox">
-                <div className="">
-                  <h2 className="dashboard-maintitle">Edit your Profile</h2>
-                </div>
-                <div className="dashboard-mainlink">
-                  <FaUserEdit className="dashboard-icon" />
-                </div>
-              </div>
-              <div>
-                <span>Click here and edit your personal details</span>
-              </div>
-            </Link>
+
             <Link to="/order-details" className="linkStyle dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -179,6 +164,40 @@ const UserDashboard = () => {
               </div>
               <div>
                 <span>Post your house listing to public</span>
+              </div>
+            </Link>
+            <Link to="/edit-user-profile" className="linkStyle dashboardbox-1">
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Edit your Profile</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <FaUserEdit className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>Click here and edit your personal details</span>
+              </div>
+            </Link>
+            <Link to="/delete-profile" className="linkStyle dashboardbox-1">
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Delete your Profile</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <MdAutoDelete className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>
+                  Click here and delete your personal data from Lodgeme
+                </span>
               </div>
             </Link>
             <div className="dashboardbox-1">

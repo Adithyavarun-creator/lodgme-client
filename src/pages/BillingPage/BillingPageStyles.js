@@ -163,6 +163,37 @@ export const BillingPageStyles = styled.div`
     }
   }
 
+  .phonelabel {
+    background-color: #fff;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    padding: 3px;
+    width: max-content;
+    position: absolute;
+    top: -20px;
+    left: 25px;
+    font-size: 14px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+      top: -13px;
+      left: 5px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+      top: -10px;
+      left: 5px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+      top: -8px;
+      left: 5px;
+    }
+  }
+
   input {
     height: 45px;
     width: 450px;
