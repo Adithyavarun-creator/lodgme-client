@@ -935,9 +935,12 @@ export const SingleHousePageStyles = styled.section`
   }
 
   .amenitiesul {
-    margin-left: 10px;
+    /* margin-left: 10px; */
     color: ${({ theme }) => theme.colors.primaryColor};
     font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
 
   .amenitylisticon {
@@ -965,9 +968,10 @@ export const SingleHousePageStyles = styled.section`
 
   .amenities-singlebox {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5px;
-    align-items: center;
+    /* align-items: center; */
+
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 5px;
     }
@@ -1905,5 +1909,9 @@ export const SingleHousePageStyles = styled.section`
     @media ${devices.smallMobiles} {
       font-size: 9px;
     }
+  }
+
+  .singlepagemapbox {
+    height: 400px;
   }
 `;

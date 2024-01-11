@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
+  useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useLoadScript } from '@react-google-maps/api';
 
 import LogoMarker from "../../assets/lodgemeblacklogo.png";
 
@@ -103,6 +103,7 @@ const MapBox = ({ lat, lng }) => {
     <div
       style={{
         display: "flex",
+        height: "400px",
       }}
     >
       <GoogleMap

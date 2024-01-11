@@ -300,9 +300,7 @@ const SingleHousePage = () => {
       <HelmetProvider>
         <Helmet>
           <meta />
-          <title>
-            {houseData?.title ? houseData?.title : "A beautiful house"}
-          </title>
+          <title>Lodgeme House and Rooms</title>
         </Helmet>
         <SingleHousePageStyles>
           <div className="singlepagetitlebox">
@@ -474,18 +472,22 @@ const SingleHousePage = () => {
 
               <div className="amenities-list">
                 <div>
-                  <h1 className="amenities-listheading">Prestations</h1>
+                  <h1 className="amenities-listheading">
+                    Prestations
+                  </h1>
                 </div>
                 {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>
-                    {amenity.split(",").map((a, i) => (
-                      <ul key={i} className="amenitiesul">
-                        <li className="flex amenitieslisttext">
-                          <MdCancel className="amenitylisticon" />
-                          &nbsp;{a}
-                        </li>
-                      </ul>
-                    ))}
+                    <span className="amenitieslisttext">
+                      {amenity.split(",").map((a, i) => (
+                        <ul key={i} className="amenitiesul">
+                          <li className="flex amenitieslisttext">
+                            <MdCancel className="amenitylisticon" />
+                            &nbsp;{a}
+                          </li>
+                        </ul>
+                      ))}
+                    </span>
                   </div>
                 ))}
               </div>
