@@ -130,7 +130,7 @@ function App() {
               path="/search-filter-results"
               element={<SearchFiltersPage />}
             />
-            <Route path="/lodgeme-support-q&a" element={<SupportPage />} />
+            {/* <Route path="/lodgeme-support-q&a" element={<SupportPage />} /> */}
 
             <Route
               path="/lodgeme-otp-verification-page"
@@ -186,6 +186,7 @@ function App() {
             </Route>
             {/* <Route path="*" element={<LazyNotFoundPageComponent />} /> */}
           </Routes>
+          {/* <SupportPage /> */}
           <Footer />
         </BrowserRouter>
       </Suspense>

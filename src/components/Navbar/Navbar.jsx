@@ -55,8 +55,6 @@ const Navbar = () => {
     }
   };
 
-  // console.log(currentUser);
-
   return (
     <>
       <NavbarStyles
@@ -91,17 +89,26 @@ const Navbar = () => {
             </div>
           )}
 
-          {currentUser && (
+          {currentUser?.provider === "lodgeme" && (
             <div>
               <img
                 src={
                   currentUser.profilePic
                     ? currentUser.profilePic
-                    : "" || currentUser?.provider === "google"
-                    ? currentUser?.user?.avatar
-                    : "" || currentUser?.provider === "facebook"
-                    ? "https://images.hindustantimes.com/tech/img/2023/09/21/1600x900/fb_1695273515215_1695273522698.jpg"
-                    : ""
+                    : "https://images.hindustantimes.com/tech/img/2023/09/21/1600x900/fb_1695273515215_1695273522698.jpg"
+                }
+                alt="user-pic"
+                className="navbar-profileimage"
+              />
+            </div>
+          )}
+          {currentUser?.provider === "google" && (
+            <div>
+              <img
+                src={
+                  currentUser?.avatar
+                    ? currentUser?.avatar
+                    : "https://e7.pngegg.com/pngimages/715/371/png-clipart-youtube-google-logo-google-s-google-account-youtube-text-trademark.png"
                 }
                 alt="user-pic"
                 className="navbar-profileimage"

@@ -5,7 +5,7 @@ import Logo from "../../assets/lodgemeblacklogo.png";
 import { HiIdentification } from "react-icons/hi2";
 import { FaUserEdit } from "react-icons/fa";
 import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
-import { MdAddHome, MdSupportAgent } from "react-icons/md";
+import { MdAddHome, MdAutoDelete, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
@@ -14,6 +14,8 @@ import { baseUrl } from "../../baseUrl/url";
 const GoogleUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  // console.log(currentUser.user);
 
   return (
     <>
@@ -93,6 +95,24 @@ const GoogleUserDashboard = () => {
               </div>
               <div>
                 <span>Browse houses and book it</span>
+              </div>
+            </Link>
+            <Link to="/delete-profile" className="linkStyle dashboardbox-1">
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Delete your Profile</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <MdAutoDelete className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>
+                  Click here and delete your personal data from Lodgeme
+                </span>
               </div>
             </Link>
 

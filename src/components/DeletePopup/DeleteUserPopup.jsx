@@ -24,6 +24,7 @@ const DeleteUserPopup = () => {
   const [userListings, setUserListings] = useState([]);
 
   // console.log(id);
+  console.log(currentUser.user);
 
   const goBack = () => {
     navigate("/dashboard-user");
@@ -45,12 +46,10 @@ const DeleteUserPopup = () => {
         return;
       }
       dispatch(deleteUserSuccess(data));
-      // localStorage.removeItem("token");
-      // toast.success("Your account has been deleted");
+      toast.success("Your account has been deleted");
       setTimeout(() => {
-        toast.success("Your account has been deleted");
         navigate("/user-sign-in");
-      }, 1000);
+      }, 1400);
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
       toast.error("Your account was not deleted as it was an invalid access");
@@ -68,7 +67,6 @@ const DeleteUserPopup = () => {
           <div>
             <h2>Are you sure you want to delete your account</h2>
           </div>
-          {/* <div>{JSON.stringify(currentUser)}</div> */}
           <div className="deletehousebox">
             <div>
               <h3>
