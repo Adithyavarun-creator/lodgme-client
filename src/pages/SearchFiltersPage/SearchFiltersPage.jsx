@@ -10,6 +10,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { DatePicker } from "antd";
 
 const SearchFiltersPage = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const SearchFiltersPage = () => {
     sort: "created_at",
     order: "desc",
   });
+  const [startDate, setStartDate] = useState(new Date());
+
   const [fetchedResults, setFetchedResults] = useState([]);
 
   useEffect(() => {
@@ -30,6 +33,9 @@ const SearchFiltersPage = () => {
     const typeFromUrl = urlParams.get("type");
     const sortFromUrl = urlParams.get("sort");
     const orderFromUrl = urlParams.get("order");
+    // console.log(moment(startDateFromUrl).format());
+
+    // urlParams.set("startDate", startDate);
 
     if (searchTermFromUrl || typeFromUrl || sortFromUrl || orderFromUrl) {
       setSearchData({
@@ -81,6 +87,13 @@ const SearchFiltersPage = () => {
       setSearchData({ ...searchData, searchTerm: e.target.value });
     }
 
+    if (e.target.id === "availableFrom") {
+      setSearchData({
+        ...searchData,
+        availableFrom: moment(searchData.availableFrom).format(),
+      });
+    }
+
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "created_at";
 
@@ -90,7 +103,7 @@ const SearchFiltersPage = () => {
     }
   };
 
-  //console.log(fetcehdResults);
+  // console.log(moment(startDate).format());
 
   return (
     <>

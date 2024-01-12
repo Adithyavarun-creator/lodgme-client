@@ -975,12 +975,39 @@ export const SearchFiltersPageStyles = styled.div`
     accent-color: ${({ theme }) => theme.colors.primaryColor};
     width: 20px;
     height: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      width: 8px;
+      height: 8px;
+    }
   }
 
   .span {
     color: #fff;
     font-size: 16px;
     font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
   }
 
   select {
@@ -996,6 +1023,19 @@ export const SearchFiltersPageStyles = styled.div`
     border-color: transparent;
     overflow: hidden;
 
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 15px;
+      padding: 4px;
+      font-size: 10px;
+    }
   }
 
   option {

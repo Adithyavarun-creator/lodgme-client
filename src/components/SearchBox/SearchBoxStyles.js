@@ -387,6 +387,20 @@ export const SearchBoxStyles = styled.div`
     color: #fff;
     font-size: 18px;
     font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
   }
 
   select {
@@ -400,6 +414,26 @@ export const SearchBoxStyles = styled.div`
     outline-style: none;
     box-shadow: none;
     border-color: transparent;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+      height: 27px;
+
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+      height: 37px;
+
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+      height: 25px;
+
+    }
   }
 
   option {

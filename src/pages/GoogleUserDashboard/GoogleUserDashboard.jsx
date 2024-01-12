@@ -49,7 +49,7 @@ const GoogleUserDashboard = () => {
     }
   };
 
-  console.log(currentUser);
+  // console.log(currentUser.user);
 
   return (
     <>

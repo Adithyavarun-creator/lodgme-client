@@ -19,13 +19,14 @@ const SearchBox = () => {
   const [diffInDays, setDiffInDays] = useState(0);
   const [beds, setBeds] = useState(1);
   const [baths, setBaths] = useState(1);
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  // const [range, setRange] = useState([
+  //   {
+  //     startDate: new Date(),
+  //     endDate: new Date(),
+  //     key: "selection",
+  //   },
+  //]);
+  // const [startDate, setStartDate] = useState(new Date());
 
   const [open, setOpen] = useState(false);
   const options = useMemo(() => countryList().getData(), []);
@@ -35,7 +36,7 @@ const SearchBox = () => {
     sort: "created_at",
     order: "desc",
   });
-  // const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(new Date());
 
   const changeHandler = (value) => {
@@ -70,18 +71,6 @@ const SearchBox = () => {
       setSearchData({ ...searchData, searchTerm: e.target.value });
     }
 
-    // if (
-    //   e.target.id === "parking" ||
-    //   // e.target.id === "furnished" ||
-    //   e.target.id === "offer"
-    // ) {
-    //   setSearchData({
-    //     ...searchData,
-    //     [e.target.id]:
-    //       e.target.checked || e.target.checked === "true" ? true : false,
-    //   });
-    // }
-
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "created_at";
 
@@ -103,7 +92,7 @@ const SearchBox = () => {
     // window.location.reload();
   };
 
-  console.log(searchData.type);
+  // console.log(startDate);
 
   return (
     <>
@@ -273,47 +262,3 @@ const SearchBox = () => {
 };
 
 export default SearchBox;
-
-/**
-  {/* <div className="bedbathinputbox">
-            <div style={{ textAlign: "center" }}>
-              <label className="bedbathlabel" htmlFor="beds">
-                Choose dates
-              </label>
-              <input
-                value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
-                  range[0].endDate,
-                  "dd/MM/yyyy"
-                )}`}
-                readOnly
-                onClick={() => setOpen((open) => !open)}
-              />
-            </div>
-          </div> 
-
-          {/* <div className="daterangeposition">
-            {open && (
-              <>
-                <div onClick={() => setOpen(false)} className="dateclose">
-                  <MdOutlineClose className="closedateicon" />
-                </div>
-                <div>
-                  <DateRangePicker
-                    className=""
-                    onChange={(item) => {
-                      setRange([item.selection]);
-                      // handleSelect(item);
-                    }}
-                    editableDateInputs={true}
-                    moveRangeOnFirstSelection={false}
-                    ranges={range}
-                    months={2}
-                    direction="horizontal"
-                    rangeColors={["#015151", "#015151", "#fed14c"]}
-                    minDate={new Date()}
-                  />
-                </div>
-              </>
-            )}
-          </div> 
- */
