@@ -209,7 +209,7 @@ export const HomepageStyles = styled(motion.div)`
     }
 
     @media ${devices.smallMobiles} {
-      margin-top: 120px;
+      margin-top: 110px;
     }
   }
 
