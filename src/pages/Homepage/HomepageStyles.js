@@ -137,7 +137,7 @@ export const HomepageStyles = styled(motion.div)`
     }
   }
 
-  .homepage_search_container {
+  /* .homepage_search_container {
     display: flex;
     flex-direction: row;
     border: 2px solid ${({ theme }) => theme.colors.primaryColor};
@@ -187,6 +187,133 @@ export const HomepageStyles = styled(motion.div)`
       gap: 7px;
       padding: 3px;
       width: 70%;
+    }
+  } */
+
+  .homepage_search_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    @media ${devices.bigLaptopsAndDesktops} {
+      margin-top: 60px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      margin-top: 60px;
+    }
+
+    @media ${devices.smallTabs} {
+      margin-top: 120px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 120px;
+    }
+  }
+
+  .searcharea-input {
+    height: 50px;
+    width: 450px;
+    border: 1.5px solid ${({ theme }) => theme.colors.primaryColor};
+    border-radius: 50px;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    outline: none;
+    offset: none;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      width: 360px;
+      height: 45px;
+      font-size: 18px;
+    }
+
+    @media ${devices.smallTabs} {
+      width: 280px;
+      height: 35px;
+      font-size: 11px;
+    }
+
+    @media ${devices.smallMobiles} {
+      width: 180px;
+      height: 30px;
+      font-size: 9px;
+    }
+  }
+
+  .searcharea-input:placeholder-shown {
+    font-size: 18px;
+    font-weight: 400;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 13px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 11px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
+    }
+  }
+
+  .searchareaiconbox {
+    position: relative;
+    left: -45px;
+    top: 2px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      left: -25px;
+      top: 2px;
+    }
+  }
+
+  .searchareaicon {
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 25px;
+      width: 25px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 20px;
+      width: 20px;
+      padding: 3px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 16px;
+      width: 16px;
+      padding: 3px;
     }
   }
 

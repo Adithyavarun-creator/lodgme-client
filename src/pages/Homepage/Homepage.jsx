@@ -5,6 +5,7 @@ import carouselImages from "../../datas/carouselImages";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { LiaSearchLocationSolid } from "react-icons/lia";
 
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
@@ -36,6 +37,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const { RangePicker } = DatePicker;
   const [houses, setHouses] = useState([]);
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -143,12 +145,13 @@ const Homepage = () => {
   //console.log(diffInDays);
 
   const handleSearchSubmit = () => {
-    if (!range) {
-      toast.error("Date not selected");
-    }
-    if (!value) {
-      toast.error("Location not selected");
-    }
+    // if (!range) {
+    //   toast.error("Date not selected");
+    // }
+    // if (!value) {
+    //   toast.error("Location not selected");
+    //   return;
+    // }
     // navigate(
     //   `/search-results?locatedCountry=${
     //     value.label ? value.label : "France"
@@ -163,9 +166,10 @@ const Homepage = () => {
     //     value.label ? value.label : "France"
     //   }&date=${date}`
     // );
-    navigate(
-      `/search-results?locatedCountry=${value.label ? value.label : "France"}`
-    );
+    // navigate(
+    //   `/search-results?locatedCountry=${value.label ? value.label : "France"}`
+    // );
+    navigate(`/search-results?locatedCountry=${country ? country : "France"}`);
   };
 
   // console.log(date);
@@ -197,7 +201,22 @@ const Homepage = () => {
         </div>
 
         <div className="homepage_search_container">
-          <div className="search_select_width">
+          <div>
+            <input
+              type="text"
+              className="searcharea-input"
+              placeholder="France/Germany/Sweden"
+              onChange={(e) => setCountry(e.target.value)}
+              value={country}
+            />
+          </div>
+          <div className="searchareaiconbox">
+            <LiaSearchLocationSolid
+              className="searchareaicon"
+              onClick={handleSearchSubmit}
+            />
+          </div>
+          {/* <div className="search_select_width">
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("location")}</span>
               <span>
@@ -213,10 +232,10 @@ const Homepage = () => {
               onChange={changeHandler}
               styles={HomepageSelectStyles}
               name="location"
-            />
+            /> 
           </div>
 
-          {/* <div>
+         <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("bookingdate")}</span>
               <span>
@@ -253,7 +272,7 @@ const Homepage = () => {
             />
           </div> */}
           <div>
-            <div className="search_labelbox">
+            {/* <div className="search_labelbox">
               <span className="search_labeltitle"> {t("submit")}</span>
               <span>
                 <FaSearchLocation className="search_box_icon" />
@@ -262,7 +281,7 @@ const Homepage = () => {
             <button className="homepage_searchbtn" onClick={handleSearchSubmit}>
               <IoSearchSharp className="" />
               {t("search")}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

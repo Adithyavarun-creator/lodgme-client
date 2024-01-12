@@ -5,7 +5,7 @@ import Logo from "../../assets/lodgemeblacklogo.png";
 import { HiIdentification } from "react-icons/hi2";
 import { FaUserEdit } from "react-icons/fa";
 import { BsCalendar2HeartFill, BsFillHousesFill } from "react-icons/bs";
-import { MdAddHome, MdSupportAgent } from "react-icons/md";
+import { MdAddHome, MdAutoDelete, MdSupportAgent } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
@@ -14,7 +14,7 @@ import { baseUrl } from "../../baseUrl/url";
 const FacebookUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <>
@@ -25,7 +25,7 @@ const FacebookUserDashboard = () => {
         </Helmet>
         <FacebookUserDashboardStyles>
           <div>
-            <h1>{currentUser?.username} Dashboard</h1>
+            <h1>{currentUser?.user?.username} Dashboard</h1>
           </div>
 
           <div>
@@ -95,6 +95,27 @@ const FacebookUserDashboard = () => {
                 <span>Your previous and upcoming bookings</span>
               </div>
             </Link>
+            <Link
+              to="/delete-facebook-user-accounts"
+              className="linkStyle dashboardbox-1"
+            >
+              <div className="dashboard-logobox">
+                <img src={Logo} className="dashboard-logo" alt="" />
+              </div>
+              <div className="flexbox">
+                <div className="">
+                  <h2 className="dashboard-maintitle">Delete your Profile</h2>
+                </div>
+                <div className="dashboard-mainlink">
+                  <MdAutoDelete className="dashboard-icon" />
+                </div>
+              </div>
+              <div>
+                <span>
+                  Click here and delete your personal data from Lodgeme
+                </span>
+              </div>
+            </Link>
             {/* <div className="dashboardbox-1">
               <div className="dashboard-logobox">
                 <img src={Logo} className="dashboard-logo" alt="" />
@@ -111,29 +132,7 @@ const FacebookUserDashboard = () => {
                 <span>Upload your passport and verify</span>
               </div>
             </div> */}
-            {currentUser?.provider === "facebook" ? (
-              ""
-            ) : (
-              <Link
-                to="/edit-user-profile"
-                className="linkStyle dashboardbox-1"
-              >
-                <div className="dashboard-logobox">
-                  <img src={Logo} className="dashboard-logo" alt="" />
-                </div>
-                <div className="flexbox">
-                  <div className="">
-                    <h2 className="dashboard-maintitle">Edit your Profile</h2>
-                  </div>
-                  <div className="dashboard-mainlink">
-                    <FaUserEdit className="dashboard-icon" />
-                  </div>
-                </div>
-                <div>
-                  <span>Click here and edit your personal details</span>
-                </div>
-              </Link>
-            )}
+
             {currentUser?.provider === "google" ? (
               <Link
                 to="/register-social-user"
@@ -179,7 +178,7 @@ const FacebookUserDashboard = () => {
               </div>
               <div className="flexbox">
                 <div className="">
-                  <h2 className="dashboard-maintitle">Add new House Listing</h2>
+                   <h2 className="dashboard-maintitle">Add new House Listing</h2>
                 </div>
                 <div className="dashboard-mainlink">
                   <MdAddHome className="dashboard-icon" />
@@ -189,24 +188,6 @@ const FacebookUserDashboard = () => {
                 <span>Post your house listing to public</span>
               </div>
             </Link> */}
-            <div className="dashboardbox-1">
-              <div className="dashboard-logobox">
-                <img src={Logo} className="dashboard-logo" alt="" />
-              </div>
-              <div className="flexbox">
-                <div className="">
-                  <h2 className="dashboard-maintitle">
-                    LodgeMe Support Center
-                  </h2>
-                </div>
-                <div className="dashboard-mainlink">
-                  <MdSupportAgent className="dashboard-icon" />
-                </div>
-              </div>
-              <div>
-                <span>Any queries ? We can guide you</span>
-              </div>
-            </div>
           </div>
         </FacebookUserDashboardStyles>
       </HelmetProvider>

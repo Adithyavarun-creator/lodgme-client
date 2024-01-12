@@ -17,7 +17,7 @@ const UserDashboard = () => {
   const { currentUser, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  //console.log(currentUser);
+  console.log(currentUser);
 
   const mobileOtp = () => {
     // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {

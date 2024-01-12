@@ -55,6 +55,8 @@ const Navbar = () => {
     }
   };
 
+  // console.log(currentUser);
+
   return (
     <>
       <NavbarStyles
@@ -66,15 +68,6 @@ const Navbar = () => {
           <img className="navlogo" src={LogoBlack} alt="brand-logo" />
         </Link>
         <div className="navbuttons">
-          {/* <div>
-            <Link
-              to="/add-new-listing"
-              className="navbutton linkStyle"
-              title="Add a new house listing at LodgeMe"
-            >
-              Add new Listing
-            </Link>
-          </div> */}
           {currentUser ? (
             ""
           ) : (
@@ -102,12 +95,12 @@ const Navbar = () => {
               />
             </div>
           )}
-          {currentUser?.provider === "google" && (
+          {currentUser?.user?.provider === "google" && (
             <div>
               <img
                 src={
-                  currentUser?.avatar
-                    ? currentUser?.avatar
+                  currentUser?.user?.avatar
+                    ? currentUser?.user?.avatar
                     : "https://e7.pngegg.com/pngimages/715/371/png-clipart-youtube-google-logo-google-s-google-account-youtube-text-trademark.png"
                 }
                 alt="user-pic"
@@ -124,18 +117,20 @@ const Navbar = () => {
                     `${`/dashboard-user`}`) ||
                   (currentUser?.provider === "google" &&
                     `${"/dashboard-google-user"}`) ||
-                  (currentUser?.provider === "facebook" &&
+                  (currentUser?.user?.provider === "facebook" &&
                     `${"/dashboard-facebook-user"}`)
                 }
                 className="navbutton linkStyle"
                 title="Click to manage your LodgeMe account"
               >
-                {currentUser.username
-                  ? currentUser.username
-                  : "" || currentUser?.provider === "google"
+                {currentUser?.username
+                  ? currentUser?.username
+                  : "" || currentUser?.user?.provider === "facebook"
                   ? currentUser?.user?.username
-                  : ""}{" "}
-                Dashboard
+                  : "" || currentUser?.user?.provider === "google"
+                  ? currentUser?.user?.username
+                  : ""}
+                &nbsp; Dashboard
               </Link>
             </div>
           )}

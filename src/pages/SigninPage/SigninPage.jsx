@@ -38,21 +38,6 @@ const SigninPage = () => {
     }
 
     try {
-      // dispatch(signInStart());
-      // axios.defaults.withCredentials = true;
-      // const { data } = await axios.post(`${baseUrl}/api/login`, {
-      //   email,
-      //   password,
-      // });
-      // console.log(data.user);
-      // Cookies.set("access_token", JSON.stringify(data.token));
-      // if (data.success === false) {
-      //   dispatch(signInFailure(data.message));
-      //   return;
-      // }
-      // dispatch(signInSuccess(data.user));
-      // toast.success("We are signing you in ! Welcome back");
-      // navigate("/dashboard-user");
       dispatch(signInStart());
       const response = await fetch(`${baseUrl}/api/login`, {
         method: "POST",
@@ -68,7 +53,6 @@ const SigninPage = () => {
       const data = await response.json();
       dispatch(signInSuccess(data.user));
       dispatch(signInToken(data.token));
-      //console.log(data.user);
       localStorage.setItem("token", JSON.stringify(data.token));
       toast.success("We are signing you in ! Welcome back");
       setTimeout(() => {
@@ -88,11 +72,11 @@ const SigninPage = () => {
       <HelmetProvider>
         <Helmet>
           <meta />
-          <title>Login | LodgeMe</title>
+          <title>Login | Lodgeme</title>
         </Helmet>
         <SinginPageStyles>
           <div>
-            <h1>LodgeMe Customer Login/Signin Page</h1>
+            <h1>Lodgeme Customer Login/Signin Page</h1>
           </div>
           <div className="formbox">
             <div>

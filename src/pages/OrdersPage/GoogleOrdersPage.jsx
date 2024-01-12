@@ -22,7 +22,7 @@ const GoogleOrdersPage = () => {
   useEffect(() => {
     const fetchGoogleUserData = async () => {
       const result = await fetch(
-        `${baseUrl}/api/google-orders/${currentUser.user._id}`,
+        `${baseUrl}/api/google-orders/${currentUser?.user._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

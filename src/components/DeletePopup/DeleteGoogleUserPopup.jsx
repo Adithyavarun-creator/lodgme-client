@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DeleteUserPopupStyles } from "./DeleteUserPopupStyles";
+import { DeleteGoogleUserPopupStyles } from "./DeleteGoogleUserPopupStyles";
 import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../baseUrl/url";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -15,7 +15,7 @@ import {
   deleteUserSuccess,
 } from "../../redux/user/userSlice";
 
-const DeleteUserPopup = () => {
+const DeleteGoogleUserPopup = () => {
   const dispatch = useDispatch();
   const { currentUser, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -23,8 +23,7 @@ const DeleteUserPopup = () => {
   const [fetchData, setFetchData] = useState([]);
   const [userListings, setUserListings] = useState([]);
 
-  // console.log(id);
-  // console.log(currentUser.user);
+  // console.log(currentUser?.token);
 
   const goBack = () => {
     navigate("/dashboard-user");
@@ -33,23 +32,26 @@ const DeleteUserPopup = () => {
   const deleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`${baseUrl}/api/user/delete/${currentUser._id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${baseUrl}/api/google-user/delete/${currentUser?.user?._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser?.token}`,
+          },
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
         return;
       }
-      dispatch(deleteUserSuccess(data));
       toast.success("Your account has been deleted");
       setTimeout(() => {
+        dispatch(deleteUserSuccess(data));
         navigate("/user-sign-in");
-      }, 1400);
+      }, 3000);
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
       toast.error("Your account was not deleted as it was an invalid access");
@@ -63,34 +65,33 @@ const DeleteUserPopup = () => {
           <meta />
           <title>Delete Listing | Lodgeme</title>
         </Helmet>
-        <DeleteUserPopupStyles>
+        <DeleteGoogleUserPopupStyles>
           <div>
             <h2>Are you sure you want to delete your account</h2>
           </div>
           <div className="deletehousebox">
             <div>
-              <h3>
-                {currentUser.firstname} {currentUser.lastname} from{" "}
-                {currentUser.country}
-              </h3>
+              <h3>{currentUser?.user?.username}</h3>
             </div>
             <div>
-              <span>Email address :&nbsp;{currentUser.email}</span>
-            </div>
-            <div>
-              <span>Mobile contact :&nbsp;+{currentUser.contactnumber}</span>
+              <span>Email address :&nbsp;{currentUser?.user?.email}</span>
             </div>
             <div className="deleteprofileimgbox">
               <img
-                src={currentUser.profilePic}
+                src={currentUser?.user?.avatar}
                 className="deleteprofileimg"
                 alt=""
               />
             </div>
             <div>
               <span>
+                Your orders will also get erased with your account details
+              </span>
+            </div>
+            <div>
+              <span>
                 Account created at :&nbsp;
-                {moment(currentUser.createdAt).format("MMMM Do YYYY")}
+                {moment(currentUser?.user?.createdAt).format("MMMM Do YYYY")}
               </span>
             </div>
           </div>
@@ -107,10 +108,10 @@ const DeleteUserPopup = () => {
             </div>
           </div>
           <Toaster position="top-center" reverseOrder={false} />
-        </DeleteUserPopupStyles>
+        </DeleteGoogleUserPopupStyles>
       </HelmetProvider>
     </>
   );
 };
 
-export default DeleteUserPopup;
+export default DeleteGoogleUserPopup;
