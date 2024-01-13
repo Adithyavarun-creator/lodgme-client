@@ -97,8 +97,6 @@ const SingleHousePage = () => {
   ]);
 
   const handleSelect = (ranges) => {
-    //console.log(ranges.selection.startDate);
-    //console.log(ranges.selection.endDate);
     const diff = differenceInDays(
       ranges.selection.endDate,
       ranges.selection.startDate
@@ -109,7 +107,6 @@ const SingleHousePage = () => {
   useEffect(() => {
     const fetchListing = async () => {
       const res = await axios.get(`${baseUrl}/api/get/${id}`);
-      // console.log(res.data);
       setHousedata(res.data.listing);
       setPostedBy(res.data.user);
       dispatch(setSelectedHouse(res.data.listing));
@@ -254,7 +251,6 @@ const SingleHousePage = () => {
   dispatch(setBookingAmount(bookingAmount));
   dispatch(setStayingDays(diffInDays));
   dispatch(setNumberofPersons(noPersons));
-  //console.log(noPersons.value);
 
   // const url = `https://server-api-q17g.onrender.com/homes&rooms/${houseData._id}`;
   const shareDetails = {
@@ -285,11 +281,11 @@ const SingleHousePage = () => {
         houseData?.title
       }&stayDays=${diffInDays}&fromdate=${range[0].startDate}&todate=${
         range[0].endDate
-      }&persons=${noPersons.value ? noPersons.value : 1}`
+      }&persons=${noPersons.value ? noPersons.value : 1}&country=${
+        houseData.locatedCountry
+      }`
     );
   };
-
-  // console.log(houseData.amenitiesIncluded.map((a) => a.split(",")));
 
   if (!id) {
     return <Spinner />;
@@ -306,7 +302,8 @@ const SingleHousePage = () => {
           <div className="singlepagetitlebox">
             <div className="">
               <h2 className="singlepagetitletext flex">
-                {houseData?.title ? houseData?.title : "A beautiful house"}
+                {houseData?.title ? houseData?.title : "A beautiful house"} at{" "}
+                {houseData.locatedCountry}
                 <MdLocationPin
                   className="rating"
                   style={{ color: "#EA4335" }}
@@ -472,9 +469,7 @@ const SingleHousePage = () => {
 
               <div className="amenities-list">
                 <div>
-                  <h1 className="amenities-listheading">
-                    Prestations
-                  </h1>
+                  <h1 className="amenities-listheading">Prestations</h1>
                 </div>
                 {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
                   <div className="amenities-singlebox" key={i}>

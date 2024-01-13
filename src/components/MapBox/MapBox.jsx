@@ -17,7 +17,6 @@ const containerStyle = {
 };
 
 const MapBox = ({ lat, lng }) => {
-  //console.log(lat, lng);
 
   const center = {
     lat: Number(lat),

@@ -9,7 +9,6 @@ import { MdAddHome, MdSupportAgent, MdAutoDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TbHomeSearch } from "react-icons/tb";
-import { baseUrl } from "../../baseUrl/url";
 import { MdVerified } from "react-icons/md";
 import { FaWindowClose } from "react-icons/fa";
 
@@ -17,20 +16,6 @@ const UserDashboard = () => {
   const { currentUser, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  console.log(currentUser);
-
-  const mobileOtp = () => {
-    // const res = await fetch(`${baseUrl}/api/user-phone/${currentUser._id}`, {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify({ formData, homeAddress: address }),
-    // });
-    // const data = await res.json();
-    // console.log(data);
-    navigate("/lodgeme-otp-verification-page");
-  };
 
   return (
     <>

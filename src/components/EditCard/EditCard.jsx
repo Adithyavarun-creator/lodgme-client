@@ -12,7 +12,6 @@ import { FiEdit } from "react-icons/fi";
 const EditCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
-  //console.log(res);
 
   return (
     <>

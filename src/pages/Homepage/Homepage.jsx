@@ -44,7 +44,6 @@ const Homepage = () => {
       try {
         const res = await fetch(`${baseUrl}/api/listings`);
         const data = await res.json();
-        //console.log(data);
         setHouses(data);
       } catch (error) {
         console.log(error);
@@ -98,7 +97,6 @@ const Homepage = () => {
 
   // hide dropdown on ESC press
   const hideOnEscape = (e) => {
-    // console.log(e.key)
     if (e.key === "Escape") {
       setOpen(false);
     }

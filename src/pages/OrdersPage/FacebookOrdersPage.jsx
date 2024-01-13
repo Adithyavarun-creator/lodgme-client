@@ -22,10 +22,10 @@ const FacebookOrdersPage = () => {
   useEffect(() => {
     const fetchFacebookOrderData = async () => {
       const result = await fetch(
-        `${baseUrl}/api/facebook-orders/${currentUser._id}`,
+        `${baseUrl}/api/facebook-orders/${currentUser.user._id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${currentUser?.token}`,
           },
         }
       );
@@ -36,7 +36,6 @@ const FacebookOrdersPage = () => {
     fetchFacebookOrderData();
   }, [currentUser, token]);
 
-  console.log(orders);
 
   return (
     <>

@@ -33,7 +33,6 @@ const SearchFiltersPage = () => {
     const typeFromUrl = urlParams.get("type");
     const sortFromUrl = urlParams.get("sort");
     const orderFromUrl = urlParams.get("order");
-    // console.log(moment(startDateFromUrl).format());
 
     // urlParams.set("startDate", startDate);
 
@@ -103,7 +102,6 @@ const SearchFiltersPage = () => {
     }
   };
 
-  // console.log(moment(startDate).format());
 
   return (
     <>

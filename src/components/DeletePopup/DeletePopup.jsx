@@ -17,15 +17,11 @@ const DeletePopup = () => {
   const [fetchData, setFetchData] = useState([]);
   const [userListings, setUserListings] = useState([]);
 
-  // console.log(id);
-
   useEffect(() => {
     const fetchListing = async () => {
       const res = await fetch(`${baseUrl}/api/get/${id}`);
       const data = await res.json();
-      console.log(data.listing);
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setFetchData(data.listing);
@@ -49,7 +45,6 @@ const DeletePopup = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       toast.success("Listing Deleted");
@@ -57,7 +52,6 @@ const DeletePopup = () => {
         navigate("/user-listings");
       }, 1000);
     } catch (error) {
-      console.log(error.message);
       toast.success(error.message);
     }
   };

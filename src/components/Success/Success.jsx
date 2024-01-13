@@ -11,7 +11,6 @@ const Success = () => {
 
   const navigate = useNavigate();
 
-  console.log(currentUser);
 
   // setTimeout(() => {
   //   navigate("/order-details");
@@ -25,7 +24,7 @@ const Success = () => {
     if (currentUser?.user?.provider === "google") {
       navigate("/google-orders-page");
     }
-    if (currentUser?.provider === "facebook") {
+    if (currentUser?.user?.provider === "facebook") {
       navigate("/facebook-orders-page");
     }
     if (currentUser?.provider === "lodgeme") {

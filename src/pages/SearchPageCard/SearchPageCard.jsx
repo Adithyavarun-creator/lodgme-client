@@ -14,7 +14,6 @@ import { FaStar } from "react-icons/fa";
 const SearchPageCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
-  // console.log(res);
 
   return (
     <>

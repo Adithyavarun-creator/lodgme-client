@@ -27,14 +27,13 @@ const OrdersPage = () => {
         },
       });
       const data = await result.json();
-      //console.log(data);
       setOrders(data);
     };
 
     fetchData();
   }, [currentUser, token]);
 
-  // console.log(currentUser.provider);
+  // console.log(orders);
 
   return (
     <>

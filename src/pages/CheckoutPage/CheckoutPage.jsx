@@ -18,8 +18,6 @@ const CheckoutPage = () => {
   const [address, setAddress] = useState("");
   const [nopersons, setNopersons] = useState(0);
 
-  // console.log(currentUser);
-
   useEffect(() => {
     const {
       fromdate,
@@ -48,10 +46,10 @@ const CheckoutPage = () => {
       })
       .then((res) => {
         //save
-        if (currentUser.provider === "facebook") {
+        if (currentUser?.user?.provider === "facebook") {
           saveFacebookOrder();
         }
-        if (currentUser.provider === "google") {
+        if (currentUser?.user?.provider === "google") {
           saveGoogleOrder();
         } else {
           saveOrder();
@@ -70,8 +68,6 @@ const CheckoutPage = () => {
       .catch((err) => console.log(err.message));
   };
 
-  //console.log(selectedHouse);
-
   const saveOrder = async () => {
     const response = await fetch(`${baseUrl}/api/create-order`, {
       method: "POST",
@@ -88,7 +84,7 @@ const CheckoutPage = () => {
         nopersons: nopersons,
         startDate,
         endDate,
-        country: selectedHouse.country,
+        country: selectedHouse.locatedCountry,
         beds: selectedHouse.beds,
         baths: selectedHouse.baths,
         livingRoom: selectedHouse.livingRoom,
@@ -107,7 +103,7 @@ const CheckoutPage = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // <---------- HERE
+        Authorization: `Bearer ${currentUser?.token}`, // <---------- HERE
       },
       body: JSON.stringify({
         billingName: name,
@@ -118,14 +114,14 @@ const CheckoutPage = () => {
         nopersons: nopersons,
         startDate,
         endDate,
-        country: selectedHouse.country,
+        country: selectedHouse.locatedCountry,
         beds: selectedHouse.beds,
         baths: selectedHouse.baths,
         livingRoom: selectedHouse.livingRoom,
         stayingDays,
         listingBooked: selectedHouse.title,
         houseDetails: selectedHouse,
-        bookedBy: currentUser.user,
+        bookedBy: currentUser?.user?._id,
         paymentMode: "Stripe",
       }),
     });
@@ -137,7 +133,7 @@ const CheckoutPage = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // <---------- HERE
+        Authorization: `Bearer ${currentUser?.token}`, // <---------- HERE
       },
       body: JSON.stringify({
         billingName: name,
@@ -148,14 +144,14 @@ const CheckoutPage = () => {
         nopersons: nopersons,
         startDate,
         endDate,
-        country: selectedHouse.country,
+        country: selectedHouse.locatedCountry,
         beds: selectedHouse.beds,
         baths: selectedHouse.baths,
         livingRoom: selectedHouse.livingRoom,
         stayingDays,
         listingBooked: selectedHouse.title,
         houseDetails: selectedHouse,
-        bookedBy: currentUser._id,
+        bookedBy: currentUser.user._id,
         paymentMode: "Stripe",
       }),
     });
@@ -183,7 +179,7 @@ const CheckoutPage = () => {
             PayPal &nbsp; <FaPaypal />
           </button> */}
 
-          <button className="flex checkoutbtn">Future Payments</button>
+          {/* <button className="flex checkoutbtn">Future Payments</button> */}
         </div>
       </div>
 

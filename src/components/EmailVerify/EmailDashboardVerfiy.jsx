@@ -32,7 +32,6 @@ const EmailDashboardVerfiy = () => {
       localStorage.removeItem("token");
       navigate("/");
     } catch (error) {
-      console.log(error);
       dispatch(signOutUserFailure(error.message));
     }
   };

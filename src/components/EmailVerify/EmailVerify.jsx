@@ -27,7 +27,6 @@ const EmailVerify = () => {
           navigate("/user-sign-in");
         }, 2600);
       } catch (error) {
-        console.log(error);
         setValidUrl(false);
       }
     };

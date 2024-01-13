@@ -44,7 +44,6 @@ const EditProfile = () => {
   }, [file]);
 
   const handleFileUpload = (file) => {
-    // console.log(file);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
@@ -69,14 +68,12 @@ const EditProfile = () => {
   };
 
   const handleChange = (e) => {
-    //console.log(e.target.id);
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
-    //console.log(ll);
     setAddress(value);
     setCoordiantes(ll);
   };
@@ -97,7 +94,6 @@ const EditProfile = () => {
         body: JSON.stringify({ formData, homeAddress: address }),
       });
       const data = await res.json();
-      console.log(data);
       if (data.success === false) {
         setLoading(false);
         toast.error(
@@ -115,7 +111,6 @@ const EditProfile = () => {
     }
   };
 
-  //console.log(currentUser);
 
   return (
     <>

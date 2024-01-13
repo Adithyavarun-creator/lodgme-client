@@ -92,7 +92,6 @@ const SearchBox = () => {
     // window.location.reload();
   };
 
-  // console.log(startDate);
 
   return (
     <>

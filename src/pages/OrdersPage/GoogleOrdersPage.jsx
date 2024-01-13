@@ -22,10 +22,10 @@ const GoogleOrdersPage = () => {
   useEffect(() => {
     const fetchGoogleUserData = async () => {
       const result = await fetch(
-        `${baseUrl}/api/google-orders/${currentUser?.user._id}`,
+        `${baseUrl}/api/google-orders/${currentUser?.user?._id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${currentUser.token}`,
           },
         }
       );
@@ -34,10 +34,8 @@ const GoogleOrdersPage = () => {
     };
     // currentUser.user.provider === "google" && fetchGoogleUserData();
     fetchGoogleUserData();
-  }, [currentUser, token]);
+  }, [currentUser, currentUser.token]);
 
-
-  //console.log(orders);
 
   return (
     <>
@@ -48,7 +46,7 @@ const GoogleOrdersPage = () => {
         </Helmet>
         <OrdersPageStyles>
           <div>
-          <h1 className="ordertitle">Your Bookings</h1>
+            <h1 className="ordertitle">Your Bookings</h1>
           </div>
           {orders.length >= 1 ? (
             orders

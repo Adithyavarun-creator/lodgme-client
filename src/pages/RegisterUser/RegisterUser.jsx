@@ -25,6 +25,7 @@ const RegisterUser = () => {
   const [option, setOption] = useState("");
   const [emailverify, setEmailverify] = useState("");
 
+
   const registerForm = async (e) => {
     e.preventDefault();
     if (!username) {
@@ -110,7 +111,7 @@ const RegisterUser = () => {
         </Helmet>
         <RegisterUserStyles>
           <div>
-            <h1>LodgeMe Customer Registration Page</h1>
+            <h1>Lodgeme Customer Registration Page</h1>
           </div>
           <div className="formbox">
             <form>
@@ -121,7 +122,7 @@ const RegisterUser = () => {
                 <input
                   id="username"
                   type="text"
-                  value={username}
+                  value={`LM${username}`}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="John78"
                   required

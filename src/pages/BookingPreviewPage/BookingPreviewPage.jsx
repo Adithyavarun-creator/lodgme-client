@@ -23,26 +23,26 @@ const BookingPreviewPage = () => {
   const { bookingAmount, selectedHouse, stayingDays } = useSelector(
     (state) => state.user
   );
+  const [locatedCountry, setLocatedCountry] = useState("");
+
   const [startDate, setStartdate] = useState("");
   const [endDate, setEnddate] = useState("");
   const [nopersons, setNopersons] = useState(0);
 
   useEffect(() => {
-    const { title, stayDays, fromdate, todate, persons } = queryString.parse(
-      window.location.search
-    );
+    const { title, stayDays, fromdate, todate, persons, country } =
+      queryString.parse(window.location.search);
     setStartdate(fromdate);
     setEnddate(todate);
     setNopersons(persons);
+    setLocatedCountry(country);
   }, []);
 
   const navigate = useNavigate();
 
-  //console.log(selectedHouse);
-
   const gotoFormFillingPage = () => {
     navigate(
-      `/billing-details?title=${selectedHouse.title}&stayDays=${startDate}&fromdate=${startDate}&todate=${endDate}&persons=${nopersons}`
+      `/billing-details?title=${selectedHouse.title}&stayDays=${startDate}&fromdate=${startDate}&todate=${endDate}&persons=${nopersons}&country=${locatedCountry}`
     );
   };
 
@@ -69,7 +69,7 @@ const BookingPreviewPage = () => {
                   className="linkStyle bookingstay"
                   to={`/homes&rooms/${selectedHouse._id}`}
                 >
-                  {selectedHouse.title}&nbsp;
+                  {selectedHouse.title}&nbsp;at {selectedHouse.locatedCountry}
                 </Link>
               </h2>
             </div>

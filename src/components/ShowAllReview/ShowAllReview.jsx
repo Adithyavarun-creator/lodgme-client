@@ -10,7 +10,6 @@ const ShowAllReview = ({ houseData, avg, setShowAllReview }) => {
   }
 
   const avgRating = totalRating / avg.length;
-  // console.log(avgRating);
 
   return (
     <ShowAllReviewStyles>

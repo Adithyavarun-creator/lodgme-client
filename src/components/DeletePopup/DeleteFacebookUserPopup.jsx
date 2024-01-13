@@ -23,7 +23,6 @@ const DeleteFacebookUserPopup = () => {
   const [fetchData, setFetchData] = useState([]);
   const [userListings, setUserListings] = useState([]);
 
-  console.log(currentUser?.user);
 
   const goBack = () => {
     navigate("/dashboard-user");

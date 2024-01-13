@@ -90,7 +90,6 @@ const AddListingPage = () => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
-    //console.log(ll);
     setAddress(value);
     setCoordiantes(ll);
   };
@@ -148,7 +147,6 @@ const AddListingPage = () => {
 
   // hide dropdown on ESC press
   const hideOnEscape = (e) => {
-    // console.log(e.key)
     if (e.key === "Escape") {
       setOpen(false);
     }
@@ -175,7 +173,6 @@ const AddListingPage = () => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setPercent(progress);
-          //console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error);
@@ -302,7 +299,6 @@ const AddListingPage = () => {
     }
   };
 
-  //console.log(range[0].startDate);
 
   return (
     <>

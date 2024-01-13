@@ -23,8 +23,7 @@ const DeleteUserPopup = () => {
   const [fetchData, setFetchData] = useState([]);
   const [userListings, setUserListings] = useState([]);
 
-  // console.log(id);
-  // console.log(currentUser.user);
+ 
 
   const goBack = () => {
     navigate("/dashboard-user");

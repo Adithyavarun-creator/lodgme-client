@@ -18,7 +18,6 @@ import axios from "axios";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
-  //console.log(currentUser);
 
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
@@ -28,7 +27,6 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
 
   const selectedOption = (e) => {
-    //console.log(e.target.value);
     const selected = i18n.changeLanguage(e.target.value);
     setSelect(selected);
     setToggle(false);
@@ -37,15 +35,13 @@ const Navbar = () => {
   const logoutUser = async () => {
     try {
       dispatch(signOutUserStart());
-      // // const res = await fetch(`${baseUrl}/api/signout`);
-      // // const data = await res.json();
+
       axios.defaults.withCredentials = true;
       const { data } = await axios.get(`${baseUrl}/api/signout`);
       if (data.success === false) {
         dispatch(signOutUserFailure(data.message));
         return;
       }
-      //console.log(data);
       dispatch(signOutUserSuccess(data));
       localStorage.removeItem("token");
       navigate("/");
@@ -55,7 +51,6 @@ const Navbar = () => {
     }
   };
 
-  // console.log(currentUser);
 
   return (
     <>
@@ -115,7 +110,7 @@ const Navbar = () => {
                 to={
                   (currentUser?.provider === "lodgeme" &&
                     `${`/dashboard-user`}`) ||
-                  (currentUser?.provider === "google" &&
+                  (currentUser?.user?.provider === "google" &&
                     `${"/dashboard-google-user"}`) ||
                   (currentUser?.user?.provider === "facebook" &&
                     `${"/dashboard-facebook-user"}`)
@@ -141,7 +136,7 @@ const Navbar = () => {
                 onClick={logoutUser}
                 to="/user-logout"
                 className="navbutton linkStyle"
-                title="Logout from LodgeMe"
+                title="Logout from Lodgeme"
               >
                 Logout &nbsp; <FiLogOut />
               </Link>
@@ -151,7 +146,7 @@ const Navbar = () => {
               <Link
                 to="/user-sign-in"
                 className="navbutton linkStyle"
-                title="Login to LodgeMe"
+                title="Login to Lodgeme"
               >
                 Login
               </Link>

@@ -27,8 +27,6 @@ const UserListingPage = () => {
   //   setToken(token);
   // }, []);
 
-  //console.log(token);
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(`${baseUrl}/api/listings/${currentUser._id}`, {
@@ -37,11 +35,11 @@ const UserListingPage = () => {
         },
       });
       const data = await result.json();
-      //console.log(data);
       setHouses(data);
     };
     fetchData();
   }, [currentUser, token]);
+
 
   return (
     <>
@@ -54,8 +52,11 @@ const UserListingPage = () => {
           <div>
             <h2>My Listings Posted to public view</h2>
           </div>
-          {houses.length &&
-            houses.map((house) => <EditCard res={house} key={house._id} />)}
+          {houses.length ? (
+            houses.map((house) => <EditCard res={house} key={house._id} />)
+          ) : (
+            <strong>No listings posted</strong>
+          )}
         </UserListingPageStyles>
       </HelmetProvider>
     </>

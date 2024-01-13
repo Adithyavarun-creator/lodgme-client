@@ -14,7 +14,6 @@ import { baseUrl } from "../../baseUrl/url";
 const FacebookUserDashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
 
-  // console.log(currentUser);
 
   return (
     <>
@@ -76,7 +75,7 @@ const FacebookUserDashboard = () => {
             </Link>
             <Link
               to={`${
-                currentUser.provider === "facebook" && "/facebook-orders-page"
+                currentUser?.user?.provider === "facebook" && "/facebook-orders-page"
               }`}
               className="linkStyle dashboardbox-1"
             >

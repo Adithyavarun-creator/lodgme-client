@@ -15,7 +15,6 @@ const ResetPassword = () => {
       `${process.env.REACT_APP_BACKEND_URL}/api/reset-password/${id}/${token}`,
       { password }
     );
-    // console.log(res.data);
     alert("Password saved");
     toast.success("Your new password is saved and sign in now to access");
     setTimeout(() => {

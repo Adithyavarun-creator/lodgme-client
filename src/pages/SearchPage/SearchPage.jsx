@@ -18,7 +18,6 @@ const SearchPage = () => {
     const res = await axios.post(`${baseUrl}/api/search-listings`, {
       locatedCountry,
     });
-    //console.log(res.data);
     setFetchedResults(res.data);
   };
 

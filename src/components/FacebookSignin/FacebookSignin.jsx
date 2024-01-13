@@ -18,14 +18,12 @@ const FacebookSignin = () => {
         userId: response.authResponse.userID,
         accessToken: response.authResponse.accessToken,
       });
-      //console.log(result.data.authObject);
       dispatch(signInSuccess(result.data.authObject));
       toast.success("Welcome to your dashboard content of Lodgeme");
       setTimeout(() => {
         navigate("/dashboard-facebook-user");
       }, 1400);
     } catch (error) {
-      console.log(error);
       dispatch(signInFailure(error));
     }
   }

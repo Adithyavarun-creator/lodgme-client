@@ -64,7 +64,7 @@ const HouseCard = ({ houseCards, title }) => {
                 <div className="toprated_favoriteuser">
                   <span className="">
                     <img
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
                       alt=""
                       className="toprated_user"
                     />

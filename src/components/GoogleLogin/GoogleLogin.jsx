@@ -1,10 +1,15 @@
 import { app, signInWithGooglePopup } from "../../firebase/firebase";
 import { useDispatch } from "react-redux";
-import { signInFailure, signInSuccess } from "../../redux/user/userSlice";
+import {
+  signInFailure,
+  signInSuccess,
+  signInToken,
+} from "../../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../baseUrl/url";
 import GoogleLogo from "../../assets/loginlogos/google.png";
 import toast, { Toaster } from "react-hot-toast";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const GoogleLogin = () => {
   const dispatch = useDispatch();
@@ -12,34 +17,38 @@ const GoogleLogin = () => {
 
   const handleGoogleClick = async () => {
     try {
-      const response = await signInWithGooglePopup();
-      dispatch(signInSuccess(response.user.data));
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
 
-      //console.log(result);
+      const result = await signInWithPopup(auth, provider);
+
       const res = await fetch(`${baseUrl}/api/googlesignin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: response.user.displayName,
-          email: response.user.email,
-          photo: response.user.photoURL,
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
         }),
       });
-
       const data = await res.json();
-      //console.log(data);
+      //dispatch(signInToken(data.token));
       dispatch(signInSuccess(data));
-      toast("You are logging in to Lodgeme community shortly!", {
-        icon: "👏",
-      });
-      setTimeout(() => {
+      if (data?.user === null) {
+        toast.success(
+          "You are verfifed by google account , now you can login again"
+        );
+        setTimeout(() => {
+          navigate("/user-sign-in");
+          window.location.reload();
+        }, 3000);
+      } else {
         navigate("/dashboard-google-user");
-      }, 1400);
+      }
     } catch (error) {
-      console.log(error);
-      dispatch(signInFailure(error));
+      console.log("could not sign in with google", error);
     }
   };
 

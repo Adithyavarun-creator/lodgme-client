@@ -90,7 +90,6 @@ const EditListingPage = () => {
       const data = await res.json();
       //console.log(data.listing);
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setFetchData(data.listing);
@@ -102,7 +101,6 @@ const EditListingPage = () => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
-    // console.log(ll);
     // setAddress(value);
     // setCoordiantes(ll);
   };
@@ -176,7 +174,6 @@ const EditListingPage = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error);
@@ -197,7 +194,6 @@ const EditListingPage = () => {
     });
   };
 
-  // console.log(currentUser);
 
   const onUpdateListing = async () => {
     try {
@@ -235,10 +231,8 @@ const EditListingPage = () => {
       const data = await res.json();
       setLoading(false);
       toast.success("Inputs are updated!!!");
-      //console.log(data);
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
       toast.error("Inputs are updated!!!");
     }
   };

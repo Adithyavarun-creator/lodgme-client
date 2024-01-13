@@ -64,7 +64,6 @@ const SigninPage = () => {
       console.log(error);
     }
 
-    //console.log(data);
   };
 
   return (

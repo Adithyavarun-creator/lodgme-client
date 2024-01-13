@@ -196,6 +196,7 @@ function App() {
             </Route>
             {/* <Route path="*" element={<LazyNotFoundPageComponent />} /> */}
           </Routes>
+
           <Footer />
         </BrowserRouter>
       </Suspense>
