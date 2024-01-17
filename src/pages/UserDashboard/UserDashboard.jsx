@@ -26,7 +26,7 @@ const UserDashboard = () => {
         </Helmet>
         <UserDashboardStyles>
           <div>
-            <h1>{currentUser?.username} Dashboard</h1>
+            <h1>{`${currentUser?.firstname} ${currentUser?.lastname}'s`} Dashboard</h1>
           </div>
 
           <div className="verifyLinks">

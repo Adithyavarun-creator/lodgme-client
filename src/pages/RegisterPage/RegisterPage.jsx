@@ -32,6 +32,8 @@ const RegisterPage = () => {
   const [option, setOption] = useState("");
   const [emailverify, setEmailverify] = useState("");
 
+  // console.log(`LM${(Math.random(username) * 10000000).toFixed()}`);
+
   const registerForm = async (e) => {
     e.preventDefault();
     if (!username) {
@@ -100,9 +102,9 @@ const RegisterPage = () => {
           icon: "👏",
         }
       );
-      setTimeout(() => {
-        navigate("/user-sign-in");
-      }, 4000);
+      // setTimeout(() => {
+      //   navigate("/user-sign-in");
+      // }, 4000);
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -132,7 +134,7 @@ const RegisterPage = () => {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="John78"
+                  placeholder="LM7373663"
                   required
                 />
               </div>

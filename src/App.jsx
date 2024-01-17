@@ -33,10 +33,7 @@ import DeleteListing from "./pages/DeleteFolder/DeleteListing";
 import DeleteUserPage from "./pages/DeleteFolder/DeleteUser";
 import DeleteGoogleUserPage from "./pages/DeleteFolder/DeleteGoogleUser";
 import DeleteFacebookUserPage from "./pages/DeleteFolder/DeleteFacebookUserPage";
-import ZohoSalesIQ from "./components/Zoho";
-import ZohoSupport from "./components/Zoho";
-import UserSupport from "./components/Zoho";
-import SalesIQ from "./components/Zoho";
+import SelectStyle from "./components/Select";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -95,6 +92,8 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<LazyHomepageComponent />} />
+            <Route path="/select" element={<SelectStyle />} />
+
             <Route
               path="/register-user-in"
               element={<LazyRegisterComponent />}
@@ -200,7 +199,6 @@ function App() {
             </Route>
             {/* <Route path="*" element={<LazyNotFoundPageComponent />} /> */}
           </Routes>
-          {/* <SalesIQ /> */}
           <Footer />
         </BrowserRouter>
       </Suspense>

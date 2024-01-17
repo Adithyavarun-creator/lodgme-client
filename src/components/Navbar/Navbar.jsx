@@ -44,13 +44,13 @@ const Navbar = () => {
       }
       dispatch(signOutUserSuccess(data));
       localStorage.removeItem("token");
+      window.location.reload();
       navigate("/");
     } catch (error) {
       console.log(error);
       dispatch(signOutUserFailure(error.message));
     }
   };
-
 
   return (
     <>
@@ -116,10 +116,10 @@ const Navbar = () => {
                     `${"/dashboard-facebook-user"}`)
                 }
                 className="navbutton linkStyle"
-                title="Click to manage your LodgeMe account"
+                title="Click to manage your Lodgeme account"
               >
                 {currentUser?.username
-                  ? currentUser?.username
+                  ? `${currentUser?.username} ${currentUser?.firstname} ${currentUser?.lastname}`
                   : "" || currentUser?.user?.provider === "facebook"
                   ? currentUser?.user?.username
                   : "" || currentUser?.user?.provider === "google"
