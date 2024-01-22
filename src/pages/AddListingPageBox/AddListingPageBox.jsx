@@ -7,7 +7,7 @@ import AccomodationType from "../../components/AddListingBoxes/AccomodationType"
 import AccomodationSteps from "../../components/AddListingBoxes/AccomodationSteps";
 
 const AddListingPageBox = () => {
-  const [next, setNext] = useState(1);
+  const [next, setNext] = useState(0);
   const navigate = useNavigate();
 
   const goNext = () => {
