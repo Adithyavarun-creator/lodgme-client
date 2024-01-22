@@ -31,6 +31,7 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { baseUrl } from "../../baseUrl/url";
 import { DatePicker } from "antd";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Homepage = () => {
   const { t } = useTranslation();
@@ -173,48 +174,49 @@ const Homepage = () => {
   // console.log(date);
 
   return (
-    <HomepageStyles
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-    >
-      <div className="homepage_header_image">
-        <Slider {...settings}>
-          {carouselImages.map((image) => (
-            <div key={image.id}>
-              <img
-                className="homepage_header_img"
-                src={image.imageSrc}
-                alt={image.alt}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-
-      <div className="homepage_header_content">
-        <div className="homepage_header_text">
-          <h1>WEBSITE UNDER PROGRESS, COMING SOON !!!</h1>
-          <h1>Un toit ou vous retrouver tous ensemble</h1>
+    <>
+      <HomepageStyles
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <div className="homepage_header_image">
+          <Slider {...settings}>
+            {carouselImages.map((image) => (
+              <div key={image.id}>
+                <img
+                  className="homepage_header_img"
+                  src={image.imageSrc}
+                  alt={image.alt}
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
 
-        <div className="homepage_search_container">
-          <div>
-            <input
-              type="text"
-              className="searcharea-input"
-              placeholder="France/Germany/Sweden"
-              onChange={(e) => setCountry(e.target.value)}
-              value={country}
-            />
+        <div className="homepage_header_content">
+          <div className="homepage_header_text">
+            <h1>WEBSITE UNDER PROGRESS, COMING SOON !!!</h1>
+            <h1>Un toit ou vous retrouver tous ensemble</h1>
           </div>
-          <div className="searchareaiconbox">
-            <LiaSearchLocationSolid
-              className="searchareaicon"
-              onClick={handleSearchSubmit}
-            />
-          </div>
-          {/* <div className="search_select_width">
+
+          <div className="homepage_search_container">
+            <div>
+              <input
+                type="text"
+                className="searcharea-input"
+                placeholder="France/Germany/Sweden"
+                onChange={(e) => setCountry(e.target.value)}
+                value={country}
+              />
+            </div>
+            <div className="searchareaiconbox">
+              <LiaSearchLocationSolid
+                className="searchareaicon"
+                onClick={handleSearchSubmit}
+              />
+            </div>
+            {/* <div className="search_select_width">
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("location")}</span>
               <span>
@@ -251,7 +253,7 @@ const Homepage = () => {
             />
           </div> */}
 
-          {/* <div>
+            {/* <div>
             <div className="search_labelbox">
               <span className="search_labeltitle"> {t("persons")}</span>
               <span>
@@ -269,8 +271,8 @@ const Homepage = () => {
               name="person"
             />
           </div> */}
-          <div>
-            {/* <div className="search_labelbox">
+            <div>
+              {/* <div className="search_labelbox">
               <span className="search_labeltitle"> {t("submit")}</span>
               <span>
                 <FaSearchLocation className="search_box_icon" />
@@ -280,21 +282,22 @@ const Homepage = () => {
               <IoSearchSharp className="" />
               {t("search")}
             </button> */}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* <div className="mt-100"></div> */}
+        {/* <div className="mt-100"></div> */}
 
-      {/* <div>
+        {/* <div>
         <HouseCard title="Top Rated Apartments" houseCards={apartmentDatas} />
       </div> */}
 
-      <div>
-        <HouseCard title="Top Rated Houses" houseCards={houses} />
-      </div>
-      <Toaster position="top-center" reverseOrder={false} />
-    </HomepageStyles>
+        <div>
+          <HouseCard title="Top Rated Houses" houseCards={houses} />
+        </div>
+        <Toaster position="top-center" reverseOrder={false} />
+      </HomepageStyles>
+    </>
   );
 };
 

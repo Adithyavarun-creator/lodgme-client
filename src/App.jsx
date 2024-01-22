@@ -33,7 +33,18 @@ import DeleteListing from "./pages/DeleteFolder/DeleteListing";
 import DeleteUserPage from "./pages/DeleteFolder/DeleteUser";
 import DeleteGoogleUserPage from "./pages/DeleteFolder/DeleteGoogleUser";
 import DeleteFacebookUserPage from "./pages/DeleteFolder/DeleteFacebookUserPage";
-import SelectStyle from "./components/Select";
+import SingleHousePage from "./pages/SingleHousePage/SingleHousePage";
+import Homepage from "./pages/Homepage/Homepage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import SigninPage from "./pages/SigninPage/SigninPage";
+import CompanyDetailsPage from "./pages/CompanyDetails/CompanyDetailsPage";
+import ConditionsPage from "./pages/ConditionsPage/ConditionsPage";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import SearchPage from "./pages/SearchPage/SearchPage";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import AddListingPage from "./pages/AddListing/AddListingPage";
+import AddListingPageBox from "./pages/AddListingPageBox/AddListingPageBox";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -91,45 +102,28 @@ function App() {
           <GlobalStyles />
           <Navbar />
           <Routes>
-            <Route path="/" element={<LazyHomepageComponent />} />
-            <Route path="/select" element={<SelectStyle />} />
+            <Route path="/" element={<Homepage />} />
 
-            <Route
-              path="/register-user-in"
-              element={<LazyRegisterComponent />}
-            />
-            <Route path="/user-sign-in" element={<LazySigninComponent />} />
-            <Route
-              path="/company-details"
-              element={<LazyCompanyDetailsPageComponent />}
-            />
-            <Route
-              path="/conditions-general"
-              element={<LazyConditionsPageComponent />}
-            />
+            <Route path="/register-user-in" element={<RegisterPage />} />
+            <Route path="/user-sign-in" element={<SigninPage />} />
+            <Route path="/company-details" element={<CompanyDetailsPage />} />
+            <Route path="/conditions-general" element={<ConditionsPage />} />
             <Route path="/animate" element={<Animate />} />
             <Route path="/spinner" element={<OnlySpinner />} />
-            <Route
-              path="/forgot-password"
-              element={<LazyForgotPasswordPageComponent />}
-            />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route
               path="/reset-password/:id/:token"
-              element={<LazyResetPasswordPageComponent />}
+              element={<ResetPassword />}
             />
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
-            <Route
-              path="/homes&rooms/:id"
-              element={<LazySingleHousePageComponent />}
-            />
+            <Route path="/add-new-listing" element={<AddListingPageBox />} />
+
+            <Route path="/homes&rooms/:id" element={<SingleHousePage />} />
             <Route
               path="/booking-preview"
               element={<LazyBookingPreviewPageComponent />}
             />
-            <Route
-              path="/search-results"
-              element={<LazySearchPageComponent />}
-            />
+            <Route path="/search-results" element={<SearchPage />} />
             <Route
               path="/search-filter-results"
               element={<SearchFiltersPage />}
@@ -142,10 +136,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
               <Route path="/user-listings" element={<UserListingPage />} />
-              <Route
-                path="/edit-user-profile"
-                element={<LazyEditProfilePageComponent />}
-              />
+              <Route path="/edit-user-profile" element={<EditProfile />} />
               <Route
                 path="/dashboard-google-user"
                 element={<GoogleUserDashboard />}
@@ -187,10 +178,6 @@ function App() {
 
               <Route path="/email-verify" element={<EmailDashboardVerfiy />} />
 
-              <Route
-                path="/add-new-listing"
-                element={<LazyAddListingPageComponent />}
-              />
               <Route path="/billing-details" element={<BillingPage />} />
               <Route path="/checkout-options" element={<CheckoutPage />} />
               {/* <Route path="/otp-page" element={<OTPPage />} /> */}

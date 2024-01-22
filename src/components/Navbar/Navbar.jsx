@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogoBlack from "../../assets/lodgemeblacklogo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MobileNavStyle, NavbarStyles } from "./NavbarStyles";
@@ -18,11 +18,20 @@ import axios from "axios";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state) => state.user);
+  // console.log(currentUser);
 
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setUser(currentUser);
+  //   } else {
+  //     setUser(null);
+  //   }
+  // }, [currentUser]);
 
   const { t, i18n } = useTranslation();
 
@@ -35,7 +44,6 @@ const Navbar = () => {
   const logoutUser = async () => {
     try {
       dispatch(signOutUserStart());
-
       axios.defaults.withCredentials = true;
       const { data } = await axios.get(`${baseUrl}/api/signout`);
       if (data.success === false) {
@@ -44,8 +52,8 @@ const Navbar = () => {
       }
       dispatch(signOutUserSuccess(data));
       localStorage.removeItem("token");
-      window.location.reload();
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
       dispatch(signOutUserFailure(error.message));
@@ -125,7 +133,7 @@ const Navbar = () => {
                   : "" || currentUser?.user?.provider === "google"
                   ? currentUser?.user?.username
                   : ""}
-                &nbsp; Dashboard
+                &nbsp;Dashboard
               </Link>
             </div>
           )}

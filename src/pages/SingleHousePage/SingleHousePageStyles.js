@@ -869,14 +869,16 @@ export const SingleHousePageStyles = styled.section`
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    justify-content: center;
+    gap: 100px;
+    justify-content: space-between;
+    position: relative;
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 25px;
     }
 
     @media ${devices.tabletsAndIpads} {
+      gap: 25px;
     }
     @media ${devices.smallTabs} {
       padding: 10px;
@@ -894,7 +896,22 @@ export const SingleHousePageStyles = styled.section`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    text-align: justify;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      gap: 14px;
+    }
+    @media ${devices.smallTabs} {
+      gap: 8px;
+    }
+
+    @media ${devices.smallMobiles} {
+      gap: 6px;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .amenities-grid {
@@ -902,9 +919,20 @@ export const SingleHousePageStyles = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     justify-content: space-between;
-    border-radius: 20px;
+    border-radius: 10px;
     transition: all 0.5s ease-in;
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .amenities-listheading {
@@ -923,7 +951,7 @@ export const SingleHousePageStyles = styled.section`
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 7px;
+      font-size: 8px;
     }
   }
 
@@ -931,49 +959,105 @@ export const SingleHousePageStyles = styled.section`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
-  }
-
-  .amenitiesul {
-    /* margin-left: 10px; */
-    color: ${({ theme }) => theme.colors.primaryColor};
-    font-weight: bolder;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .amenitylisticon {
-    color: ${({ theme }) => theme.colors.primaryColor};
-  }
-
-  .amenitieslisttext {
-    font-size: 18px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      font-size: 16px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 12px;
     }
     @media ${devices.smallTabs} {
-      font-size: 9px;
+      gap: 4px;
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 7px;
+      gap: 0;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .amenityallbtn {
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
   .amenities-singlebox {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    /* align-items: center; */
+    gap: 14px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      gap: 5px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+      gap: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+  .amenitieslisttext {
+    font-size: 15px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    font-weight: bolder;
+    list-style: none;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+  .amenitylisticon {
+    color: ${({ theme }) => theme.colors.primaryColor};
+    height: 20px;
+    width: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 15px;
+      width: 15px;
+    }
+    @media ${devices.smallTabs} {
+      height: 13px;
+      width: 13px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 12px;
+      width: 12px;
+    }
+  }
+  .amenitiesrow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -983,6 +1067,22 @@ export const SingleHousePageStyles = styled.section`
 
     @media ${devices.smallMobiles} {
       gap: 5px;
+    }
+  }
+
+  .amenitiesnotlisttext {
+    text-decoration: line-through;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
     }
   }
 
@@ -1913,5 +2013,17 @@ export const SingleHousePageStyles = styled.section`
 
   .singlepagemapbox {
     height: 400px;
+  }
+
+  .fullamenitiesbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 40;
   }
 `;

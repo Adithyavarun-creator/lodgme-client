@@ -1,6 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { AddListingStyles } from "./AddListingStyles";
-
 import { DateRangePicker } from "react-date-range";
 import { DatePicker } from "antd";
 import { differenceInDays } from "date-fns";
@@ -34,6 +33,8 @@ import {
 import { app } from "../../firebase/firebase";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { DropdownSelectStyles } from "../../components/DropdownSelectStyle";
+import { amenitiesOptions } from "../../datas/amenities";
 
 const AddListingPage = () => {
   const { currentUser, token } = useSelector((state) => state.user);
@@ -59,6 +60,8 @@ const AddListingPage = () => {
   const [fromDate, setFromdate] = useState("");
   const [toDate, setTodate] = useState("");
   const [noOfpersons, setnoOfpersons] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [notselectedOptions, setNotSelectedOptions] = useState([]);
 
   //dates
   const [range, setRange] = useState([
@@ -186,6 +189,16 @@ const AddListingPage = () => {
     });
   };
 
+  const handleChange = (option) => {
+    setSelectedOptions(option);
+  };
+
+  const handleChangeNot = (option) => {
+    setNotSelectedOptions(option);
+  };
+
+  console.log(selectedOptions);
+
   const onAddListing = async () => {
     if (!title) {
       toast.error("Enter title");
@@ -239,6 +252,14 @@ const AddListingPage = () => {
       toast.error("Enter price of stay per day");
       return;
     }
+    if (!selectedOptions) {
+      toast.error("Enter Amenities for your house");
+      return;
+    }
+    if (!notselectedOptions) {
+      toast.error("Enter Amenities not provided for your house");
+      return;
+    }
     if (!value) {
       toast.error("Enter country name");
       return;
@@ -262,7 +283,7 @@ const AddListingPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // <---------- HERE
+          Authorization: `Bearer ${token}`, //<---------- HERE
         },
         body: JSON.stringify({
           title,
@@ -276,8 +297,10 @@ const AddListingPage = () => {
           baths,
           livingRoom,
           noOfpersons,
-          amenitiesIncluded: amentitiesinc,
-          amenitiesNotIncluded: amentitiesnotinc,
+          amenitiesIncluded: selectedOptions,
+          amenitiesNotIncluded: notselectedOptions,
+          // amenitiesIncluded: amentitiesinc,
+          // amenitiesNotIncluded: amentitiesnotinc,
           postedBy: currentUser,
           pricePerNight: housePrice,
           locatedCountry: value.label,
@@ -286,6 +309,7 @@ const AddListingPage = () => {
         }),
       });
       const data = await response.json();
+      // console.log(data);
       setLoading(false);
       toast.success(
         "House Listing Published, Taking you to your published house shortly"
@@ -298,7 +322,6 @@ const AddListingPage = () => {
       toast.error(error.message);
     }
   };
-
 
   return (
     <>
@@ -497,7 +520,7 @@ const AddListingPage = () => {
               </span>
             </div>
 
-            <div className="forminputs">
+            {/* <div className="forminputs">
               <label htmlFor="amenitiesinc">
                 Add amenities that you offer while staying*
               </label>
@@ -513,8 +536,8 @@ const AddListingPage = () => {
                 <strong>Foods,Wifi,TV,Tour arrangements</strong>
                 **
               </span>
-            </div>
-            <div className="forminputs">
+            </div> */}
+            {/* <div className="forminputs">
               <label htmlFor="amenitiesnotinc">
                 Add amenities that you do not offer while staying*
               </label>
@@ -530,21 +553,47 @@ const AddListingPage = () => {
                 <strong>Food,Servicing,Tour arrangements</strong>
                 **
               </span>
-            </div>
-            {/* <div className="forminputs">
-              <label htmlFor="username">Enter your name*</label>
-              <input
-                name="username"
-                placeholder="Username"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
+            </div> */}
+
+            <div className="forminputs">
+              <label htmlFor="amenitiesinc">
+                Select amenities that you offer while staying*
+              </label>
+              <Select
+                isMulti={true}
+                placeholder="Select amenities that are available"
+                options={amenitiesOptions}
+                value={selectedOptions}
+                onChange={handleChange}
+                styles={DropdownSelectStyles}
               />
               <span>
-                **Your name&nbsp;
-                <strong>John Doe</strong>
+                **Select amenities that you can afford when people stay in the
+                house&nbsp;
+                <strong>Foods,Wifi,TV,Tour arrangements</strong>
                 **
               </span>
-            </div> */}
+            </div>
+
+            <div className="forminputs">
+              <label htmlFor="amenitiesinc">
+                Select amenities that you do not offer while staying*
+              </label>
+              <Select
+                isMulti={true}
+                placeholder="Select amenities that are not provided"
+                options={amenitiesOptions}
+                value={notselectedOptions}
+                onChange={handleChangeNot}
+                styles={DropdownSelectStyles}
+              />
+              <span>
+                **Select amenities that you can afford when people stay in the
+                house&nbsp;
+                <strong>Foods,Wifi,TV,Tour arrangements</strong>
+                **
+              </span>
+            </div>
 
             <div className="forminputs">
               <label htmlFor="">

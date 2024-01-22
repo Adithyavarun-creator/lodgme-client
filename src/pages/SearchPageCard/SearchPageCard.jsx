@@ -14,7 +14,6 @@ import { FaStar } from "react-icons/fa";
 const SearchPageCard = ({ res }) => {
   const { currentUser } = useSelector((state) => state.user);
 
-
   return (
     <>
       <SearchPageCardStyles>
@@ -119,6 +118,7 @@ const SearchPageCard = ({ res }) => {
 
           <Link
             to={`/homes&rooms/${res._id}`}
+            target="_blank"
             className="linkStyle searchresultview"
           >
             <button className="searchresultviewbtn flex">

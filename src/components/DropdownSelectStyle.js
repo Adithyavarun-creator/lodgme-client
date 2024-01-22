@@ -22,6 +22,9 @@ export const DropdownSelectStyles = {
     fontSize: "18px",
     height: "40px",
     textAlign: "center",
+    height: "150px",
+    width: "400px",
+    borderRadius: "20px",
 
     "@media only screen and (min-width: 1200px)": {
       ...DropdownSelectStyles["@media only screen and (min-width: 1200px)"],
@@ -35,19 +38,19 @@ export const DropdownSelectStyles = {
       overflow: "hidden",
       color: "#fff",
       cursor: "pointer",
+      borderRadius: "20px",
     },
     "@media (min-width: 768px) and (max-width: 1024px) ": {
       ...DropdownSelectStyles[
         "@media (min-width: 768px) and (max-width: 1024px) "
       ],
       fontSize: "14px",
-      height: "30px",
       backgroundColor: "#015151",
       borderRadius: "10px",
       textAlign: "center",
-      // width: "150px",
-      padding: "0px",
-      //width: "300px",
+      height: "150px",
+      width: "400px",
+      padding: "10px",
     },
     "@media (min-width: 481px) and (max-width: 767px) ": {
       ...DropdownSelectStyles[
@@ -58,9 +61,9 @@ export const DropdownSelectStyles = {
       borderRadius: "10px",
       height: "30px",
       textAlign: "center",
-      padding: "0px",
-      // width: "150px",
-      //width: "300px",
+      height: "150px",
+      width: "350px",
+      padding: "10px",
     },
     "@media (min-width: 280px) and (max-width: 480px) ": {
       ...DropdownSelectStyles[
@@ -68,11 +71,11 @@ export const DropdownSelectStyles = {
       ],
       fontSize: "10px",
       backgroundColor: "#015151",
-      height: "15px",
       borderRadius: "10px",
       textAlign: "center",
-      width: "180px",
-      padding: "0px",
+      height: "80px",
+      width: "250px",
+      padding: "5px",
     },
   }),
   singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),

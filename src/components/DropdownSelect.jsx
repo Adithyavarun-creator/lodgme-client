@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { DropdownSelectStyles } from "./DropdownSelect";
+import { DropdownSelectStyles } from "./DropdownSelectStyle";
+import { amenitiesOptions } from "../datas/amenities";
 
-const options = [
+export const options = [
+  { value: "Breakfast", label: "Breakfast" },
+  { value: "Lunch", label: "Lunch" },
+  { value: "Dinner", label: "Dinner" },
   { value: "Kitchen", label: "Kitchen" },
-  { value: "City view", label: "City view" },
+  { value: "City View", label: "City View" },
   { value: "Kitchen", label: "Kitchen" },
   { value: "Workspace", label: "Workspace" },
   { value: "Wifi", label: "Wifi" },
@@ -33,7 +37,7 @@ const options = [
   { value: "Parking", label: "Parking" },
 ];
 
-const SelectStyle = () => {
+const DropdownSelect = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleChange = (option) => {
@@ -55,14 +59,11 @@ const SelectStyle = () => {
       }}
     >
       <Select
-        // defaultValue={(options[0], options[1])}
         isMulti={true}
         placeholder="Select amenities available"
-        options={options}
+        options={amenitiesOptions}
         value={selectedOptions}
         onChange={handleChange}
-        // className="basic-multi-select"
-        // classNamePrefix="select"
         styles={DropdownSelectStyles}
       />
       <button onClick={submit}>Submit</button>
@@ -73,4 +74,4 @@ const SelectStyle = () => {
   );
 };
 
-export default SelectStyle;
+export default DropdownSelect;

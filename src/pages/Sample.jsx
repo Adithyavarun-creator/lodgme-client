@@ -899,7 +899,7 @@ const SingleHousePage = () => {
                     </div>
                     <div className="hostdetails">
                       <h2 className="hostdetailname">
-                        Serviced by &nbsp;{postedBy?.firstname}&nbsp;
+                        Serviced by {postedBy?.firstname}&nbsp;
                         {postedBy?.lastname}
                       </h2>
                       <span className="hostdetailsubname">
@@ -965,3 +965,5 @@ const SingleHousePage = () => {
 };
 
 export default SingleHousePage;
+
+//[TITRE DE L’ANNONCE – STUDIO/APPARTEMENT/VILLA/MAISON]

@@ -99,8 +99,9 @@ export const AddListingSelectStyles = {
     boxShadow: "none",
     color: "#ffffff",
     fontSize: "18px",
-    height: "50px",
+    height: "55px",
     textAlign: "center",
+    borderRadius: "10px",
 
     "@media only screen and (min-width: 1200px)": {
       ...AddListingSelectStyles["@media only screen and (min-width: 1200px)"],
@@ -111,6 +112,7 @@ export const AddListingSelectStyles = {
       borderRadius: "10px",
       textAlign: "center",
       padding: "0px",
+      borderRadius: "10px",
 
       // width: "300px",
     },
@@ -119,13 +121,15 @@ export const AddListingSelectStyles = {
         "@media (min-width: 768px) and (max-width: 1024px) "
       ],
       fontSize: "14px",
-      height: "30px",
+      height: "55px",
       backgroundColor: "#015151",
       border: "1px solid #015151",
       borderRadius: "10px",
       textAlign: "center",
       // width: "150px",
       padding: "0px",
+      borderRadius: "10px",
+
       //width: "300px",
     },
     "@media (min-width: 481px) and (max-width: 767px) ": {
@@ -135,9 +139,10 @@ export const AddListingSelectStyles = {
       fontSize: "12px",
       backgroundColor: "#015151",
       borderRadius: "10px",
-      height: "30px",
+      height: "50px",
       textAlign: "center",
       padding: "0px",
+
       // width: "150px",
       //width: "300px",
     },
@@ -147,7 +152,7 @@ export const AddListingSelectStyles = {
       ],
       fontSize: "12px",
       backgroundColor: "#015151",
-      height: "45px",
+      height: "50px",
       borderRadius: "10px",
       textAlign: "center",
       width: "250px",
