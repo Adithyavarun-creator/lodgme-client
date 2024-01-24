@@ -16,7 +16,7 @@ import BookingOption from "../../components/AddListingBoxes/BookingOption";
 import AddPrice from "../../components/AddListingBoxes/AddPrice";
 
 const AddListingPageBox = () => {
-  const [next, setNext] = useState(10);
+  const [next, setNext] = useState(0);
   const navigate = useNavigate();
 
   //states for below components
