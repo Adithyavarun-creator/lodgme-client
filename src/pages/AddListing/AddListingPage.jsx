@@ -38,7 +38,6 @@ import { amenitiesOptions } from "../../datas/amenities";
 
 const AddListingPage = () => {
   const { currentUser, token } = useSelector((state) => state.user);
-  const { RangePicker } = DatePicker;
 
   const [address, setAddress] = useState("");
   const [coordinates, setCoordiantes] = useState({
@@ -197,7 +196,6 @@ const AddListingPage = () => {
     setNotSelectedOptions(option);
   };
 
-  console.log(selectedOptions);
 
   const onAddListing = async () => {
     if (!title) {

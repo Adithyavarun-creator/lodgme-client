@@ -17,7 +17,6 @@ const containerStyle = {
 };
 
 const MapBox = ({ lat, lng }) => {
-
   const center = {
     lat: Number(lat),
     lng: Number(lng),
@@ -26,6 +25,7 @@ const MapBox = ({ lat, lng }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_MAPS_API,
+    libraries: ["places"],
   });
 
   const [map, setMap] = useState(null);

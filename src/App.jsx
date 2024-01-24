@@ -117,6 +117,7 @@ function App() {
             />
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
             <Route path="/add-new-listing" element={<AddListingPageBox />} />
+            {/* <Route path="/add-new-listing" element={<AddListingPage />} /> */}
 
             <Route path="/homes&rooms/:id" element={<SingleHousePage />} />
             <Route

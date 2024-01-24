@@ -1,30 +1,36 @@
 import React, { useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "../Button/Button";
 
-const AccomodationType = ({ next, setNext }) => {
-  const [selected, setSelected] = useState(false);
-  console.log(next);
-
-  const getBack = () => {
-    console.log(setNext(0));
-    setNext(1);
-  };
-
+const AccomodationType = ({ next, setNext, acctype, setAccType }) => {
   const selectRoom = (value) => {
-    // console.log(value);
-    setSelected(value);
+    if (value) {
+      setAccType(value);
+      toast.success(`Type ${value} has been selected`);
+    }
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+
+      setNext(3);
+    }, 800);
   };
+
+  console.log(acctype);
 
   return (
-    <div>
+    <div className="forstep">
       <div>
         <h2>Specify type of Accomodation available for the travellers</h2>
+      </div>
+      <div className="stepbox">
+        <span className="step">2</span>
       </div>
       <div className="acctypebox">
         <div
           className="acctypebox-1"
-          onClick={() => selectRoom("entire accommodation")}
+          onClick={() => selectRoom("Entire Accommodation")}
         >
           <div>
             <h3>Entire Accomodation</h3>
@@ -35,7 +41,7 @@ const AccomodationType = ({ next, setNext }) => {
             </span>
           </div>
         </div>
-        <div className="acctypebox-1" onClick={() => selectRoom("room")}>
+        <div className="acctypebox-1" onClick={() => selectRoom("Room")}>
           <div>
             <h3>Room</h3>
           </div>
@@ -48,7 +54,7 @@ const AccomodationType = ({ next, setNext }) => {
         </div>
         <div
           className="acctypebox-1"
-          onClick={() => selectRoom("shared accommodation")}
+          onClick={() => selectRoom("Shared Accommodation")}
         >
           <div>
             <h3>Shared Accomodation</h3>
@@ -62,8 +68,13 @@ const AccomodationType = ({ next, setNext }) => {
         </div>
       </div>
       <div className="addlistbtn">
-        <Button title="Back" icon={<IoArrowBackSharp />} onClick={getBack} />
+        <Button
+          title="Back"
+          icon={<IoArrowBackSharp />}
+          onClick={() => setNext(1)}
+        />
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

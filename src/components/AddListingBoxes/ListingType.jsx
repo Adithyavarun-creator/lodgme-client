@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { IoHomeOutline } from "react-icons/io5";
-import { MdApartment, MdOutlineCastle } from "react-icons/md";
+import {
+  MdApartment,
+  MdOutlineCastle,
+  MdOutlineArrowBackIosNew,
+} from "react-icons/md";
 import { PiHouseSimple } from "react-icons/pi";
 import { LuHotel } from "react-icons/lu";
 import { RiHotelLine } from "react-icons/ri";
 import { TbBrandGoogleHome } from "react-icons/tb";
 import { GiGreenhouse, GiCaveEntrance } from "react-icons/gi";
-import { FaLandmarkDome, FaLocationPinLock } from "react-icons/fa6";
+import {
+  FaChevronLeft,
+  FaLandmarkDome,
+  FaLocationPinLock,
+} from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 import Button from "../Button/Button";
 import { IoArrowBackSharp, IoArrowForward } from "react-icons/io5";
 import { MdDone } from "react-icons/md";
 
-const ListingType = ({ next, setNext }) => {
-  const [type, setType] = useState("");
-  const [selected, setSelected] = useState(false);
-
+const ListingType = ({ setNext, type, setType, setSelected }) => {
   const selectType = (value) => {
     if (value) {
       setSelected(true);
@@ -35,7 +40,7 @@ const ListingType = ({ next, setNext }) => {
       toast.error(`Type has not been selected`);
       return;
     }
-    setNext(2);
+    // setNext(2);
   };
 
   const goBack = () => {
@@ -170,11 +175,14 @@ const ListingType = ({ next, setNext }) => {
           </div>
         </div>
         <div className="addlistbtn">
-          {/* <Button title="Back" onClick={goBack} /> */}
-          {/* <Button
-            onClick={proceedAccomodate}
-            title="Move to Accommodate type"
-          /> */}
+          <Button
+            title="Back"
+            icon={<FaChevronLeft />}
+            onClick={() => {
+              setNext(0);
+              window.scrollTo(0, 0);
+            }}
+          />
         </div>
       </div>
       <Toaster position="top-center" reverseOrder={false} />

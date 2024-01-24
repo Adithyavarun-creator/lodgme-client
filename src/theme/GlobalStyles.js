@@ -31,7 +31,7 @@ body {
 .flex {
   display: flex;
   flex-direction: row;
-  gap: 2px;
+  gap: 5px;
   align-items: center;
   cursor: pointer;
 }
@@ -65,6 +65,13 @@ body {
   display: flex;
   justify-content: center;
 }
+
+input[type="checkbox"] {
+    accent-color: ${({ theme }) => theme.colors.primaryColor};
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
 
 
 .select {
