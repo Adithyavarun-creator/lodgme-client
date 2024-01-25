@@ -32,8 +32,8 @@ const AddListingPageBox = () => {
   //for address give value.label
   const [address, setAddress] = useState("");
   const [coordinates, setCoordiantes] = useState({
-    lat: null,
-    lng: null,
+    lat: 48.85,
+    lng: 2.29,
   });
   const [postCode, setPostCode] = useState();
 
@@ -45,7 +45,7 @@ const AddListingPageBox = () => {
   const [babycots, setbabycots] = useState(false);
   const [children, setChildren] = useState(false);
 
-  //for 5
+  //for 5 amenities
   const [checkedValue, setCheckedValue] = useState([]);
 
   //for 6
@@ -178,10 +178,6 @@ const AddListingPageBox = () => {
           {next === 7 ? (
             <UploadImages
               setNext={setNext}
-              files={files}
-              setFiles={setFiles}
-              dragging={dragging}
-              setIsDragging={setIsDragging}
               formData={formData}
               setFormData={setFormData}
             />

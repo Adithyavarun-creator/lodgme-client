@@ -25,6 +25,7 @@ const AddAmenities = ({ setNext, checkedValue, setCheckedValue }) => {
     }
     toast.success("Amenities included");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(6);
     }, 1000);
     // setNext(6);
@@ -34,7 +35,7 @@ const AddAmenities = ({ setNext, checkedValue, setCheckedValue }) => {
     <>
       <div className="forstep">
         <div>
-          <h2>Choose the amenities that are available in your accomodation</h2>
+          <h2 className="headingexample">Choose the amenities that are available in your accomodation</h2>
         </div>
         <div className="stepbox">
           <span className="step">5</span>
@@ -47,78 +48,11 @@ const AddAmenities = ({ setNext, checkedValue, setCheckedValue }) => {
                   type="checkbox"
                   value={amenity.value}
                   onChange={handleChange}
+                  className="checkbox"
                 />
               </div>
               <div className="roomamenitydetail">
                 <div>
-                  {/* <FontAwesomeIcon
-                    className="roomamenityicon"
-                    icon={
-                      amenity.value === "Breakfast"
-                        ? faUtensils
-                        : "" || amenity.value === "Lunch"
-                        ? faUtensils
-                        : "" || amenity.value === "Kitchen"
-                        ? faKitchenSet
-                        : "" || amenity.value === "Workspace"
-                        ? faHouseLaptop
-                        : "" || amenity.value === "Dinner"
-                        ? faUtensils
-                        : "" || amenity.value === "City View"
-                        ? faArrowRightToCity
-                        : "" || amenity.value === "Wifi"
-                        ? faWifi
-                        : "" || amenity.value === "Lift"
-                        ? faElevator
-                        : "" || amenity.value === "Private Balcony"
-                        ? faDoorOpen
-                        : "" || amenity.value === "Washing Machine"
-                        ? faJugDetergent
-                        : "" || amenity.value === "Hair Dryer"
-                        ? faPlug
-                        : "" || amenity.value === "Soaps"
-                        ? faSoap
-                        : "" || amenity.value === "Shower Gel"
-                        ? faSprayCanSparkles
-                        : "" || amenity.value === "Bathroom Heater"
-                        ? faHotTubPerson
-                        : "" || amenity.value === "Pillows and Blankets"
-                        ? faMattressPillow
-                        : "" || amenity.value === "Iron"
-                        ? faShirt
-                        : "" || amenity.value === "Air Conditioning"
-                        ? faTemperatureLow
-                        : "" || amenity.value === "Fan"
-                        ? faFan
-                        : "" || amenity.value === "Kettle"
-                        ? faMugHot
-                        : "" || amenity.value === "HDTV"
-                        ? faTv
-                        : "" || amenity.value === "Smoke Alaram"
-                        ? faBanSmoking
-                        : "" || amenity.value === "Refrigirator"
-                        ? faIcicles
-                        : "" || amenity.value === "Cooking Applicances"
-                        ? faFireBurner
-                        : "" || amenity.value === "Microwave"
-                        ? faSquare
-                        : "" || amenity.value === "Dishwasher"
-                        ? faHandsBubbles
-                        : "" || amenity.value === "Dining Table"
-                        ? faTable
-                        : "" || amenity.value === "Host Assistance"
-                        ? faHandshakeAngle
-                        : "" || amenity.value === "Sofa"
-                        ? faCouch
-                        : "" || amenity.value === "Tour Assistance"
-                        ? faCarOn
-                        : "" || amenity.value === "Parking"
-                        ? faSquareParking
-                        : "" || amenity.value === "Room Service"
-                        ? faPersonChalkboard
-                        : ""
-                    }
-                  /> */}
                   <FontAwesomeIcon
                     className="roomamenityicon"
                     icon={amenity.icon ? amenity.icon : ""}
@@ -151,6 +85,8 @@ const AddAmenities = ({ setNext, checkedValue, setCheckedValue }) => {
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
+
               setNext(4);
             }}
           />

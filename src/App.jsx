@@ -116,7 +116,6 @@ function App() {
               element={<ResetPassword />}
             />
             <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
-            <Route path="/add-new-listing" element={<AddListingPageBox />} />
             {/* <Route path="/add-new-listing" element={<AddListingPage />} /> */}
 
             <Route path="/homes&rooms/:id" element={<SingleHousePage />} />
@@ -136,6 +135,7 @@ function App() {
             />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
+              <Route path="/add-new-listing" element={<AddListingPageBox />} />
               <Route path="/user-listings" element={<UserListingPage />} />
               <Route path="/edit-user-profile" element={<EditProfile />} />
               <Route

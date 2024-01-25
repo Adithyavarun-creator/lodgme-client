@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import toast, { Toaster } from "react-hot-toast";
 import Button from "../Button/Button";
+import { FaChevronLeft } from "react-icons/fa6";
 
 const AccomodationType = ({ next, setNext, acctype, setAccType }) => {
   const selectRoom = (value) => {
@@ -17,12 +18,10 @@ const AccomodationType = ({ next, setNext, acctype, setAccType }) => {
     }, 800);
   };
 
-  console.log(acctype);
-
   return (
     <div className="forstep">
       <div>
-        <h2>Specify type of Accomodation available for the travellers</h2>
+        <h2 className="headingexample">Specify type of Accomodation available for the travellers</h2>
       </div>
       <div className="stepbox">
         <span className="step">2</span>
@@ -70,8 +69,11 @@ const AccomodationType = ({ next, setNext, acctype, setAccType }) => {
       <div className="addlistbtn">
         <Button
           title="Back"
-          icon={<IoArrowBackSharp />}
-          onClick={() => setNext(1)}
+          icon={<FaChevronLeft />}
+          onClick={() => {
+            window.scrollTo(0, 0);
+            setNext(1);
+          }}
         />
       </div>
       <Toaster position="top-center" reverseOrder={false} />

@@ -66,11 +66,29 @@ body {
   justify-content: center;
 }
 
-input[type="checkbox"] {
+.checkbox {
     accent-color: ${({ theme }) => theme.colors.primaryColor};
     width: 15px;
     height: 15px;
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      width: 13px;
+      height: 13px;
+    }
+
+    @media ${devices.smallTabs} {
+      width: 10px;
+      height: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      width: 10px;
+      height: 10px;
+    }
   }
 
 

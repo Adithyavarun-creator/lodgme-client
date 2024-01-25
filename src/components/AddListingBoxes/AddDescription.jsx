@@ -11,30 +11,27 @@ const AddDescription = ({ setNext, description, setDescription }) => {
     }
     toast.success("Description saved");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(10);
     }, 1000);
   };
 
-  console.log(description);
 
   return (
     <>
       <div className="forstep">
         <div>
-          <h2>Give detailed description about the house you are adding</h2>
+          <h2 className="headingexample">Give detailed description about the house you are adding</h2>
         </div>
-        <div>
-          <span className="headingexample">
-            (Elaborate house available in location, availabilities stuffs, not
-            available stuffs, services you provide for travellers, room square
-            feet, beds,baths and highlight your house)
-          </span>
-        </div>
+
         <div className="stepbox">
           <span className="step">9</span>
         </div>
 
         <div className="titlebox">
+          <span className="exampletext">
+            (Elaborate specialities about your house)
+          </span>
           <textarea
             name=""
             id=""
@@ -49,6 +46,7 @@ const AddDescription = ({ setNext, description, setDescription }) => {
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(8);
             }}
           />

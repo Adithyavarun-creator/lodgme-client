@@ -11,10 +11,23 @@ export const AddListingPageBoxStyle = styled.div`
   width: max-content;
   margin: 0 auto;
   padding: 30px;
-  border-radius: 15px;
-  /* box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -7px 11px 62px -22px rgba(0, 0, 0, 0.75); */
+
+  @media ${devices.bigLaptopsAndDesktops} {
+    padding: 30px;
+  }
+
+  @media ${devices.tabletsAndIpads} {
+    padding: 30px;
+  }
+  @media ${devices.smallTabs} {
+    padding: 10px;
+    gap: 30px;
+  }
+
+  @media ${devices.smallMobiles} {
+    padding: 5px;
+    gap: 20px;
+  }
 
   .steplisting {
     display: grid;
@@ -22,6 +35,28 @@ export const AddListingPageBoxStyle = styled.div`
     justify-content: space-between;
     column-gap: 100px;
     row-gap: 40px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 50px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 25px;
+      row-gap: 25px;
+    }
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr;
+      column-gap: 20px;
+      row-gap: 20px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr;
+      column-gap: 14px;
+      row-gap: 14px;
+    }
   }
 
   h2 {
@@ -29,6 +64,22 @@ export const AddListingPageBoxStyle = styled.div`
     font-size: 24px;
     text-align: center;
     margin-top: 20px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 22px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 20px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
+    }
   }
 
   .stepnumberbox {
@@ -50,12 +101,48 @@ export const AddListingPageBoxStyle = styled.div`
     border-radius: 50%;
     width: 40px;
     height: 40px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 20px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 15px;
+      width: 30px;
+      height: 30px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+      width: 40px;
+      height: 40px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 12px;
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .stepdesc {
-    color: ${({ theme }) => theme.colors.primaryColor};
+    color: #333;
     font-weight: bolder;
     font-size: 22px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 20px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 15px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
+    }
   }
 
   .addlistbtn {
@@ -64,6 +151,17 @@ export const AddListingPageBoxStyle = styled.div`
     align-items: center;
     gap: 70px;
     margin-top: 30px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .houseboxes {
@@ -71,10 +169,106 @@ export const AddListingPageBoxStyle = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
     row-gap: 0;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr;
+      row-gap: 8px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr;
+      row-gap: 13px;
+    }
+  }
+
+  .stepbox {
+    position: absolute;
+    top: 120px;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      top: 90px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      top: 80px;
+    }
+    @media ${devices.smallTabs} {
+      top: 130px;
+    }
+
+    @media ${devices.smallMobiles} {
+      top: 80px;
+    }
+  }
+
+  .headingexample {
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 20px;
+      margin-top: 60px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 16px;
+      margin-top: 100px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+      margin-top: 60px;
+    }
+  }
+
+  .houseboxes {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 30px;
+    column-gap: 35px;
+    row-gap: 35px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 30px;
+      column-gap: 30px;
+      row-gap: 30px;
+    }
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 30px;
+      row-gap: 30px;
+    }
+
+    @media ${devices.smallMobiles} {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0;
+    }
   }
 
   .housebox {
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,54 +280,109 @@ export const AddListingPageBoxStyle = styled.div`
     position: relative;
     transition: all 0.4s ease-in;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      padding: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+    @media ${devices.smallTabs} {
+      padding: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      width: 50%;
+      gap: 2px;
+    }
   }
 
   .housebox:hover {
     background-color: ${({ theme }) => theme.colors.primaryColor};
     color: #fff;
-  }
 
-  .selectedicon {
-    height: 25px;
-    width: 25px;
-    color: #fff;
-    background-color: ${({ theme }) => theme.colors.primaryColor};
-    border-radius: 50%;
-    padding: 2px;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .houseicon {
     height: 20px;
     width: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 17px;
+      width: 17px;
+    }
+    @media ${devices.smallTabs} {
+      height: 15px;
+      width: 15px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 17px;
+      width: 17px;
+    }
   }
 
   .housename {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 17px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 15px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 12px;
+    }
   }
 
   .forstep {
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 15px;
     color: ${({ theme }) => theme.colors.primaryColor};
-  }
 
-  .headingexample {
-    font-size: 15px;
-    display: flex;
-    justify-content: center;
-  }
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
 
-  .stepbox {
-    position: absolute;
-    top: -60px;
-    right: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @media ${devices.tabletsAndIpads} {
+      gap: 10px;
+    }
+    @media ${devices.smallTabs} {
+      gap: 8px;
+    }
+
+    @media ${devices.smallMobiles} {
+      gap: 3px;
+    }
   }
 
   .step {
@@ -149,6 +398,30 @@ export const AddListingPageBoxStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 18px;
+      padding: 5px;
+      height: 40px;
+      width: 40px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 16px;
+      padding: 5px;
+      height: 35px;
+      width: 35px;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 5px;
+      height: 25px;
+      width: 25px;
+      font-size: 14px;
+    }
   }
 
   .acctypebox {
@@ -156,6 +429,26 @@ export const AddListingPageBoxStyle = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 25px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      grid-template-columns: 0.75fr;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 0.75fr;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
   }
 
   .acctypebox-1 {
@@ -168,26 +461,80 @@ export const AddListingPageBoxStyle = styled.div`
     cursor: pointer;
     transition: all 0.6s ease-in;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      padding: 20px;
+    }
+
+    @media ${devices.smallTabs} {
+      padding: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 10px;
+    }
   }
 
   .acctypebox-1:hover {
     background-color: ${({ theme }) => theme.colors.primaryColor};
     color: #fff;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   h3 {
     font-weight: bolder;
-    font-size: 18px;
+    font-size: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 18px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 16px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   .subaccomdatetext {
     font-size: 16px;
-    font-weight: bold;
-  }
+    font-weight: 500;
 
-  .selectype {
-    background-color: red;
-    color: #fff;
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 14px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
   }
 
   .accomboxes {
@@ -195,6 +542,22 @@ export const AddListingPageBoxStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      gap: 17px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 10px;
+      padding: 10px;
+      gap: 10px;
+    }
   }
 
   .accombox {
@@ -202,11 +565,39 @@ export const AddListingPageBoxStyle = styled.div`
     flex-direction: column;
     gap: 0.8px;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      gap: 2px;
+    }
   }
 
   .acclabel {
     font-weight: bold;
     font-size: 14px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
   }
 
   .accinput {
@@ -217,6 +608,40 @@ export const AddListingPageBoxStyle = styled.div`
     padding: 10px;
     font-size: 18px;
     border: 0.8px solid ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      height: 30px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 25px;
+    }
+  }
+
+  .accinput:placeholder-shown {
+    font-size: 13px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 13px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 13px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -232,6 +657,23 @@ export const AddListingPageBoxStyle = styled.div`
     flex-direction: column;
     gap: 6px;
     margin-top: 30px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      margin-top: 15px;
+    }
+
+    @media ${devices.smallTabs} {
+      margin-top: 13px;
+      gap: 4px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 10px;
+      gap: 3px;
+    }
   }
 
   .roomspeclist {
@@ -241,22 +683,95 @@ export const AddListingPageBoxStyle = styled.div`
     align-items: center;
     padding: 10px;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .roomcounts {
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .roomspecname {
     font-size: 17px;
     font-weight: 400;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 16px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
+  }
+
+  span {
+    font-size: 17px;
+    font-weight: 400;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 17px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   .roomcountvalue {
     font-size: 20px;
     font-weight: bolder;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 17px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   .roomcounticon {
@@ -266,6 +781,23 @@ export const AddListingPageBoxStyle = styled.div`
     border-radius: 50%;
     border: 0.8px solid ${({ theme }) => theme.colors.primaryColor};
     cursor: pointer;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 25px;
+      width: 25px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 21px;
+      width: 21px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 18px;
+      width: 18px;
+    }
   }
 
   .amenitybox {
@@ -274,6 +806,26 @@ export const AddListingPageBoxStyle = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
     row-gap: 30px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      row-gap: 20px;
+      padding: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 10px;
+      row-gap: 20px;
+      padding: 8px;
+    }
   }
 
   .roomamenity {
@@ -289,23 +841,87 @@ export const AddListingPageBoxStyle = styled.div`
     position: relative;
     color: ${({ theme }) => theme.colors.primaryColor};
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 90px;
+    }
+
+    @media ${devices.smallTabs} {
+      padding: 0;
+      height: 80px;
+    }
+
+    @media ${devices.smallMobiles} {
+      padding: 0;
+      height: 70px;
+    }
   }
 
   .amenityinputcheck {
     position: absolute;
     top: 10px;
     right: 10px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      top: 3px;
+      right: 10px;
+    }
   }
 
   .roomamenityicon {
     height: 30px;
     width: 30px;
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 22px;
+      width: 22px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 18px;
+      width: 18px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 12px;
+      width: 12px;
+    }
   }
 
   .roomamenitytext {
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 18px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 16px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 11px;
+    }
   }
 
   .roomamenitydetail {
@@ -315,6 +931,18 @@ export const AddListingPageBoxStyle = styled.div`
     gap: 3px;
     align-items: center;
     justify-content: center;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .uploadbox {
@@ -325,30 +953,91 @@ export const AddListingPageBoxStyle = styled.div`
     color: ${({ theme }) => theme.colors.primaryColor};
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 15px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 230px;
+      margin-top: 0;
+      padding: 10px;
+      gap: 13px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 180px;
+      margin-top: 0;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 120px;
+      margin-top: 0;
+      padding: 5px;
+      gap: 8px;
+    }
   }
 
-  .uploadcamera {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-  }
   .uploadcameraicon {
     height: 30px;
     width: 30px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      height: 22px;
+      width: 22px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 11px;
+      width: 11px;
+    }
   }
 
   .uploadtext {
     font-size: 17px;
     font-weight: bolder;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 13px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   .uploadtextrule {
     font-size: 14px;
     font-weight: 500;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 15px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+    }
   }
 
   .dragarea {
@@ -361,11 +1050,42 @@ export const AddListingPageBoxStyle = styled.div`
     column-gap: 20px;
     row-gap: 20px;
     cursor: pointer;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      row-gap: 20px;
+    }
+
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr;
+      column-gap: 20px;
+      row-gap: 25px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 25px;
+    }
   }
 
   .delimgbox {
     position: relative;
     margin-top: 20px;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
   }
 
   .uploadedimages {
@@ -374,6 +1094,18 @@ export const AddListingPageBoxStyle = styled.div`
     border-radius: 10px;
     border: 1.3px solid ${({ theme }) => theme.colors.primaryColor};
     width: 100%;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 120px;
+    }
   }
 
   .deleteimgicon {
@@ -387,12 +1119,72 @@ export const AddListingPageBoxStyle = styled.div`
     background-color: ${({ theme }) => theme.colors.primaryColor};
     border-radius: 10px;
     cursor: pointer;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+
+    @media ${devices.smallTabs} {
+      top: -12px;
+      height: 17px;
+      width: 17px;
+      padding: 5px;
+    }
+
+    @media ${devices.smallMobiles} {
+      top: -12px;
+      height: 12px;
+      width: 12px;
+      padding: 8px;
+    }
   }
 
   .titlebox {
     margin-top: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      margin-top: 20px;
+      gap: 14px;
+    }
+
+    @media ${devices.smallTabs} {
+      margin-top: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 10px;
+    }
+  }
+
+  .exampletext {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 16px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
+    }
   }
 
   textarea {
@@ -406,6 +1198,27 @@ export const AddListingPageBoxStyle = styled.div`
     outline: none;
     border: 0.8px solid #333;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      width: 500px;
+      height: 250px;
+      padding: 10px;
+    }
+
+    @media ${devices.smallTabs} {
+      width: 350px;
+      height: 150px;
+      padding: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      width: 250px;
+      height: 100px;
+      padding: 10px;
+    }
   }
 
   .pricebox {
@@ -415,11 +1228,49 @@ export const AddListingPageBoxStyle = styled.div`
     margin-top: 30px;
     gap: 5px;
     color: ${({ theme }) => theme.colors.primaryColor};
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      margin-top: 22px;
+      gap: 5px;
+    }
+
+    @media ${devices.smallTabs} {
+      margin-top: 15px;
+      gap: 5px;
+    }
+
+    @media ${devices.smallMobiles} {
+      margin-top: 10px;
+      gap: 5px;
+    }
   }
 
   .priceicon {
     height: 70px;
     width: 70px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 55px;
+      width: 55px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 40px;
+      width: 40px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 30px;
+      width: 30px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 25px;
+      width: 25px;
+    }
   }
 
   .pricenumber {
@@ -431,9 +1282,49 @@ export const AddListingPageBoxStyle = styled.div`
     font-size: 55px;
     color: ${({ theme }) => theme.colors.primaryColor};
     font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 50px;
+      width: 15%;
+      font-size: 50px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 40px;
+      width: 15%;
+      font-size: 40px;
+    }
+
+    @media ${devices.smallTabs} {
+      height: 20px;
+      width: 15%;
+      font-size: 20px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 20px;
+      width: 10%;
+      font-size: 15px;
+    }
   }
 
   .perday {
     font-size: 50px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 43px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 37px;
+    }
+
+    @media ${devices.smallTabs} {
+      font-size: 18px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 13px;
+    }
   }
 `;

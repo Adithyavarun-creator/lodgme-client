@@ -3,8 +3,13 @@ import Button from "../Button/Button";
 import toast, { Toaster } from "react-hot-toast";
 import { MdOutlineEuro } from "react-icons/md";
 import { FaChevronLeft } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const AddPrice = ({ setNext, price, setPrice, type }) => {
+  const { currentUser, token } = useSelector((state) => state.user);
+
+  console.log(currentUser, "and", token);
+
   const onSubmit = () => {
     if (!price) {
       toast.error("Please enter price value");
@@ -12,6 +17,7 @@ const AddPrice = ({ setNext, price, setPrice, type }) => {
     }
     setTimeout(() => {
       toast.success("Price added");
+      window.scrollTo(0, 0);
     }, 1000);
   };
 
@@ -19,11 +25,11 @@ const AddPrice = ({ setNext, price, setPrice, type }) => {
     <>
       <div className="forstep">
         <div>
-          <h2>Add price for your house</h2>
+          <h2 className="headingexample">Add price for your house</h2>
         </div>
 
         <div>
-          <span className="headingexample">
+          <span className="exampletext">
             Mention the pricing for house for stay per day
           </span>
         </div>
@@ -56,13 +62,11 @@ const AddPrice = ({ setNext, price, setPrice, type }) => {
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(10);
             }}
           />
-          <Button
-            title="Publish your house in Lodgeme community"
-            onClick={onSubmit}
-          />
+          <Button title="Finally Publish your house" onClick={onSubmit} />
         </div>
         <Toaster position="top-center" reverseOrder={false} />
       </div>

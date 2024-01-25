@@ -297,8 +297,6 @@ const AddListingPage = () => {
           noOfpersons,
           amenitiesIncluded: selectedOptions,
           amenitiesNotIncluded: notselectedOptions,
-          // amenitiesIncluded: amentitiesinc,
-          // amenitiesNotIncluded: amentitiesnotinc,
           postedBy: currentUser,
           pricePerNight: housePrice,
           locatedCountry: value.label,

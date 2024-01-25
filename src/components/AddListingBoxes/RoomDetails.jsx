@@ -76,7 +76,7 @@ const RoomDetails = ({
     }
   };
 
-  // console.log("babycots is", babycots);
+  //console.log("babycots is", babycots);
   // console.log("children is", children);
 
   const moveNext = () => {
@@ -99,6 +99,7 @@ const RoomDetails = ({
 
     toast.success("House specifications added");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(5);
     }, 1000);
   };
@@ -107,7 +108,7 @@ const RoomDetails = ({
     <>
       <div className="forstep">
         <div>
-          <h2>Provide information based on your accomodation specifications</h2>
+          <h2 className="headingexample">information based on your accomodation specifications</h2>
         </div>
         <div className="stepbox">
           <span className="step">4</span>
@@ -208,14 +209,15 @@ const RoomDetails = ({
                   name=""
                   id=""
                   value={babycots}
+                  className="checkbox"
                   onChange={() => handleChange("babycots")}
                 />
-                <span>{babycots ? "Yes" : "No"}</span>
+                <span>Yes</span>
               </div>
-              {/* <div className="flex">
-                <input type="checkbox" name="" id="" />
+              <div className="flex">
+                <input type="checkbox" name="" id="" className="checkbox"/>
                 <span>No</span>
-              </div> */}
+              </div>
             </div>
           </div>
 
@@ -229,15 +231,16 @@ const RoomDetails = ({
                   type="checkbox"
                   name=""
                   id=""
+                  className="checkbox"
                   value={children}
                   onChange={() => handleChange("children")}
                 />
-                <span>{children ? "Yes" : "No"}</span>
+                <span>Yes</span>
               </div>
-              {/* <div className="flex">
-                <input type="checkbox" name="" id="" />
+              <div className="flex">
+                <input type="checkbox" className="checkbox" name="" id="" />
                 <span>No</span>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -247,6 +250,7 @@ const RoomDetails = ({
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(3);
             }}
           />

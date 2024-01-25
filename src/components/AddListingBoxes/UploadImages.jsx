@@ -15,10 +15,6 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const UploadImages = ({
   setNext,
-  dragging,
-  setIsDragging,
-  files,
-  setFiles,
   formData,
   setFormData,
 }) => {
@@ -107,6 +103,7 @@ const UploadImages = ({
     }
     toast.success("Images uploaded");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(8);
     }, 1000);
   };
@@ -115,20 +112,17 @@ const UploadImages = ({
     <>
       <div className="forstep">
         <div>
-          <h2>
-            Upload images of your house that is going to be published for
-            travellers
-          </h2>
-        </div>
-        <div>
-          <span className="headingexample">
-            Maximum number of images should be 5 and more
-          </span>
+          <h2 className="headingexample">Upload images of your house</h2>
         </div>
         <div className="stepbox">
           <span className="step">7</span>
         </div>
         <div className="uploadbox">
+          <div>
+            <span style={{ color: "#015151", textAlign: "center" }}>
+              Maximum number of images should be 5 and more
+            </span>
+          </div>
           <div className="uploadcamera">
             <FontAwesomeIcon icon={faCamera} className="uploadcameraicon" />
           </div>
@@ -169,7 +163,7 @@ const UploadImages = ({
         <div className="uploadimagebox">
           {formData.imageUrls ? (
             formData.imageUrls.map((image, i) => (
-              <div className="delimgbox" key={i}>
+              <div className="delimgbox">
                 <img src={image} alt="" className="uploadedimages" />
                 <FontAwesomeIcon
                   icon={faTrash}
@@ -188,6 +182,7 @@ const UploadImages = ({
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(6);
             }}
           />
@@ -204,60 +199,3 @@ const UploadImages = ({
 };
 
 export default UploadImages;
-
-//const onFileSelect = (e) => {
-// const files = e.target.files;
-// if (files.length === 0) return;
-// for (let i = 0; i < files.length; i++) {
-//   if (files[i].type.split("/")[0] !== "image") continue;
-//   if (!images.some((e) => e.name === files[i].name)) {
-//     setImages((prevImages) => [
-//       ...prevImages,
-//       {
-//         name: files[i].name,
-//         url: URL.createObjectURL(files[i]),
-//       },
-//     ]);
-//   }
-// }
-//}
-
-//const onDrop = (e) => {
-//e.preventDefault();
-//setIsDragging(false);
-// const files = e.dataTransfer.files;
-// for (let i = 0; i < files.length; i++) {
-//   if (files[i].type.split("/")[0] !== "image") continue;
-//   if (!images.some((e) => e.name === files[i].name)) {
-//     setImages((prevImages) => [
-//       ...prevImages,
-//       {
-//         name: files[i].name,
-//         url: URL.createObjectURL(files[i]),
-//       },
-//     ]);
-//   }
-// }
-//};
-
-/**
- rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    // This rule allows anyone with your Firestore database reference to view, edit,
-    // and delete all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // all client requests to your Firestore database will be denied until you Update
-    // your rules
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
- */

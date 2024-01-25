@@ -51,7 +51,7 @@ const ListingType = ({ setNext, type, setType, setSelected }) => {
     <>
       <div className="forstep">
         <div>
-          <h2>Describe your type of Accommodation</h2>
+          <h2 className="headingexample">Describe your type of Accommodation</h2>
         </div>
         <div className="stepbox">
           <span className="step">1</span>

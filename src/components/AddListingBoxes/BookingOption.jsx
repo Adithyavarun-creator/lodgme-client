@@ -13,7 +13,6 @@ const BookingOption = ({ setNext, setSelectBooking, selectBooking }) => {
 
     setTimeout(() => {
       window.scrollTo(0, 0);
-
       setNext(11);
     }, 800);
   };
@@ -22,12 +21,10 @@ const BookingOption = ({ setNext, setSelectBooking, selectBooking }) => {
     <>
       <div className="forstep">
         <div>
-          <h2>Reservation Preferences</h2>
+          <h2 className="headingexample">Reservation Preferences</h2>
         </div>
         <div>
-          <span className="headingexample">
-            How guests can book your rooms ?
-          </span>
+          <span className="exampletext">How guests can book your rooms ?</span>
         </div>
         <div className="stepbox">
           <span className="step">10</span>
@@ -60,6 +57,7 @@ const BookingOption = ({ setNext, setSelectBooking, selectBooking }) => {
               title="Back"
               icon={<FaChevronLeft />}
               onClick={() => {
+                window.scrollTo(0, 0);
                 setNext(9);
               }}
             />

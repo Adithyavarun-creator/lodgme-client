@@ -11,6 +11,7 @@ const AddTitle = ({ setNext, setTitle, title }) => {
     }
     toast.success("Title saved");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(9);
     }, 1000);
   };
@@ -19,20 +20,15 @@ const AddTitle = ({ setNext, setTitle, title }) => {
     <>
       <div className="forstep">
         <div>
-          <h2>
-            Give title for your listing so that people can get to know about it
-          </h2>
+          <h2 className="headingexample">Give title for your listing</h2>
         </div>
-        <div>
-          <span className="headingexample">
-            (Example : Apartment at heart of city)
-          </span>
-        </div>
+
         <div className="stepbox">
           <span className="step">8</span>
         </div>
 
         <div className="titlebox">
+          <span className="exampletext">(Example : Apartment at heart of city)</span>
           <textarea
             name=""
             id=""
@@ -47,6 +43,7 @@ const AddTitle = ({ setNext, setTitle, title }) => {
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(7);
             }}
           />

@@ -41,12 +41,13 @@ const HouseRules = ({
     }
   };
 
-
   return (
     <>
       <div className="forstep">
         <div>
-          <h2>rules to be followed while staying in house</h2>
+          <h2 className="headingexample">
+            rules to be followed while staying in house
+          </h2>
         </div>
         <div className="stepbox">
           <span className="step">6</span>
@@ -64,8 +65,13 @@ const HouseRules = ({
                   name=""
                   id=""
                   onChange={() => handleChange("smoking")}
+                  className="checkbox"
                 />
-                <span>{smoking ? "Yes" : "No"}</span>
+                <span>Yes</span>
+              </div>
+              <div className="flex">
+                <input type="checkbox" name="" id="" className="checkbox" />
+                <span>No</span>
               </div>
             </div>
           </div>
@@ -81,8 +87,13 @@ const HouseRules = ({
                   name=""
                   id=""
                   onChange={() => handleChange("pets")}
+                  className="checkbox"
                 />
-                <span>{pets ? "Yes" : "No"}</span>
+                <span>Yes</span>
+              </div>
+              <div className="flex">
+                <input type="checkbox" name="" id="" className="checkbox" />
+                <span>No</span>
               </div>
             </div>
           </div>
@@ -98,8 +109,13 @@ const HouseRules = ({
                   name=""
                   id=""
                   onChange={() => handleChange("party")}
+                  className="checkbox"
                 />
-                <span>{party ? "Yes" : "No"}</span>
+                <span>Yes</span>
+              </div>
+              <div className="flex">
+                <input type="checkbox" name="" id="" className="checkbox" />
+                <span>No</span>
               </div>
             </div>
           </div>
@@ -117,8 +133,13 @@ const HouseRules = ({
                   name=""
                   id=""
                   onChange={() => handleChange("addbabycot")}
+                  className="checkbox"
                 />
-                <span>{addbabycot ? "Yes" : "No"}</span>
+                <span>Yes</span>
+              </div>
+              <div className="flex">
+                <input type="checkbox" name="" id="" className="checkbox" />
+                <span>No</span>
               </div>
             </div>
           </div>
@@ -129,10 +150,18 @@ const HouseRules = ({
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
+              window.scrollTo(0, 0);
               setNext(5);
             }}
           />
-          <Button title="Upload house images" backicon={<FaChevronRight />} onClick={() => setNext(7)} />
+          <Button
+            title="Upload house images"
+            backicon={<FaChevronRight />}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              setNext(7);
+            }}
+          />
         </div>
 
         <Toaster position="top-center" reverseOrder={false} />

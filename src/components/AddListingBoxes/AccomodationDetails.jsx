@@ -50,6 +50,7 @@ const AccomodationDetails = ({
     }
     toast.success("Locations added");
     setTimeout(() => {
+      window.scrollTo(0, 0);
       setNext(4);
     }, 1000);
   };
@@ -58,7 +59,7 @@ const AccomodationDetails = ({
     <>
       <div className="forstep">
         <div>
-          <h2>Specify the address of accommodation</h2>
+          <h2 className="headingexample">Specify the address of accommodation</h2>
         </div>
         <div className="stepbox">
           <span className="step">3</span>
@@ -145,7 +146,7 @@ const AccomodationDetails = ({
             title="Back"
             icon={<FaChevronLeft />}
             onClick={() => {
-              setNext(0);
+              setNext(2);
               window.scrollTo(0, 0);
             }}
           />

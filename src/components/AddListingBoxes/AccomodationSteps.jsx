@@ -4,6 +4,7 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
 
 const AccomodationSteps = ({ next, setNext }) => {
   const goNext = () => {
+    window.scrollTo(0, 0);
     setNext(1);
   };
 
