@@ -959,6 +959,10 @@ export const AddListingPageBoxStyle = styled.div`
     cursor: pointer;
 
     @media ${devices.bigLaptopsAndDesktops} {
+      height: 240px;
+      margin-top: 0;
+      padding: 10px;
+      gap: 13px;
     }
 
     @media ${devices.tabletsAndIpads} {
@@ -1051,6 +1055,7 @@ export const AddListingPageBoxStyle = styled.div`
     row-gap: 20px;
     cursor: pointer;
     @media ${devices.bigLaptopsAndDesktops} {
+      grid-template-columns: 1fr 1fr
     }
 
     @media ${devices.tabletsAndIpads} {

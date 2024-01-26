@@ -45,6 +45,8 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddListingPage from "./pages/AddListing/AddListingPage";
 import AddListingPageBox from "./pages/AddListingPageBox/AddListingPageBox";
+// import Mapbox from "./components/MapBox/MapBox";
+import Mapbox from "./pages/Mapbox";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -133,6 +135,7 @@ function App() {
               path="/lodgeme-otp-verification-page"
               element={<OTPPage />}
             />
+            <Route path="/map-box" element={<Mapbox />} />
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard-user" element={<UserDashboard />} />
               <Route path="/add-new-listing" element={<AddListingPageBox />} />

@@ -20,11 +20,11 @@ import Button from "../Button/Button";
 import { IoArrowBackSharp, IoArrowForward } from "react-icons/io5";
 import { MdDone } from "react-icons/md";
 
-const ListingType = ({ setNext, type, setType, setSelected }) => {
+const ListingType = ({ setNext, roomtype, setRoomType, setSelected }) => {
   const selectType = (value) => {
     if (value) {
       setSelected(true);
-      setType(value);
+      setRoomType(value);
       toast.success(`Type ${value} has been selected`);
     }
 
@@ -36,7 +36,7 @@ const ListingType = ({ setNext, type, setType, setSelected }) => {
   };
 
   const proceedAccomodate = () => {
-    if (!type) {
+    if (!roomtype) {
       toast.error(`Type has not been selected`);
       return;
     }
@@ -51,7 +51,9 @@ const ListingType = ({ setNext, type, setType, setSelected }) => {
     <>
       <div className="forstep">
         <div>
-          <h2 className="headingexample">Describe your type of Accommodation</h2>
+          <h2 className="headingexample">
+            Describe your type of Accommodation
+          </h2>
         </div>
         <div className="stepbox">
           <span className="step">1</span>

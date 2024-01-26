@@ -1,24 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import toast, { Toaster } from "react-hot-toast";
 import { MdOutlineEuro } from "react-icons/md";
 import { FaChevronLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
+import { baseUrl } from "../../baseUrl/url";
+import { useNavigate } from "react-router-dom";
 
-const AddPrice = ({ setNext, price, setPrice, type }) => {
+const AddPrice = ({
+  setNext,
+  price,
+  setPrice,
+  roomtype,
+  acctype,
+  country,
+  address,
+  postCode,
+  travellers,
+  bedrooms,
+  bathroom,
+  baths,
+  babycots,
+  children,
+  smoking,
+  pets,
+  party,
+  addbabycot,
+  formData,
+  title,
+  description,
+  selectBooking,
+  checkedValue,
+  latitude,
+  longitude
+}) => {
+  const navigate = useNavigate();
   const { currentUser, token } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
 
-  console.log(currentUser, "and", token);
-
-  const onSubmit = () => {
-    if (!price) {
-      toast.error("Please enter price value");
-      return;
+  // console.log(currentUser, "and", token);
+  const onAddListing = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${baseUrl}/api/create-new-listing`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, //<---------- HERE
+        },
+        body: JSON.stringify({
+          roomtype,
+          acctype,
+          locatedCountry: country.label,
+          houseAddress: address,
+          postCode,
+          travellers,
+          bedrooms,
+          baths,
+          bathroom,
+          babycots,
+          children,
+          checkedAmenities: checkedValue,
+          smoking,
+          pets,
+          party,
+          addbabycot,
+          houseImages: formData.imageUrls,
+          title,
+          description,
+          bookingType: selectBooking,
+          price,
+          postedBy: currentUser,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+      toast.success(
+        "House Listing Published, Taking you to your published house shortly"
+      );
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
     }
-    setTimeout(() => {
-      toast.success("Price added");
-      window.scrollTo(0, 0);
-    }, 1000);
   };
 
   return (
@@ -66,7 +130,7 @@ const AddPrice = ({ setNext, price, setPrice, type }) => {
               setNext(10);
             }}
           />
-          <Button title="Finally Publish your house" onClick={onSubmit} />
+          <Button title="Finally Publish your house" onClick={onAddListing} />
         </div>
         <Toaster position="top-center" reverseOrder={false} />
       </div>

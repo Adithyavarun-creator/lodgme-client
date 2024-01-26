@@ -64,17 +64,18 @@ const RoomDetails = ({
   };
 
   const handleChange = (data) => {
-    if (data == "babycots") {
-      if (babycots == true) {
+    if (data === "babycots") {
+      if (babycots === true) {
       }
       setbabycots(!babycots);
     }
-    if (data == "children") {
-      if (children == true) {
+    if (data === "children") {
+      if (children === true) {
       }
       setChildren(!children);
     }
   };
+
 
   //console.log("babycots is", babycots);
   // console.log("children is", children);
@@ -108,7 +109,9 @@ const RoomDetails = ({
     <>
       <div className="forstep">
         <div>
-          <h2 className="headingexample">information based on your accomodation specifications</h2>
+          <h2 className="headingexample">
+            information based on your accomodation specifications
+          </h2>
         </div>
         <div className="stepbox">
           <span className="step">4</span>
@@ -215,7 +218,7 @@ const RoomDetails = ({
                 <span>Yes</span>
               </div>
               <div className="flex">
-                <input type="checkbox" name="" id="" className="checkbox"/>
+                <input type="checkbox" name="" id="" className="checkbox" />
                 <span>No</span>
               </div>
             </div>

@@ -9,6 +9,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import MapboxAutocomplete from "react-mapbox-autocomplete";
 
 const AccomodationDetails = ({
   setNext,
@@ -19,21 +20,27 @@ const AccomodationDetails = ({
   setCoordiantes,
   postCode,
   setPostCode,
+  latitude,
+  setLongitude,
+  setLatitude,
+  longitude,
 }) => {
   const options = useMemo(() => countryList().getData(), []);
+
+  const mapAccess = process.env.REACT_APP_MAPBOX_API;
 
   const changeHandler = (value) => {
     setCountry(value);
   };
 
-  // console.log(value.label);
+  function _suggestionSelect(result, lat, long, text) {
+    //console.log(lat, long);
+    setLatitude(lat);
+    setLongitude(long);
+    setAddress(result);
+  }
 
-  const handleSelect = async (values) => {
-    const results = await geocodeByAddress(values);
-    const ll = await getLatLng(results[0]);
-    setAddress(values);
-    setCoordiantes(ll);
-  };
+  //console.log(address);
 
   const goRoomDetails = () => {
     if (!country) {
@@ -59,7 +66,9 @@ const AccomodationDetails = ({
     <>
       <div className="forstep">
         <div>
-          <h2 className="headingexample">Specify the address of accommodation</h2>
+          <h2 className="headingexample">
+            Specify the address of accommodation
+          </h2>
         </div>
         <div className="stepbox">
           <span className="step">3</span>
@@ -81,7 +90,21 @@ const AccomodationDetails = ({
             <label className="acclabel" htmlFor="">
               Address
             </label>
-            <PlacesAutocomplete
+            {/* <input
+              type="text"
+              className="accinput"
+              placeholder="Find your street"
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
+            /> */}
+            <MapboxAutocomplete
+              publicKey={mapAccess}
+              inputClass="accinput"
+              onSuggestionSelect={_suggestionSelect}
+              resetSearch={false}
+              placeholder="Search Address..."
+            />
+            {/* <PlacesAutocomplete
               value={address}
               onChange={setAddress}
               onSelect={handleSelect}
@@ -124,7 +147,7 @@ const AccomodationDetails = ({
                   </div>
                 </div>
               )}
-            </PlacesAutocomplete>
+            </PlacesAutocomplete> */}
           </div>
           <div className="accombox">
             <label className="acclabel" htmlFor="">
@@ -137,7 +160,6 @@ const AccomodationDetails = ({
               placeholder="1011"
               onChange={(e) => setPostCode(e.target.value)}
               value={postCode}
-              defaultValue={postCode}
             />
           </div>
         </div>

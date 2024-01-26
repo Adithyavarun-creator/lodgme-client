@@ -24,7 +24,8 @@ const MapBox = ({ lat, lng }) => {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_MAPS_API,
+    // googleMapsApiKey: process.env.REACT_APP_MAPS_API,
+    googleMapsApiKey: "AIzaSyBz3HCwZNupLmTWqp9axBOaI2rGIAfHXZk",
     libraries: ["places"],
   });
 

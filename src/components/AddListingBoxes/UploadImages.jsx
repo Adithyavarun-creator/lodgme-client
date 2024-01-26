@@ -163,7 +163,7 @@ const UploadImages = ({
         <div className="uploadimagebox">
           {formData.imageUrls ? (
             formData.imageUrls.map((image, i) => (
-              <div className="delimgbox">
+              <div className="delimgbox" key={i}>
                 <img src={image} alt="" className="uploadedimages" />
                 <FontAwesomeIcon
                   icon={faTrash}

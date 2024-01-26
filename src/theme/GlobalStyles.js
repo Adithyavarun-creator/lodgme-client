@@ -13,6 +13,12 @@ body {
   scroll-behavior:smooth;
 }
 
+.leaflet-container {
+    width: 100%;
+    height: 100vh;
+  }
+
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;

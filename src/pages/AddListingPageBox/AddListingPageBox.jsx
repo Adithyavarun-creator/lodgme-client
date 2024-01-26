@@ -16,12 +16,12 @@ import BookingOption from "../../components/AddListingBoxes/BookingOption";
 import AddPrice from "../../components/AddListingBoxes/AddPrice";
 
 const AddListingPageBox = () => {
-  const [next, setNext] = useState(0);
+  const [next, setNext] = useState(3);
   const navigate = useNavigate();
 
   //states for below components
   //for 1
-  const [type, setType] = useState("");
+  const [roomtype, setRoomType] = useState("");
   const [selected, setSelected] = useState(false);
 
   //for 2
@@ -35,6 +35,9 @@ const AddListingPageBox = () => {
     lat: 48.85,
     lng: 2.29,
   });
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+
   const [postCode, setPostCode] = useState();
 
   //for 4
@@ -99,8 +102,8 @@ const AddListingPageBox = () => {
             <ListingType
               next={next}
               setNext={setNext}
-              type={type}
-              setType={setType}
+              roomtype={roomtype}
+              setRoomType={setRoomType}
               selected={selected}
               setSelected={setSelected}
             />
@@ -128,6 +131,10 @@ const AddListingPageBox = () => {
               setAddress={setAddress}
               postCode={postCode}
               setPostCode={setPostCode}
+              latitude={latitude}
+              setLatitude={setLatitude}
+              longitude={longitude}
+              setLongitude={setLongitude}
             />
           ) : (
             ""
@@ -212,7 +219,7 @@ const AddListingPageBox = () => {
               setNext={setNext}
               price={price}
               setPrice={setPrice}
-              type={type}
+              roomtype={roomtype}
               acctype={acctype}
               country={country}
               address={address}
@@ -229,6 +236,9 @@ const AddListingPageBox = () => {
               title={title}
               description={description}
               selectBooking={selectBooking}
+              checkedValue={checkedValue}
+              latitude={latitude}
+              longitude={longitude}
             />
           ) : (
             ""
