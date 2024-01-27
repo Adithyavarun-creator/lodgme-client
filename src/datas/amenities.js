@@ -78,7 +78,7 @@ export const amenitiesOptions = [
     icon: faFan,
   },
   { value: "HDTV", label: "HDTV", icon: faTv },
-  { value: "Smoke Alarm", label: "Smoke Alarm", icon: faBanSmoking },
+  { value: "Smoke Alaram", label: "Smoke Alaram", icon: faBanSmoking },
   { value: "Refrigirator", label: "Refrigirator", icon: faIcicles },
   {
     value: "Cooking Applicances",

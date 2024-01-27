@@ -3,7 +3,7 @@
 //https://lodgme-server-api.vercel.app
 import axios from "axios";
 
-export const baseUrl = "http://localhost:8000";
+export const baseUrl = "https://server-api-q17g.onrender.com";
 export const clientUrl = "https://lodgeme.com";
 
 export const searchListings = async (query) => {

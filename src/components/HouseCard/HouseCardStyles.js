@@ -61,7 +61,6 @@ export const HouseCardStyles = styled.div`
     border-radius: 10px;
     cursor: pointer;
     position: relative;
-    z-index: 1;
     overflow: hidden;
     transition: all 0.6s;
     /* border: 2px solid red; */
@@ -79,21 +78,21 @@ export const HouseCardStyles = styled.div`
   }
 
   .slick-dots {
-    top: 145px;
+    top: 175px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      top: 175px;
+      top: 150px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      top: 135px;
+      top: 115px;
     }
     @media ${devices.smallTabs} {
       top: 155px;
     }
 
     @media ${devices.smallMobiles} {
-      top: 145px;
+      top: 130px;
     }
   }
 
@@ -101,18 +100,13 @@ export const HouseCardStyles = styled.div`
     color: #fff !important;
   }
 
-  .toprated_house_card:hover {
-    -webkit-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
-    -moz-box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
-    box-shadow: 0px 4px 16px 3px rgba(1, 81, 81, 1);
-  }
-
   .toprated_house_cardimg {
     height: 170px;
     width: 100%;
     object-fit: fill;
     border-radius: 10px;
-    transition: all 0.6s;
+    transition: all 0.6s ease;
+    overflow: hidden;
 
     @media ${devices.bigLaptopsAndDesktops} {
       height: 200px;
@@ -130,29 +124,33 @@ export const HouseCardStyles = styled.div`
     }
   }
 
+  .toprated_house_cardimg:hover {
+    transform: scale(1.2);
+  }
+
   .toprated_priceboxi {
-    font-size: 18px;
-    padding: 10px;
+    font-size: 13px;
+    padding: 10px 14px;
     background-color: #015151;
     color: #fff;
     border-radius: 15px;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      font-size: 18px;
+      font-size: 13px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 16px;
-      padding: 4px 10px;
+      padding: 8px 10px;
+      font-size: 12px;
     }
     @media ${devices.smallTabs} {
       font-size: 12px;
-      padding: 4px 8px;
+      padding: 5px 10px;
     }
 
     @media ${devices.smallMobiles} {
       font-size: 12px;
-      padding: 4px 8px;
+      padding: 8px 10px;
     }
   }
 
@@ -200,14 +198,16 @@ export const HouseCardStyles = styled.div`
   }
 
   .toprated_locationicon {
-    height: 25px;
-    width: 25px;
-    color: #ea4335;
+    height: 15px;
+    width: 15px;
+    color: ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
+      height: 12px;
+      width: 12px;
     }
     @media ${devices.smallTabs} {
     }
@@ -218,44 +218,43 @@ export const HouseCardStyles = styled.div`
 
   .toprated_favoriteuser {
     position: absolute;
-    top: 5px;
+    top: -3px;
     right: 0;
     height: 44px;
     border-radius: 40%;
     align-items: center;
     display: flex;
+    z-index: 100;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      top: 5px;
+      top: -3px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      top: 0;
+      top: -3px;
     }
     @media ${devices.smallTabs} {
-      top: 5px;
+      top: -3px;
     }
 
     @media ${devices.smallMobiles} {
+      top: -3px;
     }
   }
 
   .toprated_user {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 100%;
     border-radius: 10px;
-    border: 3px solid ${({ theme }) => theme.colors.primaryColor};
-
-    /* border: 3px solid #015151; */
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    padding: 10px;
+    /* border: 0.8px solid ${({ theme }) => theme.colors.primaryColor}; */
 
     @media ${devices.bigLaptopsAndDesktops} {
-      height: 50px;
-      width: 50px;
+      width: 100%;
     }
 
     @media ${devices.tabletsAndIpads} {
-      height: 40px;
-      width: 40px;
     }
     @media ${devices.smallTabs} {
     }
@@ -264,7 +263,7 @@ export const HouseCardStyles = styled.div`
     }
   }
 
-  .toprated_locationbox {
+  .toprated_locationcountrybox {
     display: flex;
     align-items: center;
     gap: 7px;
@@ -290,10 +289,43 @@ export const HouseCardStyles = styled.div`
     }
   }
 
+  .toprated_locationbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    /* display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: ${({ theme }) => theme.tabletAndIpadScreens.cardlocation};
+    font-weight: 400;
+    line-height: 19px; */
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 14px;
+      gap: 6px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+      gap: 6px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 10px;
+      gap: 6px;
+    }
+  }
+
   /* #e31b23 */
 
   .toprated_house_cardsubs {
-    padding: 10px;
+    padding: 2px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -301,7 +333,7 @@ export const HouseCardStyles = styled.div`
     @media ${devices.bigLaptopsAndDesktops} {
     }
     @media ${devices.tabletsAndIpads} {
-      padding: 6px;
+      padding: 2px;
       gap: 5px;
     }
 
@@ -334,25 +366,87 @@ export const HouseCardStyles = styled.div`
     }
   }
 
-  .toprated_house_cardmaintext {
-    font-weight: bold;
-    text-transform: capitalize;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
+  .ratingflex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5px;
+    padding: 5px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    border-radius: 10px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 16px;
+      padding: 5px;
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .toprated_staricon {
+    /* color: ${({ theme }) => theme.colors.primaryColor}; */
+    height: 12px;
+    width: 12px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 10px;
+      width: 10px;
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .toprated_ratingcount {
+    font-size: 13px;
+    font-weight: bolder;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 10px;
     }
     @media ${devices.smallTabs} {
       font-size: 14px;
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 14px;
+      font-size: 12px;
+    }
+  }
+
+  .toprated_house_cardmaintext {
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 700;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 15px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 13px;
     }
   }
 
@@ -376,34 +470,19 @@ export const HouseCardStyles = styled.div`
     }
   }
 
-  .toprated_staricon {
-    color: ${({ theme }) => theme.colors.ratingColor};
-    height: 20px;
-    width: 20px;
+  .toprated_countryname {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
     }
     @media ${devices.smallTabs} {
-    }
-
-    @media ${devices.smallMobiles} {
-    }
-  }
-
-  .toprated_ratingcount {
-    font-size: 20px;
-    font-weight: bolder;
-    @media ${devices.bigLaptopsAndDesktops} {
-    }
-
-    @media ${devices.tabletsAndIpads} {
-      font-size: 18px;
-    }
-    @media ${devices.smallTabs} {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     @media ${devices.smallMobiles} {

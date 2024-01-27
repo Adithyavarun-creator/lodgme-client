@@ -32,7 +32,8 @@ const AddPrice = ({
   selectBooking,
   checkedValue,
   latitude,
-  longitude
+  longitude,
+  city
 }) => {
   const navigate = useNavigate();
   const { currentUser, token } = useSelector((state) => state.user);
@@ -71,10 +72,13 @@ const AddPrice = ({
           bookingType: selectBooking,
           price,
           postedBy: currentUser,
+          latitude,
+          longitude,
+          city,
         }),
       });
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setLoading(false);
       toast.success(
         "House Listing Published, Taking you to your published house shortly"

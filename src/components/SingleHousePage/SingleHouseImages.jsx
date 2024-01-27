@@ -1,8 +1,13 @@
 import React from "react";
 import Button from "../Button/Button";
+import OnlySpinner from "../OnlySpinner/OnlySpinner";
 
 const SingleHouseImages = ({ data, setShowImages, showImages }) => {
   // console.log(data?.map((d) => d));
+
+  if (!data) {
+    return <OnlySpinner />;
+  }
 
   return (
     <div>

@@ -8,6 +8,9 @@ import {
   FaWifi,
   FaStar,
   FaToilet,
+  FaSmokingBan,
+  FaBabyCarriage,
+  FaSmoking,
 } from "react-icons/fa";
 import { RWebShare } from "react-web-share";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,10 +22,11 @@ import {
   FaToiletPortable,
   FaArrowLeftLong,
   FaCalendarCheck,
+  FaChildren,
 } from "react-icons/fa6";
 import { BsEmojiHeartEyesFill } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
-
+import { GiPartyPopper } from "react-icons/gi";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Spinner from "../../components/Spinner/Spinner";
 import Button from "../../components/Button/Button";
@@ -37,6 +41,8 @@ import {
   MdBalcony,
   MdLocationPin,
   MdEuroSymbol,
+  MdBathroom,
+  MdOutlinePets,
 } from "react-icons/md";
 import { IoBedSharp, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { PiArmchairFill } from "react-icons/pi";
@@ -147,10 +153,10 @@ const SingleHousePage = () => {
       setHousedata(res.data.listing);
       setPostedBy(res.data.user);
       dispatch(setSelectedHouse(res.data.listing));
-      const latitude = res.data.listing.mapLocation[0].lat;
-      setLat(latitude);
-      const longitude = res.data.listing.mapLocation[0].lng;
-      setLng(longitude);
+      // const latitude = res.data.listing.mapLocation[0].lat;
+      // setLat(latitude);
+      // const longitude = res.data.listing.mapLocation[0].lng;
+      // setLng(longitude);
       const avgrating = res.data?.listing?.reviews?.map((r) => r.rating);
       setAvg(avgrating);
     };
@@ -324,6 +330,7 @@ const SingleHousePage = () => {
     );
   };
 
+
   if (!id) {
     return <Spinner />;
   }
@@ -337,16 +344,21 @@ const SingleHousePage = () => {
         </Helmet>
         <SingleHousePageStyles>
           <div className="singlepagetitlebox">
-            <div className="">
+            <div className="singlepageaddressbox">
               <h2 className="singlepagetitletext flex">
-                {houseData?.title ? houseData?.title : "A beautiful house"} at{" "}
-                {houseData.locatedCountry}
+                {houseData?.title ? houseData?.title : "A beautiful house"}{" "}
                 <MdLocationPin
                   className="rating"
                   style={{ color: "#EA4335" }}
                   onClick={clickMap}
                 />
               </h2>
+
+              <div className="singlepagetitlecontent" onClick={clickReview}>
+                <span className="singlepagelocationcountry">
+                  {houseData?.city}, {houseData?.locatedCountry}
+                </span>
+              </div>
 
               <div className="singlepagetitlecontent" onClick={clickReview}>
                 <FaStar className="rating" />
@@ -373,15 +385,7 @@ const SingleHousePage = () => {
               </div>
             </div>
           </div>
-          <div>
-            <span onClick={onClick} className="flex singlepagecalendardates">
-              <FaCalendarCheck />
-              &nbsp; Available from{" "}
-              {moment(houseData?.availableFrom).format(
-                "MMMM Do YYYY"
-              )} until {moment(houseData?.availableTill).format("MMMM Do YYYY")}
-            </span>
-          </div>
+
           {/* singlehouseimages */}
           <SingleHouseImages
             data={houseData.houseImages}
@@ -403,31 +407,29 @@ const SingleHousePage = () => {
           {/* House Amenities */}
           <div className="singlepagehouserooms">
             <div className="singlepagehouseroomdetail">
-              <PiArmchairFill />
-              <span>
-                {houseData?.livingRoom ? houseData.livingRoom : "No"} Living
-                room
-              </span>
-            </div>
-            <div className="singlepagehouseroomdetail">
-              <IoBedSharp />
-              <span>{houseData?.beds ? houseData?.beds : "No"} Beds</span>
-            </div>
-            <div className="singlepagehouseroomdetail">
-              <FaBath />
-              <span>{houseData?.baths ? houseData?.baths : "No"} Baths</span>
-            </div>
-            <div className="singlepagehouseroomdetail">
-              <FaUsers />
-
-              <span>
-                {houseData.noOfpersons ? houseData?.noOfpersons : "No"} Visitors
+              <FaUsers className="singlehouseroomdetailicon" />
+              <span className="signlehouseroomtext">
+                {houseData.travellers ? houseData?.travellers : "No"} Travellers
                 Allowed
               </span>
             </div>
             <div className="singlepagehouseroomdetail">
-              <FaUsersSlash />
-              <span>Visitors Not allowed</span>
+              <IoBedSharp className="singlehouseroomdetailicon" />
+              <span className="signlehouseroomtext">
+                {houseData?.bedrooms ? houseData?.bedrooms : "No"} Bedrooms
+              </span>
+            </div>
+            <div className="singlepagehouseroomdetail">
+              <FaBath className="singlehouseroomdetailicon" />
+              <span className="signlehouseroomtext">
+                {houseData?.baths ? houseData?.baths : "No"} Baths
+              </span>
+            </div>
+            <div className="singlepagehouseroomdetail">
+              <MdBathroom className="singlehouseroomdetailicon" />
+              <span className="signlehouseroomtext">
+                {houseData?.bathroom ? houseData.bathroom : "No"} Bathrooms
+              </span>
             </div>
           </div>
 
@@ -439,8 +441,11 @@ const SingleHousePage = () => {
               </div>
               <div>
                 <span className="singlepagehousepublishsubname">
-                  <strong>Jack</strong> is responsible service provider for this
-                  house
+                  <strong>
+                    {postedBy?.firstname}&nbsp;
+                    {postedBy?.lastname}
+                  </strong>{" "}
+                  is responsible service provider for this house
                 </span>
               </div>
             </div>
@@ -448,7 +453,7 @@ const SingleHousePage = () => {
 
           <div>
             <h1 className="amenities-listheading">
-              TITRE DE L’ANNONCE – {houseData?.type}
+              TITRE DE L’ANNONCE – {houseData?.roomtype} Type
             </h1>
           </div>
 
@@ -473,88 +478,91 @@ const SingleHousePage = () => {
               </div>
               <div>
                 <article className="singlepagearticlecontent">
-                  {data?.additionalInfo
-                    ? data?.additionalInfo
+                  {data?.description
+                    ? data?.description
                     : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id, vel veniam quod maiores dolorem officia, exercitationem veritatis blanditiis possimus neque quia totam ab nobis inventore quaerat. Error nemo dolorem eligendi odit nostrum pariatur laborum perspiciatis recusandae quod enim? Adipisc distinctio aperiam voluptas pariatur error rem itaque autem"}
                 </article>
               </div>
             </div>
             {/* grid */}
-            <div className="amenities-grid">
-              <div className="amenities-list">
-                <div>
-                  <h1 className="amenities-listheading">
-                    Composition du logement
-                  </h1>
-                </div>
-                {houseData?.amenitiesIncluded?.slice(0, 5).map((amenity, i) => (
+            {/* <div className=""> */}
+            <div className="amenities-list">
+              <div>
+                <h1 className="amenities-listheading">
+                  Composition du logement
+                </h1>
+              </div>
+              {houseData?.checkedAmenities
+                ?.slice(0, 5)
+                .sort()
+                .map((amenity, i) => (
                   <div className="amenitiesrow" key={i}>
-                    {amenity.value && (
+                    {amenity && (
                       <div>
                         <FontAwesomeIcon
                           className="amenitylisticon"
                           icon={
-                            amenity.value === "Breakfast"
+                            amenity === "Breakfast"
                               ? faUtensils
-                              : "" || amenity.value === "Lunch"
+                              : "" || amenity === "Lunch"
                               ? faUtensils
-                              : "" || amenity.value === "Kitchen"
+                              : "" || amenity === "Kitchen"
                               ? faKitchenSet
-                              : "" || amenity.value === "Workspace"
+                              : "" || amenity === "Workspace"
                               ? faHouseLaptop
-                              : "" || amenity.value === "Dinner"
+                              : "" || amenity === "Dinner"
                               ? faUtensils
-                              : "" || amenity.value === "City View"
+                              : "" || amenity === "City View"
                               ? faArrowRightToCity
-                              : "" || amenity.value === "Wifi"
+                              : "" || amenity === "Wifi"
                               ? faWifi
-                              : "" || amenity.value === "Lift"
+                              : "" || amenity === "Lift"
                               ? faElevator
-                              : "" || amenity.value === "Private Balcony"
+                              : "" || amenity === "Private Balcony"
                               ? faDoorOpen
-                              : "" || amenity.value === "Washing Machine"
+                              : "" || amenity === "Washing Machine"
                               ? faJugDetergent
-                              : "" || amenity.value === "Hair Dryer"
+                              : "" || amenity === "Hair Dryer"
                               ? faPlug
-                              : "" || amenity.value === "Soaps"
+                              : "" || amenity === "Soaps"
                               ? faSoap
-                              : "" || amenity.value === "Shower Gel"
+                              : "" || amenity === "Shower Gel"
                               ? faSprayCanSparkles
-                              : "" || amenity.value === "Bathroom Heater"
+                              : "" || amenity === "Bathroom Heater"
                               ? faHotTubPerson
-                              : "" || amenity.value === "Pillows and Blankets"
+                              : "" || amenity === "Pillows and Blankets"
                               ? faMattressPillow
-                              : "" || amenity.value === "Iron"
+                              : "" || amenity === "Iron"
                               ? faShirt
-                              : "" || amenity.value === "Air Conditioning"
+                              : "" || amenity === "Air Conditioning"
                               ? faTemperatureLow
-                              : "" || amenity.value === "Fan"
+                              : "" || amenity === "Fan"
                               ? faFan
-                              : "" || amenity.value === "Kettle"
+                              : "" || amenity === "Kettle"
                               ? faMugHot
-                              : "" || amenity.value === "HDTV"
+                              : "" || amenity === "HDTV"
                               ? faTv
-                              : "" || amenity.value === "Smoke Alaram"
+                              : "" || amenity === "Smoke Alaram"
                               ? faBanSmoking
-                              : "" || amenity.value === "Refrigirator"
+                              : "" || amenity === "Refrigirator"
                               ? faIcicles
-                              : "" || amenity.value === "Cooking Applicances"
+                              : "" || amenity === "Cooking Applicances"
                               ? faFireBurner
-                              : "" || amenity.value === "Microwave"
+                              : "" || amenity === "Microwave"
                               ? faSquare
-                              : "" || amenity.value === "Dishwasher"
+                              : "" || amenity === "Dishwasher"
                               ? faHandsBubbles
-                              : "" || amenity.value === "Dining Table"
+                              : "" || amenity === "Dining Table"
                               ? faTable
-                              : "" || amenity.value === "Host Assistance"
+                              : "" || amenity === "Host Assistance"
                               ? faHandshakeAngle
-                              : "" || amenity.value === "Sofa"
+                              : "" || amenity === "Sofa"
                               ? faCouch
-                              : "" || amenity.value === "Tour Assistance"
+                              : "" || amenity === "Tour Assistance"
                               ? faCarOn
-                              : "" || amenity.value === "Parking"
+                              : "" || amenity === "Parking"
                               ? faSquareParking
-                              : "" || amenity.value === "Room Service"
+                              : "" || amenity === "Room Service"
                               ? faPersonChalkboard
                               : ""
                           }
@@ -562,99 +570,10 @@ const SingleHousePage = () => {
                       </div>
                     )}
                     <div>
-                      <li className="amenitieslisttext">{amenity.value}</li>
+                      <li className="amenitieslisttext">{amenity}</li>
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <div className="amenities-list">
-                <div>
-                  <h1 className="amenities-listheading">Prestations</h1>
-                </div>
-                {houseData?.amenitiesNotIncluded
-                  ?.slice(0, 5)
-                  .map((amenity, i) => (
-                    <div className="amenitiesrow amenitiesnotlisttext" key={i}>
-                      {amenity.value && (
-                        <div>
-                          <FontAwesomeIcon
-                            className="amenitylisticon"
-                            icon={
-                              amenity.value === "Breakfast"
-                                ? faUtensils
-                                : "" || amenity.value === "Lunch"
-                                ? faUtensils
-                                : "" || amenity.value === "Kitchen"
-                                ? faKitchenSet
-                                : "" || amenity.value === "Workspace"
-                                ? faHouseLaptop
-                                : "" || amenity.value === "Dinner"
-                                ? faUtensils
-                                : "" || amenity.value === "City View"
-                                ? faArrowRightToCity
-                                : "" || amenity.value === "Wifi"
-                                ? faWifi
-                                : "" || amenity.value === "Lift"
-                                ? faElevator
-                                : "" || amenity.value === "Private Balcony"
-                                ? faDoorOpen
-                                : "" || amenity.value === "Washing Machine"
-                                ? faJugDetergent
-                                : "" || amenity.value === "Hair Dryer"
-                                ? faPlug
-                                : "" || amenity.value === "Soaps"
-                                ? faSoap
-                                : "" || amenity.value === "Shower Gel"
-                                ? faSprayCanSparkles
-                                : "" || amenity.value === "Bathroom Heater"
-                                ? faHotTubPerson
-                                : "" || amenity.value === "Pillows and Blankets"
-                                ? faMattressPillow
-                                : "" || amenity.value === "Iron"
-                                ? faShirt
-                                : "" || amenity.value === "Air Conditioning"
-                                ? faTemperatureLow
-                                : "" || amenity.value === "Fan"
-                                ? faFan
-                                : "" || amenity.value === "Kettle"
-                                ? faMugHot
-                                : "" || amenity.value === "HDTV"
-                                ? faTv
-                                : "" || amenity.value === "Smoke Alaram"
-                                ? faBanSmoking
-                                : "" || amenity.value === "Refrigirator"
-                                ? faIcicles
-                                : "" || amenity.value === "Cooking Applicances"
-                                ? faFireBurner
-                                : "" || amenity.value === "Microwave"
-                                ? faSquare
-                                : "" || amenity.value === "Dishwasher"
-                                ? faHandsBubbles
-                                : "" || amenity.value === "Dining Table"
-                                ? faTable
-                                : "" || amenity.value === "Host Assistance"
-                                ? faHandshakeAngle
-                                : "" || amenity.value === "Sofa"
-                                ? faCouch
-                                : "" || amenity.value === "Tour Assistance"
-                                ? faCarOn
-                                : "" || amenity.value === "Parking"
-                                ? faSquareParking
-                                : "" || amenity.value === "Room Service"
-                                ? faPersonChalkboard
-                                : ""
-                            }
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <li className="amenitieslisttext">{amenity.value}</li>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-
               <div className="amenityallbtn">
                 <Button
                   title="View Amenities Offered"
@@ -662,6 +581,7 @@ const SingleHousePage = () => {
                 />
               </div>
             </div>
+            {/* </div> */}
 
             {showAmenity && (
               <div className="fullamenitiesbox">
@@ -673,9 +593,54 @@ const SingleHousePage = () => {
             )}
           </div>
 
+          <div className="singlepagerulebox">
+            <div className="houserule">
+              {houseData.smoking ? (
+                <FaSmoking className="houseruleicon" />
+              ) : (
+                <FaSmokingBan className="houseruleicon" />
+              )}
+              <span className="houseruletext">
+                smoking {houseData.smoking ? "allowed" : "not allowed"}
+              </span>
+            </div>
+            <div className="houserule">
+              <GiPartyPopper className="houseruleicon" />
+              <span className="houseruletext">
+                parties {houseData.party ? "allowed" : "not allowed"}
+              </span>
+            </div>
+            <div className="houserule">
+              <MdOutlinePets className="houseruleicon" />
+              <span className="houseruletext">
+                pets {houseData.pets ? "allowed" : "not allowed"}
+              </span>
+            </div>
+            <div className="houserule">
+              <FaChildren className="houseruleicon" />
+              <span className="houseruletext">
+                children {houseData.children ? "allowed" : "not allowed"}
+              </span>
+            </div>
+            <div className="houserule">
+              <FaBabyCarriage className="houseruleicon" />
+              <span className="houseruletext">
+                babycots {houseData.babycots ? "allowed" : "not allowed"}
+              </span>
+            </div>
+
+            <div className="houserule">
+              <FaBabyCarriage className="houseruleicon" />
+              <span className="houseruletext">
+                extra babycots{" "}
+                {houseData.addbabycot ? "allowed" : "not allowed"}
+              </span>
+            </div>
+          </div>
+
           {/* Map Location Pin  */}
           <div className="singlepagemapbox" ref={mapRef}>
-            <Mapbox lat={lat} lng={lng} />
+            <Mapbox lat={houseData?.latitude} lng={houseData?.longitude} />
           </div>
 
           {/* review box */}
@@ -767,20 +732,9 @@ const SingleHousePage = () => {
                 <div className="reservationcardcontent">
                   <h1 className="singlepagereviewheading flex">
                     <MdEuroSymbol className="amenities-icon" />
-                    {houseData.pricePerNight
-                      ? houseData.pricePerNight
-                      : "On talks"}
+                    {houseData.price ? houseData.price : "On talks"}
                     &nbsp;per day
                   </h1>
-                  <span className="reservation-available">
-                    <FaCalendarCheck />
-                    &nbsp; Available only from{" "}
-                    {moment(houseData?.availableFrom).format(
-                      "MMMM Do YYYY"
-                    )}{" "}
-                    until{" "}
-                    {moment(houseData?.availableTill).format("MMMM Do YYYY")}
-                  </span>
                 </div>
                 <div className="">
                   <div className="date-calendar-box">
@@ -815,11 +769,11 @@ const SingleHousePage = () => {
                   <div className="reservation-details">
                     <div>
                       <span>
-                        {houseData.pricePerNight} x {diffInDays} nuits
+                        {houseData.price} x {diffInDays} nuits
                       </span>
                     </div>
                     <div>
-                      <span>{houseData.pricePerNight * diffInDays}</span>
+                      <span>{houseData.price * diffInDays}</span>
                     </div>
                   </div>
                   <div className="reservation-details">
@@ -845,7 +799,7 @@ const SingleHousePage = () => {
                       <span className="totalbookingamount">
                         <strong className="flex">
                           <MdEuroSymbol className="amenities-icon" />
-                          {houseData.pricePerNight * diffInDays + lodgmeCharge}
+                          {houseData.price * diffInDays + lodgmeCharge}
                         </strong>
                       </span>
                     </div>
@@ -938,9 +892,6 @@ const SingleHousePage = () => {
                     <span className="reviewowneradds">
                       Country: {postedBy?.country}
                     </span>
-                  </div>
-                  <div>
-                    <span className="reviewowneradds">Languages: English</span>
                   </div>
                   <div>
                     <span className="reviewowneradds">Response rate: 100%</span>

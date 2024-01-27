@@ -36,8 +36,9 @@ export const SingleHousePageStyles = styled.section`
 
   .singlepagetitlebox {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
+    align-items: center;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -49,6 +50,12 @@ export const SingleHousePageStyles = styled.section`
 
     @media ${devices.smallMobiles} {
     }
+  }
+
+  .singlepageaddressbox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   .singlepagetitlecontent {
@@ -70,7 +77,7 @@ export const SingleHousePageStyles = styled.section`
     }
   }
   .rating {
-    color: ${({ theme }) => theme.colors.ratingColor};
+    color: ${({ theme }) => theme.colors.primaryColor};
     height: 20px;
     width: 20px;
     cursor: pointer;
@@ -94,8 +101,7 @@ export const SingleHousePageStyles = styled.section`
   }
   .ratingnumber {
     font-size: 18px;
-    color: darkgrey;
-    font-weight: bold;
+    font-weight: bolder;
     cursor: pointer;
 
     @media ${devices.bigLaptopsAndDesktops} {
@@ -365,22 +371,42 @@ export const SingleHousePageStyles = styled.section`
   }
 
   .singlepagetitletext {
-    font-size: 22px;
+    font-size: 26px;
+    color: ${({ theme }) => theme.colors.primaryColor};
 
     @media ${devices.bigLaptopsAndDesktops} {
-      font-size: 20px;
+      font-size: 22px;
     }
 
     @media ${devices.tabletsAndIpads} {
       font-size: 18px;
     }
     @media ${devices.smallTabs} {
-      /* font-size: 12px; */
-      font-size: 10px;
+      font-size: 14px;
     }
 
     @media ${devices.smallMobiles} {
       font-size: 8px;
+    }
+  }
+
+  .singlepagelocationcountry {
+    font-size: 17px;
+    font-weight: 500;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 17px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 9px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 6px;
     }
   }
 
@@ -663,36 +689,74 @@ export const SingleHousePageStyles = styled.section`
     align-items: center;
     border: none;
     offset: none;
-    padding: 10px 14px;
+    padding: 10px 20px;
     gap: 10px;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
     background-color: ${({ theme }) => theme.colors.primaryColor};
     color: #fff;
-    font-weight: bolder;
 
     @media ${devices.bigLaptopsAndDesktops} {
-      padding: 12px 10px;
+      padding: 10px 20px;
       gap: 6px;
-      font-size: 12px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      padding: 10px 8px;
+      padding: 8px 20px;
       gap: 6px;
-      font-size: 10px;
     }
     @media ${devices.smallTabs} {
-      padding: 6px 8px;
+      padding: 6px 10px;
       gap: 3px;
-      font-size: 8px;
     }
 
     @media ${devices.smallMobiles} {
-      padding: 4px 6px;
+      padding: 4px 8px;
       gap: 3px;
-      font-size: 5px;
+    }
+  }
+
+  .singlehouseroomdetailicon {
+    height: 20px;
+    width: 20px;
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 20px;
+      width: 20px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 17px;
+      width: 17px;
+    }
+    @media ${devices.smallTabs} {
+      height: 12px;
+      width: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 9.5px;
+      width: 9.5px;
+    }
+  }
+
+  .signlehouseroomtext {
+    font-weight: bolder;
+    font-size: 15px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 15px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 9px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 6px;
     }
   }
 
@@ -787,6 +851,7 @@ export const SingleHousePageStyles = styled.section`
   .singlepagehousepublishsubname {
     font-size: 20px;
     color: darkgray;
+    font-weight: 700;
 
     @media ${devices.bigLaptopsAndDesktops} {
       font-size: 18px;
@@ -958,19 +1023,21 @@ export const SingleHousePageStyles = styled.section`
   .amenities-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
+      gap: 12px;
     }
     @media ${devices.smallTabs} {
-      gap: 4px;
+      gap: 14px;
     }
 
     @media ${devices.smallMobiles} {
-      gap: 0;
+      gap: 10px;
       justify-content: center;
       align-items: center;
     }
@@ -1107,6 +1174,109 @@ export const SingleHousePageStyles = styled.section`
     @media ${devices.smallMobiles} {
       height: 10px;
       width: 10px;
+    }
+  }
+
+  .singlepagerulebox {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    row-gap: 60px;
+    column-gap: 40px;
+    cursor: pointer;
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 40px;
+      column-gap: 30px;
+    }
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
+
+  .houserule {
+    border: 0.8px solid darkgrey;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    transition: all 0.6s ease-in;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      padding: 20px;
+      gap: 6px;
+    }
+    @media ${devices.smallTabs} {
+      gap: 4px;
+      padding: 15px;
+    }
+
+    @media ${devices.smallMobiles} {
+      gap: 4px;
+      padding: 10px;
+    }
+  }
+
+  .houserule:hover {
+    background-color: #fff;
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+
+  .houseruleicon {
+    height: 40px;
+    width: 40px;
+    @media ${devices.bigLaptopsAndDesktops} {
+      height: 35px;
+      width: 35px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 30px;
+      width: 30px;
+    }
+    @media ${devices.smallTabs} {
+      height: 20px;
+      width: 20px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 15px;
+      width: 15px;
+    }
+  }
+
+  .houseruletext {
+    font-size: 20px;
+    font-weight: bolder;
+    text-transform: capitalize;
+    @media ${devices.bigLaptopsAndDesktops} {
+      font-size: 17px;
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 16px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 12px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 9px;
     }
   }
 

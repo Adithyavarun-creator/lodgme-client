@@ -24,6 +24,8 @@ const AccomodationDetails = ({
   setLongitude,
   setLatitude,
   longitude,
+  city,
+  setCity,
 }) => {
   const options = useMemo(() => countryList().getData(), []);
 
@@ -40,7 +42,8 @@ const AccomodationDetails = ({
     setAddress(result);
   }
 
-  //console.log(address);
+  // console.log(latitude);
+  // console.log(longitude);
 
   const goRoomDetails = () => {
     if (!country) {
@@ -49,6 +52,10 @@ const AccomodationDetails = ({
     }
     if (!address) {
       toast.error("Please add the exact location so that we can pin in map");
+      return;
+    }
+    if (!city) {
+      toast.error("Please add the city");
       return;
     }
     if (!postCode) {
@@ -90,13 +97,7 @@ const AccomodationDetails = ({
             <label className="acclabel" htmlFor="">
               Address
             </label>
-            {/* <input
-              type="text"
-              className="accinput"
-              placeholder="Find your street"
-              onChange={(e) => setAddress(e.target.value)}
-              value={address}
-            /> */}
+
             <MapboxAutocomplete
               publicKey={mapAccess}
               inputClass="accinput"
@@ -104,50 +105,18 @@ const AccomodationDetails = ({
               resetSearch={false}
               placeholder="Search Address..."
             />
-            {/* <PlacesAutocomplete
-              value={address}
-              onChange={setAddress}
-              onSelect={handleSelect}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <div>
-                  <input
-                    {...getInputProps({
-                      placeholder: "Select the address",
-                      className: "accinput",
-                    })}
-                  />
-                  <div className="autocomplete-dropdown-container">
-                    {loading && <div>Loading...</div>}
-                    {suggestions.map((suggestion) => {
-                      const className = suggestion.active
-                        ? "suggestion-item--active"
-                        : "suggestion-item";
-                      // inline style for demonstration purpose
-                      const style = suggestion.active
-                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                        : { backgroundColor: "#ffffff", cursor: "pointer" };
-                      return (
-                        <div
-                          key={suggestion.placeId}
-                          {...getSuggestionItemProps(suggestion, {
-                            className,
-                            style,
-                          })}
-                        >
-                          <span>{suggestion.description}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </PlacesAutocomplete> */}
+          </div>
+          <div className="accombox">
+            <label className="acclabel" htmlFor="">
+              City
+            </label>
+            <input
+              type="text"
+              className="accinput"
+              placeholder="Riga"
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
           </div>
           <div className="accombox">
             <label className="acclabel" htmlFor="">

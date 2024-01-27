@@ -9,16 +9,21 @@ export const AmenitiesStyle = styled.div`
   height: max-content;
   background-color: #fff;
   border-radius: 15px;
+  z-index: 130;
+  width: 40%;
 
   @media ${devices.bigLaptopsAndDesktops} {
   }
 
   @media ${devices.tabletsAndIpads} {
+    width: 40%;
   }
   @media ${devices.smallTabs} {
+    width: 20%;
   }
 
   @media ${devices.smallMobiles} {
+    width: 15%;
   }
 
   .close-box {
@@ -107,8 +112,10 @@ export const AmenitiesStyle = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 5px;
-    gap: 100px;
+    /* gap: 100px; */
     padding: 30px;
+    justify-content: center;
+    align-items: center;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -122,8 +129,7 @@ export const AmenitiesStyle = styled.div`
 
     @media ${devices.smallMobiles} {
       padding: 10px;
-      gap: 50px;
-
+      /* gap: 50px; */
     }
   }
 
@@ -144,14 +150,13 @@ export const AmenitiesStyle = styled.div`
 
     @media ${devices.smallMobiles} {
       gap: 4px;
-
     }
   }
 
   li {
     list-style: none;
     color: ${({ theme }) => theme.colors.primaryColor};
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bolder;
 
     @media ${devices.bigLaptopsAndDesktops} {
@@ -172,8 +177,8 @@ export const AmenitiesStyle = styled.div`
 
   .amenityicon {
     color: ${({ theme }) => theme.colors.primaryColor};
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -209,7 +214,6 @@ export const AmenitiesStyle = styled.div`
 
     @media ${devices.smallMobiles} {
       gap: 5px;
-
     }
   }
 

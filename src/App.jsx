@@ -45,8 +45,8 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddListingPage from "./pages/AddListing/AddListingPage";
 import AddListingPageBox from "./pages/AddListingPageBox/AddListingPageBox";
-// import Mapbox from "./components/MapBox/MapBox";
-import Mapbox from "./pages/Mapbox";
+import Mapbox from "./components/MapBox/MapBox";
+//import Mapbox from "./pages/Mapbox";
 
 const LazyHomepageComponent = React.lazy(() =>
   import("./pages/Homepage/Homepage")
@@ -121,6 +121,8 @@ function App() {
             {/* <Route path="/add-new-listing" element={<AddListingPage />} /> */}
 
             <Route path="/homes&rooms/:id" element={<SingleHousePage />} />
+            <Route path="/homes&map-box" element={<SingleHousePage />} />
+
             <Route
               path="/booking-preview"
               element={<LazyBookingPreviewPageComponent />}

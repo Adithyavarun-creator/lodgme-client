@@ -16,7 +16,7 @@ import BookingOption from "../../components/AddListingBoxes/BookingOption";
 import AddPrice from "../../components/AddListingBoxes/AddPrice";
 
 const AddListingPageBox = () => {
-  const [next, setNext] = useState(3);
+  const [next, setNext] = useState(0);
   const navigate = useNavigate();
 
   //states for below components
@@ -31,12 +31,13 @@ const AddListingPageBox = () => {
   const [country, setCountry] = useState("");
   //for address give value.label
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [coordinates, setCoordiantes] = useState({
     lat: 48.85,
     lng: 2.29,
   });
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
 
   const [postCode, setPostCode] = useState();
 
@@ -129,6 +130,8 @@ const AddListingPageBox = () => {
               setCoordiantes={setCoordiantes}
               address={address}
               setAddress={setAddress}
+              city={city}
+              setCity={setCity}
               postCode={postCode}
               setPostCode={setPostCode}
               latitude={latitude}
@@ -239,6 +242,7 @@ const AddListingPageBox = () => {
               checkedValue={checkedValue}
               latitude={latitude}
               longitude={longitude}
+              city={city}
             />
           ) : (
             ""

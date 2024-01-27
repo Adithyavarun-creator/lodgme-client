@@ -44,167 +44,167 @@ const Amenities = ({ houseData, setShowAmenity }) => {
           onClick={() => setShowAmenity(false)}
         />
       </div>
-      {/* <div>
-          <h2>List of Amenities available and not available</h2>
-        </div> */}
       <div className="amenitycolumn">
         <div className="amenitycolumn1">
           <div>
             <h2>Amenities Provided</h2>
           </div>
-          {houseData?.amenitiesIncluded?.map((amenity, i) => (
-            <div className="amenitycontent" key={i}>
-              {amenity.value && (
+          {houseData?.checkedAmenities
+            .slice()
+            .sort()
+            .map((amenity, i) => (
+              <div className="amenitycontent" key={i}>
+                {amenity && (
+                  <div>
+                    <FontAwesomeIcon
+                      className="amenityicon"
+                      icon={
+                        amenity === "Breakfast"
+                          ? faUtensils
+                          : "" || amenity === "Lunch"
+                          ? faUtensils
+                          : "" || amenity === "Kitchen"
+                          ? faKitchenSet
+                          : "" || amenity === "Workspace"
+                          ? faHouseLaptop
+                          : "" || amenity === "Dinner"
+                          ? faUtensils
+                          : "" || amenity === "City View"
+                          ? faArrowRightToCity
+                          : "" || amenity === "Wifi"
+                          ? faWifi
+                          : "" || amenity === "Lift"
+                          ? faElevator
+                          : "" || amenity === "Private Balcony"
+                          ? faDoorOpen
+                          : "" || amenity === "Washing Machine"
+                          ? faJugDetergent
+                          : "" || amenity === "Hair Dryer"
+                          ? faPlug
+                          : "" || amenity === "Soaps"
+                          ? faSoap
+                          : "" || amenity === "Shower Gel"
+                          ? faSprayCanSparkles
+                          : "" || amenity === "Bathroom Heater"
+                          ? faHotTubPerson
+                          : "" || amenity === "Pillows and Blankets"
+                          ? faMattressPillow
+                          : "" || amenity === "Iron"
+                          ? faShirt
+                          : "" || amenity === "Air Conditioning"
+                          ? faTemperatureLow
+                          : "" || amenity === "Fan"
+                          ? faFan
+                          : "" || amenity === "Kettle"
+                          ? faMugHot
+                          : "" || amenity === "HDTV"
+                          ? faTv
+                          : "" || amenity === "Smoke Alaram"
+                          ? faBanSmoking
+                          : "" || amenity === "Refrigirator"
+                          ? faIcicles
+                          : "" || amenity === "Cooking Applicances"
+                          ? faFireBurner
+                          : "" || amenity === "Microwave"
+                          ? faSquare
+                          : "" || amenity === "Dishwasher"
+                          ? faHandsBubbles
+                          : "" || amenity === "Dining Table"
+                          ? faTable
+                          : "" || amenity === "Host Assistance"
+                          ? faHandshakeAngle
+                          : "" || amenity === "Sofa"
+                          ? faCouch
+                          : "" || amenity === "Tour Assistance"
+                          ? faCarOn
+                          : "" || amenity === "Parking"
+                          ? faSquareParking
+                          : "" || amenity === "Room Service"
+                          ? faPersonChalkboard
+                          : ""
+                      }
+                    />
+                  </div>
+                )}
                 <div>
-                  <FontAwesomeIcon
-                    className="amenityicon"
-                    icon={
-                      amenity.value === "Breakfast"
-                        ? faUtensils
-                        : "" || amenity.value === "Lunch"
-                        ? faUtensils
-                        : "" || amenity.value === "Kitchen"
-                        ? faKitchenSet
-                        : "" || amenity.value === "Workspace"
-                        ? faHouseLaptop
-                        : "" || amenity.value === "Dinner"
-                        ? faUtensils
-                        : "" || amenity.value === "City View"
-                        ? faArrowRightToCity
-                        : "" || amenity.value === "Wifi"
-                        ? faWifi
-                        : "" || amenity.value === "Lift"
-                        ? faElevator
-                        : "" || amenity.value === "Private Balcony"
-                        ? faDoorOpen
-                        : "" || amenity.value === "Washing Machine"
-                        ? faJugDetergent
-                        : "" || amenity.value === "Hair Dryer"
-                        ? faPlug
-                        : "" || amenity.value === "Soaps"
-                        ? faSoap
-                        : "" || amenity.value === "Shower Gel"
-                        ? faSprayCanSparkles
-                        : "" || amenity.value === "Bathroom Heater"
-                        ? faHotTubPerson
-                        : "" || amenity.value === "Pillows and Blankets"
-                        ? faMattressPillow
-                        : "" || amenity.value === "Iron"
-                        ? faShirt
-                        : "" || amenity.value === "Air Conditioning"
-                        ? faTemperatureLow
-                        : "" || amenity.value === "Fan"
-                        ? faFan
-                        : "" || amenity.value === "Kettle"
-                        ? faMugHot
-                        : "" || amenity.value === "HDTV"
-                        ? faTv
-                        : "" || amenity.value === "Smoke Alaram"
-                        ? faBanSmoking
-                        : "" || amenity.value === "Refrigirator"
-                        ? faIcicles
-                        : "" || amenity.value === "Cooking Applicances"
-                        ? faFireBurner
-                        : "" || amenity.value === "Microwave"
-                        ? faSquare
-                        : "" || amenity.value === "Dishwasher"
-                        ? faHandsBubbles
-                        : "" || amenity.value === "Dining Table"
-                        ? faTable
-                        : "" || amenity.value === "Host Assistance"
-                        ? faHandshakeAngle
-                        : "" || amenity.value === "Sofa"
-                        ? faCouch
-                        : "" || amenity.value === "Tour Assistance"
-                        ? faCarOn
-                        : "" || amenity.value === "Parking"
-                        ? faSquareParking
-                        : "" || amenity.value === "Room Service"
-                        ? faPersonChalkboard
-                        : ""
-                    }
-                  />
+                  <li className="">{amenity}</li>
                 </div>
-              )}
-              <div>
-                <li className="">{amenity.value}</li>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
-        <div className="amenitycolumn1">
+        {/* <div className="amenitycolumn1">
           <div>
             <h2>Amenities Not Provided</h2>
           </div>
-          {houseData?.amenitiesNotIncluded?.map((amenity, i) => (
+          {houseData?.checkedAmenities?.map((amenity, i) => (
             <div className="amenitycontent line-through" key={i}>
-              {amenity.value && (
+              {amenity && (
                 <div>
                   <FontAwesomeIcon
                     className="amenityicon line-through"
                     icon={
-                      amenity.value === "Breakfast"
+                      amenity === "Breakfast"
                         ? faUtensils
-                        : "" || amenity.value === "Lunch"
+                        : "" || amenity === "Lunch"
                         ? faUtensils
-                        : "" || amenity.value === "Kitchen"
+                        : "" || amenity === "Kitchen"
                         ? faKitchenSet
-                        : "" || amenity.value === "Workspace"
+                        : "" || amenity === "Workspace"
                         ? faHouseLaptop
-                        : "" || amenity.value === "Dinner"
+                        : "" || amenity === "Dinner"
                         ? faUtensils
-                        : "" || amenity.value === "City View"
+                        : "" || amenity === "City View"
                         ? faTreeCity
-                        : "" || amenity.value === "Wifi"
+                        : "" || amenity === "Wifi"
                         ? faWifi
-                        : "" || amenity.value === "Lift"
+                        : "" || amenity === "Lift"
                         ? faElevator
-                        : "" || amenity.value === "Private Balcony"
+                        : "" || amenity === "Private Balcony"
                         ? faDoorOpen
-                        : "" || amenity.value === "Washing Machine"
+                        : "" || amenity === "Washing Machine"
                         ? faJugDetergent
-                        : "" || amenity.value === "Hair Dryer"
+                        : "" || amenity === "Hair Dryer"
                         ? faPlug
-                        : "" || amenity.value === "Soaps"
+                        : "" || amenity === "Soaps"
                         ? faSoap
-                        : "" || amenity.value === "Shower Gel"
+                        : "" || amenity === "Shower Gel"
                         ? faSprayCanSparkles
-                        : "" || amenity.value === "Bathroom Heater"
+                        : "" || amenity === "Bathroom Heater"
                         ? faHotTubPerson
-                        : "" || amenity.value === "Pillows and Blankets"
+                        : "" || amenity === "Pillows and Blankets"
                         ? faMattressPillow
-                        : "" || amenity.value === "Iron"
+                        : "" || amenity === "Iron"
                         ? faShirt
-                        : "" || amenity.value === "Air Conditioning"
+                        : "" || amenity === "Air Conditioning"
                         ? faTemperatureLow
-                        : "" || amenity.value === "Fan"
+                        : "" || amenity === "Fan"
                         ? faFan
-                        : "" || amenity.value === "Kettle"
+                        : "" || amenity === "Kettle"
                         ? faMugHot
-                        : "" || amenity.value === "HDTV"
+                        : "" || amenity === "HDTV"
                         ? faTv
-                        : "" || amenity.value === "Smoke Alaram"
+                        : "" || amenity === "Smoke Alaram"
                         ? faBanSmoking
-                        : "" || amenity.value === "Refrigirator"
+                        : "" || amenity === "Refrigirator"
                         ? faIcicles
-                        : "" || amenity.value === "Cooking Applicances"
+                        : "" || amenity === "Cooking Applicances"
                         ? faFireBurner
-                        : "" || amenity.value === "Microwave"
+                        : "" || amenity === "Microwave"
                         ? faSquare
-                        : "" || amenity.value === "Dishwasher"
+                        : "" || amenity === "Dishwasher"
                         ? faHandsBubbles
-                        : "" || amenity.value === "Dining Table"
+                        : "" || amenity === "Dining Table"
                         ? faTable
-                        : "" || amenity.value === "Host Assistance"
+                        : "" || amenity === "Host Assistance"
                         ? faHandshakeAngle
-                        : "" || amenity.value === "Sofa"
+                        : "" || amenity === "Sofa"
                         ? faCouch
-                        : "" || amenity.value === "Tour Assistance"
+                        : "" || amenity === "Tour Assistance"
                         ? faCarOn
-                        : "" || amenity.value === "Parking"
+                        : "" || amenity === "Parking"
                         ? faSquareParking
-                        : "" || amenity.value === "Room Service"
+                        : "" || amenity === "Room Service"
                         ? faPersonChalkboard
                         : ""
                     }
@@ -212,11 +212,11 @@ const Amenities = ({ houseData, setShowAmenity }) => {
                 </div>
               )}
               <div>
-                <li className="">{amenity.value}</li>
+                <li className="">{amenity}</li>
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </AmenitiesStyle>
   );

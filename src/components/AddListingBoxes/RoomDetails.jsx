@@ -76,9 +76,8 @@ const RoomDetails = ({
     }
   };
 
-
-  //console.log("babycots is", babycots);
-  // console.log("children is", children);
+  console.log("babycots is", babycots);
+  console.log("children is", children);
 
   const moveNext = () => {
     if (!baths) {

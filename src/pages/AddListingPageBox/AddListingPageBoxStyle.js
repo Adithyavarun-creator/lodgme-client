@@ -272,6 +272,7 @@ export const AddListingPageBoxStyle = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     padding: 20px;
     gap: 8px;
     border: 1.5px solid ${({ theme }) => theme.colors.primaryColor};
