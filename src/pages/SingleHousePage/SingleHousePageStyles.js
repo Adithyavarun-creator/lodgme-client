@@ -14,29 +14,28 @@ export const SingleHousePageStyles = styled.section`
   /* position: relative; */
 
   @media ${devices.bigLaptopsAndDesktops} {
-    gap: 40px;
+    gap: 30px;
   }
 
   @media ${devices.tabletsAndIpads} {
     padding-left: 80px;
     padding-right: 80px;
-    gap: 30px;
+    gap: 20px;
   }
   @media ${devices.smallTabs} {
     padding-left: 30px;
     padding-right: 30px;
-    gap: 20px;
+    gap: 15px;
   }
 
   @media ${devices.smallMobiles} {
     padding-left: 15px;
     padding-right: 15px;
-    gap: 10px;
+    gap: 8px;
   }
 
   .singlepagetitlebox {
     display: flex;
-    /* align-items: center; */
     justify-content: space-between;
     align-items: center;
 
@@ -55,48 +54,75 @@ export const SingleHousePageStyles = styled.section`
   .singlepageaddressbox {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      gap: 14px;
+    }
+    @media ${devices.smallTabs} {
+      gap: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      gap: 6px;
+    }
   }
 
   .singlepagetitlecontent {
     display: flex;
     flex-direction: row;
-    gap: 3px;
+    gap: 6px;
     align-items: center;
+    padding: 8px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    width: max-content;
+    border-radius: 10px;
+    color: white;
 
     @media ${devices.bigLaptopsAndDesktops} {
+      gap: 5px;
+      padding: 8px;
     }
 
     @media ${devices.tabletsAndIpads} {
+      padding: 6px;
+      gap: 5px;
     }
     @media ${devices.smallTabs} {
       gap: 3px;
+      padding: 6px;
     }
 
     @media ${devices.smallMobiles} {
+      padding: 4px;
+      gap: 2px;
     }
   }
   .rating {
-    color: ${({ theme }) => theme.colors.primaryColor};
     height: 20px;
     width: 20px;
     cursor: pointer;
 
     @media ${devices.bigLaptopsAndDesktops} {
+      height: 16px;
+      width: 16px;
     }
 
     @media ${devices.tabletsAndIpads} {
-      height: 20px;
-      width: 20px;
+      height: 14px;
+      width: 14px;
     }
     @media ${devices.smallTabs} {
-      height: 12px;
-      width: 12px;
+      height: 10px;
+      width: 10px;
     }
 
     @media ${devices.smallMobiles} {
-      height: 8px;
-      width: 8px;
+      height: 6px;
+      width: 6px;
     }
   }
   .ratingnumber {
@@ -774,8 +800,8 @@ export const SingleHousePageStyles = styled.section`
       height: 35px;
     }
     @media ${devices.smallTabs} {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
     }
 
     @media ${devices.smallMobiles} {
@@ -810,7 +836,6 @@ export const SingleHousePageStyles = styled.section`
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    /* border: 1px solid red; */
 
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 7px;
@@ -825,6 +850,58 @@ export const SingleHousePageStyles = styled.section`
 
     @media ${devices.smallMobiles} {
       gap: 3px;
+    }
+  }
+
+  .verified {
+    position: relative;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+    }
+  }
+
+  .userverifiedbox {
+    position: absolute;
+    top: -10px;
+    right: 0;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      top: -8px;
+      right: -3px;
+    }
+  }
+
+  .userverifiedicon {
+    height: 20px;
+    width: 20px;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+    }
+    @media ${devices.smallTabs} {
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 7px;
+      width: 7px;
     }
   }
 
@@ -850,7 +927,7 @@ export const SingleHousePageStyles = styled.section`
 
   .singlepagehousepublishsubname {
     font-size: 20px;
-    color: darkgray;
+    color: #333;
     font-weight: 700;
 
     @media ${devices.bigLaptopsAndDesktops} {
@@ -1181,7 +1258,7 @@ export const SingleHousePageStyles = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
-    row-gap: 60px;
+    row-gap: 25px;
     column-gap: 40px;
     cursor: pointer;
     @media ${devices.bigLaptopsAndDesktops} {
@@ -1189,7 +1266,7 @@ export const SingleHousePageStyles = styled.section`
 
     @media ${devices.tabletsAndIpads} {
       grid-template-columns: 1fr 1fr;
-      row-gap: 40px;
+      row-gap: 20px;
       column-gap: 30px;
     }
     @media ${devices.smallTabs} {
@@ -1233,8 +1310,8 @@ export const SingleHousePageStyles = styled.section`
   }
 
   .houserule:hover {
-    background-color: #fff;
-    color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
   }
 
   .houseruleicon {
@@ -2053,8 +2130,7 @@ export const SingleHousePageStyles = styled.section`
     }
     @media ${devices.smallTabs} {
       padding: 4px 6px;
-
-      font-size: 8px;
+      font-size: 10px;
     }
 
     @media ${devices.smallMobiles} {
@@ -2065,7 +2141,7 @@ export const SingleHousePageStyles = styled.section`
 
   .hostdetailsubname {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: bolder;
     color: darkgray;
 
     @media ${devices.bigLaptopsAndDesktops} {
@@ -2073,20 +2149,21 @@ export const SingleHousePageStyles = styled.section`
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 10px;
+      font-size: 12px;
     }
     @media ${devices.smallTabs} {
       font-size: 10px;
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 9px;
+      font-size: 8px;
     }
   }
 
   .reviewownerdetailgrid-2 {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 30px;
     padding: 20px;
     border-radius: 20px;
@@ -2195,5 +2272,30 @@ export const SingleHousePageStyles = styled.section`
     justify-content: center;
     align-items: center;
     z-index: 40;
+  }
+
+  .verificationbox {
+    padding: 6px;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    color: #fff;
+    border-radius: 10px;
+    font-size: 16px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+      padding: 6px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 9px;
+      padding: 4px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 7px;
+      padding: 4px;
+    }
   }
 `;

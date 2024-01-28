@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../baseUrl/url";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import toast, { Toaster } from "react-hot-toast";
 
 const BillingPage = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser, token } =
@@ -33,7 +34,7 @@ const BillingPage = () => {
 
   const proceedPayment = async () => {
     if (!name || !email || !address || !number) {
-      alert("Please fill details");
+      toast.error("Enter all the fields to proceed for payment");
       return;
     } else {
       // const response = await fetch(`${baseUrl}/api/create-order`, {
@@ -144,6 +145,7 @@ const BillingPage = () => {
             />
           </div>
         </BillingPageStyles>
+        <Toaster position="top-center" reverseOrder={false} />
       </HelmetProvider>
     </>
   );

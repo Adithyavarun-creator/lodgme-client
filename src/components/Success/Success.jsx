@@ -4,6 +4,7 @@ import { SuccessStyles } from "./SuccessStyle";
 import { useNavigate } from "react-router-dom";
 import SuccessImage from "../../assets/success.jpg";
 import Button from "../Button/Button";
+import { MdVerified } from "react-icons/md";
 
 const Success = () => {
   const { bookingAmount, selectedHouse, stayingDays, currentUser } =
@@ -11,10 +12,9 @@ const Success = () => {
 
   const navigate = useNavigate();
 
-
-  // setTimeout(() => {
-  //   navigate("/order-details");
-  // }, 3000);
+  setTimeout(() => {
+    navigate("/order-details");
+  }, 7000);
 
   const goHome = () => {
     navigate("/");
@@ -38,16 +38,22 @@ const Success = () => {
         {currentUser ? (
           <>
             <div>
-              <h1>Your transaction is success !!!</h1>
+              <h1>
+                Your transaction is success !!! and we received your payment
+              </h1>
             </div>
             <div>
-              <h3>We received your payment</h3>
+              {/* <img src={SuccessImage} className="successimg" alt="" /> */}
+              <MdVerified className="successimg" />
+            </div>
+
+            <div>
+              <span className="redirectmsg">
+                Redirecting you to orders page within 5-6 seconds or click below
+              </span>
             </div>
             <div>
               <Button title="Go to Orders" onClick={goOrders} />
-            </div>
-            <div>
-              <img src={SuccessImage} className="successimg" alt="" />
             </div>
           </>
         ) : (

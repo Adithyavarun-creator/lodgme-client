@@ -10,20 +10,21 @@ export const AmenitiesStyle = styled.div`
   background-color: #fff;
   border-radius: 15px;
   z-index: 130;
-  width: 40%;
+  width: 47%;
 
   @media ${devices.bigLaptopsAndDesktops} {
+    width: 50%;
   }
 
   @media ${devices.tabletsAndIpads} {
-    width: 40%;
+    width: 50%;
   }
   @media ${devices.smallTabs} {
-    width: 20%;
+    width: 60%;
   }
 
   @media ${devices.smallMobiles} {
-    width: 15%;
+    width: 60%;
   }
 
   .close-box {
@@ -210,6 +211,7 @@ export const AmenitiesStyle = styled.div`
     @media ${devices.tabletsAndIpads} {
     }
     @media ${devices.smallTabs} {
+      gap: 5px;
     }
 
     @media ${devices.smallMobiles} {

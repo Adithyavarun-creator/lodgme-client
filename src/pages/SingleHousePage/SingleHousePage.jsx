@@ -30,6 +30,7 @@ import { GiPartyPopper } from "react-icons/gi";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Spinner from "../../components/Spinner/Spinner";
 import Button from "../../components/Button/Button";
+import { MdVerified, MdVerifiedUser } from "react-icons/md";
 import {
   PiElevatorLight,
   PiShareFatFill,
@@ -166,6 +167,7 @@ const SingleHousePage = () => {
   const dateRef = useRef();
   const reviewRef = useRef();
   const mapRef = useRef();
+  const userRef = useRef();
 
   const personOptions = [
     { value: 1, label: 1 },
@@ -190,6 +192,10 @@ const SingleHousePage = () => {
 
   const clickMap = () => {
     mapRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const clickUser = () => {
+    userRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const changeHandler = (value) => {
@@ -290,7 +296,7 @@ const SingleHousePage = () => {
 
   const lodgmeCharge = 100;
 
-  const bookingAmount = houseData.pricePerNight * diffInDays + lodgmeCharge;
+  const bookingAmount = houseData.price * diffInDays + lodgmeCharge;
   dispatch(setBookingAmount(bookingAmount));
   dispatch(setStayingDays(diffInDays));
   dispatch(setNumberofPersons(noPersons));
@@ -330,7 +336,6 @@ const SingleHousePage = () => {
     );
   };
 
-
   if (!id) {
     return <Spinner />;
   }
@@ -356,7 +361,8 @@ const SingleHousePage = () => {
 
               <div className="singlepagetitlecontent" onClick={clickReview}>
                 <span className="singlepagelocationcountry">
-                  {houseData?.city}, {houseData?.locatedCountry}
+                  {houseData?.postCode}, {houseData?.city},{" "}
+                  {houseData?.locatedCountry}
                 </span>
               </div>
 
@@ -381,6 +387,32 @@ const SingleHousePage = () => {
                 </span>
                 <span className="sharetext" onClick={shareFunction}>
                   Share
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* User Details */}
+          <div className="" onClick={clickUser}>
+            <div className="singlepagehousepublishbox">
+              {/* <div className="verified">
+                <img src={postedBy?.profilePic} alt="" className="userimage" />
+                {postedBy?.mobileVerified && (
+                  <div className="userverifiedbox">
+                    <MdVerified
+                      className="userverifiedicon"
+                      title="Verified User"
+                    />
+                  </div>
+                )}
+              </div> */}
+              <div>
+                <span className="singlepagehousepublishsubname">
+                  <strong>
+                    {postedBy?.firstname} {postedBy?.lastname}
+                  </strong>{" "}
+                  is the host{" "}
+                  {postedBy?.mobileVerified && "and verified by Lodgeme"}
                 </span>
               </div>
             </div>
@@ -430,24 +462,6 @@ const SingleHousePage = () => {
               <span className="signlehouseroomtext">
                 {houseData?.bathroom ? houseData.bathroom : "No"} Bathrooms
               </span>
-            </div>
-          </div>
-
-          {/* User Details */}
-          <div className="">
-            <div className="singlepagehousepublishbox">
-              <div>
-                <img src={postedBy?.profilePic} alt="" className="userimage" />
-              </div>
-              <div>
-                <span className="singlepagehousepublishsubname">
-                  <strong>
-                    {postedBy?.firstname}&nbsp;
-                    {postedBy?.lastname}
-                  </strong>{" "}
-                  is responsible service provider for this house
-                </span>
-              </div>
             </div>
           </div>
 
@@ -837,23 +851,24 @@ const SingleHousePage = () => {
 
           {postedBy && (
             <div>
-              <div className="reviewownerdetail">
+              <div className="reviewownerdetail" ref={userRef}>
                 <div className="reviewownerdetailgrid-1">
                   <div className="reviewownerdetailuserbox">
-                    <div>
-                      <img
-                        className="hostimage"
-                        src={
-                          postedBy?.profilePic
-                            ? postedBy?.profilePic
-                            : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-                        }
-                        alt=""
-                      />
+                    <img
+                      className="hostimage"
+                      src={
+                        postedBy?.profilePic
+                          ? postedBy?.profilePic
+                          : "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                      }
+                      alt=""
+                    />
+                    <div className="flex verificationbox" title="User verified by Lodgeme">
+                      <MdVerified /> by Lodgeme
                     </div>
                     <div className="hostdetails">
                       <h2 className="hostdetailname">
-                        Serviced by &nbsp;{postedBy?.firstname}&nbsp;
+                        Serviced by {postedBy?.firstname}&nbsp;
                         {postedBy?.lastname}
                       </h2>
                       <span className="hostdetailsubname">
@@ -861,14 +876,6 @@ const SingleHousePage = () => {
                         {moment(postedBy?.createdAt).format("MMMM Do YYYY")}
                       </span>
                     </div>
-                    {postedBy?.verified && (
-                      <div className="verifybox">
-                        <span>
-                          <RiVerifiedBadgeFill />
-                        </span>
-                        <span>Verified</span>
-                      </div>
-                    )}
                   </div>
 
                   <div>
@@ -901,9 +908,6 @@ const SingleHousePage = () => {
                       Response time: within a few hours
                     </span>
                   </div>
-                  {/* <div>
-                  <Button title="Contact Service" />
-                </div> */}
                 </div>
               </div>
             </div>

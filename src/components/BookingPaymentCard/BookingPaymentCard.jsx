@@ -51,7 +51,7 @@ const BookingPaymentCard = () => {
           <div className="bookingpricebox">
             <div>
               <span className="flex">
-                {selectedHouse.pricePerNight}&nbsp;{" "}
+                {selectedHouse.price}&nbsp;{" "}
                 <MdEuroSymbol className="" /> x&nbsp;{stayingDays}
                 &nbsp;{stayingDays < 2 ? "night" : "nights"}
               </span>
@@ -59,7 +59,7 @@ const BookingPaymentCard = () => {
             <div>
               <span className="flex">
                 <MdEuroSymbol />
-                &nbsp;{selectedHouse.pricePerNight * stayingDays}
+                &nbsp;{selectedHouse.price * stayingDays}
               </span>
             </div>
           </div>
@@ -81,7 +81,7 @@ const BookingPaymentCard = () => {
             <div>
               <span className="flex">
                 <MdEuroSymbol />
-                &nbsp;{selectedHouse.pricePerNight * stayingDays + 100}
+                &nbsp;{selectedHouse.price * stayingDays + 100}
               </span>
             </div>
           </div>

@@ -144,30 +144,6 @@ const Homepage = () => {
   //console.log(diffInDays);
 
   const handleSearchSubmit = () => {
-    // if (!range) {
-    //   toast.error("Date not selected");
-    // }
-    // if (!value) {
-    //   toast.error("Location not selected");
-    //   return;
-    // }
-    // navigate(
-    //   `/search-results?locatedCountry=${
-    //     value.label ? value.label : "France"
-    //   }&stayDays=${diffInDays}&fromdate=${format(
-    //     range[0].startDate,
-    //     "dd/MM/yyyy"
-    //   )}&todate=${format(range[0].endDate, "dd/MM/yyyy")}`
-    // );
-    //*************** */
-    //  navigate(
-    //   `/search-results?locatedCountry=${
-    //     value.label ? value.label : "France"
-    //   }&date=${date}`
-    // );
-    // navigate(
-    //   `/search-results?locatedCountry=${value.label ? value.label : "France"}`
-    // );
     navigate(`/search-results?locatedCountry=${country ? country : "France"}`);
   };
 
@@ -216,81 +192,10 @@ const Homepage = () => {
                 onClick={handleSearchSubmit}
               />
             </div>
-            {/* <div className="search_select_width">
-            <div className="search_labelbox">
-              <span className="search_labeltitle"> {t("location")}</span>
-              <span>
-                <RiMapPin2Fill className="search_box_icon" />
-              </span>
-            </div>
 
-            <Select
-              className="select"
-              placeholder="Select Location"
-              options={options}
-              value={value}
-              onChange={changeHandler}
-              styles={HomepageSelectStyles}
-              name="location"
-            /> 
-          </div>
-
-         <div>
-            <div className="search_labelbox">
-              <span className="search_labeltitle"> {t("bookingdate")}</span>
-              <span>
-                <FaCalendarMinus className="search_box_icon" />
-              </span>
-            </div>
-            <input
-              value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(
-                range[0].endDate,
-                "dd/MM/yyyy"
-              )}`}
-              readOnly
-              className="date_inputfield"
-              onClick={() => setOpen((open) => !open)}
-            />
-          </div> */}
-
-            {/* <div>
-            <div className="search_labelbox">
-              <span className="search_labeltitle"> {t("persons")}</span>
-              <span>
-                <TbUsersGroup className="search_box_icon" />
-              </span>
-            </div>
-
-            <Select
-              className="select"
-              placeholder={`${t("selectPersons")}`}
-              options={personOptions}
-              value={noPersons}
-              onChange={changePersonHandler}
-              styles={HomepageSelectStyles}
-              name="person"
-            />
-          </div> */}
-            <div>
-              {/* <div className="search_labelbox">
-              <span className="search_labeltitle"> {t("submit")}</span>
-              <span>
-                <FaSearchLocation className="search_box_icon" />
-              </span>
-            </div>
-            <button className="homepage_searchbtn" onClick={handleSearchSubmit}>
-              <IoSearchSharp className="" />
-              {t("search")}
-            </button> */}
-            </div>
+            <div></div>
           </div>
         </div>
-
-        {/* <div className="mt-100"></div> */}
-
-        {/* <div>
-        <HouseCard title="Top Rated Apartments" houseCards={apartmentDatas} />
-      </div> */}
 
         <div>
           <HouseCard title="Top Rated Houses" houseCards={houses} />

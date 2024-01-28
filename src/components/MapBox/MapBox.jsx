@@ -7,8 +7,8 @@ import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 const Mapbox = ({ lat, lng }) => {
   const [markers, setMarkers] = useState({
-    latitude: lat ? lat : 48.858093,
-    longitude: lng ? lng : 2.294694,
+    latitude: lat ? lat : 27.173891,
+    longitude: lng ? lng : 78.042068,
   });
 
   let DefaultIcon = L.icon({

@@ -27,25 +27,21 @@ const SearchPageCard = ({ res }) => {
           </div>
           <div className="searchpricebox">
             <MdEuroSymbol className="searchpriceicon" />
-            <span className="searchhouseamount">{res.pricePerNight}/night</span>
+            <span className="searchhouseamount">{res.price}/night</span>
           </div>
-          <div className="searchpricebox">
+          {/* <div className="searchpricebox">
             <FaCalendarCheck className="searchpriceicon" />
             &nbsp;
             <span className="searchhouseamount">
               {moment(res.availableFrom).format("LL")} until{" "}
               {moment(res.availableTill).format("LL")}
             </span>
-          </div>
+          </div> */}
           <div className="searchpricetag">
             <IoPricetags className="searchpricetagicon" />
           </div>
           <div className="searchresultuserbox">
-            <img
-              className="searchresultuser"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=3880&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <img className="searchresultuser" src={res.houseImages[0]} alt="" />
           </div>
 
           {/* {currentUser ? (
