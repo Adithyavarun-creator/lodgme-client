@@ -27,8 +27,10 @@ export const SearchPageCardStyles = styled.div`
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bolder;
+    color: ${({ theme }) => theme.colors.primaryColor};
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
@@ -45,7 +47,7 @@ export const SearchPageCardStyles = styled.div`
   }
 
   .searchratingbox {
-    font-size: 18px;
+    font-size: 14px;
     color: #fff;
     background-color: ${({ theme }) => theme.colors.primaryColor};
     padding: 4px;
@@ -56,14 +58,14 @@ export const SearchPageCardStyles = styled.div`
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 18px;
+      font-size: 12px;
     }
     @media ${devices.smallTabs} {
-      font-size: 14px;
+      font-size: 10px;
     }
 
     @media ${devices.smallMobiles} {
-      font-size: 12px;
+      font-size: 8px;
     }
   }
 
@@ -138,9 +140,31 @@ export const SearchPageCardStyles = styled.div`
     }
   }
 
+  .travelnos {
+    color: #333;
+    width: max-content;
+    font-weight: bolder;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    font-size: 14px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 12px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 8px;
+    }
+  }
+
   .searchpriceicon {
-    height: 20px;
-    width: 20px;
+    height: 14px;
+    width: 14px;
 
     @media ${devices.bigLaptopsAndDesktops} {
       height: 15px;
@@ -148,8 +172,8 @@ export const SearchPageCardStyles = styled.div`
     }
 
     @media ${devices.tabletsAndIpads} {
-      height: 15px;
-      width: 15px;
+      height: 12px;
+      width: 12px;
     }
     @media ${devices.smallTabs} {
       height: 10px;
@@ -157,8 +181,8 @@ export const SearchPageCardStyles = styled.div`
     }
 
     @media ${devices.smallMobiles} {
-      height: 10px;
-      width: 10px;
+      height: 8px;
+      width: 8px;
     }
   }
 
@@ -255,15 +279,19 @@ export const SearchPageCardStyles = styled.div`
   .searchresultsection {
     display: grid;
     grid-template-rows: 1fr 1fr;
-    gap: 10px;
+    row-gap: 8px;
     padding: 15px;
     position: relative;
     cursor: pointer;
 
     @media ${devices.bigLaptopsAndDesktops} {
+      row-gap: 8px;
     }
 
     @media ${devices.tabletsAndIpads} {
+      grid-template-rows: 1fr 1fr;
+      row-gap: 6px;
+      padding: 12px;
     }
     @media ${devices.smallTabs} {
       grid-template-rows: 1fr 1fr;
@@ -358,7 +386,7 @@ export const SearchPageCardStyles = styled.div`
   .searchresultcountry {
     color: #333;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }

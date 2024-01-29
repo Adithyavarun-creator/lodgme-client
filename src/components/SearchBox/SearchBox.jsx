@@ -57,6 +57,8 @@ const SearchBox = () => {
   const handleChange = (e) => {
     if (
       e.target.id === "all" ||
+      e.target.id === "home" ||
+      e.target.id === "apartment" ||
       e.target.id === "furnished" ||
       e.target.id === "studio" ||
       e.target.id === "modern" ||
@@ -92,7 +94,6 @@ const SearchBox = () => {
     // window.location.reload();
   };
 
-
   return (
     <>
       <SearchBoxStyles>
@@ -125,6 +126,40 @@ const SearchBox = () => {
                   name="all"
                   onChange={handleChange}
                   checked={searchData.type === "all"}
+                />
+              </div>
+            </div>
+
+            <div className="input-checkbox-content">
+              <div>
+                <label htmlFor="home" className="span">
+                  Home
+                </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="home"
+                  name="home"
+                  onChange={handleChange}
+                  checked={searchData.type === "home"}
+                />
+              </div>
+            </div>
+
+            <div className="input-checkbox-content">
+              <div>
+                <label htmlFor="apartment" className="span">
+                  Apartment
+                </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="apartment"
+                  name="apartment"
+                  onChange={handleChange}
+                  checked={searchData.type === "apartment"}
                 />
               </div>
             </div>

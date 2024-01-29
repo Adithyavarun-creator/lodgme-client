@@ -3,7 +3,6 @@ import { SearchPageStyles } from "./SearchPageStyles";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import queryString from "query-string";
 import { baseUrl, searchListings } from "../../baseUrl/url";
-import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
@@ -20,6 +19,8 @@ const SearchPage = () => {
     });
     setFetchedResults(res.data);
   };
+
+  //console.log(fetchedResults);
 
   useEffect(() => {
     const { locatedCountry } = queryString.parse(window.location.search);

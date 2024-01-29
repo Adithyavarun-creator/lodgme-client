@@ -1,16 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { SearchFiltersPageStyles } from "./SearchFiltersPageStyles";
-import SearchBox from "../../components/SearchBox/SearchBox";
-import queryString from "query-string";
-import countryList from "react-select-country-list";
 import { baseUrl, searchListings } from "../../baseUrl/url";
 import OnlySpinner from "../../components/OnlySpinner/OnlySpinner";
 import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import { DatePicker } from "antd";
 
 const SearchFiltersPage = () => {
   const navigate = useNavigate();
@@ -22,12 +17,11 @@ const SearchFiltersPage = () => {
     sort: "created_at",
     order: "desc",
   });
-  const [startDate, setStartDate] = useState(new Date());
 
   const [fetchedResults, setFetchedResults] = useState([]);
 
   useEffect(() => {
-    //eslint-disable-next-line no-restricted-globals
+    // eslint-disable-next-line no-restricted-globals
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
     const typeFromUrl = urlParams.get("type");
@@ -50,13 +44,15 @@ const SearchFiltersPage = () => {
       const searchQuery = urlParams.toString();
       const res = await fetch(`${baseUrl}/api/get?${searchQuery}`);
       const data = await res.json();
+      // console.log(data);
       setFetchedResults(data);
       setLoading(false);
     };
 
     fetchListings();
-    //eslint-disable-next-line no-restricted-globals
+    // eslint-disable-next-line no-restricted-globals
   }, [location.search]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,6 +68,8 @@ const SearchFiltersPage = () => {
   const handleChange = (e) => {
     if (
       e.target.id === "all" ||
+      e.target.id === "home" ||
+      e.target.id === "apartment" ||
       e.target.id === "furnished" ||
       e.target.id === "studio" ||
       e.target.id === "modern" ||
@@ -86,12 +84,12 @@ const SearchFiltersPage = () => {
       setSearchData({ ...searchData, searchTerm: e.target.value });
     }
 
-    if (e.target.id === "availableFrom") {
-      setSearchData({
-        ...searchData,
-        availableFrom: moment(searchData.availableFrom).format(),
-      });
-    }
+    // if (e.target.id === "availableFrom") {
+    //   setSearchData({
+    //     ...searchData,
+    //     availableFrom: moment(searchData.availableFrom).format(),
+    //   });
+    // }
 
     if (e.target.id === "sort_order") {
       const sort = e.target.value.split("_")[0] || "created_at";
@@ -101,7 +99,6 @@ const SearchFiltersPage = () => {
       setSearchData({ ...searchData, sort, order });
     }
   };
-
 
   return (
     <>
@@ -143,6 +140,40 @@ const SearchFiltersPage = () => {
                         name="all"
                         onChange={handleChange}
                         checked={searchData.type === "all"}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="input-checkbox-content">
+                    <div>
+                      <label htmlFor="home" className="span">
+                        Home
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="home"
+                        name="home"
+                        onChange={handleChange}
+                        checked={searchData.type === "home"}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="input-checkbox-content">
+                    <div>
+                      <label htmlFor="apartment" className="span">
+                        Apartment
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="apartment"
+                        name="apartment"
+                        onChange={handleChange}
+                        checked={searchData.type === "apartment"}
                       />
                     </div>
                   </div>
