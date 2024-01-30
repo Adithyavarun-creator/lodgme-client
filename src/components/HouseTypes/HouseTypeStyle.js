@@ -88,7 +88,7 @@ export const HouseTypeStyle = styled.div`
     gap: 5px;
     align-items: center;
     padding: 10px;
-
+    transition: all.6s ease-in;
     @media ${devices.bigLaptopsAndDesktops} {
       gap: 8px;
     }
