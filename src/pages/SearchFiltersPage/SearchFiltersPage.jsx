@@ -6,6 +6,7 @@ import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import HouseType from "../../components/HouseTypes/HouseType";
 
 const SearchFiltersPage = () => {
   const navigate = useNavigate();
@@ -107,6 +108,7 @@ const SearchFiltersPage = () => {
           <meta />
           <title>Search filter results | Lodgeme</title>
         </Helmet>
+        <HouseType />
         <SearchFiltersPageStyles>
           <div className="search-box">
             {/* <SearchBox /> */}

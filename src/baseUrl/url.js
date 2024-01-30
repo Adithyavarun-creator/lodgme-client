@@ -9,6 +9,3 @@ export const clientUrl = "https://lodgeme.com";
 export const searchListings = async (query) => {
   await axios.post(`${baseUrl}/api/search-listings`, query);
 };
-
-//dashboard email ceo@lodgeme.com (MAIL°
-//dashboard password Mot de passe : 0659043811Cm@

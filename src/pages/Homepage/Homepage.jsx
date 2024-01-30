@@ -32,6 +32,7 @@ import moment from "moment";
 import { baseUrl } from "../../baseUrl/url";
 import { DatePicker } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
+import CountryList from "../../components/CountryList/CountryList";
 
 const Homepage = () => {
   const { t } = useTranslation();
@@ -186,15 +187,18 @@ const Homepage = () => {
                 value={country}
               />
             </div>
+
             <div className="searchareaiconbox">
               <LiaSearchLocationSolid
                 className="searchareaicon"
                 onClick={handleSearchSubmit}
               />
             </div>
-
-            <div></div>
           </div>
+        </div>
+
+        <div>
+          <CountryList />
         </div>
 
         <div>
@@ -207,43 +211,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-/**
-       <div className="datebox_range" ref={refOne}>
-            {open && (
-              // <DateRangePicker
-              //   className="date_range"
-              //   onChange={(item) => {
-              //     setRange([item.selection]);
-              //     handleSelect(item);
-              //   }}
-              //   editableDateInputs={true}
-              //   moveRangeOnFirstSelection={false}
-              //   ranges={range}
-              //   months={2}
-              //   direction="horizontal"
-              //   rangeColors={["#015151", "#015151", "#fed14c"]}
-              //   minDate={new Date()}
-              // />
-              // <RangePicker
-              //   onChange={(value, dateString) => setDate(dateString)}
-              //   disabledDate={(current) =>
-              //     current && current.valueOf() < moment().subtract(1, "days")
-              //   }
-              // />
-            )}
-            {/* <RangePicker
-              onChange={(value, dateString) => setDates(dateString)}
-              disabledDate={(current) =>
-                current && current.valueOf() < moment().subtract(1, "days")
-              }
-            />
-            </div>
-
-            <RangePicker
-              onChange={(value, dateString) => setDate(dateString)}
-              disabledDate={(current) =>
-                current && current.valueOf() < moment().subtract(1, "days")
-              }
-            />
- */

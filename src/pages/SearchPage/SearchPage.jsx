@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { SearchPageStyles } from "./SearchPageStyles";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import queryString from "query-string";
-import { baseUrl, searchListings } from "../../baseUrl/url";
+import { baseUrl } from "../../baseUrl/url";
 import SearchPageCard from "../SearchPageCard/SearchPageCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
+import HouseType from "../../components/HouseTypes/HouseType";
 
 const SearchPage = () => {
   const [country, setCountry] = useState("");
@@ -24,7 +25,6 @@ const SearchPage = () => {
 
   useEffect(() => {
     const { locatedCountry } = queryString.parse(window.location.search);
-    // setStaydays(stayDays);
     setCountry(locatedCountry);
     searchListings(locatedCountry);
   }, [window.location.search]);
@@ -36,6 +36,7 @@ const SearchPage = () => {
           <meta />
           <title>Search results | Lodgeme</title>
         </Helmet>
+        <HouseType />
         <SearchPageStyles>
           <div className="search-box">
             <SearchBox />
