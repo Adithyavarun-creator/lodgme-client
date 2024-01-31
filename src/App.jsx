@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { GlobalStyles } from "./theme/GlobalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
@@ -41,11 +41,13 @@ import CompanyDetailsPage from "./pages/CompanyDetails/CompanyDetailsPage";
 import ConditionsPage from "./pages/ConditionsPage/ConditionsPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import ReservationPage from "./pages/ReservationPage/ReservationPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddListingPage from "./pages/AddListing/AddListingPage";
 import AddListingPageBox from "./pages/AddListingPageBox/AddListingPageBox";
 import Mapbox from "./components/MapBox/MapBox";
+import Reservation from "./pages/Reservation/Reservation";
 //import Mapbox from "./pages/Mapbox";
 
 const LazyHomepageComponent = React.lazy(() =>
@@ -105,6 +107,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Homepage />} />
+            <Route path="/reservation" element={<Reservation />} />
 
             <Route path="/register-user-in" element={<RegisterPage />} />
             <Route path="/user-sign-in" element={<SigninPage />} />

@@ -23,11 +23,11 @@ export const ButtonStyles = styled.button`
 
   @media ${devices.tabletsAndIpads} {
     padding: 10px 18px;
-    font-size: 12px;
+    font-size: 14px;
   }
   @media ${devices.smallTabs} {
     padding: 8px 14px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   @media ${devices.smallMobiles} {

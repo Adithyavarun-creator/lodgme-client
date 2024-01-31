@@ -42,6 +42,13 @@ body {
   cursor: pointer;
 }
 
+.plainflex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
 .countrybox:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   }
