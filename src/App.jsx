@@ -41,7 +41,6 @@ import CompanyDetailsPage from "./pages/CompanyDetails/CompanyDetailsPage";
 import ConditionsPage from "./pages/ConditionsPage/ConditionsPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import ReservationPage from "./pages/ReservationPage/ReservationPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AddListingPage from "./pages/AddListing/AddListingPage";

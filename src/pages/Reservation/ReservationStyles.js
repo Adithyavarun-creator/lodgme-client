@@ -25,9 +25,10 @@ export const ReservationStyles = styled.div`
   }
 
   @media ${devices.smallMobiles} {
-    padding-top: 10px;
+    padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    gap: 20px;
   }
 
   .reservationtitle {
@@ -55,6 +56,7 @@ export const ReservationStyles = styled.div`
     grid-template-columns: 2fr 1fr;
     column-gap: 20px;
     color: ${({ theme }) => theme.colors.primaryColor};
+
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
@@ -63,17 +65,18 @@ export const ReservationStyles = styled.div`
     }
     @media ${devices.smallTabs} {
       grid-template-columns: 1fr;
-      column-gap: 15px;
+      row-gap: 30px;
     }
 
     @media ${devices.smallMobiles} {
       grid-template-columns: 1fr;
-      column-gap: 10px;
+      row-gap: 20px;
     }
   }
 
   .end {
     display: flex;
+    gap: 10px;
     justify-content: end;
 
     @media ${devices.bigLaptopsAndDesktops} {
@@ -83,10 +86,12 @@ export const ReservationStyles = styled.div`
     }
     @media ${devices.smallTabs} {
       margin-bottom: 20px;
+      gap: 7px;
     }
 
     @media ${devices.smallMobiles} {
       margin-bottom: 16px;
+      gap: 7px;
     }
   }
 
@@ -251,19 +256,18 @@ export const ReservationStyles = styled.div`
   .amountbox {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
-      gap: 10px;
     }
     @media ${devices.smallTabs} {
-      gap: 8px;
+      gap: 25px;
     }
 
     @media ${devices.smallMobiles} {
-      gap: 6px;
+      gap: 20px;
     }
   }
 
@@ -274,6 +278,7 @@ export const ReservationStyles = styled.div`
     padding: 15px;
     border-radius: 10px;
     background-color: #f0f0f0;
+    margin-top: 30px;
 
     @media ${devices.bigLaptopsAndDesktops} {
     }
@@ -283,11 +288,13 @@ export const ReservationStyles = styled.div`
     @media ${devices.smallTabs} {
       gap: 6px;
       padding: 10px;
+      margin-top: 20px;
     }
 
     @media ${devices.smallMobiles} {
       gap: 4px;
       padding: 8px;
+      margin-top: 13px;
     }
   }
 
@@ -540,12 +547,12 @@ export const ReservationStyles = styled.div`
   }
 
   article {
-    font-size: 18px;
+    font-size: 16px;
     @media ${devices.bigLaptopsAndDesktops} {
     }
 
     @media ${devices.tabletsAndIpads} {
-      font-size: 15px;
+      font-size: 14px;
     }
     @media ${devices.smallTabs} {
       font-size: 12px;
@@ -558,5 +565,82 @@ export const ReservationStyles = styled.div`
 
   .infoboxtext {
     text-align: center;
+  }
+
+  .gridrow {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    row-gap: 20px;
+    column-gap: 30px;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media ${devices.smallTabs} {
+      grid-template-columns: 1fr;
+      margin-top: 13px;
+    }
+
+    @media ${devices.smallMobiles} {
+      grid-template-columns: 1fr;
+      margin-top: 10px;
+    }
+  }
+
+  input {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    padding: 15px;
+    outline: none;
+    offset: none;
+    font-size: 16px;
+    border: 0.5px solid darkgrey;
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      height: 40px;
+      font-size: 14px;
+      padding: 10px;
+    }
+    @media ${devices.smallTabs} {
+      height: 35px;
+      font-size: 12px;
+      padding: 10px;
+    }
+
+    @media ${devices.smallMobiles} {
+      height: 25px;
+      font-size: 10px;
+      padding: 10px;
+    }
+  }
+
+  .amountpay {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bolder;
+    /* margin-top: 30px; */
+
+    @media ${devices.bigLaptopsAndDesktops} {
+    }
+
+    @media ${devices.tabletsAndIpads} {
+      font-size: 18px;
+    }
+    @media ${devices.smallTabs} {
+      font-size: 14px;
+    }
+
+    @media ${devices.smallMobiles} {
+      font-size: 11px;
+    }
   }
 `;

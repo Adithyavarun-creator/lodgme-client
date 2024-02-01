@@ -83,6 +83,14 @@ body {
   justify-content: center;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
 .checkbox {
     accent-color: ${({ theme }) => theme.colors.primaryColor};
     width: 15px;

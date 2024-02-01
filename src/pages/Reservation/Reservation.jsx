@@ -1,64 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReservationStyles } from "./ReservationStyles";
 import { FaEdit, FaStar } from "react-icons/fa";
 import Button from "../../components/Button/Button";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaChevronRight } from "react-icons/fa6";
 import { MdOutlineEuro, MdVerified } from "react-icons/md";
+import ConfirmPay from "../../components/Reservation/ConfirmPay";
+import Info from "../../components/Reservation/Info";
+import Payment from "../../components/Reservation/Payment";
 
 const Reservation = () => {
+  const [steps, setSteps] = useState(0);
   return (
     <ReservationStyles>
       <div>
         <h2 className="reservationtitle">Confirm and Pay</h2>
       </div>
       <div className="reservationbox">
-        <div className="dateboxcolumn">
-          <div className="datebox">
-            <div>
-              <h4>Information about your trip</h4>
-            </div>
-            <div className="datecontent">
-              <div>
-                <h5>Dates booked</h5>
-              </div>
-              <div className="datespace">
-                <div>
-                  <span>From 20 december 2023 until 2 Jan 2024</span>
-                </div>
-                <div className="flex">
-                  <FaEdit className="reservationediticon" />
-                  <span>Modify</span>
-                </div>
-              </div>
-            </div>
-            <div className="datecontent">
-              <div>
-                <h5>Travellers</h5>
-              </div>
-              <div className="datespace">
-                <div>
-                  <span>4 persons</span>
-                </div>
-                <div className="flex">
-                  <FaEdit className="reservationediticon" />
-                  <span>Modify</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="end">
-            <Button title="Proceed to billing" />
-          </div>
-        </div>
-        <div className="amountbox">
+        <div>
+          {steps === 0 && <ConfirmPay steps={steps} setSteps={setSteps} />}
+          {steps === 1 && <Info steps={steps} setSteps={setSteps} />}
+          {steps === 2 && <Payment steps={steps} setSteps={setSteps} />}
           <div className="supportbox">
             <h4>Support Call</h4>
             <span>
               For reservation assistance or issues please contact 54 675 354
             </span>
           </div>
+        </div>
 
+        <div className="amountbox">
           <div className="housecontentbox">
             <div className="houseimagebox">
               <img

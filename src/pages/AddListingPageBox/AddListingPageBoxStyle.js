@@ -645,14 +645,6 @@ export const AddListingPageBoxStyle = styled.div`
     }
   }
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0;
-  }
-
   .roomspecs {
     display: flex;
     flex-direction: column;
@@ -1056,7 +1048,7 @@ export const AddListingPageBoxStyle = styled.div`
     row-gap: 20px;
     cursor: pointer;
     @media ${devices.bigLaptopsAndDesktops} {
-      grid-template-columns: 1fr 1fr
+      grid-template-columns: 1fr 1fr;
     }
 
     @media ${devices.tabletsAndIpads} {
