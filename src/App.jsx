@@ -47,6 +47,7 @@ import AddListingPage from "./pages/AddListing/AddListingPage";
 import AddListingPageBox from "./pages/AddListingPageBox/AddListingPageBox";
 import Mapbox from "./components/MapBox/MapBox";
 import Reservation from "./pages/Reservation/Reservation";
+import HousePage from "./pages/HousePage/HousePage";
 //import Mapbox from "./pages/Mapbox";
 
 const LazyHomepageComponent = React.lazy(() =>
@@ -107,6 +108,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/reservation" element={<Reservation />} />
+            <Route path="/house" element={<HousePage />} />
 
             <Route path="/register-user-in" element={<RegisterPage />} />
             <Route path="/user-sign-in" element={<SigninPage />} />
