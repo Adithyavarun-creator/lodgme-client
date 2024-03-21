@@ -173,8 +173,8 @@ const Homepage = () => {
 
         <div className="homepage_header_content">
           <div className="homepage_header_text">
-            <h1>WEBSITE UNDER PROGRESS, COMING SOON !!!</h1>
-            <h1>Un toit ou vous retrouver tous ensemble</h1>
+            <h1>Searching for stay !!!</h1>
+            <h1>Prenez votre hébergement</h1>
           </div>
 
           <div className="homepage_search_container">
